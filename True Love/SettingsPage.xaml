@@ -1,0 +1,127 @@
+﻿<Page
+    x:Class="True_Love.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:True_Love"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Pivot x:Uid="Spd" Margin="0,72,0,0" HorizontalAlignment="Center">
+        <PivotItem x:Uid="Sph1">
+            <Grid>
+                <Grid.Background>
+                    <ImageBrush ImageSource="Assets\Background\BG2.png" Stretch="UniformToFill"/>
+                </Grid.Background>
+                <Viewbox>
+                    <StackPanel HorizontalAlignment="Center">
+                        <Image Source="Assets\SplashScreen.scale-200.png" Height="228" Width="299"/>
+                        <TextBlock Text="TRUE LOVE" HorizontalAlignment="Center" FontFamily="{StaticResource  avicii}" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Margin="0,0,0,10"/>
+                        <TextBlock Text="在恩 @ 2020" HorizontalAlignment="Center"  Margin="0,0,0,0"/>
+                        <TextBlock Text="V0.0.3 Beta" HorizontalAlignment="Center" Margin="0,2,0,0"/>
+                        <TextBlock x:Uid="1Sh" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" HorizontalAlignment="Center"  Margin="0,30,0,10"/>
+                        <TextBlock x:Uid="1Sh1" HorizontalAlignment="Center" Margin="0,0,0,0"/>
+                        <Button Width="259" Height="33" x:Name="sendmail" HorizontalAlignment="Center" Margin="0,7,0,0" Click="Mail_Click" Style="{StaticResource ButtonRevealStyle}">
+                            <Image Source="Assets/Logo/Mail.png" Margin="4,-4,4,-4"/>
+                        </Button>
+                        <Button Width="259" Height="33" x:Name="sendweibo" HorizontalAlignment="Center" Margin="0,7,0,0" Click="weibo_Click" Style="{StaticResource ButtonRevealStyle}">
+                            <Image Source="Assets/Logo/Weibo.png" Margin="-5,-4,-5,-4"/>
+                        </Button>
+
+                        <TextBlock x:Uid="1Ss" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" HorizontalAlignment="Center"  Margin="0,30,0,10"/>
+                        <TextBlock x:Uid="1Ss1" HorizontalAlignment="Center" Margin="0,0,0,0"/>
+                        <TextBlock Text="TRUE.SVG *1" HorizontalAlignment="Center"  Margin="0,7,0,0"/>
+                        <TextBlock Text="AVICII.SVG *1" HorizontalAlignment="Center" Margin="0,2,0,0"/>
+                        
+                        <TextBlock x:Uid="1Se" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Margin="0,30,0,10" HorizontalAlignment="Center"/>
+                        <TextBlock TextWrapping="WrapWholeWords" HorizontalAlignment="Center">                    
+                        <Span xml:space="preserve"><Run>本程序有助于您了解浏览关于 </Run><Hyperlink NavigateUri="https://instagram.com/avicii?igshid=1o2qr9406f43m">Tim</Hyperlink><Run> 的所有信息。</Run></Span>
+                        </TextBlock>
+                        <TextBlock Text="若侵犯到您的合法权利请及时联系我。" HorizontalAlignment="Center" Margin="0,2,0,20"/>
+                    </StackPanel>
+                </Viewbox>
+            </Grid>
+        </PivotItem>
+
+        <PivotItem x:Uid="Sph2">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                <StackPanel Margin="5">
+                    <TextBlock x:Uid="2Sf1" Margin="0,10,0,0" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" FontWeight="Bold"/>
+                    <TextBlock x:Uid="2Sa1" Style="{ThemeResource CaptionTextBlockStyle}" Margin="0,10,0,20"/>
+                    <TextBlock x:Uid="2Sf2" Margin="0,10,0,0" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" FontWeight="Bold"/>
+                    <TextBlock x:Uid="2Sa2" Style="{ThemeResource CaptionTextBlockStyle}" Margin="0,10,0,20"/>
+                    <TextBlock x:Uid="2Sf3" Margin="0,10,0,0" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" FontWeight="Bold"/>
+                    <TextBlock x:Uid="2Sa3" Style="{ThemeResource CaptionTextBlockStyle}" Margin="0,10,0,20"/>
+                    <TextBlock Text="-● END ●-" Margin="0,20,0,0" Style="{StaticResource SubheaderTextBlockStyle}" FontWeight="Bold" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </ScrollViewer>
+        </PivotItem>
+
+        <PivotItem x:Uid="Sph3">
+            <StackPanel>
+                <!--<TextBlock Style="{ThemeResource TitleTextBlockStyle}">
+                    <Run> 最后更新日期：</Run>
+                    <Run Foreground="{StaticResource SystemAccentColor}">2020/01/02</Run>
+                </TextBlock>-->
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock x:Uid="3Supdate1" Style="{ThemeResource TitleTextBlockStyle}"/>
+                    <TextBlock x:Uid="3Supdate2" Style="{ThemeResource TitleTextBlockStyle}" Foreground="{StaticResource SystemAccentColor}"/>
+                </StackPanel>
+                
+                <TextBlock Text="v0.0.3" Foreground="{StaticResource SystemAccentColor}" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Margin="0,20,0,3"/>
+                <TextBlock x:Uid="3Sup3a" Style="{ThemeResource CaptionTextBlockStyle}" Margin="10,0,0,3"/>
+                <TextBlock x:Uid="3Sup3b" Style="{ThemeResource CaptionTextBlockStyle}" Margin="10,0,0,0"/>
+
+                <TextBlock Text="v0.0.2" Foreground="{StaticResource SystemAccentColor}" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Margin="0,20,0,3"/>
+                <TextBlock x:Uid="3Sup2a" Style="{ThemeResource CaptionTextBlockStyle}" Margin="10,0,0,3"/>
+                <TextBlock x:Uid="3Sup2b" Style="{ThemeResource CaptionTextBlockStyle}" Margin="10,0,0,0"/>
+
+                <TextBlock Text="v0.0.1" Foreground="{StaticResource SystemAccentColor}" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Margin="0,20,0,3"/>
+                <TextBlock x:Uid="3Sup1a" Style="{ThemeResource CaptionTextBlockStyle}" Margin="10,0,0,3"/>
+                <TextBlock x:Uid="3Sup1b" Style="{ThemeResource CaptionTextBlockStyle}" Margin="10,0,0,0"/>
+            </StackPanel>
+        </PivotItem>
+
+        <PivotItem x:Uid="Sph4">
+            <Grid>
+                <StackPanel>
+                    <StackPanel HorizontalAlignment="Center" Padding="0,0,0,49">
+                        <Image Source="Assets\SplashScreen.scale-200.png" x:Name="re11" Grid.Column="0" Height="78" Width="160"/>
+                        <RelativePanel Grid.Column="0">
+                            <Image Source="Assets\Background\AVICII.jpg" x:Name="re22" Grid.Column="0" Height="100" Margin="0,0,10,0"/>
+                            <StackPanel x:Name="re33" Orientation="Horizontal" RelativePanel.RightOf="re22">
+                                <TextBlock Text="Tim Bergling" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}" Margin="0,1,5,0"/>
+                                <HyperlinkButton NavigateUri="https://open.spotify.com/artist/1vCWHaC5f2uS3yhpwWbIA6?si=IYzh3XGLTo2t_CzCMTro0g" Margin="5,0,5,0">
+                                    <Image Source="Assets/Logo/Spotify.png" Height="14" Width="14"/>
+                                </HyperlinkButton>
+                                <HyperlinkButton NavigateUri="https://www.youtube.com/user/AviciiOfficialVEVO" Margin="5,0,5,0">
+                                    <Image Source="Assets/Logo/Youtube.png" Height="14" Width="14"/>
+                                </HyperlinkButton>
+                                <HyperlinkButton NavigateUri="https://itunes.apple.com/ca/artist/avicii/298496035" Margin="5,0,5,0">
+                                    <Image Source="Assets/Logo/Apple.png" Height="14"  Width="14"/>
+                                </HyperlinkButton>
+                            </StackPanel>
+                            <TextBlock Text="音乐不止，信仰不断。" TextWrapping="Wrap" RelativePanel.RightOf="re22" RelativePanel.Below="re33" Width="223"/>
+                        </RelativePanel>
+                    </StackPanel>
+
+                    <StackPanel HorizontalAlignment="Center" Padding="0,0,0,50">
+                        <TextBlock Text="TEUE LOVE" x:Name="re111" FontFamily="{StaticResource avicii}" FontSize="41" Margin="0,0,0,20" HorizontalAlignment="Center"/>
+                        <RelativePanel HorizontalAlignment="Center">
+                            <Image Source="Assets\Background\在恩.png" x:Name="re222" Height="100" Margin="0,0,10,0"/>
+                            <StackPanel Orientation="Horizontal" RelativePanel.RightOf="re222" x:Name="re333">
+                                <TextBlock Text="在恩" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}"/>
+                            </StackPanel>
+                            <TextBlock Text="一位不愿透露名字的神秘人士。有任何问题尽情联系我。" x:Name="re444" TextWrapping="Wrap" RelativePanel.RightOf="re222" RelativePanel.Below="re333" Width="226"/>
+                            <Button RelativePanel.RightOf="re222" RelativePanel.Below="re444" Style="{StaticResource ButtonRevealStyle}" Width="226" Margin="0,5,0,0" >
+                                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE715;"/>
+                            </Button>
+                        </RelativePanel>
+                    </StackPanel>
+                </StackPanel>
+                <Button Content="进入竖屏界面" Click="WPHome_Click" Style="{StaticResource AccentButtonStyle}" HorizontalAlignment="Stretch" VerticalAlignment="Bottom"/>
+            </Grid>
+        </PivotItem>
+    </Pivot>
+</Page>

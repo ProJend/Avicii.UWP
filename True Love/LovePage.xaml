@@ -1,0 +1,51 @@
+﻿<Page
+    x:Class="True_Love.LovePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:True_Love"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+        <Grid x:Name="grid" Margin="0,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.Background>
+                <ImageBrush ImageSource="Assets\Background\BG1.jpg" Stretch="UniformToFill" AlignmentX="Left"/>
+            </Grid.Background>
+
+
+
+            <StackPanel Orientation="Vertical" Grid.Row="1" Grid.ColumnSpan="3" Margin="0,20,0,0">
+                <TextBlock Text="◢◤" Style="{StaticResource HeaderTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                <TextBlock Text="Remembering Tim Bergling" Style="{StaticResource HeaderTextBlockStyle}" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center" Margin="0,20,0,0"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Grid.Row="2" Grid.Column="1" Margin="0,50,0,50" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                <TextBlock x:Uid="Lt1"
+                       Style="{ThemeResource TitleTextBlockStyle}" Margin="0,0,0,50" TextAlignment="Center"/>
+                <TextBlock x:Uid="Lt2" Margin="0,0,0,50" Style="{ThemeResource TitleTextBlockStyle}" TextAlignment="Center"/>
+                <TextBlock x:Uid="Lt3" 
+                       Style="{ThemeResource TitleTextBlockStyle}" Margin="0,0,0,0" TextAlignment="Center"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Grid.Row="3"  Grid.ColumnSpan="3" Margin="0,0,0,20">
+                <TextBlock Text="the Avicii Memory boaid" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource HeaderTextBlockStyle}" Margin="0,10,0,0"/>
+                <TextBlock Text="I N  L O V I N G  M E M O R Y" FontFamily="{StaticResource  avicii}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}" Margin="0,20,0,10"/>
+                <TextBlock Text="1 9 8 9 . 0 9 . 0 8 - 2 0 1 8 . 0 4 . 2 0" FontFamily="{StaticResource avicii}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}" Margin="0,0,0,0"/>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Page>

@@ -1,0 +1,43 @@
+﻿<Page
+    x:Class="True_Love.WPPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:True_Love"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+     
+    <Grid>
+        <Frame x:Name="ContentFrame" IsTabStop="True" Grid.Row="4"/>
+        <Grid Margin="0,70,0,0">
+            <Pivot  Title="真实的">
+                <PivotItem Header="爱意">
+
+                </PivotItem>
+                <PivotItem Header="回忆">
+
+                </PivotItem>
+                <PivotItem Header="商店">
+
+                </PivotItem>
+            </Pivot>
+        </Grid>
+        
+        <Grid x:Name="bar" Background="Black" Canvas.ZIndex="2" VerticalAlignment="Bottom">
+            <CommandBar Background="Black" DefaultLabelPosition="Bottom">
+                <AppBarButton Icon="Upload" Label="返回顶部" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="返回顶部"/>
+                <AppBarButton Icon="Add" Label="分享故事" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="分享你与 Avicii 的故事"/>
+                <AppBarButton Icon="Refresh" Label="刷新" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="刷新数据"/>
+                <AppBarButton Icon="Setting" Label="设置" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="打开设置" Click="SET_Click"/>
+                <CommandBar.SecondaryCommands >
+                    <AppBarButton Icon="Page" Label="访问网页:iTunes">
+                        <AppBarButton.KeyboardAccelerators> 
+                            <KeyboardAccelerator Modifiers="Control" Key="S" />
+                        </AppBarButton.KeyboardAccelerators>
+                    </AppBarButton>
+                </CommandBar.SecondaryCommands>
+            </CommandBar>
+        </Grid>
+    </Grid>
+</Page>
