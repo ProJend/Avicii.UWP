@@ -9,9 +9,8 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
      
     <Grid>
-        <Frame x:Name="ContentFrame" IsTabStop="True" Grid.Row="4"/>
-        <Grid Margin="0,70,0,0">
-            <Pivot  Title="真实的">
+        <Grid Margin="0,70,0,0" x:Name="pi">
+            <Pivot  Title="◢◤">
                 <PivotItem Header="爱意">
 
                 </PivotItem>
@@ -24,7 +23,38 @@
             </Pivot>
         </Grid>
         
-        <Grid x:Name="bar" Background="Black" Canvas.ZIndex="2" VerticalAlignment="Bottom">
+        <ScrollViewer x:Name="sv" ViewChanged="sv_ViewChanged" VerticalScrollBarVisibility="Hidden">
+            <!--<Frame x:Name="ContentFrame" IsTabStop="True" Grid.Row="4"/>-->
+            <StackPanel>
+                <Grid Height="400" Background="DarkRed" Margin="20  "/>
+                <Grid Height="400" Background="DarkRed" Margin="20"/>
+                <Grid Height="400" Background="DarkRed" Margin="20"/>
+            </StackPanel>
+        </ScrollViewer>
+               
+        <Grid x:Name="bar" Canvas.ZIndex="2" VerticalAlignment="Bottom">
+            <!--将来搬运到主导航页面应该不再需要此响应器-->
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup>
+                    <VisualState x:Name="open">
+                        <VisualState.StateTriggers>
+                            <AdaptiveTrigger MinWindowWidth="300"/>
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter Target="bar.(Opacity)" Value="1"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                    <VisualState x:Name="close">
+                        <VisualState.StateTriggers>
+                            <AdaptiveTrigger MinWindowWidth="0"/>
+                        </VisualState.StateTriggers>
+                        <VisualState.Setters>
+                            <Setter Target="bar.(Opacity)" Value="0"/>
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+            
             <CommandBar Background="Black" DefaultLabelPosition="Bottom">
                 <AppBarButton Icon="Upload" Label="返回顶部" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="返回顶部"/>
                 <AppBarButton Icon="Add" Label="分享故事" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="分享你与 Avicii 的故事"/>
@@ -32,11 +62,25 @@
                 <AppBarButton Icon="Setting" Label="设置" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="打开设置" Click="SET_Click"/>
                 <CommandBar.SecondaryCommands >
                     <AppBarButton Icon="Page" Label="访问网页:iTunes">
-                        <AppBarButton.KeyboardAccelerators> 
+                        <AppBarButton.KeyboardAccelerators>
                             <KeyboardAccelerator Modifiers="Control" Key="S" />
                         </AppBarButton.KeyboardAccelerators>
                     </AppBarButton>
                 </CommandBar.SecondaryCommands>
+                
+                <!--<CommandBar.Triggers>
+                    <EventTrigger RoutedEvent="Page.Loaded">
+                        <BeginStoryboard>
+                            <Storyboard x:Name="Storyboard1">
+                                <DoubleAnimation Storyboard.TargetName="Translation" Storyboard.TargetProperty="X" From="0" To="200" >
+                                    <DoubleAnimation.EasingFunction>
+                                        <CircleEase EasingMode="EaseInOut" />
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </CommandBar.Triggers>-->
             </CommandBar>
         </Grid>
     </Grid>

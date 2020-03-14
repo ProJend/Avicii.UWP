@@ -31,6 +31,9 @@ namespace True_Love
             NavigationCacheMode = NavigationCacheMode.Enabled;
         }
 
+        /// <summary>
+        /// 发送邮件 https://blog.csdn.net/weixin_34128534/article/details/94255782
+        /// </summary>
         private async void Mail_Click(object sender, RoutedEventArgs e)
         {
             //收件人            
