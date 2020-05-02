@@ -9,6 +9,7 @@ using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
+using Windows.UI.Notifications;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -33,7 +34,9 @@ namespace True_Love
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-        }
+            //TileUpdateManager.CreateTileUpdaterForApplication().Clear(); // 清空队列
+            TileUpdateManager.CreateTileUpdaterForApplication().EnableNotificationQueue(true); // 实现通知循环
+        }   
 
         /// <summary>
         /// 在应用程序由最终用户正常启动时进行调用。
@@ -44,6 +47,7 @@ namespace True_Love
         {
             Frame rootFrame = Window.Current.Content as Frame;
 
+            
             // 不要在窗口已包含内容时重复应用程序初始化，
             // 只需确保窗口处于活动状态
             if (rootFrame == null)
@@ -78,6 +82,9 @@ namespace True_Love
             }
         }
 
+        /// <summary>
+        /// 沉淀状态栏。       
+        /// </summary>
         private void ExtendAcrylicIntoTitleBar()
         {
             CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;

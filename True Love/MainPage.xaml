@@ -11,12 +11,14 @@
     <Grid>
         <Frame x:Name="ContentFrame" IsTabStop="True" Margin="0,0,0,0"/>
         <NavigationView x:Name="NavView"
-                         Loaded="NavView_Loaded"
-                         ItemInvoked="NavView_ItemInvoked"
-                         PaneDisplayMode="top"
-                         IsBackButtonVisible="Collapsed">
+                        Loaded="NavView_Loaded"
+                        BackRequested="NavView_BackRequested"
+                        ItemInvoked="NavView_ItemInvoked"
+                        PaneDisplayMode="Auto"
+                        IsBackButtonVisible="Auto"
+                        PaneTitle=" ">
             <NavigationView.MenuItems>
-                <NavigationViewItemHeader x:Uid="Mnh1" x:Name="MainPagesHeader"/>
+                <NavigationViewItemHeader x:Uid="Mnh1" x:Name="MainPagesHeader"/>   
                 <NavigationViewItem x:Uid="Mnh2" Icon="Contact" Tag="home"/>
                 <NavigationViewItemSeparator/>
                 <NavigationViewItem x:Uid="Mnh3" Icon="World" Tag="comments"/>

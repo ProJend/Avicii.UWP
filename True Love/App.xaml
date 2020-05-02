@@ -267,22 +267,24 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary>
                     <ResourceDictionary.ThemeDictionaries>
-                        <ResourceDictionary x:Key="Default">
+                        <ResourceDictionary x:Key="Dark">
                             <!-- The "Default" theme dictionary is used unless a specific
                                  light, dark, or high contrast dictionary is provided. These
                                  resources should be tested with both the light and dark themes,
                                  and specific light or dark resources provided as needed. -->
                             <AcrylicBrush x:Key="NavigationViewDefaultPaneBackground"
-                                   BackgroundSource="Backdrop"
-                                   TintColor="Transparent"
-                                   TintOpacity=".0"/>
+                                          BackgroundSource="Backdrop"
+                                          TintColor="Black"
+                                          TintOpacity=".50"
+                                          FallbackColor="Black"/>
                             <AcrylicBrush x:Key="NavigationViewTopPaneBackground"
-                                   BackgroundSource="HostBackdrop"
-                                   TintColor="Black"  
-                                   TintOpacity=".30"/>
+                                          BackgroundSource="HostBackdrop"
+                                          TintColor="Black"  
+                                          TintOpacity=".30"/>
                             <AcrylicBrush x:Key="NavigationViewExpandedPaneBackground" 
                                           BackgroundSource="HostBackdrop" 
-                                          TintColor="DarkSlateGray"/>
+                                          TintColor="Black"
+                                          TintOpacity=".30"/>
                         </ResourceDictionary>
                         <ResourceDictionary x:Key="HighContrast">
                             <!-- Always include a "HighContrast" dictionary when you override

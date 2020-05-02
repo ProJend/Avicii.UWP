@@ -8,6 +8,7 @@ using Windows.ApplicationModel.Email;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.System;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -25,8 +26,13 @@ namespace True_Love
     /// </summary>
     public sealed partial class SettingsPage : Page
     {
+        private LiveTileService liveTileService;
+        private string source;
+
         public SettingsPage()
         {
+            liveTileService = new LiveTileService();
+            source = "ms-appx:///Assets/Background/BG1.jpg";
             this.InitializeComponent();
             NavigationCacheMode = NavigationCacheMode.Enabled;
         }
@@ -59,6 +65,22 @@ namespace True_Love
         private void WPHome_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(WPPage));
+        }
+
+        private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+        {
+            ToggleSwitch toggleSwitch = sender as ToggleSwitch;
+            if (toggleSwitch != null)
+            {
+                if (toggleSwitch.IsOn == true)
+                {
+                    liveTileService.AddTile("adad","dadd",source);//添加新磁贴
+                }
+                else
+                {
+                    TileUpdateManager.CreateTileUpdaterForApplication().Clear(); // 清空队列
+                }
+            }
         }
     }
 }

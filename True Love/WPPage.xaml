@@ -9,13 +9,35 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
      
     <Grid>
+        <!--70-->
         <Grid Margin="0,70,0,0" x:Name="pi">
             <Pivot  Title="◢◤">
                 <PivotItem Header="爱意">
-
+                    <ScrollViewer x:Name="sv" ViewChanged="sv_ViewChanged" VerticalScrollBarVisibility="Hidden">
+                        <!--<Frame x:Name="ContentFrame" IsTabStop="True" Grid.Row="4"/>-->
+                        <StackPanel>
+                            <Grid Height="400" Background="DarkRed" Margin="20">
+                                <Button VerticalAlignment="Center" HorizontalAlignment="Center" Padding="100"/>
+                            </Grid>
+                            <Grid Height="400" Background="DarkRed" Margin="20"/>
+                            <Grid Height="400" Background="DarkRed" Margin="20"/>
+                        </StackPanel>
+                    </ScrollViewer>
                 </PivotItem>
                 <PivotItem Header="回忆">
-
+                    <ScrollViewer>
+                        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                            <StackPanel>
+                                <Image x:Name="MyImage" Source="ms-appx:///Assets/Background/BG1.jpg" Width="280" Height="280"></Image>
+                                <TextBlock Text="标题" HorizontalAlignment="Center" Margin="5"></TextBlock>
+                                <TextBox x:Name="MyTitle" Width="380" Margin="5"></TextBox>
+                                <TextBlock Text="内容" HorizontalAlignment="Center"  Margin="5"></TextBlock>
+                                <TextBox x:Name="MyDetail" Width="380" Height="50" TextWrapping="Wrap"  Margin="5"></TextBox>
+                                <Button Content="更改图片" Click="ChangeImage" HorizontalAlignment="Center" Margin="5"></Button>
+                                <Button Content="添加磁贴" Click="AddTile" HorizontalAlignment="Center" Margin="5"></Button>
+                            </StackPanel>
+                        </Grid>
+                    </ScrollViewer>
                 </PivotItem>
                 <PivotItem Header="商店">
 
@@ -23,14 +45,7 @@
             </Pivot>
         </Grid>
         
-        <ScrollViewer x:Name="sv" ViewChanged="sv_ViewChanged" VerticalScrollBarVisibility="Hidden">
-            <!--<Frame x:Name="ContentFrame" IsTabStop="True" Grid.Row="4"/>-->
-            <StackPanel>
-                <Grid Height="400" Background="DarkRed" Margin="20  "/>
-                <Grid Height="400" Background="DarkRed" Margin="20"/>
-                <Grid Height="400" Background="DarkRed" Margin="20"/>
-            </StackPanel>
-        </ScrollViewer>
+        
                
         <Grid x:Name="bar" Canvas.ZIndex="2" VerticalAlignment="Bottom">
             <!--将来搬运到主导航页面应该不再需要此响应器-->

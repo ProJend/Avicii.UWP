@@ -5,12 +5,14 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 // https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x804 上介绍了“空白页”项模板
@@ -26,58 +28,154 @@ namespace True_Love
         {
             this.InitializeComponent();            
         }
-        public UIElement PaneHeader { get; set; }
+
+        private void ContentFrame_NavigationFailed(object sender, NavigationFailedEventArgs e)
+        {
+            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
+        }
+
+        // List of ValueTuple holding the Navigation Tag and the relative Navigation Page
+        private readonly List<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
+        {
+            ("home", typeof(LovePage)),
+            ("images", typeof(ImagesPage)),
+            ("comments", typeof(CommentsPage)),
+            ("music", typeof(FMPage)),
+        };
+
 
         private void NavView_Loaded(object sender, RoutedEventArgs e)
         {
-            // you can also add items in code behind
+            // Add handler for ContentFrame navigation.
+            ContentFrame.Navigated += On_Navigated;
 
-            // set the initial SelectedItem 
-            foreach (NavigationViewItemBase item in NavView.MenuItems)
+            // NavView doesn't load any page by default, so load home page.
+            NavView.SelectedItem = NavView.MenuItems[0];
+            // If navigation occurs on SelectionChanged, this isn't needed.
+            // Because we use ItemInvoked to navigate, we need to call Navigate
+            // here to load the home page.
+            NavView_Navigate("home", new EntranceNavigationTransitionInfo());
+
+            // Add keyboard accelerators for backwards navigation.
+            var goBack = new KeyboardAccelerator { Key = VirtualKey.GoBack };
+            goBack.Invoked += BackInvoked;
+            this.KeyboardAccelerators.Add(goBack);
+
+            // ALT routes here
+            var altLeft = new KeyboardAccelerator
             {
-                if (item is NavigationViewItem && item.Tag.ToString() == "comments")
-                {
-                    ContentFrame.Navigate(typeof(CommentsPage));
-                    NavView.SelectedItem = item;
-                    break;
-                }
+                Key = VirtualKey.Left,
+                Modifiers = VirtualKeyModifiers.Menu
+            };
+            altLeft.Invoked += BackInvoked;
+            this.KeyboardAccelerators.Add(altLeft);
+        }
+
+        private void NavView_ItemInvoked(NavigationView sender,
+                                         NavigationViewItemInvokedEventArgs args)
+        {
+            if (args.IsSettingsInvoked == true)
+            {
+                NavView_Navigate("settings", args.RecommendedNavigationTransitionInfo);
+            }
+            else if (args.InvokedItemContainer != null)
+            {
+                var navItemTag = args.InvokedItemContainer.Tag.ToString();
+                NavView_Navigate(navItemTag, args.RecommendedNavigationTransitionInfo);
             }
         }
 
-        private void NavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+        // NavView_SelectionChanged is not used in this example, but is shown for completeness.
+        // You will typically handle either ItemInvoked or SelectionChanged to perform navigation,
+        // but not both.
+        private void NavView_SelectionChanged(NavigationView sender,
+                                              NavigationViewSelectionChangedEventArgs args)
         {
-            if (args.IsSettingsInvoked)
+            if (args.IsSettingsSelected == true)
             {
-                ContentFrame.Navigate(typeof(SettingsPage));
+                NavView_Navigate("settings", args.RecommendedNavigationTransitionInfo);
+            }
+            else if (args.SelectedItemContainer != null)
+            {
+                var navItemTag = args.SelectedItemContainer.Tag.ToString();
+                NavView_Navigate(navItemTag, args.RecommendedNavigationTransitionInfo);
+            }
+        }
+
+        private void NavView_Navigate(string navItemTag, NavigationTransitionInfo transitionInfo)
+        {
+            Type _page = null;
+            if (navItemTag == "settings")
+            {
+                _page = typeof(SettingsPage);
             }
             else
             {
-                // find NavigationViewItem with Content that equals InvokedItem
-                var item = sender.MenuItems.OfType<NavigationViewItem>().First(x => (string)x.Content == (string)args.InvokedItem);
-                NavView_Navigate(item as NavigationViewItem);
+                var item = _pages.FirstOrDefault(p => p.Tag.Equals(navItemTag));
+                _page = item.Page;
             }
-        }
+            // Get the page type before navigation so you can prevent duplicate
+            // entries in the backstack.
+            var preNavPageType = ContentFrame.CurrentSourcePageType;
 
-        private void NavView_Navigate(NavigationViewItem item)
-        {
-            switch (item.Tag)
+            // Only navigate if the selected page isn't currently loaded.
+            if (!(_page is null) && !Type.Equals(preNavPageType, _page))
             {
-                case "home":
-                    ContentFrame.Navigate(typeof(LovePage));
-                    break;
-
-                case "images":
-                    ContentFrame.Navigate(typeof(ImagesPage));
-                    break;
-
-                case "comments":
-                    ContentFrame.Navigate(typeof(CommentsPage));
-                    break;
-
-                case "music":
-                    ContentFrame.Navigate(typeof(FMPage));
-                    break;
+                ContentFrame.Navigate(_page, null, transitionInfo);
             }
         }
+
+        private void NavView_BackRequested(NavigationView sender,
+                                           NavigationViewBackRequestedEventArgs args)
+        {
+            On_BackRequested();
+        }
+
+        private void BackInvoked(KeyboardAccelerator sender,
+                                 KeyboardAcceleratorInvokedEventArgs args)
+        {
+            On_BackRequested();
+            args.Handled = true;
+        }
+
+        private bool On_BackRequested()
+        {
+            if (ContentFrame.CanGoBack)
+            {
+                ContentFrame.GoBack();
+                return true;
+            }
+            return false;
+
+            // Don't go back if the nav pane is overlayed.
+            if (NavView.IsPaneOpen &&
+                (NavView.DisplayMode == NavigationViewDisplayMode.Compact ||
+                 NavView.DisplayMode == NavigationViewDisplayMode.Minimal))
+                return false;
+        }
+
+        private void On_Navigated(object sender, NavigationEventArgs e)
+        {
+            NavView.IsBackEnabled = ContentFrame.CanGoBack;
+
+            if (ContentFrame.SourcePageType == typeof(SettingsPage))
+            {
+                // SettingsItem is not part of NavView.MenuItems, and doesn't have a Tag.
+                NavView.SelectedItem = (NavigationViewItem)NavView.SettingsItem;
+                //NavView.Header = "Settings";
+            }
+            else if (ContentFrame.SourcePageType != null)
+            {
+                var item = _pages.FirstOrDefault(p => p.Page == e.SourcePageType);
+
+                NavView.SelectedItem = NavView.MenuItems
+                    .OfType<NavigationViewItem>()
+                    .First(n => n.Tag.Equals(item.Tag));
+
+                //NavView.Header =
+                //    ((NavigationViewItem)NavView.SelectedItem)?.Content?.ToString();
+            }
+        }
+       
     }
 }
