@@ -43,8 +43,8 @@
 
             <StackPanel Orientation="Vertical" Grid.Row="3"  Grid.ColumnSpan="3" Margin="0,0,0,20">
                 <TextBlock Text="the Avicii Memory boaid" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource HeaderTextBlockStyle}" Margin="0,10,0,0"/>
-                <TextBlock Text="I N  L O V I N G  M E M O R Y" FontFamily="{StaticResource  avicii}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}" Margin="0,20,0,10"/>
-                <TextBlock Text="1 9 8 9 . 0 9 . 0 8 - 2 0 1 8 . 0 4 . 2 0" FontFamily="{StaticResource avicii}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}" Margin="0,0,0,0"/>
+                <TextBlock Text="I N  L O V I N G  M E M O R Y" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}" Margin="0,20,0,10"/>
+                <TextBlock Text="1 9 8 9 . 0 9 . 0 8 - 2 0 1 8 . 0 4 . 2 0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}" Margin="0,0,0,0"/>
             </StackPanel>
         </Grid>
     </ScrollViewer>

@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using muxc = Microsoft.UI.Xaml.Controls;
 
 // https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x804 上介绍了“空白页”项模板
 
@@ -26,7 +27,8 @@ namespace True_Love
     {
         public MainPage()
         {
-            this.InitializeComponent();            
+            this.InitializeComponent();
+            Window.Current.SetTitleBar(AppTitleBar);
         }
 
         private void ContentFrame_NavigationFailed(object sender, NavigationFailedEventArgs e)
@@ -36,13 +38,12 @@ namespace True_Love
 
         // List of ValueTuple holding the Navigation Tag and the relative Navigation Page
         private readonly List<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
-        {
+         {
             ("home", typeof(LovePage)),
             ("images", typeof(ImagesPage)),
             ("comments", typeof(CommentsPage)),
             ("music", typeof(FMPage)),
         };
-
 
         private void NavView_Loaded(object sender, RoutedEventArgs e)
         {
@@ -71,8 +72,8 @@ namespace True_Love
             this.KeyboardAccelerators.Add(altLeft);
         }
 
-        private void NavView_ItemInvoked(NavigationView sender,
-                                         NavigationViewItemInvokedEventArgs args)
+        private void NavView_ItemInvoked(muxc.NavigationView sender,
+                                         muxc.NavigationViewItemInvokedEventArgs args)
         {
             if (args.IsSettingsInvoked == true)
             {
@@ -88,8 +89,8 @@ namespace True_Love
         // NavView_SelectionChanged is not used in this example, but is shown for completeness.
         // You will typically handle either ItemInvoked or SelectionChanged to perform navigation,
         // but not both.
-        private void NavView_SelectionChanged(NavigationView sender,
-                                              NavigationViewSelectionChangedEventArgs args)
+        private void NavView_SelectionChanged(muxc.NavigationView sender,
+                                              muxc.NavigationViewSelectionChangedEventArgs args)
         {
             if (args.IsSettingsSelected == true)
             {
@@ -125,8 +126,8 @@ namespace True_Love
             }
         }
 
-        private void NavView_BackRequested(NavigationView sender,
-                                           NavigationViewBackRequestedEventArgs args)
+        private void NavView_BackRequested(muxc.NavigationView sender,
+                                           muxc.NavigationViewBackRequestedEventArgs args)
         {
             On_BackRequested();
         }
@@ -140,18 +141,17 @@ namespace True_Love
 
         private bool On_BackRequested()
         {
-            if (ContentFrame.CanGoBack)
-            {
-                ContentFrame.GoBack();
-                return true;
-            }
-            return false;
+            if (!ContentFrame.CanGoBack)
+                return false;
 
             // Don't go back if the nav pane is overlayed.
             if (NavView.IsPaneOpen &&
-                (NavView.DisplayMode == NavigationViewDisplayMode.Compact ||
-                 NavView.DisplayMode == NavigationViewDisplayMode.Minimal))
+                (NavView.DisplayMode == muxc.NavigationViewDisplayMode.Compact ||
+                 NavView.DisplayMode == muxc.NavigationViewDisplayMode.Minimal))
                 return false;
+
+            ContentFrame.GoBack();
+            return true;
         }
 
         private void On_Navigated(object sender, NavigationEventArgs e)
@@ -161,7 +161,7 @@ namespace True_Love
             if (ContentFrame.SourcePageType == typeof(SettingsPage))
             {
                 // SettingsItem is not part of NavView.MenuItems, and doesn't have a Tag.
-                NavView.SelectedItem = (NavigationViewItem)NavView.SettingsItem;
+                NavView.SelectedItem = (muxc.NavigationViewItem)NavView.SettingsItem;
                 //NavView.Header = "Settings";
             }
             else if (ContentFrame.SourcePageType != null)
@@ -169,13 +169,12 @@ namespace True_Love
                 var item = _pages.FirstOrDefault(p => p.Page == e.SourcePageType);
 
                 NavView.SelectedItem = NavView.MenuItems
-                    .OfType<NavigationViewItem>()
+                    .OfType<muxc.NavigationViewItem>()
                     .First(n => n.Tag.Equals(item.Tag));
 
                 //NavView.Header =
-                //    ((NavigationViewItem)NavView.SelectedItem)?.Content?.ToString();
+                //    ((muxc.NavigationViewItem)NavView.SelectedItem)?.Content?.ToString();
             }
         }
-       
     }
 }

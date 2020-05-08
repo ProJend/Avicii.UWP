@@ -6,25 +6,31 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls">
+    <Page.Resources>
+        <Thickness x:Key="NavigationViewHeaderMargin">0</Thickness>
+    </Page.Resources>
 
-    <Grid>
-        <Frame x:Name="ContentFrame" IsTabStop="True" Margin="0,0,0,0"/>
-        <NavigationView x:Name="NavView"
+    <Grid x:Name="LayoutRoot">
+        <Frame x:Name="ContentFrame" IsTabStop="True" d:IsLocked="True" Padding="0,0,0,0"/>
+        <muxc:NavigationView x:Name="NavView"
                         Loaded="NavView_Loaded"
                         BackRequested="NavView_BackRequested"
                         ItemInvoked="NavView_ItemInvoked"
                         PaneDisplayMode="Auto"
                         IsBackButtonVisible="Auto"
-                        PaneTitle=" ">
-            <NavigationView.MenuItems>
-                <NavigationViewItemHeader x:Uid="Mnh1" x:Name="MainPagesHeader"/>   
-                <NavigationViewItem x:Uid="Mnh2" Icon="Contact" Tag="home"/>
-                <NavigationViewItemSeparator/>
-                <NavigationViewItem x:Uid="Mnh3" Icon="World" Tag="comments"/>
-                <NavigationViewItem x:Uid="Mnh4" Icon="Shop" Tag="images"/>
-            </NavigationView.MenuItems>
-        </NavigationView>
+                             IsTitleBarAutoPaddingEnabled="False" d:IsLocked="True">
+            <muxc:NavigationView.MenuItems>
+                <!--<muxc:NavigationViewItem Icon="Setting"/>-->
+                <muxc:NavigationViewItemHeader x:Uid="Mnh1" x:Name="MainPagesHeader"/>
+                <muxc:NavigationViewItem x:Uid="Mnh2" Icon="Contact" Tag="home"/>
+                <muxc:NavigationViewItemSeparator/>
+                <muxc:NavigationViewItem x:Uid="Mnh3" Icon="World" Tag="comments"/>
+                <muxc:NavigationViewItem x:Uid="Mnh4" Icon="Shop" Tag="images"/>
+            </muxc:NavigationView.MenuItems>
+        </muxc:NavigationView>
+        <Grid Height="32" VerticalAlignment="Top" HorizontalAlignment="Stretch" x:Name="AppTitleBar" Background="Transparent" d:IsLocked="True" Margin="80,0,0,0"/>
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
@@ -38,6 +44,7 @@
                         <Setter Target="NavView.PaneDisplayMode" Value="Top"/>
                         <Setter Target="MainPagesHeader.Visibility" Value="Collapsed"/>
                         <!-- Leave the next line for left-only navigation. -->
+                        <Setter Target="AppTitleBar.Margin" Value="390,0,0,0"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

@@ -69,16 +69,19 @@ namespace True_Love
 
         private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
         {
+            bool OnOrOff;
             ToggleSwitch toggleSwitch = sender as ToggleSwitch;
             if (toggleSwitch != null)
             {
                 if (toggleSwitch.IsOn == true)
                 {
                     liveTileService.AddTile("adad","dadd",source);//添加新磁贴
+                    OnOrOff = true;
                 }
                 else
                 {
                     TileUpdateManager.CreateTileUpdaterForApplication().Clear(); // 清空队列
+                    OnOrOff = false;
                 }
             }
         }

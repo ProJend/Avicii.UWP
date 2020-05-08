@@ -162,17 +162,8 @@
   <data name="3Sup1b.Text" xml:space="preserve">
     <value>● Complete the Tim Bergling's personal informations.</value>
   </data>
-  <data name="3Sup2a.Text" xml:space="preserve">
-    <value>● Open the page cache, it can save the page.</value>
-  </data>
-  <data name="3Sup2b.Text" xml:space="preserve">
-    <value>● Improve the details of the title bar.</value>
-  </data>
-  <data name="3Sup3a.Text" xml:space="preserve">
-    <value>● All to center. (maybe)</value>
-  </data>
   <data name="3Sup3b.Text" xml:space="preserve">
-    <value>● Added some languages: Simplified Chinese / Traditional Chinese / English</value>
+    <value>● Added some languages about: Simplified Chinese / Traditional Chinese / English</value>
   </data>
   <data name="3Supdate1.Text" xml:space="preserve">
     <value>The last day of update：</value>
