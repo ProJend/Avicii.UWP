@@ -157,28 +157,16 @@
     <value>来自开发者的话：</value>
   </data>
   <data name="3Sup1a.Text" xml:space="preserve">
-    <value>● 初版，正式投用使用</value>
+    <value>● 更换 FontIcon 矢量图标</value>
   </data>
   <data name="3Sup1b.Text" xml:space="preserve">
-    <value>● 完成 Tim Bergling 的个人页面设计</value>
-  </data>
-  <data name="3Sup2a.Text" xml:space="preserve">
-    <value>● 开放网页缓存权限，不会再丢失网页</value>
-  </data>
-  <data name="3Sup2b.Text" xml:space="preserve">
-    <value>● 完善标题栏细节，及更多细节</value>
-  </data>
-  <data name="3Sup3a.Text" xml:space="preserve">
-    <value>● 全局居中（假装</value>
-  </data>
-  <data name="3Sup3b.Text" xml:space="preserve">
-    <value>● 添加 英文 / 繁體 / 简体 语言</value>
+    <value>● 更人性化的导航栏</value>
   </data>
   <data name="3Supdate1.Text" xml:space="preserve">
     <value>最后更新日期：</value>
   </data>
   <data name="3Supdate2.Text" xml:space="preserve">
-    <value>2020/02/30</value>
+    <value>2020/05/11</value>
   </data>
   <data name="Lt1.Text" xml:space="preserve">
     <value>Tim 创造的音乐使我们相遇在一起，时时刻刻留在了我们的回忆当中。</value>

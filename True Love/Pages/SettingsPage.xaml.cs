@@ -1,25 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
 using Windows.ApplicationModel.Email;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.System;
 using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
-namespace True_Love
+namespace True_Love.Pages
 {
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
@@ -56,15 +45,12 @@ namespace True_Love
         }
 
         private async void weibo_Click(object sender, RoutedEventArgs e)
-
         {
             var a = await Launcher.LaunchUriAsync(new Uri("https://weibo.com/6081786829"));
-
         }
-
-        private void WPHome_Click(object sender, RoutedEventArgs e)
+        private async void Github_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(WPPage));
+            var a = await Launcher.LaunchUriAsync(new Uri("https://github.com/ProJend/TrueLove-UWP/issues/new"));
         }
 
         private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
@@ -75,7 +61,7 @@ namespace True_Love
             {
                 if (toggleSwitch.IsOn == true)
                 {
-                    liveTileService.AddTile("adad","dadd",source);//添加新磁贴
+                    liveTileService.AddTile("adad", "dadd", source);//添加新磁贴
                     OnOrOff = true;
                 }
                 else

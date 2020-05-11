@@ -1,30 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.System;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using muxc = Microsoft.UI.Xaml.Controls;
+using True_Love.Pages;
+// https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
-// https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x804 上介绍了“空白页”项模板
-
-namespace True_Love
+namespace True_Love.Pages
 {
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        //滚动条位置变量
+        double scrlocation = 0;
+        //导航栏当前显示状态（这个是为了减少不必要的开销，因为我做的是动画隐藏显示效果如果不用一个变量来记录当前导航栏状态的会重复执行隐藏或显示）
+        bool isshowbmbar = true;
         public MainPage()
         {
             this.InitializeComponent();
@@ -40,13 +38,14 @@ namespace True_Love
         private readonly List<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
          {
             ("home", typeof(LovePage)),
-            ("images", typeof(ImagesPage)),
+            ("images", typeof(Shop)),
             ("comments", typeof(CommentsPage)),
             ("music", typeof(FMPage)),
         };
 
         private void NavView_Loaded(object sender, RoutedEventArgs e)
         {
+            SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
             // Add handler for ContentFrame navigation.
             ContentFrame.Navigated += On_Navigated;
 
@@ -65,8 +64,8 @@ namespace True_Love
             // ALT routes here
             var altLeft = new KeyboardAccelerator
             {
-                Key = VirtualKey.Left,
-                Modifiers = VirtualKeyModifiers.Menu
+                Key = VirtualKey.Back,
+                //Modifiers = VirtualKeyModifiers.Menu
             };
             altLeft.Invoked += BackInvoked;
             this.KeyboardAccelerators.Add(altLeft);
@@ -138,7 +137,18 @@ namespace True_Love
             On_BackRequested();
             args.Handled = true;
         }
-
+        private void MainPage_BackRequested(object sender, BackRequestedEventArgs e)
+        {
+            if (e.Handled)
+            {
+                return;
+            }
+            if (Frame.CanGoBack)
+            {
+                Frame.GoBack();
+                e.Handled = true;
+            }
+        }
         private bool On_BackRequested()
         {
             if (!ContentFrame.CanGoBack)
@@ -175,6 +185,62 @@ namespace True_Love
                 //NavView.Header =
                 //    ((muxc.NavigationViewItem)NavView.SelectedItem)?.Content?.ToString();
             }
+        }
+
+        /// <summary>
+        /// 下滑隐藏导航栏 https://www.cnblogs.com/lonelyxmas/p/9919869.html
+        /// </summary>
+        private void sv_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        {
+            if (sv.VerticalOffset != scrlocation)
+            {
+                if (sv.VerticalOffset > scrlocation)
+                {
+                    //滚动条当前位置大于存储的变量值时代表往下滑，隐藏底部栏
+                    //隐藏
+                    if (isshowbmbar)
+                    {
+                        //这里为了简洁易懂就不做动画隐藏效果，直接用透明度进行隐藏。
+                        bar.Opacity = 0;
+                        isshowbmbar = false;
+                    }
+                }
+                else
+                {
+                    //显示
+                    if (isshowbmbar == false)
+                    {
+                        bar.Opacity = 1;
+                        isshowbmbar = true;
+                    }
+                }
+            }
+            scrlocation = sv.VerticalOffset;
+        }
+
+        private async void Spotify_Click(object sender, RoutedEventArgs e)
+        {
+            var a = await Launcher.LaunchUriAsync(new Uri("https://open.spotify.com/artist/1vCWHaC5f2uS3yhpwWbIA6?si=IYzh3XGLTo2t_CzCMTro0g"));
+        }
+        private async void YouTube_Click(object sender, RoutedEventArgs e)
+        {
+            var a = await Launcher.LaunchUriAsync(new Uri("https://www.youtube.com/user/AviciiOfficialVEVO"));
+        }
+        private async void Apple_Click(object sender, RoutedEventArgs e)
+        {
+            var a = await Launcher.LaunchUriAsync(new Uri("https://itunes.apple.com/ca/artist/avicii/298496035"));
+        }
+        private async void Netease_Click(object sender, RoutedEventArgs e)
+        {
+            var a = await Launcher.LaunchUriAsync(new Uri("https://music.163.com/#/artist?id=45236"));
+        }
+        private async void QQ_Click(object sender, RoutedEventArgs e)
+        {
+            var a = await Launcher.LaunchUriAsync(new Uri("https://y.qq.com/n/yqq/singer/001jgAtj3LtJnE.html"));
+        }
+        private async void Instagram_Click(object sender, RoutedEventArgs e)
+        {
+            var a = await Launcher.LaunchUriAsync(new Uri("https://www.instagram.com/avicii/"));
         }
     }
 }

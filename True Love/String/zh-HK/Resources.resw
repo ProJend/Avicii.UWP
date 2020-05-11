@@ -130,7 +130,7 @@
     <value>幫助</value>
   </data>
   <data name="1Sh1.Text" xml:space="preserve">
-    <value>如有問題，隨時恭候！</value>
+    <value>如有問題，隨時联络！</value>
   </data>
   <data name="1Ss.Text" xml:space="preserve">
     <value>援助</value>
@@ -160,28 +160,16 @@
     <value>來自開發者的話：</value>
   </data>
   <data name="3Sup1a.Text" xml:space="preserve">
-    <value>● 初版，正式投入使用</value>
+    <value>● 更換 FontIcon 矢量圖標</value>
   </data>
   <data name="3Sup1b.Text" xml:space="preserve">
-    <value>● 完成 Tim Bergling 的個人頁面設計</value>
-  </data>
-  <data name="3Sup2a.Text" xml:space="preserve">
-    <value>● 開放網路緩存權限，不會再丟失網頁</value>
-  </data>
-  <data name="3Sup2b.Text" xml:space="preserve">
-    <value>● 完善標題欄細節，以及更多隱藏細節</value>
-  </data>
-  <data name="3Sup3a.Text" xml:space="preserve">
-    <value>● 假装全局居中（假裝</value>
-  </data>
-  <data name="3Sup3b.Text" xml:space="preserve">
-    <value>● 添加语言 英文 / 简体 / 繁體</value>
+    <value>● 導航欄更人性化</value>
   </data>
   <data name="3Supdate1.Text" xml:space="preserve">
     <value>最後更新日期：</value>
   </data>
   <data name="3Supdate2.Text" xml:space="preserve">
-    <value>02/30/2020</value>
+    <value>11/05/2020</value>
   </data>
   <data name="Lt1.Text" xml:space="preserve">
     <value>因爲 Tim 音樂讓大家有緣相連在一起，時時刻刻深埋在我們的回憶當中。</value>
