@@ -139,15 +139,9 @@ namespace True_Love.Pages
         }
         private void MainPage_BackRequested(object sender, BackRequestedEventArgs e)
         {
-            if (e.Handled)
-            {
-                return;
-            }
-            if (Frame.CanGoBack)
-            {
-                Frame.GoBack();
-                e.Handled = true;
-            }
+            if (!ContentFrame.CanGoBack) return;
+            ContentFrame.GoBack();
+            e.Handled = true;
         }
         private bool On_BackRequested()
         {

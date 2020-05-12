@@ -142,19 +142,13 @@
     <value>Sorry, there's not have energy to get Developer ID now.</value>
   </data>
   <data name="2Sa3.Text" xml:space="preserve">
-    <value>This is my first try to do UWP, hope this app can make you luck!</value>
+    <value>This is my first try to do UWP, wish this app can make you luck!</value>
   </data>
   <data name="2Sf1.Text" xml:space="preserve">
     <value>Why don't upload at Microsoft Store?</value>
   </data>
   <data name="2Sf3.Text" xml:space="preserve">
     <value>Something word of developer:</value>
-  </data>
-  <data name="3Sup1a.Text" xml:space="preserve">
-    <value />
-  </data>
-  <data name="3Sup1b.Text" xml:space="preserve">
-    <value />
   </data>
   <data name="3Supdate1.Text" xml:space="preserve">
     <value>The last day of update：</value>
@@ -193,7 +187,7 @@
     <value>About</value>
   </data>
   <data name="Sph2.Header" xml:space="preserve">
-    <value>F&amp;Q</value>
+    <value>Help</value>
   </data>
   <data name="Sph3.Header" xml:space="preserve">
     <value>Release Notes</value>

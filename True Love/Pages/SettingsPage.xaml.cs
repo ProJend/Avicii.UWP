@@ -23,7 +23,6 @@ namespace True_Love.Pages
             liveTileService = new LiveTileService();
             source = "ms-appx:///Assets/Background/BG1.jpg";
             this.InitializeComponent();
-            NavigationCacheMode = NavigationCacheMode.Enabled;
         }
 
         /// <summary>

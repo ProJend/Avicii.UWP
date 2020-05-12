@@ -13,6 +13,7 @@
         /Fonts/IconFont.ttf#iconfont
     </FontFamily>
     <!--#加字体名，不是字体文件名。字体名打开字体文件可得-->
+    
     <ControlTemplate x:Name="ScrollViewerScrollBarlessTemplate" TargetType="ScrollViewer">
         <Grid Background="{TemplateBinding Background}">
             <ScrollContentPresenter x:Name="ScrollContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Margin="{TemplateBinding Padding}"/>
@@ -566,6 +567,9 @@
                                                     <SymbolIcon Symbol="Setting"/>
                                                 </muxc:NavigationViewItem.Icon>
                                             </muxc:NavigationViewItem>
+                                        </Grid>
+                                        <Grid Grid.Row="9">
+                                            <TextBlock Text="IN  LOVING  MEMORY" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                         </Grid>
                                     </Grid>
                                 </SplitView.Pane>

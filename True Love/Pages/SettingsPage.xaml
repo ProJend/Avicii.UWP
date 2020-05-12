@@ -19,7 +19,7 @@
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                         <!--<Image Source="/Assets/SplashScreen.scale-200.png" Height="228" Width="299"/>-->
                         <TextBlock Text="TRUE LOVE" HorizontalAlignment="Center" FontFamily="{ThemeResource  avicii}" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,0,0,10"/>
-                        <TextBlock Text="v0.0.1 Beta" HorizontalAlignment="Center"  Margin="4"/>
+                        <TextBlock Text="v0.1.0 Beta" HorizontalAlignment="Center"  Margin="4"/>
                         <TextBlock Text="ProJend @ 2020" HorizontalAlignment="Center" Margin="4"/>
                         <TextBlock Text="Power By Tim Bergling" HorizontalAlignment="Center" Margin="4"/>
                         <TextBlock x:Uid="1Sh1" HorizontalAlignment="Center" Margin="4"/>
@@ -50,16 +50,23 @@
             </PivotItem>
 
             <PivotItem x:Uid="Sph2">
-                <ScrollViewer VerticalScrollBarVisibility="Hidden">
-                    <StackPanel Margin="0">
-                        <TextBlock x:Uid="2Sf1" Margin="0,10,0,0" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" FontWeight="Bold"/>
-                        <TextBlock x:Uid="2Sa1" Style="{ThemeResource BodyTextBlockStyle}" Margin="0,5,0,20"/>
-                        <TextBlock x:Uid="2Sf2" Margin="0,10,0,0" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" FontWeight="Bold"/>
-                        <TextBlock x:Uid="2Sa2" Style="{ThemeResource BodyTextBlockStyle}" Margin="0,5,0,20"/>
-                        <TextBlock x:Uid="2Sf3" Margin="0,10,0,0" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" FontWeight="Bold"/>
-                        <TextBlock x:Uid="2Sa3" Style="{ThemeResource CaptionTextBlockStyle}" Margin="0,5,0,20"/>
-                    </StackPanel>
-                </ScrollViewer>
+                <StackPanel Margin="0">
+                    <TextBlock Text="快捷键" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>
+                    <TextBlock Text="Backspace：返回"/>
+                    
+                    <TextBlock>
+                        <LineBreak/><LineBreak/>
+                    </TextBlock>
+                    <TextBlock Text="FAQ" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"  Margin="0,0,0,0"/>
+                    <TextBlock x:Uid="2Sf1" Margin="0,0,0,0" Style="{ThemeResource BodyTextBlockStyle}"/>
+                    <TextBlock x:Uid="2Sa1" Style="{ThemeResource BaseTextBlockStyle}" Margin="0,0,0,0"/>
+                    <TextBlock/>
+                    <TextBlock x:Uid="2Sf2" Margin="0,0,0,0" Style="{ThemeResource BodyTextBlockStyle}"/>
+                    <TextBlock x:Uid="2Sa2" Style="{ThemeResource BaseTextBlockStyle}" Margin="0,0,0,0"/>
+                    <TextBlock/>
+                    <TextBlock x:Uid="2Sf3" Margin="0,0,0,0" Style="{ThemeResource BodyTextBlockStyle}"/>
+                    <TextBlock x:Uid="2Sa3" Style="{ThemeResource BaseTextBlockStyle}" Margin="0,0,0,0"/>
+                </StackPanel>
             </PivotItem>
 
             <PivotItem x:Uid="Sph3">
@@ -72,10 +79,16 @@
                         <TextBlock x:Uid="3Supdate1" Style="{ThemeResource TitleTextBlockStyle}"/>
                         <TextBlock x:Uid="3Supdate2" Style="{ThemeResource TitleTextBlockStyle}" Foreground="{StaticResource SystemAccentColor}"/>
                     </StackPanel>
-
-                    <TextBlock Text="0.0.1" Foreground="{StaticResource SystemAccentColor}" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,20,0,3"/>
-                    <TextBlock x:Uid="3Sup1a" Style="{ThemeResource BodyTextBlockStyle}" Margin="10,0,0,3"/>
-                    <TextBlock x:Uid="3Sup1b" Style="{ThemeResource BodyTextBlockStyle}" Margin="10,0,0,0"/>
+                    
+                    <TextBlock/>
+                    <TextBlock Text="0.1.0" Foreground="{StaticResource SystemAccentColor}" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,0,0,0"/>
+                    <TextBlock Text="改进：更换 FontIcon 矢量图标" Margin="0,0,0,0"/>
+                    <TextBlock Text="改进：更具有人性化的导航栏" Margin="0,0,0,0"/>
+                    <TextBlock Text="修复：返回导航功能已生效" Margin="0,0,0,0"/>
+                    
+                    <TextBlock/>
+                    <TextBlock Text="0.0.3" Foreground="{StaticResource SystemAccentColor}" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,0,0,0"/>
+                    <TextBlock Text="新增：多语言支持" Style="{ThemeResource BodyTextBlockStyle}" Margin="0,0,0,0"/>
                 </StackPanel>
             </PivotItem>
 

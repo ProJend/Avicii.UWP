@@ -159,12 +159,6 @@
   <data name="2Sf3.Text" xml:space="preserve">
     <value>來自開發者的話：</value>
   </data>
-  <data name="3Sup1a.Text" xml:space="preserve">
-    <value>● 更換 FontIcon 矢量圖標</value>
-  </data>
-  <data name="3Sup1b.Text" xml:space="preserve">
-    <value>● 導航欄更人性化</value>
-  </data>
   <data name="3Supdate1.Text" xml:space="preserve">
     <value>最後更新日期：</value>
   </data>
@@ -202,7 +196,7 @@
     <value>關於</value>
   </data>
   <data name="Sph2.Header" xml:space="preserve">
-    <value>F&amp;Q</value>
+    <value>Help</value>
   </data>
   <data name="Sph3.Header" xml:space="preserve">
     <value>更新日志</value>
