@@ -9,122 +9,136 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Pivot x:Uid="Spd" Margin="0,0,0,0" x:Name="pivot">
-            <PivotItem x:Uid="Sph1">
-                <Grid>
-                    <Grid.Background>
-                        <ImageBrush ImageSource="/Assets/Background/BG3.png" Stretch="UniformToFill"/>
-                    </Grid.Background>
+        <Grid VerticalAlignment="Stretch">
+            <TextBlock Text="Settings" Style="{ThemeResource TitleTextBlockStyle}" Margin="90,2,0,0" x:Name="settings"/>
+        </Grid>
+        <RelativePanel x:Name="Settings" Margin="10,40,10,0">
+            <StackPanel Name="Page1">
+                <TextBlock Text="General" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
+                <TextBlock Text="Attention: Can not save status over now!" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>
+                <ToggleSwitch x:Name="LiveTile" Header="Live Tiles" ToolTipService.ToolTip="Show Avicii on tile" Toggled="ToggleSwitch_Toggled"/>
 
-                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <!--<Image Source="/Assets/SplashScreen.scale-200.png" Height="228" Width="299"/>-->
-                        <TextBlock Text="TRUE LOVE" HorizontalAlignment="Center" FontFamily="{ThemeResource  avicii}" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,0,0,10"/>
-                        <TextBlock Text="v0.1.0 Beta" HorizontalAlignment="Center"  Margin="4"/>
-                        <TextBlock Text="ProJend @ 2020" HorizontalAlignment="Center" Margin="4"/>
-                        <TextBlock Text="Power By Tim Bergling" HorizontalAlignment="Center" Margin="4"/>
-                        <TextBlock x:Uid="1Sh1" HorizontalAlignment="Center" Margin="4"/>
-                        <Button Foreground="Black" Background="#addbe0" Width="259" Height="33" HorizontalAlignment="Center" Margin="0,7,0,0" Click="Github_Click" Style="{StaticResource ButtonRevealStyle}">
-                            <FontIcon FontFamily="{ThemeResource  iconfont}" Glyph="&#xe64a;" Foreground="Black"/>
-                        </Button>
-                        <Button Foreground="Black" Background="#addbe0" Width="259" Height="33" x:Name="sendmail" HorizontalAlignment="Center" Margin="0,7,0,0" Click="Mail_Click" Style="{StaticResource ButtonRevealStyle}">
-                            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE715;" Foreground="Black"/>
-                        </Button>
-                        <Button Width="259" Height="33" x:Name="sendweibo" HorizontalAlignment="Center" Margin="0,7,0,7" Click="weibo_Click" Style="{StaticResource ButtonRevealStyle}">
-                            <FontIcon FontFamily="{ThemeResource  iconfont}" Glyph="&#xe737;"/>
-                        </Button>
-                        <TextBlock TextWrapping="WrapWholeWords" HorizontalAlignment="Center" Margin="4">                    
-                            <Span xml:space="preserve"><Run>本程序有助于您了解浏览关于 </Run><Hyperlink NavigateUri="https://instagram.com/avicii?igshid=1o2qr9406f43m">Tim</Hyperlink><Run> 的所有信息。</Run></Span>
-                        </TextBlock>
-                        <TextBlock Text="若侵犯到您的合法权利请及时联系我。" HorizontalAlignment="Center" Margin="4"/>
-                    </StackPanel>
-                </Grid>
-            </PivotItem>
-
-            <PivotItem Header="Settings">
-                <Grid>
-                    <StackPanel>
-                        <TextBlock Text="Attention: Can not save status over now!" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>
-                        <ToggleSwitch Header="Live Tiles" ToolTipService.ToolTip="Show Avicii on tile" Toggled="ToggleSwitch_Toggled" IsOn="{Binding OnOrOff, Mode=TwoWay}"/>
-                    </StackPanel>
-                </Grid>
-            </PivotItem>
-
-            <PivotItem x:Uid="Sph2">
-                <StackPanel Margin="0">
-                    <TextBlock Text="快捷键" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>
-                    <TextBlock Text="Backspace：返回"/>
-                    
-                    <TextBlock>
+                <TextBlock>
                         <LineBreak/><LineBreak/>
-                    </TextBlock>
-                    <TextBlock Text="FAQ" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"  Margin="0,0,0,0"/>
-                    <TextBlock x:Uid="2Sf1" Margin="0,0,0,0" Style="{ThemeResource BodyTextBlockStyle}"/>
-                    <TextBlock x:Uid="2Sa1" Style="{ThemeResource BaseTextBlockStyle}" Margin="0,0,0,0"/>
-                    <TextBlock/>
-                    <TextBlock x:Uid="2Sf2" Margin="0,0,0,0" Style="{ThemeResource BodyTextBlockStyle}"/>
-                    <TextBlock x:Uid="2Sa2" Style="{ThemeResource BaseTextBlockStyle}" Margin="0,0,0,0"/>
-                    <TextBlock/>
-                    <TextBlock x:Uid="2Sf3" Margin="0,0,0,0" Style="{ThemeResource BodyTextBlockStyle}"/>
-                    <TextBlock x:Uid="2Sa3" Style="{ThemeResource BaseTextBlockStyle}" Margin="0,0,0,0"/>
-                </StackPanel>
-            </PivotItem>
+                </TextBlock>
+                <TextBlock Text="Keyboard Shortcuts" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
+                <TextBlock Text="Backspace: Back"/>
 
-            <PivotItem x:Uid="Sph3">
-                <StackPanel>
-                    <!--<TextBlock Style="{ThemeResource TitleTextBlockStyle}">
-                    <Run> 最后更新日期：</Run>
-                    <Run Foreground="{StaticResource SystemAccentColor}">2020/01/02</Run>
-                </TextBlock>-->
+                <TextBlock>
+                        <LineBreak/><LineBreak/>
+                </TextBlock>
+                <TextBlock Text="FAQ" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
+                <TextBlock x:Uid="2Sf1"/>
+                <TextBlock x:Uid="2Sa1"/>
+                <TextBlock/>
+                <TextBlock x:Uid="2Sf2"/>
+                <TextBlock x:Uid="2Sa2"/>
+                <TextBlock/>
+                <TextBlock x:Uid="2Sf3"/>
+                <TextBlock x:Uid="2Sa3"/>
+
+                <TextBlock>
+                        <LineBreak/><LineBreak/>
+                </TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="What's New" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
+                    <TextBlock Text="-" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Margin="10,0,10,0" Foreground="{ThemeResource SystemAccentColor}"/>
+                    <TextBlock x:Uid="3Supdate2" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
+                </StackPanel>
+                <TextBlock Text="改进：更换 FontIcon 矢量图标" Margin="0,0,0,0"/>
+                <TextBlock Text="改进：更具有人性化的导航栏" Margin="0,0,0,0"/>
+                <TextBlock Text="修复：返回导航功能已生效" Margin="0,0,0,0"/>
+
+                <TextBlock>
+                        <LineBreak/><LineBreak/>
+                </TextBlock>
+            </StackPanel>
+
+            <StackPanel x:Name="Page2" RelativePanel.Below="Page1">
+                <TextBlock Text="About This App" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
+                <TextBlock Text="TRUE LOVE" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>
+                <TextBlock Text="Version: 0.1.0 beta" Opacity="0.7"/>
+                <TextBlock Text="2020 @ ProJend" Opacity="0.7"/>
+                <TextBlock Text="Power By Tim Bergling" Opacity="0.7"/>
+                <TextBlock Text="This App will help you browse all about Tim Bergling."/>
+
+                <TextBlock>
+                        <LineBreak/><LineBreak/>
+                </TextBlock>
+                <TextBlock Text="Links" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
+                <TextBlock Text="ProJend" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>
+                <TextBlock Text="Contact Author"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Background="Transparent" Width="42" Height="42" Click="Github_Click" Style="{StaticResource ButtonRevealStyle}">
+                        <FontIcon Foreground="#addbe0" FontFamily="{ThemeResource  iconfont}" Glyph="&#xe64a;"/>
+                    </Button>
+                    <Button Background="Transparent" Width="42" Height="42" Click="Mail_Click" Style="{StaticResource ButtonRevealStyle}">
+                        <FontIcon Foreground="#addbe0" FontFamily="Segoe MDL2 Assets" Glyph="&#xE715;"/>
+                    </Button>
+                    <Button Background="Transparent" Width="42" Height="42" Click="Weibo_Click" Style="{StaticResource ButtonRevealStyle}">
+                        <FontIcon FontFamily="{ThemeResource  iconfont}" Glyph="&#xe737;"/>
+                    </Button>
+                </StackPanel>
+                <!--<TextBlock Text="Contact Guys"/>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock x:Uid="3Supdate1" Style="{ThemeResource TitleTextBlockStyle}"/>
-                        <TextBlock x:Uid="3Supdate2" Style="{ThemeResource TitleTextBlockStyle}" Foreground="{StaticResource SystemAccentColor}"/>
-                    </StackPanel>
-                    
-                    <TextBlock/>
-                    <TextBlock Text="0.1.0" Foreground="{StaticResource SystemAccentColor}" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,0,0,0"/>
-                    <TextBlock Text="改进：更换 FontIcon 矢量图标" Margin="0,0,0,0"/>
-                    <TextBlock Text="改进：更具有人性化的导航栏" Margin="0,0,0,0"/>
-                    <TextBlock Text="修复：返回导航功能已生效" Margin="0,0,0,0"/>
-                    
-                    <TextBlock/>
-                    <TextBlock Text="0.0.3" Foreground="{StaticResource SystemAccentColor}" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="0,0,0,0"/>
-                    <TextBlock Text="新增：多语言支持" Style="{ThemeResource BodyTextBlockStyle}" Margin="0,0,0,0"/>
+                        <Button Background="Transparent" Width="42" Height="42" Style="{StaticResource ButtonRevealStyle}">
+                            <FontIcon Foreground="#addbe0" FontFamily="{ThemeResource  iconfont}" Glyph="&#xe639;"/>
+                        </Button>
+                        <Button Background="Transparent" Width="42" Height="42" Style="{StaticResource ButtonRevealStyle}">
+                            <FontIcon Foreground="#addbe0" FontFamily="{ThemeResource  iconfont}" Glyph="&#xe773;"/>
+                        </Button>
+                    </StackPanel>-->
+                <TextBlock/>
+                <TextBlock Text="Tim Bergling" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" ToolTipService.ToolTip="Remembering"/>
+                <TextBlock Text="Losing In Music"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Background="Transparent" Width="42" Height="42" Click="Spotify_Click" Style="{StaticResource ButtonRevealStyle}">
+                        <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource  iconfont}" Glyph="&#xeaae;"/>
+                    </Button>
+                    <Button Background="Transparent" Width="42" Height="42" Click="YouTube_Click" Style="{StaticResource ButtonRevealStyle}">
+                        <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource  iconfont}" Glyph="&#xe660;"/>
+                    </Button>
+                    <Button Background="Transparent" Width="42" Height="42" Click="Apple_Click" Style="{StaticResource ButtonRevealStyle}">
+                        <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource  iconfont}" Glyph="&#xe61a;"/>
+                    </Button>
+                    <Button Background="Transparent" Width="42" Height="42" Click="Netease_Click" Style="{StaticResource ButtonRevealStyle}">
+                        <FontIcon FontFamily="{ThemeResource  iconfont}" Glyph="&#xe628;"/>
+                    </Button>
+                    <Button Background="Transparent" Width="42" Height="42" Click="QQ_Click" Style="{StaticResource ButtonRevealStyle}">
+                        <FontIcon FontFamily="{ThemeResource  iconfont}" Glyph="&#xe6c6;"/>
+                    </Button>
+                    <Button Background="Transparent" Width="42" Height="42" Click="Kugou_Click" Style="{StaticResource ButtonRevealStyle}">
+                        <FontIcon FontFamily="{ThemeResource  iconfont}" Glyph="&#xe62d;"/>
+                    </Button>
                 </StackPanel>
-            </PivotItem>
+                <TextBlock Text="All My Life"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Background="Transparent" Width="42" Height="42" Click="Instagram_Click" Style="{StaticResource ButtonRevealStyle}">
+                        <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource  iconfont}" Glyph="&#xe62e;"/>
+                    </Button>
+                    <Button Background="Transparent" Width="42" Height="42" Click="Facebook_Click" Style="{StaticResource ButtonRevealStyle}">
+                        <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource  iconfont}" Glyph="&#xe665;"/>
+                    </Button>
+                </StackPanel>
+                <TextBlock Text="True Stories"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Background="Transparent" Width="42" Height="42" Click="Shop_Click" Style="{StaticResource ButtonRevealStyle}">
+                        <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE719;"/>
+                    </Button>
+                    <Button Background="Transparent" Width="42" Height="42" Click="Memory_Click" Style="{StaticResource ButtonRevealStyle}">
+                        <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE909;"/>
+                    </Button>
+                    <Button Background="Transparent" Width="42" Height="42" Click="Quora_Click" Style="{StaticResource ButtonRevealStyle}">
+                        <FontIcon FontFamily="{ThemeResource  iconfont}" Glyph="&#xe6df;"/>
+                    </Button>
+                </StackPanel>
+                <TextBlock Text="R.I.P.❤"/>
 
-            <!--<PivotItem x:Uid="Sph4">
-                <Grid>
-                    <RelativePanel  HorizontalAlignment="Center">
-                        <StackPanel HorizontalAlignment="Center" Padding="0,0,0,50" x:Name="all1">
-                            <Image Source="Assets\SplashScreen.scale-200.png" x:Name="re11" Grid.Column="0" Height="78" Width="160"/>
-                            <RelativePanel Grid.Column="0">
-                                <Image Source="Assets\Background\AVICII.jpg" x:Name="re22" Grid.Column="0" Height="100" Margin="0,0,10,0"/>
-                                <StackPanel x:Name="re33" Orientation="Horizontal" RelativePanel.RightOf="re22" HorizontalAlignment="Right">
-                                    <TextBlock Text="Tim Bergling" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}" Margin="0,1,5,0"/>
-                                    <HyperlinkButton Content="&#xeaae;" FontFamily="{ThemeResource iconfont}" NavigateUri="https://open.spotify.com/artist/1vCWHaC5f2uS3yhpwWbIA6?si=IYzh3XGLTo2t_CzCMTro0g" Margin="5,0,5,0"/>
-                                    <HyperlinkButton Content="&#xe660;" FontFamily="{ThemeResource iconfont}" NavigateUri="https://www.youtube.com/user/AviciiOfficialVEVO" Margin="5,0,5,0"/>
-                                    <HyperlinkButton Content="&#xe61a;" FontFamily="{ThemeResource iconfont}" NavigateUri="https://itunes.apple.com/ca/artist/avicii/298496035" Margin="5,0,5,0"/>
-                                </StackPanel>
-                                <TextBlock Text="音乐不止，信仰不断。" TextWrapping="Wrap" RelativePanel.RightOf="re22" RelativePanel.Below="re33" Width="223"/>
-                            </RelativePanel>
-                        </StackPanel>
-
-                        <StackPanel HorizontalAlignment="Center" Padding="0,0,0,50" x:Name="all2" Margin="0,16,0,0" RelativePanel.Below="all1">
-                            --><!--52--><!--
-                            <TextBlock Text="TEUE LOVE" x:Name="re111" FontFamily="{StaticResource avicii}" FontSize="52" Margin="0,0,0,10" HorizontalAlignment="Center"/>
-                            <RelativePanel HorizontalAlignment="Center">
-                                <Image Source="Assets\Background\在恩.png" x:Name="re222" Height="100" Margin="0,0,10,0"/>
-                                <TextBlock RelativePanel.RightOf="re222" x:Name="re333" Text="在恩" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}"/>
-                                <TextBlock Text="一位不愿透露名字的神秘人士。有任何问题尽情联系我。" x:Name="re444" TextWrapping="Wrap" RelativePanel.RightOf="re222" RelativePanel.Below="re333" Width="226"/>
-                                <Button RelativePanel.RightOf="re222" RelativePanel.Below="re444" Style="{StaticResource ButtonRevealStyle}" Width="226" Margin="0,6,0,0">
-                                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE715;"/>
-                                </Button>
-                            </RelativePanel>
-                        </StackPanel>
-                    </RelativePanel>
-                </Grid>
-            </PivotItem>-->
-        </Pivot>
+                <TextBlock>
+                        <LineBreak/><LineBreak/>
+                </TextBlock>
+            </StackPanel>
+        </RelativePanel>
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
@@ -134,7 +148,12 @@
                         MinWindowWidth="642"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="pivot.Margin" Value="0,32,0,0"/>
+                        <Setter Target="Page2.(RelativePanel.Below)" Value=""/>
+                        <Setter Target="Page2.(RelativePanel.RightOf)" Value="Page1"/>
+                        <!--<Setter Target="Page2.HorizontalAlignment" Value="Right"/>-->
+                        <Setter Target="Page2.Margin" Value="30,0,30,0"/>
+                        <Setter Target="Settings.Margin" Value="30,90,30,0"/>
+                        <Setter Target="settings.Margin" Value="30,40,30,0"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

@@ -38,8 +38,7 @@ namespace True_Love.Pages
         private readonly List<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
          {
             ("home", typeof(LovePage)),
-            ("images", typeof(Shop)),
-            ("comments", typeof(CommentsPage)),
+            ("comment", typeof(CommentsPage)),
             ("music", typeof(FMPage)),
         };
 
@@ -210,31 +209,6 @@ namespace True_Love.Pages
                 }
             }
             scrlocation = sv.VerticalOffset;
-        }
-
-        private async void Spotify_Click(object sender, RoutedEventArgs e)
-        {
-            var a = await Launcher.LaunchUriAsync(new Uri("https://open.spotify.com/artist/1vCWHaC5f2uS3yhpwWbIA6?si=IYzh3XGLTo2t_CzCMTro0g"));
-        }
-        private async void YouTube_Click(object sender, RoutedEventArgs e)
-        {
-            var a = await Launcher.LaunchUriAsync(new Uri("https://www.youtube.com/user/AviciiOfficialVEVO"));
-        }
-        private async void Apple_Click(object sender, RoutedEventArgs e)
-        {
-            var a = await Launcher.LaunchUriAsync(new Uri("https://itunes.apple.com/ca/artist/avicii/298496035"));
-        }
-        private async void Netease_Click(object sender, RoutedEventArgs e)
-        {
-            var a = await Launcher.LaunchUriAsync(new Uri("https://music.163.com/#/artist?id=45236"));
-        }
-        private async void QQ_Click(object sender, RoutedEventArgs e)
-        {
-            var a = await Launcher.LaunchUriAsync(new Uri("https://y.qq.com/n/yqq/singer/001jgAtj3LtJnE.html"));
-        }
-        private async void Instagram_Click(object sender, RoutedEventArgs e)
-        {
-            var a = await Launcher.LaunchUriAsync(new Uri("https://www.instagram.com/avicii/"));
         }
     }
 }
