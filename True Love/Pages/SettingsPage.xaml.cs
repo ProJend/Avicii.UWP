@@ -5,7 +5,6 @@ using Windows.System;
 using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -19,11 +18,30 @@ namespace True_Love.Pages
         private LiveTileService liveTileService;
         private string source;
         public static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+        private readonly string closeText, titleText; //声明更新记录字符串
+
         public SettingsPage()
         {
             liveTileService = new LiveTileService();
-            source = "ms-appx:///Assets/Background/BG1.jpg";
+            source = "ms-appx:///Assets/Background/BG1.jpg";;
+
             this.InitializeComponent();
+
+            switch (Language) //匹对语种
+            {
+                case "en-US":
+                    closeText = "Get it!";
+                    titleText = "Release Notes";
+                    break;
+                case "zh-Hans-CN":
+                    closeText = "好哒！";
+                    titleText = "更新记录";
+                    break;
+                case "zh-Hant-HK":
+                    closeText = "好嘅！";
+                    titleText = "更新日志";
+                    break;
+            }
         }
 
         private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
@@ -32,15 +50,31 @@ namespace True_Love.Pages
             {
                 if (toggleSwitch.IsOn == true)
                 {
-                    liveTileService.AddTile("adad", "dadd", source);//添加新磁贴
-                    localSettings.Values["LiveTile"] = true;
+                    liveTileService.AddTile("adad", "dadd", source); //添加新磁贴
+                    localSettings.Values["SetLive"] = true;
                 }
                 else
                 {
-                    TileUpdateManager.CreateTileUpdaterForApplication().Clear(); // 清空队列
-                    localSettings.Values["LiveTile"] = false;
+                    TileUpdateManager.CreateTileUpdaterForApplication().Clear(); //清空队列
+                    localSettings.Values["SetLive"] = false;
                 }
             }
+        }
+
+        /// <summary>
+        /// 更新记录
+        /// </summary>
+        private async void Release_Click(object sender, RoutedEventArgs e)
+        {
+            
+            var release = new ContentDialog()
+            {
+                Title = titleText,
+                Content = new Release(),
+                CloseButtonText = closeText,
+                FullSizeDesired = true,                
+            };
+            await release.ShowAsync();          
         }
 
         #region Links

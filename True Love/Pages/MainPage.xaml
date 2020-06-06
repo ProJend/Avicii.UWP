@@ -9,11 +9,35 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls">
 
+    <Page.Resources>
+        <!--<Storyboard x:Name="Storyboard1">
+            <DoubleAnimation Storyboard.TargetName="bar" Storyboard.TargetProperty="Visibility" From="0" To="1" >
+                <DoubleAnimation.EasingFunction>
+                    <CircleEase EasingMode="EaseInOut" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <EdgeUIThemeTransition x:Name="bad"/>-->
+    </Page.Resources>
+    
     <Grid x:Name="LayoutRoot">
-        <ScrollViewer x:Name="sv" ViewChanged="sv_ViewChanged" VerticalScrollBarVisibility="Hidden">
-            <Frame x:Name="ContentFrame" IsTabStop="False"/>
+        <ScrollViewer x:Name="sv" ViewChanged="Sv_ViewChanged" VerticalScrollBarVisibility="Hidden">
+            <Frame x:Name="ContentFrame">
+                <Frame.ContentTransitions>
+                    <TransitionCollection>
+                        <NavigationThemeTransition/>
+                    </TransitionCollection>
+                </Frame.ContentTransitions>
+
+            </Frame>
         </ScrollViewer>
 
+        <Grid x:Name="BackgroundOfBar" Height="40" VerticalAlignment="Top" Opacity="1">
+            <Grid.Background>
+                <!--<SolidColorBrush Color="Black" Opacity="0.5"/>-->
+                <AcrylicBrush FallbackColor="Black" BackgroundSource="Backdrop" TintColor="#000001" TintOpacity=".3"/>
+            </Grid.Background>
+        </Grid>
         <muxc:NavigationView x:Name="NavView"
                         Loaded="NavView_Loaded"
                         BackRequested="NavView_BackRequested"
@@ -24,19 +48,34 @@
             <muxc:NavigationView.MenuItems>
                 <!--<muxc:NavigationViewItem Icon="Setting"/>-->
                 <muxc:NavigationViewItemHeader x:Uid="Mnh1" x:Name="MainPagesHeader"/>
-                <muxc:NavigationViewItem x:Uid="Mnh2" Icon="Contact" Tag="home"/>
+                <muxc:NavigationViewItem x:Uid="Mnh2" Icon="Contact" Tag="home">
+                    <muxc:NavigationViewItem.KeyboardAccelerators>
+                        <KeyboardAccelerator Modifiers="None" Key="F1"/>
+                    </muxc:NavigationViewItem.KeyboardAccelerators>
+                </muxc:NavigationViewItem>
                 <muxc:NavigationViewItemSeparator/>
-                <muxc:NavigationViewItem x:Uid="Mnh3" Icon="World" Tag="comment"/>
+                <muxc:NavigationViewItem x:Uid="Mnh3" Icon="World" Tag="comment">
+                    <muxc:NavigationViewItem.KeyboardAccelerators>
+                        <KeyboardAccelerator Modifiers="None" Key="F2"/>
+                    </muxc:NavigationViewItem.KeyboardAccelerators>
+                </muxc:NavigationViewItem>
             </muxc:NavigationView.MenuItems>
         </muxc:NavigationView>
 
         <Grid x:Name="bar" Canvas.ZIndex="2" VerticalAlignment="Bottom">
-            <CommandBar DefaultLabelPosition="Bottom" >
+            <Grid.OpacityTransition>
+                <ScalarTransition />
+            </Grid.OpacityTransition>
+            
+            <CommandBar DefaultLabelPosition="Bottom" RightTapped="CommandBar_RightTapped" x:Name="CommandBar" FlowDirection="LeftToRight" OverflowButtonVisibility="Auto" >
+                <CommandBar.KeyboardAccelerators>
+                    <KeyboardAccelerator Modifiers="Shift" Key="C"/>
+                </CommandBar.KeyboardAccelerators>
                 <CommandBar.Background>
-                    <AcrylicBrush TintColor="#000001" TintOpacity="0.3" BackgroundSource="Backdrop" FallbackColor="Black"/>
+                    <AcrylicBrush TintColor="#000001" TintOpacity="0.5" BackgroundSource="Backdrop" FallbackColor="Black"/>
                 </CommandBar.Background>
-                <AppBarButton Icon="Upload" Label="返回顶部" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="返回顶部"/>
                 <AppBarButton Icon="Add" Label="分享故事" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="分享你与 Avicii 的故事"/>
+                <AppBarButton  x:Name="BackTopButton" Icon="Upload" Label="Back To Top" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="返回顶部" Click="BackToTop"/>
                 <AppBarButton Icon="Refresh" Label="刷新" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="刷新数据"/>
                 <!--<AppBarButton Icon="Setting" Label="设置" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="打开设置"/>-->
                 <CommandBar.SecondaryCommands >
@@ -59,7 +98,7 @@
             </CommandBar>
         </Grid>
 
-        <Grid Height="32" VerticalAlignment="Top" HorizontalAlignment="Stretch" x:Name="AppTitleBar" Background="Transparent" Margin="80,0,0,0"/>
+        <Grid Height="40" VerticalAlignment="Top" HorizontalAlignment="Stretch" x:Name="AppTitleBar" Background="Transparent" Margin="80,0,0,0"/>
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
@@ -74,6 +113,7 @@
                         <Setter Target="MainPagesHeader.Visibility" Value="Collapsed"/>
                         <!-- Leave the next line for left-only navigation. -->
                         <Setter Target="AppTitleBar.Margin" Value="302,0,0,0"/>
+                        <Setter Target="BackgroundOfBar.Opacity" Value="0"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

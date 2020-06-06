@@ -21,17 +21,18 @@
                             <Color x:Key="SystemAccentColor">#addbe0</Color>
                             <AcrylicBrush x:Key="NavigationViewDefaultPaneBackground"
                                           BackgroundSource="Backdrop"
-                                          TintColor="#000001"
+                                          TintColor="Black"
                                           TintOpacity=".5"
                                           FallbackColor="Black"/>
                             <AcrylicBrush x:Key="NavigationViewTopPaneBackground"
                                           BackgroundSource="Backdrop"
                                           TintColor="#000001"
-                                          TintOpacity=".3"/>
+                                          TintOpacity=".5"
+                                          FallbackColor="Black"/>
                             <AcrylicBrush x:Key="NavigationViewExpandedPaneBackground" 
                                           BackgroundSource="HostBackdrop" 
                                           TintColor="Black"
-                                          TintOpacity=".3"/>
+                                          TintOpacity=".5"/>
                         </ResourceDictionary>
                         <ResourceDictionary x:Key="HighContrast">
                             <!-- Always include a "HighContrast" dictionary when you override

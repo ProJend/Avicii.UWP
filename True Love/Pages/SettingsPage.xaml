@@ -9,10 +9,15 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Grid VerticalAlignment="Stretch">
-            <TextBlock Text="Settings" Style="{ThemeResource TitleTextBlockStyle}" Margin="90,2,0,0" x:Name="settings"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="40*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid VerticalAlignment="Stretch" Grid.Column="1">
+            <TextBlock Text="Settings" Style="{ThemeResource TitleTextBlockStyle}" Margin="0,40,0,0" x:Name="settings"/>
         </Grid>
-        <RelativePanel x:Name="Settings" Margin="10,40,10,0">
+        <RelativePanel x:Name="Settings" Margin="0,90,0,0" Grid.Column="1">
             <StackPanel Name="Page1">
                 <TextBlock Text="General" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
                 <TextBlock Text="Attention: Can not save status over now!" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>
@@ -21,33 +26,39 @@
                 <TextBlock>
                         <LineBreak/><LineBreak/>
                 </TextBlock>
-                <TextBlock Text="Keyboard Shortcuts" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
-                <TextBlock Text="Backspace: Back"/>
+                <TextBlock Text="Hot Keys" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
+                <TextBlock Text="Keyboard Shortcuts" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>
+                <TextBlock Text="ESC or Win + Backspace: Back"/>
+                <TextBlock Text="Shift + Win + Enter: Fullscreen"/>
+                <TextBlock Text="Shift + C: Open or Close CommandBar"/>
+                
+                <TextBlock/>
+                <TextBlock Text="Mouse Actions" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>
+                <TextBlock Text="Right tap on CommandBar: Open or Close CommandBar"/>
 
                 <TextBlock>
                         <LineBreak/><LineBreak/>
                 </TextBlock>
                 <TextBlock Text="FAQ" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
-                <TextBlock x:Uid="2Sf1"/>
-                <TextBlock x:Uid="2Sa1"/>
+                <TextBlock x:Uid="2Sf1" Style="{ThemeResource BodyTextBlockStyle}"/>
+                <TextBlock x:Uid="2Sa1" Style="{ThemeResource BodyTextBlockStyle}"/>
                 <TextBlock/>
-                <TextBlock x:Uid="2Sf2"/>
-                <TextBlock x:Uid="2Sa2"/>
+                <TextBlock x:Uid="2Sf2" Style="{ThemeResource BodyTextBlockStyle}"/>
+                <TextBlock x:Uid="2Sa2" Style="{ThemeResource BodyTextBlockStyle}"/>
                 <TextBlock/>
-                <TextBlock x:Uid="2Sf3"/>
-                <TextBlock x:Uid="2Sa3"/>
+                <TextBlock x:Uid="2Sf3" Style="{ThemeResource BodyTextBlockStyle}"/>
+                <TextBlock x:Uid="2Sa3" Style="{ThemeResource BodyTextBlockStyle}"/>
 
                 <TextBlock>
                         <LineBreak/><LineBreak/>
                 </TextBlock>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="What's New" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
-                    <TextBlock Text="-" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Margin="10,0,10,0" Foreground="{ThemeResource SystemAccentColor}"/>
-                    <TextBlock x:Uid="3Supdate2" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
-                </StackPanel>
-                <TextBlock Text="改进：更换 FontIcon 矢量图标" Margin="0,0,0,0"/>
-                <TextBlock Text="改进：更具有人性化的导航栏" Margin="0,0,0,0"/>
-                <TextBlock Text="修复：返回导航功能已生效" Margin="0,0,0,0"/>
+                <TextBlock Text="What's New" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
+                <TextBlock Text="Recent Records: 11/05/2020" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>
+                <TextBlock Text="改进：更换 FontIcon 矢量图标"/>
+                <TextBlock Text="改进：更具有人性化的导航栏"/>
+                <TextBlock Text="修复：返回导航功能已生效"/>
+                <TextBlock/>
+                <HyperlinkButton Content="Learn More" Click="Release_Click"/>
 
                 <TextBlock>
                         <LineBreak/><LineBreak/>
@@ -60,14 +71,14 @@
                 <TextBlock Text="Version: 0.1.0 beta" Opacity="0.7"/>
                 <TextBlock Text="2020 @ ProJend" Opacity="0.7"/>
                 <TextBlock Text="Power By Tim Bergling" Opacity="0.7"/>
-                <TextBlock Text="This App will help you browse all about Tim Bergling."/>
+                <TextBlock Text="This App will help you easy to browse all about Tim Bergling."/>
 
                 <TextBlock>
                         <LineBreak/><LineBreak/>
                 </TextBlock>
                 <TextBlock Text="Links" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
                 <TextBlock Text="ProJend" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>
-                <TextBlock Text="Contact Author"/>
+                <TextBlock Text="Report To Author"/>
                 <StackPanel Orientation="Horizontal">
                     <Button Background="Transparent" Width="42" Height="42" Click="Github_Click" Style="{StaticResource ButtonRevealStyle}">
                         <FontIcon Foreground="#addbe0" FontFamily="{ThemeResource  iconfont}" Glyph="&#xe64a;"/>
@@ -79,7 +90,7 @@
                         <FontIcon FontFamily="{ThemeResource  iconfont}" Glyph="&#xe737;"/>
                     </Button>
                 </StackPanel>
-                <!--<TextBlock Text="Contact Guys"/>
+                <TextBlock Text="Brag With Guys"/>
                     <StackPanel Orientation="Horizontal">
                         <Button Background="Transparent" Width="42" Height="42" Style="{StaticResource ButtonRevealStyle}">
                             <FontIcon Foreground="#addbe0" FontFamily="{ThemeResource  iconfont}" Glyph="&#xe639;"/>
@@ -87,7 +98,7 @@
                         <Button Background="Transparent" Width="42" Height="42" Style="{StaticResource ButtonRevealStyle}">
                             <FontIcon Foreground="#addbe0" FontFamily="{ThemeResource  iconfont}" Glyph="&#xe773;"/>
                         </Button>
-                    </StackPanel>-->
+                    </StackPanel>
                 <TextBlock/>
                 <TextBlock Text="Tim Bergling" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" ToolTipService.ToolTip="Remembering"/>
                 <TextBlock Text="Losing In Music"/>
@@ -144,18 +155,16 @@
             <VisualStateGroup>
                 <VisualState>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger
-                        MinWindowWidth="642"/>
+                        <AdaptiveTrigger MinWindowWidth="910"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="Page2.(RelativePanel.Below)" Value=""/>
                         <Setter Target="Page2.(RelativePanel.RightOf)" Value="Page1"/>
                         <!--<Setter Target="Page2.HorizontalAlignment" Value="Right"/>-->
-                        <Setter Target="Page2.Margin" Value="30,0,30,0"/>
-                        <Setter Target="Settings.Margin" Value="30,90,30,0"/>
-                        <Setter Target="settings.Margin" Value="30,40,30,0"/>
+                        <Setter Target="Page1.MaxWidth" Value="480"/>
+                        <Setter Target="Page2.Margin" Value="40,0,40,0"/>
                     </VisualState.Setters>
-                </VisualState>
+                </VisualState>             
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
     </Grid>

@@ -10,6 +10,7 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using muxc = Microsoft.UI.Xaml.Controls;
 using True_Love.Pages;
+using Windows.UI.Xaml.Controls.Primitives;
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
 namespace True_Love.Pages
@@ -23,10 +24,12 @@ namespace True_Love.Pages
         double scrlocation = 0;
         //导航栏当前显示状态（这个是为了减少不必要的开销，因为我做的是动画隐藏显示效果如果不用一个变量来记录当前导航栏状态的会重复执行隐藏或显示）
         bool isshowbmbar = true;
+
         public MainPage()
         {
             this.InitializeComponent();
             Window.Current.SetTitleBar(AppTitleBar);
+            CommandBarTransition();
         }
 
         private void ContentFrame_NavigationFailed(object sender, NavigationFailedEventArgs e)
@@ -56,7 +59,7 @@ namespace True_Love.Pages
             NavView_Navigate("home", new EntranceNavigationTransitionInfo());
 
             // Add keyboard accelerators for backwards navigation.
-            var goBack = new KeyboardAccelerator { Key = VirtualKey.GoBack };
+            var goBack = new KeyboardAccelerator { Key = VirtualKey.Escape };
             goBack.Invoked += BackInvoked;
             this.KeyboardAccelerators.Add(goBack);
 
@@ -102,11 +105,12 @@ namespace True_Love.Pages
         }
 
         private void NavView_Navigate(string navItemTag, NavigationTransitionInfo transitionInfo)
-        {
+        {;
             Type _page = null;
             if (navItemTag == "settings")
             {
                 _page = typeof(SettingsPage);
+                //ContentFrame.Navigate(_page, null, new DrillInNavigationTransitionInfo());
             }
             else
             {
@@ -118,7 +122,7 @@ namespace True_Love.Pages
             var preNavPageType = ContentFrame.CurrentSourcePageType;
 
             // Only navigate if the selected page isn't currently loaded.
-            if (!(_page is null) && !Type.Equals(preNavPageType, _page))
+            if (!(_page is null) && !Equals(preNavPageType, _page))
             {
                 ContentFrame.Navigate(_page, null, transitionInfo);
             }
@@ -180,10 +184,33 @@ namespace True_Love.Pages
             }
         }
 
+        #region 命令栏
+        private void CommandBar_RightTapped(object sender, RightTappedRoutedEventArgs e)
+        {
+            if (!CommandBar.IsOpen == true)
+            {
+                CommandBar.IsOpen = true;
+            }
+            else
+            {
+                CommandBar.IsOpen = false;
+            }
+        }
+
         /// <summary>
-        /// 下滑隐藏导航栏 https://www.cnblogs.com/lonelyxmas/p/9919869.html
+        /// 命令栏跟随窗口移动动画
         /// </summary>
-        private void sv_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        private void CommandBarTransition()
+        {
+            EdgeUIThemeTransition inStoryoard = new EdgeUIThemeTransition { Edge = EdgeTransitionLocation.Bottom };
+            var tc = new TransitionCollection { inStoryoard };
+            bar.Transitions = tc;
+        }
+
+        /// <summary>
+        /// 下滑隐藏命令栏 https://www.cnblogs.com/lonelyxmas/p/9919869.html
+        /// </summary>
+        private void Sv_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
         {
             if (sv.VerticalOffset != scrlocation)
             {
@@ -193,8 +220,9 @@ namespace True_Love.Pages
                     //隐藏
                     if (isshowbmbar)
                     {
-                        //这里为了简洁易懂就不做动画隐藏效果，直接用透明度进行隐藏。
+                        //bar.Visibility = Visibility.Collapsed;
                         bar.Opacity = 0;
+                        CommandBar.IsEnabled = false;
                         isshowbmbar = false;
                     }
                 }
@@ -203,12 +231,34 @@ namespace True_Love.Pages
                     //显示
                     if (isshowbmbar == false)
                     {
+                        //bar.Visibility = Visibility.Visible;
                         bar.Opacity = 1;
+                        CommandBar.IsEnabled = true;
                         isshowbmbar = true;
                     }
                 }
-            }
+
+                if (sv.VerticalOffset > 1)  //
+                {
+                    BackTopButton.IsEnabled = true;
+                }
+                else if (sv.VerticalOffset < sv.ViewportHeight)  //
+                {
+                    BackTopButton.IsEnabled = false;
+                }
+            }  
             scrlocation = sv.VerticalOffset;
         }
+
+        public void ChangeView(double? horizontalOffset, double? verticalOffset, float? zoomFactor)
+        {
+
+        }
+
+        private void BackToTop(object sender, RoutedEventArgs e)
+        {
+            sv.ChangeView(null, 0, null);
+        }
+        #endregion
     }
 }
