@@ -9,17 +9,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls">
 
-    <Page.Resources>
-        <!--<Storyboard x:Name="Storyboard1">
-            <DoubleAnimation Storyboard.TargetName="bar" Storyboard.TargetProperty="Visibility" From="0" To="1" >
-                <DoubleAnimation.EasingFunction>
-                    <CircleEase EasingMode="EaseInOut" />
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-        </Storyboard>
-        <EdgeUIThemeTransition x:Name="bad"/>-->
-    </Page.Resources>
-    
     <Grid x:Name="LayoutRoot">
         <ScrollViewer x:Name="sv" ViewChanged="Sv_ViewChanged" VerticalScrollBarVisibility="Hidden">
             <Frame x:Name="ContentFrame">
@@ -32,12 +21,13 @@
             </Frame>
         </ScrollViewer>
 
-        <Grid x:Name="BackgroundOfBar" Height="40" VerticalAlignment="Top" Opacity="1">
+        <Grid x:Name="BackgroundOfBar" Height="40" VerticalAlignment="Top">
             <Grid.Background>
                 <!--<SolidColorBrush Color="Black" Opacity="0.5"/>-->
-                <AcrylicBrush FallbackColor="Black" BackgroundSource="Backdrop" TintColor="#000001" TintOpacity=".3"/>
+                <AcrylicBrush FallbackColor="Black" BackgroundSource="Backdrop" TintColor="#000001" TintOpacity=".5"/>
             </Grid.Background>
         </Grid>
+
         <muxc:NavigationView x:Name="NavView"
                         Loaded="NavView_Loaded"
                         BackRequested="NavView_BackRequested"
@@ -61,11 +51,14 @@
                 </muxc:NavigationViewItem>
             </muxc:NavigationView.MenuItems>
         </muxc:NavigationView>
-
+        
         <Grid x:Name="bar" Canvas.ZIndex="2" VerticalAlignment="Bottom">
-            <Grid.OpacityTransition>
+            <Grid.TranslationTransition>
+                <Vector3Transition/>
+            </Grid.TranslationTransition>
+            <!--<Grid.OpacityTransition>
                 <ScalarTransition />
-            </Grid.OpacityTransition>
+            </Grid.OpacityTransition>-->
             
             <CommandBar DefaultLabelPosition="Bottom" RightTapped="CommandBar_RightTapped" x:Name="CommandBar" FlowDirection="LeftToRight" OverflowButtonVisibility="Auto" >
                 <CommandBar.KeyboardAccelerators>
@@ -74,9 +67,13 @@
                 <CommandBar.Background>
                     <AcrylicBrush TintColor="#000001" TintOpacity="0.5" BackgroundSource="Backdrop" FallbackColor="Black"/>
                 </CommandBar.Background>
-                <AppBarButton Icon="Add" Label="分享故事" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="分享你与 Avicii 的故事"/>
-                <AppBarButton  x:Name="BackTopButton" Icon="Upload" Label="Back To Top" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="返回顶部" Click="BackToTop"/>
-                <AppBarButton Icon="Refresh" Label="刷新" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="刷新数据"/>
+                <!--<AppBarButton Icon="Add" Label="分享故事" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="分享你与 Avicii 的故事"/>-->
+                <AppBarButton  x:Name="BackTopButton" IsEnabled="False" Icon="Upload" Label="Back To Top" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="Back to top" Click="BackToTop_Click">
+                    <AppBarButton.KeyboardAccelerators>
+                        <KeyboardAccelerator Modifiers="None" Key="F6"/>
+                    </AppBarButton.KeyboardAccelerators>
+                </AppBarButton>
+                <!--<AppBarButton x:Name="RefreshButton" Icon="Refresh" Label="刷新" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="刷新数据" Click="Refresh_Click"/>-->
                 <!--<AppBarButton Icon="Setting" Label="设置" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="打开设置"/>-->
                 <CommandBar.SecondaryCommands >
                     
@@ -113,7 +110,7 @@
                         <Setter Target="MainPagesHeader.Visibility" Value="Collapsed"/>
                         <!-- Leave the next line for left-only navigation. -->
                         <Setter Target="AppTitleBar.Margin" Value="302,0,0,0"/>
-                        <Setter Target="BackgroundOfBar.Opacity" Value="0"/>
+                        <Setter Target="BackgroundOfBar.Visibility" Value="Collapsed"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

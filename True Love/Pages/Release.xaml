@@ -8,8 +8,18 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <!--这里是储存更新记录的地方-->
     <StackPanel>
-        <TextBlock Text="0.1.0 beta - 11/05/2020" Foreground="{ThemeResource SystemAccentColor}" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>
+        <TextBlock Text="⚠ 注意" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
+        <TextBlock Text="OS 1809 系统版本是分水岭，如果低于该版本会有如下的功能缺失：" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" TextWrapping="Wrap"/>
+        <TextBlock Text="功能：下滑隐藏任务栏"/>
+        <TextBlock>
+            <LineBreak/><LineBreak/>
+        </TextBlock>
 
+        <TextBlock Text="🔈 0.1.0 - 2020/05/11" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
+        <TextBlock Text="改进：更换 FontIcon 矢量图标"/>
+        <TextBlock Text="改进：更具有人性化的导航栏"/>
+        <TextBlock Text="修复：返回导航功能已生效"/>
     </StackPanel>
 </Page>

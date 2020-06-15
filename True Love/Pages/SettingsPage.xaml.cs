@@ -15,32 +15,39 @@ namespace True_Love.Pages
     /// </summary>
     public sealed partial class SettingsPage : Page
     {
-        private LiveTileService liveTileService;
-        private string source;
+        private readonly LiveTileService liveTileService;
+        private readonly string source;
         public static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
         private readonly string closeText, titleText; //声明更新记录字符串
-
+ 
         public SettingsPage()
         {
             liveTileService = new LiveTileService();
-            source = "ms-appx:///Assets/Background/BG1.jpg";;
+            source = "ms-appx:///Assets/Background/BG1.jpg";
 
             this.InitializeComponent();
 
-            switch (Language) //匹对语种
+            if (!string.IsNullOrEmpty(Language)) //判断对传的值进行是否为空值
             {
-                case "en-US":
-                    closeText = "Get it!";
-                    titleText = "Release Notes";
-                    break;
-                case "zh-Hans-CN":
-                    closeText = "好哒！";
-                    titleText = "更新记录";
-                    break;
-                case "zh-Hant-HK":
-                    closeText = "好嘅！";
-                    titleText = "更新日志";
-                    break;
+                //默认值
+                closeText = "OK";
+                titleText = "Release Notes";
+
+                switch (Language) //匹对语种
+                {
+                    case "en-US":
+                        closeText = "Get it!";
+                        titleText = "Release Notes";
+                        break;
+                    case "zh-Hans-CN":
+                        closeText = "好哒！";
+                        titleText = "更新记录";
+                        break;
+                    case "zh-Hant-HK":
+                        closeText = "好嘅！";
+                        titleText = "更新日志";
+                        break;
+                }
             }
         }
 
@@ -58,6 +65,7 @@ namespace True_Love.Pages
                     TileUpdateManager.CreateTileUpdaterForApplication().Clear(); //清空队列
                     localSettings.Values["SetLive"] = false;
                 }
+                toggleSwitch.Toggled +=ToggleSwitch_Toggled;
             }
         }
 
@@ -72,7 +80,7 @@ namespace True_Love.Pages
                 Title = titleText,
                 Content = new Release(),
                 CloseButtonText = closeText,
-                FullSizeDesired = true,                
+                FullSizeDesired = false,                
             };
             await release.ShowAsync();          
         }
@@ -83,7 +91,7 @@ namespace True_Love.Pages
         /// </summary>
         private async void Mail_Click(object sender, RoutedEventArgs e)
         {
-            //收件人            
+            //收件人 
             EmailRecipient emailRecipient1 = new EmailRecipient("projend@outlook.com");
 
             //具体的一封email
@@ -92,61 +100,44 @@ namespace True_Love.Pages
             //给邮件添加收件人，可以添加多个
             emailMessage.To.Add(emailRecipient1);
 
-            //通过邮件管理类，生成一个邮件 简单来说  帮你唤起设备里的邮件软
+            //通过邮件管理类，生成一个邮件。简单来说，帮你唤起设备里的邮件 UWP
             await EmailManager.ShowComposeNewEmailAsync(emailMessage);
         }
 
-        private async void Weibo_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// 链接按钮
+        /// 应用于从外部浏览器打开各种网址
+        /// </summary>
+        private async void Links_Click(object sender, RoutedEventArgs e)
         {
-            await Launcher.LaunchUriAsync(new Uri("https://weibo.com/6081786829"));
-        }
-        private async void Github_Click(object sender, RoutedEventArgs e)
-        {
-            await Launcher.LaunchUriAsync(new Uri("https://github.com/ProJend/TrueLove-UWP/issues/new"));
-        }
-        private async void Spotify_Click(object sender, RoutedEventArgs e)
-        {
-            await Launcher.LaunchUriAsync(new Uri("https://open.spotify.com/artist/1vCWHaC5f2uS3yhpwWbIA6?si=IYzh3XGLTo2t_CzCMTro0g"));
-        }
-        private async void YouTube_Click(object sender, RoutedEventArgs e)
-        {
-            await Launcher.LaunchUriAsync(new Uri("https://www.youtube.com/user/AviciiOfficialVEVO"));
-        }
-        private async void Apple_Click(object sender, RoutedEventArgs e)
-        {
-            await Launcher.LaunchUriAsync(new Uri("https://itunes.apple.com/ca/artist/avicii/298496035"));
-        }
-        private async void Netease_Click(object sender, RoutedEventArgs e)
-        {
-            await Launcher.LaunchUriAsync(new Uri("https://music.163.com/#/artist?id=45236"));
-        }
-        private async void QQ_Click(object sender, RoutedEventArgs e)
-        {
-            await Launcher.LaunchUriAsync(new Uri("https://y.qq.com/n/yqq/singer/001jgAtj3LtJnE.html"));
-        }
-        private async void Kugou_Click(object sender, RoutedEventArgs e)
-        {
-            await Launcher.LaunchUriAsync(new Uri("https://www.kugou.com/singer/86133.html"));
-        }
-        private async void Instagram_Click(object sender, RoutedEventArgs e)
-        {
-            await Launcher.LaunchUriAsync(new Uri("https://www.instagram.com/avicii/"));
-        }
-        private async void Facebook_Click(object sender, RoutedEventArgs e)
-        {
-            await Launcher.LaunchUriAsync(new Uri("https://www.facebook.com/avicii.t.berg"));
-        }
-        private async void Memory_Click(object sender, RoutedEventArgs e)
-        {
-            await Launcher.LaunchUriAsync(new Uri("http://www.avicii.com"));
-        }
-        private async void Shop_Click(object sender, RoutedEventArgs e)
-        {
-            await Launcher.LaunchUriAsync(new Uri("https://shop.avicii.com"));
-        }
-        private async void Quora_Click(object sender, RoutedEventArgs e)
-        {
-            await Launcher.LaunchUriAsync(new Uri("https://www.quora.com/profile/Tim-Bergling-2/answers"));
+            FrameworkElement button = sender as FrameworkElement;
+            switch (button.Tag as string)
+            {
+                //汇报 Bug
+                case "Weibo": await Launcher.LaunchUriAsync(new Uri("https://weibo.com/6081786829")); break;
+                case "GitHub": await Launcher.LaunchUriAsync(new Uri("https://github.com/ProJend/TrueLove-UWP/issues/new")); break;
+
+                //社区群
+                //case "Telegram": await Launcher.LaunchUriAsync(new Uri("")); break;
+                //case "Skype": await Launcher.LaunchUriAsync(new Uri("")); break;
+
+                //Avicii 的音乐
+                case "Spotify": await Launcher.LaunchUriAsync(new Uri("https://open.spotify.com/artist/1vCWHaC5f2uS3yhpwWbIA6?si=kNHKtOIpRgiBuE4WVsJ28w")); break;
+                case "YouTube": await Launcher.LaunchUriAsync(new Uri("https://www.youtube.com/user/AviciiOfficialVEVO")); break;
+                case "Apple": await Launcher.LaunchUriAsync(new Uri("https://itunes.apple.com/ca/artist/avicii/298496035")); break;
+                case "Netease": await Launcher.LaunchUriAsync(new Uri("https://music.163.com/#/artist?id=45236")); break;
+                case "QQ": await Launcher.LaunchUriAsync(new Uri("https://y.qq.com/n/yqq/singer/001jgAtj3LtJnE.html")); break;
+                case "Kugou": await Launcher.LaunchUriAsync(new Uri("https://www.kugou.com/singer/86133.html")); break;
+
+                //Avicii 的个人故事
+                case "Instagram": await Launcher.LaunchUriAsync(new Uri("https://www.instagram.com/avicii/")); break;
+                case "Facebook": await Launcher.LaunchUriAsync(new Uri("https://www.facebook.com/avicii.t.berg")); break;
+
+                //Avicii 的个人网站
+                case "Shop": await Launcher.LaunchUriAsync(new Uri("https://shop.avicii.com")); break;
+                case "Memory": await Launcher.LaunchUriAsync(new Uri("http://www.avicii.com")); break;
+                case "Quora": await Launcher.LaunchUriAsync(new Uri("https://www.quora.com/profile/Tim-Bergling-2/answers")); break;
+            }
         }
         #endregion 
     }

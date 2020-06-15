@@ -12,6 +12,9 @@
                 <ResourceDictionary>
                     <CornerRadius x:Key="OverlayCornerRadius">0</CornerRadius>
                     <CornerRadius x:Key="ControlCornerRadius">0</CornerRadius>
+                    <!--<Style TargetType="Button">
+                        <Setter Property="CornerRadius" Value="0" />
+                    </Style>-->
                     <ResourceDictionary.ThemeDictionaries>
                         <ResourceDictionary x:Key="Dark">
                             <!-- The "Default" theme dictionary is used unless a specific
@@ -27,7 +30,7 @@
                             <AcrylicBrush x:Key="NavigationViewTopPaneBackground"
                                           BackgroundSource="Backdrop"
                                           TintColor="#000001"
-                                          TintOpacity=".5"
+                                          TintOpacity=".1"
                                           FallbackColor="Black"/>
                             <AcrylicBrush x:Key="NavigationViewExpandedPaneBackground" 
                                           BackgroundSource="HostBackdrop" 

@@ -9,8 +9,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using muxc = Microsoft.UI.Xaml.Controls;
-using True_Love.Pages;
 using Windows.UI.Xaml.Controls.Primitives;
+using System.Numerics;
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
 namespace True_Love.Pages
@@ -32,10 +32,7 @@ namespace True_Love.Pages
             CommandBarTransition();
         }
 
-        private void ContentFrame_NavigationFailed(object sender, NavigationFailedEventArgs e)
-        {
-            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
-        }
+        private void ContentFrame_NavigationFailed(object sender, NavigationFailedEventArgs e) => throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
 
         // List of ValueTuple holding the Navigation Tag and the relative Navigation Page
         private readonly List<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
@@ -64,13 +61,13 @@ namespace True_Love.Pages
             this.KeyboardAccelerators.Add(goBack);
 
             // ALT routes here
-            var altLeft = new KeyboardAccelerator
+            var back = new KeyboardAccelerator
             {
                 Key = VirtualKey.Back,
                 //Modifiers = VirtualKeyModifiers.Menu
             };
-            altLeft.Invoked += BackInvoked;
-            this.KeyboardAccelerators.Add(altLeft);
+            back.Invoked += BackInvoked;
+            this.KeyboardAccelerators.Add(back);
         }
 
         private void NavView_ItemInvoked(muxc.NavigationView sender,
@@ -128,11 +125,7 @@ namespace True_Love.Pages
             }
         }
 
-        private void NavView_BackRequested(muxc.NavigationView sender,
-                                           muxc.NavigationViewBackRequestedEventArgs args)
-        {
-            On_BackRequested();
-        }
+        private void NavView_BackRequested(muxc.NavigationView sender, muxc.NavigationViewBackRequestedEventArgs args) => On_BackRequested();
 
         private void BackInvoked(KeyboardAccelerator sender,
                                  KeyboardAcceleratorInvokedEventArgs args)
@@ -146,6 +139,7 @@ namespace True_Love.Pages
             ContentFrame.GoBack();
             e.Handled = true;
         }
+
         private bool On_BackRequested()
         {
             if (!ContentFrame.CanGoBack)
@@ -185,20 +179,16 @@ namespace True_Love.Pages
         }
 
         #region 命令栏
+        /// <summary>
+        /// 鼠标右击命令栏活动。
+        /// </summary>
         private void CommandBar_RightTapped(object sender, RightTappedRoutedEventArgs e)
         {
-            if (!CommandBar.IsOpen == true)
-            {
-                CommandBar.IsOpen = true;
-            }
-            else
-            {
-                CommandBar.IsOpen = false;
-            }
+            CommandBar.IsOpen = !CommandBar.IsOpen == true;
         }
 
         /// <summary>
-        /// 命令栏跟随窗口移动动画
+        /// 命令栏跟随窗口移动动画。
         /// </summary>
         private void CommandBarTransition()
         {
@@ -214,35 +204,50 @@ namespace True_Love.Pages
         {
             if (sv.VerticalOffset != scrlocation)
             {
+                //滚动条当前位置大于存储的变量值时代表往下滑，隐藏底部栏
                 if (sv.VerticalOffset > scrlocation)
-                {
-                    //滚动条当前位置大于存储的变量值时代表往下滑，隐藏底部栏
+                {                 
                     //隐藏
                     if (isshowbmbar)
-                    {
+                    {               
+                        //通过动画来隐藏
+                        bar.Translation = new Vector3(0, 40, 0);
+
+                        //直接隐藏
                         //bar.Visibility = Visibility.Collapsed;
-                        bar.Opacity = 0;
-                        CommandBar.IsEnabled = false;
+
+                        //bar.Opacity = 0;
+                        //CommandBar.IsEnabled = false;
+
                         isshowbmbar = false;
                     }
                 }
+                //反之展开
                 else
                 {
                     //显示
                     if (isshowbmbar == false)
                     {
+                        //通过动画来隐藏
+                        bar.Translation = new Vector3(0, 0, 0);
+
+                        //直接隐藏
                         //bar.Visibility = Visibility.Visible;
-                        bar.Opacity = 1;
-                        CommandBar.IsEnabled = true;
+
+                        //bar.Opacity = 1;
+                        //CommandBar.IsEnabled = true;
+
                         isshowbmbar = true;
                     }
                 }
 
-                if (sv.VerticalOffset > 1)  //
+                //当滚动条高度大于1时，返回顶部按钮维持使用状态
+                if (sv.VerticalOffset > 1)
                 {
                     BackTopButton.IsEnabled = true;
                 }
-                else if (sv.VerticalOffset < sv.ViewportHeight)  //
+                //反之停用此按钮
+                else if (sv.VerticalOffset < sv.ViewportHeight)
                 {
                     BackTopButton.IsEnabled = false;
                 }
@@ -250,15 +255,53 @@ namespace True_Love.Pages
             scrlocation = sv.VerticalOffset;
         }
 
-        public void ChangeView(double? horizontalOffset, double? verticalOffset, float? zoomFactor)
+        /// <summary>
+        /// 返回滑动条参数。
+        /// </summary>
+        /// <param name="horizontalOffset">X：横度。</param>
+        /// <param name="verticalOffset">Y：高度。</param>
+        /// <param name="zoomFactor">Z：斜度。</param>
+        public void ChangeView(double? horizontalOffset,
+                               double? verticalOffset,
+                               float? zoomFactor)
         {
 
         }
 
-        private void BackToTop(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// 返回顶部按钮。
+        /// </summary>
+        private void BackToTop_Click(object sender, RoutedEventArgs e)
         {
             sv.ChangeView(null, 0, null);
         }
+
+        /// <summary>
+        /// 刷新按钮。
+        /// </summary>
+        private void Refresh_Click(object sender, RoutedEventArgs e)
+        {
+            RefreshData();
+        }
+
+        private void RefreshData()
+        {
+
+        }
+
+        //private void Visualizer_RefreshStateChanged(RefreshVisualizer sender, RefreshStateChangedEventArgs args)
+        //{
+        //    // Respond to visualizer state changes.
+        //    // Disable the refresh button if the visualizer is refreshing.
+        //    if (args.NewState == RefreshVisualizerState.Refreshing)
+        //    {
+        //        RefreshButton.IsEnabled = false;
+        //    }
+        //    else
+        //    {
+        //        RefreshButton.IsEnabled = true;
+        //    }
+        //}
         #endregion
     }
 }

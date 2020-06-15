@@ -4,7 +4,6 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
 using Windows.UI;
-using Windows.UI.Core;
 using Windows.UI.Notifications;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -28,7 +27,7 @@ namespace True_Love
             this.Suspending += OnSuspending;
             //TileUpdateManager.CreateTileUpdaterForApplication().Clear(); // 清空队列
             TileUpdateManager.CreateTileUpdaterForApplication().EnableNotificationQueue(true); // 实现通知循环
-        }   
+        }
 
         /// <summary>
         /// 在应用程序由最终用户正常启动时进行调用。
@@ -37,11 +36,9 @@ namespace True_Love
         /// <param name="e">有关启动请求和过程的详细信息。</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            Frame rootFrame = Window.Current.Content as Frame;
-
             // 不要在窗口已包含内容时重复应用程序初始化，
             // 只需确保窗口处于活动状态
-            if (rootFrame == null)
+            if (!(Window.Current.Content is Frame rootFrame))
             {
                 // 创建要充当导航上下文的框架，并导航到第一页
                 rootFrame = new Frame();
@@ -65,24 +62,21 @@ namespace True_Love
                     // 并通过将所需信息作为导航参数传入来配置
                     // 参数
                     rootFrame.Navigate(typeof(MainPage), e.Arguments);
-                }   
+                }
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
 
                 ExtendAcrylicIntoTitleBar();
             }
         }
-        
+
 
         /// <summary>
         /// 导航到特定页失败时调用
         /// </summary>
         ///<param name="sender">导航失败的框架</param>
         ///<param name="e">有关导航失败的详细信息</param>
-        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
-        {
-            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
-        }
+        void OnNavigationFailed(object sender, NavigationFailedEventArgs e) => throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
 
         /// <summary>
         /// 在将要挂起应用程序执行时调用。  在不知道应用程序
@@ -99,14 +93,17 @@ namespace True_Love
         }
 
         /// <summary>
-        /// 沉淀状态栏。       
+        /// 沉淀状态栏。
         /// </summary>
         private void ExtendAcrylicIntoTitleBar()
         {
             CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
-            ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
+            var titleBar = ApplicationView.GetForCurrentView().TitleBar;
             titleBar.ButtonBackgroundColor = Colors.Transparent;
             titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
-        }      
+            titleBar.ButtonHoverBackgroundColor = Color.FromArgb(0xFF, 173, 219, 224);
+            titleBar.ButtonPressedBackgroundColor = Color.FromArgb(0xFF, 173, 219, 224);
+            titleBar.ButtonHoverForegroundColor = Colors.Black;
+        }
     }
 }
