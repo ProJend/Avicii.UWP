@@ -39,7 +39,6 @@ namespace True_Love.Pages
          {
             ("home", typeof(LovePage)),
             ("comment", typeof(CommentsPage)),
-            ("music", typeof(FMPage)),
         };
 
         private void NavView_Loaded(object sender, RoutedEventArgs e)

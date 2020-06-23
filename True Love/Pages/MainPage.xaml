@@ -28,12 +28,12 @@
             </Grid.Background>
         </Grid>
 
-        <muxc:NavigationView x:Name="NavView"
-                        Loaded="NavView_Loaded"
-                        BackRequested="NavView_BackRequested"
-                        ItemInvoked="NavView_ItemInvoked"
-                        PaneDisplayMode="Auto"
-                        IsBackButtonVisible="Auto"
+        <muxc:NavigationView x:Name="NavView"                      
+                             Loaded="NavView_Loaded"
+                             BackRequested="NavView_BackRequested"
+                             ItemInvoked="NavView_ItemInvoked"
+                             PaneDisplayMode="Auto"
+                             IsBackButtonVisible="Auto"
                              IsTitleBarAutoPaddingEnabled="False">
             <muxc:NavigationView.MenuItems>
                 <!--<muxc:NavigationViewItem Icon="Setting"/>-->

@@ -19,15 +19,18 @@
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" ShortName="True Love" Square310x310Logo="Assets\Square310x310Logo.png" Square71x71Logo="Assets\Square71x71Logo.png">
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="wide310x150Logo" />
+            <uap:ShowOn Tile="square310x310Logo"/>
+            <uap:ShowOn Tile="square150x150Logo"/>
           </uap:ShowNameOnTiles>
         </uap:DefaultTile>
-        <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#000000" />
+        <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="black" />
         <uap:InitialRotationPreference>
           <uap:Rotation Preference="portrait" />
           <uap:Rotation Preference="landscape" />
           <uap:Rotation Preference="landscapeFlipped" />
           <uap:Rotation Preference="portraitFlipped" />
         </uap:InitialRotationPreference>
+        <uap:LockScreen BadgeLogo="Assets\BadgeLogo.png" Notification="badge"/>
       </uap:VisualElements>
     </Application>
   </Applications>

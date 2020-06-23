@@ -29,10 +29,6 @@ namespace True_Love.Pages
 
             if (!string.IsNullOrEmpty(Language)) //判断对传的值进行是否为空值
             {
-                //默认值
-                closeText = "OK";
-                titleText = "Release Notes";
-
                 switch (Language) //匹对语种
                 {
                     case "en-US":
@@ -46,6 +42,10 @@ namespace True_Love.Pages
                     case "zh-Hant-HK":
                         closeText = "好嘅！";
                         titleText = "更新日志";
+                        break;
+                    default:
+                        closeText = "OK";
+                        titleText = "Release Notes";
                         break;
                 }
             }
@@ -132,11 +132,16 @@ namespace True_Love.Pages
                 //Avicii 的个人故事
                 case "Instagram": await Launcher.LaunchUriAsync(new Uri("https://www.instagram.com/avicii/")); break;
                 case "Facebook": await Launcher.LaunchUriAsync(new Uri("https://www.facebook.com/avicii.t.berg")); break;
+                case "Twitter": await Launcher.LaunchUriAsync(new Uri("https://www.twitter.com/Avicii")); break;
 
                 //Avicii 的个人网站
                 case "Shop": await Launcher.LaunchUriAsync(new Uri("https://shop.avicii.com")); break;
                 case "Memory": await Launcher.LaunchUriAsync(new Uri("http://www.avicii.com")); break;
+                case "Foundation": await Launcher.LaunchUriAsync(new Uri("https://www.timberglingfoundation.org")); break;
                 case "Quora": await Launcher.LaunchUriAsync(new Uri("https://www.quora.com/profile/Tim-Bergling-2/answers")); break;
+
+                //粉丝们的个人小站
+                case "One": await Launcher.LaunchUriAsync(new Uri("https://avicii.one")); break;
             }
         }
         #endregion 

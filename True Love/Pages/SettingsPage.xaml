@@ -14,18 +14,22 @@
             <ColumnDefinition Width="40*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
+        
         <Grid VerticalAlignment="Stretch" Grid.Column="1">
             <TextBlock Text="Settings" Style="{ThemeResource TitleTextBlockStyle}" Margin="1,40,0,0" x:Name="settings"/>
         </Grid>
+        
         <RelativePanel x:Name="Settings" Margin="0,90,0,0" Grid.Column="1">
             <StackPanel Name="Page1">
-                <TextBlock Text="General" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
+
+                <!--Options-->
+                <TextBlock Text="Options" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
                 <TextBlock Text="Attention: Can not save status over now!" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>
                 <ToggleSwitch x:Name="LiveTile" Header="Live Tiles" ToolTipService.ToolTip="Show Avicii on tile" Toggled="ToggleSwitch_Toggled"/>
-
-                <TextBlock>
-                        <LineBreak/><LineBreak/>
-                </TextBlock>
+                
+                <TextBlock><LineBreak/><LineBreak/></TextBlock>
+                <!--Hot Keys-->
+                
                 <TextBlock Text="Hot Keys" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
                 <TextBlock Text="Keyboard Shortcuts" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>
                 <TextBlock Text="ESC or Win + Backspace : Back"/>
@@ -40,9 +44,9 @@
                 <TextBlock Text="Mouse Actions" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>
                 <TextBlock Text="Right tap on CommandBar : Switch CommandBar"/>
 
-                <TextBlock>
-                        <LineBreak/><LineBreak/>
-                </TextBlock>
+                <TextBlock><LineBreak/><LineBreak/></TextBlock>
+                <!--FAQ-->
+                
                 <TextBlock Text="FAQ" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
                 <TextBlock x:Uid="2Sf1" Style="{ThemeResource BodyTextBlockStyle}"/>
                 <TextBlock x:Uid="2Sa1" Style="{ThemeResource BodyTextBlockStyle}"/>
@@ -55,10 +59,12 @@
                 <TextBlock/>
                 <TextBlock x:Uid="2Sf3" Style="{ThemeResource BodyTextBlockStyle}"/>
                 <TextBlock x:Uid="2Sa3" Style="{ThemeResource BodyTextBlockStyle}"/>
+                <TextBlock/>
+                <HyperlinkButton Content="GitHub Wiki"/>
 
-                <TextBlock>
-                        <LineBreak/><LineBreak/>
-                </TextBlock>
+                <TextBlock><LineBreak/><LineBreak/></TextBlock>
+                <!--What's New-->
+                
                 <TextBlock Text="What's New" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
                 <TextBlock Text="Recent Records : 15/06/2020" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>
                 <TextBlock Text="改进：重写了设置页面"/>
@@ -68,12 +74,12 @@
                 <TextBlock/>
                 <HyperlinkButton Content="Learn More" Click="Release_Click"/>
 
-                <TextBlock>
-                        <LineBreak/><LineBreak/>
-                </TextBlock>
+                <TextBlock><LineBreak/><LineBreak/></TextBlock>
             </StackPanel>
 
             <StackPanel x:Name="Page2" RelativePanel.Below="Page1">
+                
+                <!--About This App-->
                 <TextBlock Text="About This App" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
                 <TextBlock Text="TRUE LOVE" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>
                 <TextBlock Text="Version : 0.1.1.0" Opacity="0.7"/>
@@ -81,9 +87,9 @@
                 <TextBlock Text="Power By Tim Bergling" Opacity="0.7"/>
                 <TextBlock Text="This App will help you easy to browse all about Tim Bergling."/>
 
-                <TextBlock>
-                        <LineBreak/><LineBreak/>
-                </TextBlock>
+                <TextBlock><LineBreak/><LineBreak/></TextBlock>
+                <!--Links-->
+                
                 <TextBlock Text="Links" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
                 <TextBlock Text="ProJend" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>
                 <TextBlock Text="Report To Author"/>
@@ -98,15 +104,15 @@
                         <FontIcon FontFamily="{ThemeResource  iconfont}" Glyph="&#xe737;"/>
                     </Button>
                 </StackPanel>
-                <!--<TextBlock Text="Brag With Guys"/>
+                <TextBlock Text="Brag With Guys"/>
                 <StackPanel Orientation="Horizontal">
                     <Button Background="Transparent" Width="42" Height="42" Tag="Telegram" CornerRadius="0" Style="{StaticResource ButtonRevealStyle}">
                         <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource  iconfont}" Glyph="&#xe639;"/>
                     </Button>
-                    <Button Background="Transparent" Width="42" Height="42" Tag="Skype" CornerRadius="0" Style="{StaticResource ButtonRevealStyle}">
-                        <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource  iconfont}" Glyph="&#xe773;"/>
-                    </Button>
-                </StackPanel>-->
+                    <!--<Button Background="Transparent" Width="42" Height="42" Tag="Skype" CornerRadius="0" Style="{StaticResource ButtonRevealStyle}">
+                        <FontIcon FontFamily="{ThemeResource  iconfont}" Glyph="&#xe773;"/>
+                    </Button>-->
+                </StackPanel>
                 <TextBlock/>
                 <TextBlock Text="Tim Bergling" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" ToolTipService.ToolTip="Remembering"/>
                 <TextBlock Text="Losing In Music"/>
@@ -138,24 +144,37 @@
                     <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Facebook" CornerRadius="0" Style="{StaticResource ButtonRevealStyle}">
                         <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource  iconfont}" Glyph="&#xe665;"/>
                     </Button>
+                    <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Twitter" CornerRadius="0" Style="{StaticResource ButtonRevealStyle}">
+                        <FontIcon FontFamily="{ThemeResource  iconfont}" Glyph="&#xe600;"/>
+                    </Button>
                 </StackPanel>
                 <TextBlock Text="True Stories"/>
                 <StackPanel Orientation="Horizontal">
                     <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Shop" CornerRadius="0" Style="{StaticResource ButtonRevealStyle}">
                         <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE719;"/>
                     </Button>
+                    <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Foundation" CornerRadius="0" Style="{StaticResource ButtonRevealStyle}">
+                        <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE95E;"/>
+                    </Button>
                     <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Memory" CornerRadius="0" Style="{StaticResource ButtonRevealStyle}">
                         <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE909;"/>
                     </Button>
                     <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Quora" CornerRadius="0" Style="{StaticResource ButtonRevealStyle}">
-                        <FontIcon FontFamily="{ThemeResource  iconfont}" Glyph="&#xe6df;"/>
+                        <FontIcon FontFamily="{ThemeResource iconfont}" Glyph="&#xe6df;"/>
                     </Button>
                 </StackPanel>
-                <TextBlock Text="R.I.P.❤"/>
+                <TextBlock Text="Missing You ❤"/>
+                <TextBlock/>
+                <TextBlock Text="Fans" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>
+                <TextBlock Text="Made Of Love"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button ToolTipService.ToolTip="#projectOne" Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="One" CornerRadius="0" Style="{StaticResource ButtonRevealStyle}">
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7F6;"/>
+                        <!--Headphone = xE7F6 ; Music = xEC4F-->
+                    </Button>
+                </StackPanel>
 
-                <TextBlock>
-                        <LineBreak/><LineBreak/>
-                </TextBlock>
+                <TextBlock><LineBreak/><LineBreak/></TextBlock>
             </StackPanel>
         </RelativePanel>
 
