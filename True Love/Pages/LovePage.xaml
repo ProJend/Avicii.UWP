@@ -9,7 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
 
-        <Grid x:Name="grid" Margin="0,0,0,0">
+    <Grid x:Name="grid" ManipulationMode="System,TranslateX">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>

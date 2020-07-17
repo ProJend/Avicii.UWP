@@ -12,7 +12,7 @@
     <DefaultLanguage>zh-CN</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.19041.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -135,7 +135,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LiveTileService.cs" />
+    <Compile Include="Helpers\LiveTileService.cs" />
     <Compile Include="Pages\CommentsPage.xaml.cs">
       <DependentUpon>CommentsPage.xaml</DependentUpon>
     </Compile>
@@ -246,7 +246,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Themes\Styles.xaml">
+    <Page Include="Styles\Fonts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Navigation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -263,10 +267,10 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Fonts\Avicii.ttf" />
+    <Content Include="Assets\Fonts\Avicii.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Fonts\Freeland.ttf" />
+    <Content Include="Assets\Fonts\Freeland.ttf" />
   </ItemGroup>
   <ItemGroup>
     <PRIResource Include="String\en-US\Resources.resw" />
@@ -278,7 +282,7 @@
     <PRIResource Include="String\zh-HK\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Fonts\IconFont.ttf" />
+    <Content Include="Assets\Fonts\IconFont.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\Instagram\" />

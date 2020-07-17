@@ -2,16 +2,17 @@
     x:Class="True_Love.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:True_Love" 
+    xmlns:muxm="using:Microsoft.UI.Xaml.Media"
     RequestedTheme="Dark">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
-                <ResourceDictionary Source="Themes/Styles.xaml" />
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls"/>
+                <ResourceDictionary Source="Styles/Fonts.xaml"/>
+                <ResourceDictionary Source="Styles/Navigation.xaml"/>
                 <ResourceDictionary>
-                    <CornerRadius x:Key="OverlayCornerRadius">0</CornerRadius>
-                    <CornerRadius x:Key="ControlCornerRadius">0</CornerRadius>
+                    <!--<CornerRadius x:Key="OverlayCornerRadius">0</CornerRadius>
+                    <CornerRadius x:Key="ControlCornerRadius">0</CornerRadius>-->
                     <!--<Style TargetType="Button">
                         <Setter Property="CornerRadius" Value="0" />
                     </Style>-->
@@ -22,17 +23,17 @@
                                  resources should be tested with both the light and dark themes,
                                  and specific light or dark resources provided as needed. -->
                             <Color x:Key="SystemAccentColor">#addbe0</Color>
-                            <AcrylicBrush x:Key="NavigationViewDefaultPaneBackground"
+                            <muxm:AcrylicBrush x:Key="NavigationViewDefaultPaneBackground"
                                           BackgroundSource="Backdrop"
                                           TintColor="Black"
                                           TintOpacity=".5"
                                           FallbackColor="Black"/>
-                            <AcrylicBrush x:Key="NavigationViewTopPaneBackground"
+                            <muxm:AcrylicBrush x:Key="NavigationViewTopPaneBackground"
                                           BackgroundSource="Backdrop"
                                           TintColor="#000001"
-                                          TintOpacity=".1"
+                                          TintOpacity=".7"
                                           FallbackColor="Black"/>
-                            <AcrylicBrush x:Key="NavigationViewExpandedPaneBackground" 
+                            <muxm:AcrylicBrush x:Key="NavigationViewExpandedPaneBackground" 
                                           BackgroundSource="HostBackdrop" 
                                           TintColor="Black"
                                           TintOpacity=".5"/>

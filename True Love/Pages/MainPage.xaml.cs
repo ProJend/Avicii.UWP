@@ -10,7 +10,10 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using muxc = Microsoft.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
-using System.Numerics;
+using Windows.Foundation.Metadata;
+using Microsoft.UI.Xaml.Media;
+using Windows.UI;
+
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
 namespace True_Love.Pages
@@ -20,16 +23,82 @@ namespace True_Love.Pages
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        //滚动条位置变量
+        // 滚动条位置变量
         double scrlocation = 0;
-        //导航栏当前显示状态（这个是为了减少不必要的开销，因为我做的是动画隐藏显示效果如果不用一个变量来记录当前导航栏状态的会重复执行隐藏或显示）
+        // 导航栏当前显示状态（这个是为了减少不必要的开销，因为我做的是动画隐藏显示效果如果不用一个变量来记录当前导航栏状态的会重复执行隐藏或显示）
         bool isshowbmbar = true;
+        double x = 0;
 
         public MainPage()
         {
             this.InitializeComponent();
             Window.Current.SetTitleBar(AppTitleBar);
             CommandBarTransition();
+ 
+            this.ManipulationMode = ManipulationModes.TranslateX; // 设置这个页面的手势模式为横向滑动
+            this.ManipulationCompleted += The_ManipulationCompleted; // 订阅手势滑动结束后的事件
+            this.ManipulationDelta += The_ManipulationDelta; // 订阅手势滑动事件
+
+            #region 兼容低版本号系统
+            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5)) // OS15063
+            {
+                // 背景
+                var myBrush = new AcrylicBrush
+                {
+                    BackgroundSource = AcrylicBackgroundSource.Backdrop,
+                    TintColor = Color.FromArgb(255, 0, 0, 1),
+                    FallbackColor = Colors.Black,
+                    TintOpacity = 0.7,
+                };
+                CommandBar.Background = myBrush;
+                BackgroundOfBar.Background = myBrush;
+
+                BackTopButton.Style = (Style)this.Resources["AppBarButtonRevealStyle"];
+
+                // 键盘快捷键             
+                var FrametoLove = new KeyboardAccelerator { Key = VirtualKey.F1 };
+                LovePage.KeyboardAccelerators.Add(FrametoLove);
+
+                var FrametoMemory = new KeyboardAccelerator { Key = VirtualKey.F2 };
+                MemoryPage.KeyboardAccelerators.Add(FrametoMemory);
+
+                var BacktoTop = new KeyboardAccelerator { Key = VirtualKey.F6 };
+                BackTopButton.KeyboardAccelerators.Add(BacktoTop);
+            }
+            else
+            {
+                var myBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Colors.Black);
+                var myBrush2 = new Windows.UI.Xaml.Media.SolidColorBrush(Colors.Black);
+                myBrush2.Opacity = 0.7;
+
+                CommandBar.Background = myBrush2;
+                BackgroundOfBar.Background = myBrush;
+            }
+            #endregion
+        }
+
+        /// <summary>
+        /// 手势滑动中 https://blog.csdn.net/github_36704374/article/details/59580697
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void The_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
+            x += e.Delta.Translation.X; // 将滑动的值赋给 x
+        }
+        
+        /// <summary>
+        /// 手势滑动结束
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void The_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
+        {
+            if (x > 100) // 判断滑动的距离
+                NavView.IsPaneOpen = true; // 打开汉堡菜单            
+            if (x < -100)
+                NavView.IsPaneOpen = false; // 关闭汉堡菜单
+            x = 0;  // 清零 x，不然x会累加
         }
 
         private void ContentFrame_NavigationFailed(object sender, NavigationFailedEventArgs e) => throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
@@ -55,18 +124,12 @@ namespace True_Love.Pages
             NavView_Navigate("home", new EntranceNavigationTransitionInfo());
 
             // Add keyboard accelerators for backwards navigation.
-            var goBack = new KeyboardAccelerator { Key = VirtualKey.Escape };
-            goBack.Invoked += BackInvoked;
-            this.KeyboardAccelerators.Add(goBack);
-
-            // ALT routes here
-            var back = new KeyboardAccelerator
+            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5))
             {
-                Key = VirtualKey.Back,
-                //Modifiers = VirtualKeyModifiers.Menu
-            };
-            back.Invoked += BackInvoked;
-            this.KeyboardAccelerators.Add(back);
+                var goBack = new KeyboardAccelerator { Key = VirtualKey.Escape };
+                goBack.Invoked += BackInvoked;
+                this.KeyboardAccelerators.Add(goBack);
+            }               
         }
 
         private void NavView_ItemInvoked(muxc.NavigationView sender,
@@ -162,7 +225,9 @@ namespace True_Love.Pages
             {
                 // SettingsItem is not part of NavView.MenuItems, and doesn't have a Tag.
                 NavView.SelectedItem = (muxc.NavigationViewItem)NavView.SettingsItem;
-                //NavView.Header = "Settings";
+                if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5));
+                else
+                    NavView.Header = "Settings";
             }
             else if (ContentFrame.SourcePageType != null)
             {
@@ -172,8 +237,9 @@ namespace True_Love.Pages
                     .OfType<muxc.NavigationViewItem>()
                     .First(n => n.Tag.Equals(item.Tag));
 
-                //NavView.Header =
-                //    ((muxc.NavigationViewItem)NavView.SelectedItem)?.Content?.ToString();
+                if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5));
+                else
+                    NavView.Header = ((muxc.NavigationViewItem)NavView.SelectedItem)?.Content?.ToString();
             }
         }
 
@@ -208,15 +274,10 @@ namespace True_Love.Pages
                 {                 
                     //隐藏
                     if (isshowbmbar)
-                    {               
+                    {
                         //通过动画来隐藏
-                        bar.Translation = new Vector3(0, 40, 0);
-
-                        //直接隐藏
-                        //bar.Visibility = Visibility.Collapsed;
-
-                        //bar.Opacity = 0;
-                        //CommandBar.IsEnabled = false;
+                        //bar.Translation = new Vector3(0, 40, 0);
+                        Close.Begin();
 
                         isshowbmbar = false;
                     }
@@ -228,13 +289,8 @@ namespace True_Love.Pages
                     if (isshowbmbar == false)
                     {
                         //通过动画来隐藏
-                        bar.Translation = new Vector3(0, 0, 0);
-
-                        //直接隐藏
-                        //bar.Visibility = Visibility.Visible;
-
-                        //bar.Opacity = 1;
-                        //CommandBar.IsEnabled = true;
+                        //bar.Translation = new Vector3(0, 0, 0);
+                        Open.Begin();
 
                         isshowbmbar = true;
                     }
@@ -261,8 +317,8 @@ namespace True_Love.Pages
         /// <param name="verticalOffset">Y：高度。</param>
         /// <param name="zoomFactor">Z：斜度。</param>
         public void ChangeView(double? horizontalOffset,
-                               double? verticalOffset,
-                               float? zoomFactor)
+                                                double? verticalOffset,
+                                                float? zoomFactor)
         {
 
         }

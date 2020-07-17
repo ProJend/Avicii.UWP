@@ -1,10 +1,14 @@
 ﻿using System;
+using True_Love.Helpers;
 using Windows.ApplicationModel.Email;
 using Windows.Storage;
-using Windows.System;
+using static Windows.System.Launcher;
 using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.Foundation.Metadata;
+using Windows.UI;
+using Windows.UI.Xaml.Media;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -18,7 +22,7 @@ namespace True_Love.Pages
         private readonly LiveTileService liveTileService;
         private readonly string source;
         public static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
-        private readonly string closeText, titleText; //声明更新记录字符串
+        private readonly string closeText, titleText; // 声明更新记录字符串
  
         public SettingsPage()
         {
@@ -27,9 +31,9 @@ namespace True_Love.Pages
 
             this.InitializeComponent();
 
-            if (!string.IsNullOrEmpty(Language)) //判断对传的值进行是否为空值
+            if (!string.IsNullOrEmpty(Language)) // 判断对传的值进行是否为空值
             {
-                switch (Language) //匹对语种
+                switch (Language) // 匹对语种
                 {
                     case "en-US":
                         closeText = "Get it!";
@@ -49,23 +53,58 @@ namespace True_Love.Pages
                         break;
                 }
             }
+            if(Language != "zh-Hans-CN")
+                FAQ_CN.Visibility = Visibility.Collapsed;
+
+            #region 兼容低版本号系统
+            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5));
+            else
+            {
+                HotKeys.Visibility = Visibility.Collapsed;
+                Header.Visibility = Visibility.Collapsed;
+            }
+            #endregion
+
+            ReadSettings();
         }
 
+        /// <summary>
+        /// 读取选项状态
+        /// </summary>
+        private void ReadSettings()
+        {
+            // Live Tiles
+            switch (localSettings.Values["SetLiveTiles"])
+            {
+                case true:
+                    LiveTiles.IsOn = true;
+                    break;
+                case false:
+                    LiveTiles.IsOn = false;
+                    break;
+            }
+        }
+
+
+        /// <summary>
+        /// 动态磁贴开关。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
         {
             if (sender is ToggleSwitch toggleSwitch)
             {
                 if (toggleSwitch.IsOn == true)
                 {
-                    liveTileService.AddTile("adad", "dadd", source); //添加新磁贴
-                    localSettings.Values["SetLive"] = true;
+                    liveTileService.AddTile("adad", "dadd", source); // 添加新磁贴
+                    localSettings.Values["SetLiveTiles"] = true;
                 }
                 else
                 {
-                    TileUpdateManager.CreateTileUpdaterForApplication().Clear(); //清空队列
-                    localSettings.Values["SetLive"] = false;
+                    TileUpdateManager.CreateTileUpdaterForApplication().Clear(); // 清空队列
+                    localSettings.Values["SetLiveTiles"] = false;
                 }
-                toggleSwitch.Toggled +=ToggleSwitch_Toggled;
             }
         }
 
@@ -74,15 +113,32 @@ namespace True_Love.Pages
         /// </summary>
         private async void Release_Click(object sender, RoutedEventArgs e)
         {
-            
-            var release = new ContentDialog()
+            var myBrush = new SolidColorBrush(Colors.Black);
+            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5))
             {
-                Title = titleText,
-                Content = new Release(),
-                CloseButtonText = closeText,
-                FullSizeDesired = false,                
-            };
-            await release.ShowAsync();          
+                var release = new ContentDialog()
+                {
+                    Title = titleText,
+                    Content = new Release(),
+                    CloseButtonText = closeText,
+                    FullSizeDesired = false,
+                    Background = myBrush,
+                    CloseButtonStyle = (Style)this.Resources["ButtonRevealStyle"],
+                };
+                await release.ShowAsync();
+            }
+            else
+            {
+                var release = new ContentDialog()
+                {
+                    Title = titleText,
+                    Content = new Release(),
+                    CloseButtonText = closeText,
+                    FullSizeDesired = false,
+                    Background = myBrush,
+                };
+                await release.ShowAsync();
+            }
         }
 
         #region Links
@@ -91,16 +147,16 @@ namespace True_Love.Pages
         /// </summary>
         private async void Mail_Click(object sender, RoutedEventArgs e)
         {
-            //收件人 
+            // 收件人 
             EmailRecipient emailRecipient1 = new EmailRecipient("projend@outlook.com");
 
-            //具体的一封email
+            // 具体的一封 Email
             EmailMessage emailMessage = new EmailMessage();
 
-            //给邮件添加收件人，可以添加多个
+            // 给邮件添加收件人，可以添加多个
             emailMessage.To.Add(emailRecipient1);
 
-            //通过邮件管理类，生成一个邮件。简单来说，帮你唤起设备里的邮件 UWP
+            // 通过邮件管理类，生成一个邮件。简单来说，帮你唤起设备里的邮件 UWP
             await EmailManager.ShowComposeNewEmailAsync(emailMessage);
         }
 
@@ -113,35 +169,35 @@ namespace True_Love.Pages
             FrameworkElement button = sender as FrameworkElement;
             switch (button.Tag as string)
             {
-                //汇报 Bug
-                case "Weibo": await Launcher.LaunchUriAsync(new Uri("https://weibo.com/6081786829")); break;
-                case "GitHub": await Launcher.LaunchUriAsync(new Uri("https://github.com/ProJend/TrueLove-UWP/issues/new")); break;
+                // 汇报 Bugs
+                case "Weibo": await LaunchUriAsync(new Uri("https://weibo.com/6081786829")); break;
+                case "GitHub": await LaunchUriAsync(new Uri("https://github.com/ProJend/TrueLove-UWP/issues/new")); break;
 
-                //社区群
-                //case "Telegram": await Launcher.LaunchUriAsync(new Uri("")); break;
-                //case "Skype": await Launcher.LaunchUriAsync(new Uri("")); break;
+                // 社区群
+                case "Telegram": await LaunchUriAsync(new Uri("https://t.me/TrueAvicii")); break;
+                //case "Skype": await LaunchUriAsync(new Uri("")); break;
 
-                //Avicii 的音乐
-                case "Spotify": await Launcher.LaunchUriAsync(new Uri("https://open.spotify.com/artist/1vCWHaC5f2uS3yhpwWbIA6?si=kNHKtOIpRgiBuE4WVsJ28w")); break;
-                case "YouTube": await Launcher.LaunchUriAsync(new Uri("https://www.youtube.com/user/AviciiOfficialVEVO")); break;
-                case "Apple": await Launcher.LaunchUriAsync(new Uri("https://itunes.apple.com/ca/artist/avicii/298496035")); break;
-                case "Netease": await Launcher.LaunchUriAsync(new Uri("https://music.163.com/#/artist?id=45236")); break;
-                case "QQ": await Launcher.LaunchUriAsync(new Uri("https://y.qq.com/n/yqq/singer/001jgAtj3LtJnE.html")); break;
-                case "Kugou": await Launcher.LaunchUriAsync(new Uri("https://www.kugou.com/singer/86133.html")); break;
+                // Avicii 的音乐
+                case "Spotify": await LaunchUriAsync(new Uri("spotify:artist:1vCWHaC5f2uS3yhpwWbIA6")); break;
+                case "YouTube": await LaunchUriAsync(new Uri("https://www.youtube.com/user/AviciiOfficialVEVO")); break;
+                case "Apple": await LaunchUriAsync(new Uri("https://itunes.apple.com/ca/artist/avicii/298496035")); break;
+                case "Netease": await LaunchUriAsync(new Uri("https://music.163.com/#/artist?id=45236")); break;
+                case "QQ": await LaunchUriAsync(new Uri("https://y.qq.com/n/yqq/singer/001jgAtj3LtJnE.html")); break;
+                case "Kugou": await LaunchUriAsync(new Uri("https://www.kugou.com/singer/86133.html")); break;
 
-                //Avicii 的个人故事
-                case "Instagram": await Launcher.LaunchUriAsync(new Uri("https://www.instagram.com/avicii/")); break;
-                case "Facebook": await Launcher.LaunchUriAsync(new Uri("https://www.facebook.com/avicii.t.berg")); break;
-                case "Twitter": await Launcher.LaunchUriAsync(new Uri("https://www.twitter.com/Avicii")); break;
+                // Avicii 的个人故事
+                case "Instagram": await LaunchUriAsync(new Uri("https://www.instagram.com/avicii/")); break;
+                case "Facebook": await LaunchUriAsync(new Uri("https://www.facebook.com/avicii.t.berg")); break;
+                case "Twitter": await LaunchUriAsync(new Uri("https://www.twitter.com/Avicii")); break;
 
-                //Avicii 的个人网站
-                case "Shop": await Launcher.LaunchUriAsync(new Uri("https://shop.avicii.com")); break;
-                case "Memory": await Launcher.LaunchUriAsync(new Uri("http://www.avicii.com")); break;
-                case "Foundation": await Launcher.LaunchUriAsync(new Uri("https://www.timberglingfoundation.org")); break;
-                case "Quora": await Launcher.LaunchUriAsync(new Uri("https://www.quora.com/profile/Tim-Bergling-2/answers")); break;
+                // Avicii 的个人网站
+                case "Shop": await LaunchUriAsync(new Uri("https://shop.avicii.com")); break;
+                case "Memory": await LaunchUriAsync(new Uri("http://www.avicii.com")); break;
+                case "Foundation": await LaunchUriAsync(new Uri("https://www.timberglingfoundation.org")); break;
+                case "Quora": await LaunchUriAsync(new Uri("https://www.quora.com/profile/Tim-Bergling-2/answers")); break;
 
-                //粉丝们的个人小站
-                case "One": await Launcher.LaunchUriAsync(new Uri("https://avicii.one")); break;
+                // 粉丝们的个人小站
+                case "One": await LaunchUriAsync(new Uri("https://avicii.one")); break;
             }
         }
         #endregion 

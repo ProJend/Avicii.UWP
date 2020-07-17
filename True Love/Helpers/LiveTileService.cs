@@ -1,12 +1,7 @@
 ﻿using Microsoft.Toolkit.Uwp.Notifications;
 using Windows.UI.Notifications;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace True_Love
+namespace True_Love.Helpers
 {
     /// <summary>
     /// 动态磁贴 参考了 https://blog.csdn.net/qiuxy23/article/details/81252402
@@ -56,12 +51,12 @@ namespace True_Love
                             {
                                 new AdaptiveText()
                                 {
-                                    Text="有什么话想要对 Tim Bergling 说？",
+                                    Text="Something want to talk to Tim Bergling?",
                                     HintAlign=AdaptiveTextAlign.Center,
                                     HintWrap = true,
-                                    
-                                    //HintStyle=AdaptiveTextStyle.Body
-                                }
+                                    //HintStyle=(Style)this.Resources["AccentButtonStyle"],
+                                    //HintStyle=AdaptiveTextStyle.CaptionSubtle,
+                                },
                             },
                             PeekImage = new TilePeekImage()
                              {
@@ -81,11 +76,11 @@ namespace True_Love
                             {
                                 Text = "Tim Bergling",//设置标题
                                 HintStyle = AdaptiveTextStyle.Base,
-                                HintAlign = AdaptiveTextAlign.Right ,
+                                HintAlign = AdaptiveTextAlign.Right,
                             },
                             new AdaptiveText()
                             {
-                                Text = "Memories",//设置内容
+                                Text = "Foundation",//设置内容
                                 HintStyle = AdaptiveTextStyle.Body,
                                 HintAlign = AdaptiveTextAlign.Right
                             }
@@ -120,11 +115,6 @@ namespace True_Love
                     //},
                 }
             };
-        }
-
-        internal void AddTile(object text1, object text2, string source)
-        {
-            throw new NotImplementedException();
         }
     }
 }
