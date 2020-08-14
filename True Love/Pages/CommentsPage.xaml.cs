@@ -10,9 +10,11 @@ namespace True_Love.Pages
     /// </summary>
     public sealed partial class CommentsPage : Page
     {
+        public static CommentsPage Current;
         public CommentsPage()
         {
             this.InitializeComponent();
+            Current = this;
             NavigationCacheMode = NavigationCacheMode.Enabled;
         }
     }

@@ -57,8 +57,7 @@ namespace True_Love.Pages
                 FAQ_CN.Visibility = Visibility.Collapsed;
 
             #region 兼容低版本号系统
-            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5));
-            else
+            if (!ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5))
             {
                 HotKeys.Visibility = Visibility.Collapsed;
                 Header.Visibility = Visibility.Collapsed;

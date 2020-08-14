@@ -15,7 +15,7 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="45"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
@@ -68,18 +68,15 @@
                             <TextBlock Text="Shift + Win + Enter"/>
                             <TextBlock/>
                             <!--<TextBlock Text="> 15063" Foreground="{ThemeResource SystemAccentColor}"/>-->
-                            <!--<TextBlock Opacity="0.7">Switch CommandBar</TextBlock>
-                        <TextBlock Text="Shift + C"/>
-                        <TextBlock/>-->
                             <TextBlock Opacity="0.7" Grid.Column="0">Page Love</TextBlock>
                             <TextBlock Grid.Column="1">F1</TextBlock>
                             <TextBlock/>
                             <TextBlock Opacity="0.7" Grid.Column="0">Page Memory</TextBlock>
                             <TextBlock Grid.Column="1">F2</TextBlock>
                             <TextBlock/>
-                            <!--<TextBlock Opacity="0.7" Grid.Column="0">Refresh</TextBlock>
-                        <TextBlock Grid.Column="1">F5</TextBlock>
-                        <TextBlock/>-->
+                            <TextBlock Opacity="0.7" Grid.Column="0">Refresh</TextBlock>
+                            <TextBlock Grid.Column="1">F5</TextBlock>
+                            <TextBlock/>
                             <TextBlock Opacity="0.7" Grid.Column="0">Back To Top</TextBlock>
                             <TextBlock Grid.Column="1">F6</TextBlock>
                             <TextBlock/>
@@ -149,15 +146,15 @@
                             <FontIcon FontFamily="{ThemeResource  iconfont}" Glyph="&#xe737;"/>
                         </Button>
                     </StackPanel>
-                    <!--<TextBlock Text="Brag With Guys"/>
+                    <TextBlock Text="Brag With Guys"/>
                     <StackPanel Orientation="Horizontal">
                         <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Telegram" v1709:Style="{StaticResource ButtonRevealStyle}">
                             <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource  iconfont}" Glyph="&#xe639;"/>
                         </Button>
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Skype" v1709:Style="{StaticResource ButtonRevealStyle}">
-                        <FontIcon FontFamily="{ThemeResource  iconfont}" Glyph="&#xe773;"/>
-                    </Button>
-                    </StackPanel>-->
+                        <!--<Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Skype" v1709:Style="{StaticResource ButtonRevealStyle}">
+                            <FontIcon FontFamily="{ThemeResource  iconfont}" Glyph="&#xe773;"/>
+                        </Button>-->
+                    </StackPanel>
                     <TextBlock/>
                     <TextBlock Text="Tim Bergling" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" ToolTipService.ToolTip="Remembering"/>
                     <TextBlock Text="(8 September 1989 – 20 April 2018), better known by his stage name Avicii, was a Swedish DJ, remixer, record producer, musician, and songwriter who specialized in audio programming, remixing, and record producing."

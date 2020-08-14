@@ -23,7 +23,7 @@
     <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Always</AppxBundle>
-    <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
+    <AppxBundlePlatforms>arm64</AppxBundlePlatforms>
     <AppInstallerUri>\\c</AppInstallerUri>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
     <PackageCertificateKeyFile />
@@ -135,6 +135,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Generic.cs" />
     <Compile Include="Helpers\LiveTileService.cs" />
     <Compile Include="Pages\CommentsPage.xaml.cs">
       <DependentUpon>CommentsPage.xaml</DependentUpon>
@@ -169,6 +170,14 @@
     <Content Include="Assets\BadgeLogo.scale-150.png" />
     <Content Include="Assets\BadgeLogo.scale-200.png" />
     <Content Include="Assets\BadgeLogo.scale-400.png" />
+    <Content Include="Assets\Instagram\4B9B8C149E6AA28D7B85879D603A7372.jpg" />
+    <Content Include="Assets\Instagram\4F36282C98D429DA452A296A2215C5AC.jpg" />
+    <Content Include="Assets\Instagram\59F4AC4B4D42C13A26FCBB55B7971986.jpg" />
+    <Content Include="Assets\Instagram\5B1109A12575A0E83B396DCF03EFEF1C.jpg" />
+    <Content Include="Assets\Instagram\6DA947BFEC93B4CFCF2A98BB8E7D99E2.jpg" />
+    <Content Include="Assets\Instagram\C7E8ED931DE64E71F49FAB0332887D2F.jpg" />
+    <Content Include="Assets\Instagram\CBF4AA71C8EC345C0CDEBD88694EC92A.jpg" />
+    <Content Include="Assets\Instagram\CEDF07AD0F6EB2979DA192F2D23324B8.jpg" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-125.png" />
     <Content Include="Assets\SplashScreen.scale-150.png" />
@@ -262,6 +271,9 @@
     <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications">
       <Version>6.1.0</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
+      <Version>4.0.0</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml">
       <Version>2.4.2</Version>
     </PackageReference>
@@ -285,7 +297,9 @@
     <Content Include="Assets\Fonts\IconFont.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets\Instagram\" />
+    <SDKReference Include="WindowsMobile, Version=10.0.19041.0">
+      <Name>Windows Mobile Extensions for the UWP</Name>
+    </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

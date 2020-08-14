@@ -7,7 +7,8 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    xmlns:v1709="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 5)">
+    xmlns:v1709="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 5)"
+    xmlns:v1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)">
 
     <Page.Resources>
         <Storyboard x:Name="Close">
@@ -37,21 +38,21 @@
             </Frame>
         </ScrollViewer>
 
-        <Grid x:Name="BackgroundOfBar" Height="40" VerticalAlignment="Top"/>
+        <Grid x:Name="BackgroundOfBar" VerticalAlignment="Top"/>
 
         <Grid x:Name="bar" VerticalAlignment="Bottom">
             <!--<v1809:Grid.TranslationTransition>
                 <Vector3Transition/>
             </v1809:Grid.TranslationTransition>-->
 
-            <CommandBar DefaultLabelPosition="Bottom" v1709:ToolTipService.ToolTip="Right tag on here to switch CommandBar." RightTapped="CommandBar_RightTapped" x:Name="CommandBar" FlowDirection="LeftToRight" OverflowButtonVisibility="Auto">
+            <CommandBar DefaultLabelPosition="Bottom" v1709:ToolTipService.ToolTip="Right tag on here to switch CommandBar." Loaded="CommandBar_Loaded" RightTapped="CommandBar_RightTapped" x:Name="CommandBar" FlowDirection="LeftToRight" OverflowButtonVisibility="Auto">
                 <CommandBar.RenderTransform>
                     <TranslateTransform x:Name="Translate"/>
                 </CommandBar.RenderTransform>
                 <!--<AppBarButton Icon="Add" Label="分享故事" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="分享你与 Avicii 的故事"/>-->
-                <AppBarButton  x:Name="BackTopButton" IsEnabled="False" Icon="Upload" Label="Back To Top" ToolTipService.ToolTip="Back to top" Click="BackToTop_Click">
+                <AppBarButton x:Name="BackTopButton" IsEnabled="False" Icon="Upload" Label="Back To Top" ToolTipService.ToolTip="Back to top" Click="BackToTop_Click">
                 </AppBarButton>
-                <!--<AppBarButton x:Name="RefreshButton" Icon="Refresh" Label="刷新" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="刷新数据" Click="Refresh_Click"/>-->
+                <AppBarButton x:Name="RefreshButton" Icon="Refresh" Label="Refresh" ToolTipService.ToolTip="Refresh dates" Click="Refresh_Click"/>
                 <!--<AppBarButton Icon="Setting" Label="设置" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="打开设置"/>-->
                 <CommandBar.SecondaryCommands >
 
@@ -67,7 +68,6 @@
                              IsBackButtonVisible="Auto"
                              IsTitleBarAutoPaddingEnabled="False">
             <muxc:NavigationView.MenuItems>
-                <!--<muxc:NavigationViewItem Icon="Setting"/>-->
                 <muxc:NavigationViewItemHeader x:Uid="Mnh1" x:Name="MainPagesHeader"/>
                 <muxc:NavigationViewItem x:Uid="Mnh2" x:Name="LovePage" Icon="Contact" Tag="home">
                 </muxc:NavigationViewItem>
@@ -77,7 +77,7 @@
             </muxc:NavigationView.MenuItems>
         </muxc:NavigationView>
 
-        <Grid Height="40" VerticalAlignment="Top" HorizontalAlignment="Stretch" x:Name="AppTitleBar" Background="Transparent" Margin="80,0,0,0"/>
+        <Grid Height="40" Visibility="Collapsed" VerticalAlignment="Top" HorizontalAlignment="Stretch" x:Name="AppTitleBar" Background="Transparent" Margin="80,0,0,0"/>
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>

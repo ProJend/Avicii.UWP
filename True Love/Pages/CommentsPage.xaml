@@ -4,11 +4,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:True_Love.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <WebView Source="https://www.avicii.com"  ManipulationMode="System,TranslateX"/>
+    <Grid ManipulationMode="System,TranslateX" x:Name="grid" ScrollViewer.VerticalScrollMode="Disabled">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <ProgressRing Foreground="White" IsActive="True" Width="50" Height="50"/>
+            <TextBlock/>
+            <TextBlock>Lodding web page...</TextBlock>
+        </StackPanel>
+
+        <WebView Source="http://avicii.com" x:Name="webview" x:FieldModifier="Public"/>
     </Grid>
 </Page>

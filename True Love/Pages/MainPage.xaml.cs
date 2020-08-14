@@ -24,7 +24,7 @@ namespace True_Love.Pages
     public sealed partial class MainPage : Page
     {
         // 滚动条位置变量
-        double scrlocation = 0;
+        public double scrlocation = 0;
         // 导航栏当前显示状态（这个是为了减少不必要的开销，因为我做的是动画隐藏显示效果如果不用一个变量来记录当前导航栏状态的会重复执行隐藏或显示）
         bool isshowbmbar = true;
         double x = 0;
@@ -32,9 +32,12 @@ namespace True_Love.Pages
         public MainPage()
         {
             this.InitializeComponent();
-            Window.Current.SetTitleBar(AppTitleBar);
-            CommandBarTransition();
- 
+            if (!ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+            {
+                AppTitleBar.Visibility = Visibility.Visible;
+                Window.Current.SetTitleBar(AppTitleBar);
+            }
+
             this.ManipulationMode = ManipulationModes.TranslateX; // 设置这个页面的手势模式为横向滑动
             this.ManipulationCompleted += The_ManipulationCompleted; // 订阅手势滑动结束后的事件
             this.ManipulationDelta += The_ManipulationDelta; // 订阅手势滑动事件
@@ -53,7 +56,10 @@ namespace True_Love.Pages
                 CommandBar.Background = myBrush;
                 BackgroundOfBar.Background = myBrush;
 
+                BackgroundOfBar.Height = 40;
+
                 BackTopButton.Style = (Style)this.Resources["AppBarButtonRevealStyle"];
+                RefreshButton.Style = (Style)this.Resources["AppBarButtonRevealStyle"];
 
                 // 键盘快捷键             
                 var FrametoLove = new KeyboardAccelerator { Key = VirtualKey.F1 };
@@ -64,6 +70,9 @@ namespace True_Love.Pages
 
                 var BacktoTop = new KeyboardAccelerator { Key = VirtualKey.F6 };
                 BackTopButton.KeyboardAccelerators.Add(BacktoTop);
+
+                var Refresh = new KeyboardAccelerator { Key = VirtualKey.F5 };
+                RefreshButton.KeyboardAccelerators.Add(Refresh);
             }
             else
             {
@@ -73,39 +82,18 @@ namespace True_Love.Pages
 
                 CommandBar.Background = myBrush2;
                 BackgroundOfBar.Background = myBrush;
+
+                BackgroundOfBar.Height = 45;
             }
             #endregion
         }
 
-        /// <summary>
-        /// 手势滑动中 https://blog.csdn.net/github_36704374/article/details/59580697
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void The_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
-        {
-            x += e.Delta.Translation.X; // 将滑动的值赋给 x
-        }
-        
-        /// <summary>
-        /// 手势滑动结束
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void The_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
-        {
-            if (x > 100) // 判断滑动的距离
-                NavView.IsPaneOpen = true; // 打开汉堡菜单            
-            if (x < -100)
-                NavView.IsPaneOpen = false; // 关闭汉堡菜单
-            x = 0;  // 清零 x，不然x会累加
-        }
-
+        #region NavigationView
         private void ContentFrame_NavigationFailed(object sender, NavigationFailedEventArgs e) => throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
 
         // List of ValueTuple holding the Navigation Tag and the relative Navigation Page
         private readonly List<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
-         {
+        {
             ("home", typeof(LovePage)),
             ("comment", typeof(CommentsPage)),
         };
@@ -129,7 +117,31 @@ namespace True_Love.Pages
                 var goBack = new KeyboardAccelerator { Key = VirtualKey.Escape };
                 goBack.Invoked += BackInvoked;
                 this.KeyboardAccelerators.Add(goBack);
-            }               
+            }
+        }
+
+        /// <summary>
+        /// 手势滑动中 https://blog.csdn.net/github_36704374/article/details/59580697
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void The_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        {
+            x += e.Delta.Translation.X; // 将滑动的值赋给 x
+        }
+
+        /// <summary>
+        /// 手势滑动结束
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void The_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
+        {
+            if (x > 100) // 判断滑动的距离
+                NavView.IsPaneOpen = true; // 打开汉堡菜单            
+            if (x < -100)
+                NavView.IsPaneOpen = false; // 关闭汉堡菜单
+            x = 0;  // 清零 x，不然x会累加
         }
 
         private void NavView_ItemInvoked(muxc.NavigationView sender,
@@ -164,12 +176,11 @@ namespace True_Love.Pages
         }
 
         private void NavView_Navigate(string navItemTag, NavigationTransitionInfo transitionInfo)
-        {;
+        {
             Type _page = null;
             if (navItemTag == "settings")
             {
                 _page = typeof(SettingsPage);
-                //ContentFrame.Navigate(_page, null, new DrillInNavigationTransitionInfo());
             }
             else
             {
@@ -193,7 +204,7 @@ namespace True_Love.Pages
                                  KeyboardAcceleratorInvokedEventArgs args)
         {
             On_BackRequested();
-            args.Handled = true;
+            args.Handled = true;     
         }
         private void MainPage_BackRequested(object sender, BackRequestedEventArgs e)
         {
@@ -225,9 +236,9 @@ namespace True_Love.Pages
             {
                 // SettingsItem is not part of NavView.MenuItems, and doesn't have a Tag.
                 NavView.SelectedItem = (muxc.NavigationViewItem)NavView.SettingsItem;
-                if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5));
-                else
-                    NavView.Header = "Settings";
+                if (!ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5)) NavView.Header = "SETTINGS";
+
+                RefreshChanged("settings");
             }
             else if (ContentFrame.SourcePageType != null)
             {
@@ -237,15 +248,28 @@ namespace True_Love.Pages
                     .OfType<muxc.NavigationViewItem>()
                     .First(n => n.Tag.Equals(item.Tag));
 
-                if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5));
-                else
-                    NavView.Header = ((muxc.NavigationViewItem)NavView.SelectedItem)?.Content?.ToString();
+                if (!ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5)) 
+                    NavView.Header = ((muxc.NavigationViewItem)NavView.SelectedItem)?.Content?.ToString().ToUpper();
+
+                RefreshChanged(item.Tag.ToString());
             }
+         
+        }
+        #endregion
+
+        #region 底部工具栏
+        /// <summary>
+        /// 加载相关代码
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CommandBar_Loaded(object sender, RoutedEventArgs e)
+        {
+            CommandBarTransition();
         }
 
-        #region 命令栏
         /// <summary>
-        /// 鼠标右击命令栏活动。
+        /// 鼠标右击工具栏活动。
         /// </summary>
         private void CommandBar_RightTapped(object sender, RightTappedRoutedEventArgs e)
         {
@@ -253,7 +277,7 @@ namespace True_Love.Pages
         }
 
         /// <summary>
-        /// 命令栏跟随窗口移动动画。
+        /// 工具栏跟随窗口移动动画。
         /// </summary>
         private void CommandBarTransition()
         {
@@ -263,6 +287,7 @@ namespace True_Love.Pages
         }
 
         /// <summary>
+        /// 检查工具栏相关的按钮可用状态。
         /// 下滑隐藏命令栏 https://www.cnblogs.com/lonelyxmas/p/9919869.html
         /// </summary>
         private void Sv_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
@@ -307,7 +332,7 @@ namespace True_Love.Pages
                     BackTopButton.IsEnabled = false;
                 }
             }  
-            scrlocation = sv.VerticalOffset;
+            scrlocation = sv.VerticalOffset;  
         }
 
         /// <summary>
@@ -336,27 +361,26 @@ namespace True_Love.Pages
         /// </summary>
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
-            RefreshData();
+            CommentsPage.Current.webview.Refresh();
+            
         }
 
-        private void RefreshData()
+        /// <summary>
+        /// 检查刷新按钮可用状态。
+        /// </summary>
+        /// <param name="tag">NavViewItem.Tag</param>
+        private void RefreshChanged(string tag)
         {
-
+            switch (tag)
+            {
+                case "comment":
+                    RefreshButton.IsEnabled = true;
+                    break;
+                default:
+                    RefreshButton.IsEnabled = false;
+                    break;
+            }
         }
-
-        //private void Visualizer_RefreshStateChanged(RefreshVisualizer sender, RefreshStateChangedEventArgs args)
-        //{
-        //    // Respond to visualizer state changes.
-        //    // Disable the refresh button if the visualizer is refreshing.
-        //    if (args.NewState == RefreshVisualizerState.Refreshing)
-        //    {
-        //        RefreshButton.IsEnabled = false;
-        //    }
-        //    else
-        //    {
-        //        RefreshButton.IsEnabled = true;
-        //    }
-        //}
         #endregion
     }
 }

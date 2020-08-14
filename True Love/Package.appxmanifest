@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="Tim" Publisher="CN=True Love for UWP, O=Ben, C=CN" Version="0.1.0.0" />
+  <Identity Name="Tim" Publisher="CN=True Love for UWP, O=Ben, C=CN" Version="0.1.3.0" />
   <mp:PhoneIdentity PhoneProductId="cf0148d5-01bb-4b60-b53b-da3346bf8e5e" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>True Love - Avicii Memory Library</DisplayName>
@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="True_Love.App">
-      <uap:VisualElements DisplayName="True Love - Avicii Foundation" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="True Love For UWP" BackgroundColor="black">
+      <uap:VisualElements DisplayName="True Love" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="True Love For UWP" BackgroundColor="black">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" ShortName="True Love" Square310x310Logo="Assets\Square310x310Logo.png" Square71x71Logo="Assets\Square71x71Logo.png">
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="square150x150Logo" />

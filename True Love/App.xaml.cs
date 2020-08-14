@@ -3,6 +3,7 @@ using True_Love.Pages;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
+using Windows.Foundation.Metadata;
 using Windows.UI;
 using Windows.UI.Notifications;
 using Windows.UI.ViewManagement;
@@ -66,7 +67,8 @@ namespace True_Love
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
 
-                ExtendAcrylicIntoTitleBar();
+                if (!ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar")) HideTitleBar();
+                //else ExtendAcrylicIntoStatusBar();
             }
         }
 
@@ -93,9 +95,9 @@ namespace True_Love
         }
 
         /// <summary>
-        /// 沉淀状态栏。
+        /// 沉淀状态栏 for PC
         /// </summary>
-        private void ExtendAcrylicIntoTitleBar()
+        private void HideTitleBar()
         {
             CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
             var titleBar = ApplicationView.GetForCurrentView().TitleBar;
@@ -105,5 +107,16 @@ namespace True_Love
             titleBar.ButtonPressedBackgroundColor = Color.FromArgb(0xFF, 173, 219, 224);
             titleBar.ButtonHoverForegroundColor = Colors.Black;
         }
+
+        /// <summary>
+        /// 沉淀状态栏 for Phone
+        /// </summary>
+        //private void HideStatusBar()
+        //{
+        //    var applicationView = ApplicationView.GetForCurrentView();
+        //    applicationView.SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
+        //    var statusbar = StatusBar.GetForCurrentView();
+        //    statusbar.BackgroundColor = Colors.Transparent;
+        //}
     }
 }

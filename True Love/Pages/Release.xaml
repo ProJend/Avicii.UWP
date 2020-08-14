@@ -18,7 +18,7 @@
         
         <TextBlock Text="🔈 0.1.1 - 2020/06/15" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
         <TextBlock Text="改进：重写了设置页面"/>
-        <TextBlock Text="改进：底部任务栏增加动画，灵活多变" Style="{ThemeResource BodyTextBlockStyle}"/>
+        <TextBlock Text="改进：底部工具栏增加动画，灵活多变" Style="{ThemeResource BodyTextBlockStyle}"/>
         <TextBlock Text="新增：返回顶部功能"/>
         <TextBlock Text="兼容：系统最低版本要求降至 OS : 1709 vs Value : 16299" Style="{ThemeResource BodyTextBlockStyle}"/>
         <TextBlock/>
