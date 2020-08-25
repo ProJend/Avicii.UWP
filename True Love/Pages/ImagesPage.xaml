@@ -1,0 +1,61 @@
+﻿<Page
+    x:Class="True_Love.Pages.ImagesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:True_Love.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid ManipulationMode="System,TranslateX">
+        <StackPanel Margin="0 45 0 0" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Style="{ThemeResource SubheaderTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}" VerticalAlignment="Center" HorizontalAlignment="Center">I M A G E S</TextBlock>
+            <TextBlock Margin="30 0 30 0" Style="{ThemeResource SubtitleTextBlockStyle}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <LineBreak/>
+                <Run>S O M E T I M E   A   P I C T U R E   I S   W O R T H   M O R E   T H A N   A   T H O U S A N D   W O R D S .</Run>
+                <LineBreak/>
+            </TextBlock>
+            <GridView>
+                <!--<GridView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Image Source="{Binding Item.Thumbnail}" Stretch="Uniform"/>
+                        </Grid>
+                    </DataTemplate>
+                </GridView.ItemTemplate>-->
+                <GridView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <controls:StaggeredPanel DesiredColumnWidth="250"
+                                             HorizontalAlignment="Stretch"/>
+                    </ItemsPanelTemplate>
+                </GridView.ItemsPanel>
+                <GridViewItem>
+                    <Image Source="/Assets/Instagram/1.jpg"/>
+                </GridViewItem>
+                <GridViewItem>
+                    <Image Source="/Assets/Instagram/2.jpg"/>
+                </GridViewItem>
+                <GridViewItem>
+                    <Image Source="/Assets/Instagram/3.jpg"/>
+                </GridViewItem>
+                <GridViewItem>
+                    <Image Source="/Assets/Instagram/4.jpg"/>
+                </GridViewItem>
+                <GridViewItem>
+                    <Image Source="/Assets/Instagram/5.jpg"/>
+                </GridViewItem>
+                <GridViewItem>
+                    <Image Source="/Assets/Instagram/6.jpg"/>
+                </GridViewItem>
+                <GridViewItem>
+                    <Image Source="/Assets/Instagram/7.jpg"/>
+                </GridViewItem>
+                <GridViewItem>
+                    <Image Source="/Assets/Instagram/8.jpg"/>
+                </GridViewItem>
+            </GridView>
+        </StackPanel>
+    </Grid>
+</Page>

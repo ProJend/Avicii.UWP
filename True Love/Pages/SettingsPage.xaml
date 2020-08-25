@@ -27,11 +27,9 @@
 
             <!--标头 :
                 Header-->
-            <StackPanel x:Name="Header" Grid.Row="0">
-                <!--<TextBlock/>-->
-                <TextBlock Text="Settings" Style="{ThemeResource TitleTextBlockStyle}" Margin="1,0,0,0" x:Name="settings"/>
-                <TextBlock/>
-            </StackPanel>
+            <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Margin="1,0,0,0" x:Name="Header" Grid.Row="0">
+                    <Run>Settings</Run><LineBreak/>
+            </TextBlock>
 
             <!--内容 :
                 Content-->
@@ -44,96 +42,100 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-       
-                <RelativePanel x:Name="Settings" Grid.Row="0" Grid.Column="0">
-                    <StackPanel Name="Content1">
 
-                        <!--选项 : ⚙
+                <StackPanel Name="Content1" Grid.Row="0" Grid.Column="0">
+                    <!--选项 : ⚙
                             Options-->
-                        <TextBlock Text="Options" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
-                        <TextBlock Opacity="0.7">Live Tiles</TextBlock>
-                        <ToggleSwitch x:Name="LiveTiles"  ToolTipService.ToolTip="Show Avicii on tile" Toggled="ToggleSwitch_Toggled"/>
+                    <TextBlock Text="Options" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
+                    <TextBlock Foreground="DarkGray">Live Tiles</TextBlock>
+                    <ToggleSwitch x:Name="LiveTiles"  ToolTipService.ToolTip="Show Avicii on tile" Toggled="ToggleSwitch_Toggled"/>
 
-                        <TextBlock><LineBreak/><LineBreak/></TextBlock>
-                        <!--热键 :
+                    <!--热键 : ⌨
                             Hot Keys-->
-
-                        <StackPanel x:Name="HotKeys">
-                            <TextBlock Text="Hot Keys" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
-                            <!--<TextBlock Text="Keyboard Shortcuts" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>-->
-                            <TextBlock Opacity="0.7">Back</TextBlock>
-                            <TextBlock Text="ESC or Win + Backspace"/>
-                            <TextBlock/>
-                            <TextBlock Opacity="0.7" Margin="0">Fullscreen</TextBlock>
-                            <TextBlock Text="Shift + Win + Enter"/>
-                            <TextBlock/>
-                            <!--<TextBlock Text="> 15063" Foreground="{ThemeResource SystemAccentColor}"/>-->
-                            <TextBlock Opacity="0.7" Grid.Column="0">Page Love</TextBlock>
-                            <TextBlock Grid.Column="1">F1</TextBlock>
-                            <TextBlock/>
-                            <TextBlock Opacity="0.7" Grid.Column="0">Page Memory</TextBlock>
-                            <TextBlock Grid.Column="1">F2</TextBlock>
-                            <TextBlock/>
-                            <TextBlock Opacity="0.7" Grid.Column="0">Refresh</TextBlock>
-                            <TextBlock Grid.Column="1">F5</TextBlock>
-                            <TextBlock/>
-                            <TextBlock Opacity="0.7" Grid.Column="0">Back To Top</TextBlock>
-                            <TextBlock Grid.Column="1">F6</TextBlock>
-                            <TextBlock/>
-
-                            <TextBlock><LineBreak/><LineBreak/></TextBlock>
-                        </StackPanel>
+                    <StackPanel x:Name="HotKeys">
+                        <TextBlock><LineBreak/><LineBreak/></TextBlock>
+                        <TextBlock Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}">
+                            <Run>Hot Keys</Run>
+                        </TextBlock>
+                        <!--<TextBlock Text="Keyboard Shortcuts" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>-->
+                        <TextBlock>
+                            <Run Foreground="DarkGray">Back</Run><LineBreak/>
+                            <Run>ESC or Win + Backspace</Run><LineBreak/><LineBreak/>
+                            <Run Foreground="DarkGray">Fullscreen</Run><LineBreak/>
+                            <Run>Shift + Win + Enter</Run><LineBreak/><LineBreak/>
+                            <Run Foreground="DarkGray">Page Love</Run><LineBreak/>
+                            <Run>F1</Run><LineBreak/><LineBreak/>
+                            <Run Foreground="DarkGray">Page Memory</Run><LineBreak/>
+                            <Run>F2</Run><LineBreak/><LineBreak/>
+                            <Run Foreground="DarkGray">Refresh</Run><LineBreak/>
+                            <Run>F5</Run><LineBreak/><LineBreak/>
+                            <Run Foreground="DarkGray">Back To Top</Run><LineBreak/>
+                            <Run>F6</Run>
+                        </TextBlock>
                     </StackPanel>
 
-                    <StackPanel x:Name="Content2" RelativePanel.Below="Content1">
-                        
-                        <!--疑难解答 : 
+                    <!--疑难解答 : ❓
                             FAQ-->
-                        <TextBlock Text="FAQ" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
-                        <TextBlock x:Uid="2Sf1" Opacity="0.7" Style="{ThemeResource BodyTextBlockStyle}"/>
-                        <TextBlock x:Uid="2Sa1" Style="{ThemeResource BodyTextBlockStyle}"/>
-                        <TextBlock/>
-                        <StackPanel x:Name="FAQ_CN">
-                            <TextBlock x:Uid="2Sf2" Opacity="0.7" Style="{ThemeResource BodyTextBlockStyle}"/>
-                            <TextBlock x:Uid="2Sa2" Style="{ThemeResource BodyTextBlockStyle}"/>
-                        </StackPanel>
-                        <!--<TextBlock/>
+                    <TextBlock><LineBreak/><LineBreak/></TextBlock>
+
+                    <TextBlock Text="FAQ" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
+                    <TextBlock Style="{ThemeResource BodyTextBlockStyle}">
+                        <Run x:Uid="2Sf1" Foreground="DarkGray"></Run><LineBreak/>
+                        <Run x:Uid="2Sa1"/>
+                    </TextBlock>
+                    <StackPanel x:Name="FAQ_CN">
+                        <TextBlock Style="{ThemeResource BodyTextBlockStyle}"> 
+                            <Run x:Uid="2Sf2" Foreground="DarkGray"></Run><LineBreak/>
+                            <Run x:Uid="2Sa2"/>
+                        </TextBlock>
+                    </StackPanel>
+                    <!--<TextBlock/>
                         <HyperlinkButton Content="GitHub Wiki"/>-->
 
-                        <TextBlock><LineBreak/><LineBreak/></TextBlock>
-                        <!--最近更新 : 🔈
+                    <!--最近更新 : 🚀
                             What's New-->
+                    <TextBlock><LineBreak/><LineBreak/></TextBlock>
 
-                        <TextBlock Text="What's New" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
-                        <TextBlock Text="Recent Records : 17/07/2020" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>
-                        <TextBlock Opacity="0.7">新增：触摸右滑展开汉堡菜单，反之左滑关闭</TextBlock>
-                        <TextBlock Opacity="0.7">修复：低版本号系统打开应用闪退问题</TextBlock>
-                        <TextBlock Opacity="0.7">兼容：支援 WP</TextBlock>
-                        <TextBlock/>
-                        <HyperlinkButton Content="Learn More" Click="Release_Click"/>
+                    <TextBlock Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}">
+                        <Run Foreground="{ThemeResource SystemAccentColor}">What's New</Run><LineBreak/>
+                        <Run>Recent Records : 17/07/2020</Run>
+                    </TextBlock>
+                    <TextBlock Foreground="DarkGray">
+                        <Run>新增：触摸右滑展开汉堡菜单，反之左滑关闭</Run><LineBreak/>
+                        <Run>修复：低版本号系统打开应用闪退问题</Run><LineBreak/>
+                        <Run>兼容：支援 WP</Run><LineBreak/>
 
-                        <TextBlock><LineBreak/><LineBreak/></TextBlock>
-                    </StackPanel>
-                </RelativePanel>
+                    </TextBlock>
+                    <HyperlinkButton Content="Learn More" Click="Release_Click"/>
 
-                <StackPanel x:Name="Content0" Grid.Row="1" Grid.Column="0">
+                    <TextBlock><LineBreak/><LineBreak/></TextBlock>
+                </StackPanel>
+
+                <StackPanel x:Name="Content2" Grid.Row="1" Grid.Column="0">
 
                     <!--关于此应用 : ℹ
                         About This App-->
-                    <TextBlock Text="About This App" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
-                    <TextBlock Text="TRUE LOVE" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>
-                    <TextBlock Text="Version : 0.1.2.0" Opacity="0.7"/>
-                    <TextBlock Text="2020 @ ProJend" Opacity="0.7"/>
-                    <TextBlock Text="Power By Tim Bergling" Opacity="0.7"/>
-                    <TextBlock Text="This App will help you easy to browse all about Tim Bergling." Style="{ThemeResource BodyTextBlockStyle}"/>
 
-                    <TextBlock><LineBreak/><LineBreak/></TextBlock>
+                    <TextBlock Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}">
+                        <Run Foreground="{ThemeResource SystemAccentColor}">About This App</Run><LineBreak/>
+                        <Run>TRUE LOVE</Run>
+                    </TextBlock>
+                    <TextBlock Style="{ThemeResource BodyTextBlockStyle}">
+                        <Run Foreground="DarkGray">Version : 0.2.0.0</Run><LineBreak/>
+                        <Run Foreground="DarkGray">2020 @ ProJend</Run><LineBreak/>
+                        <Run Foreground="DarkGray">Power By Tim Bergling</Run><LineBreak/>
+                        <Run>This App will help you easy to browse all about Tim Bergling.</Run>
+                    </TextBlock>
+                    
                     <!--链接 : 🔗
                         Links-->
+                    <TextBlock><LineBreak/><LineBreak/></TextBlock>
 
-                    <TextBlock Text="Links" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
-                    <TextBlock Text="ProJend" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>
-                    <TextBlock Text="This is my first try to do UWP, wish this app will make you luck!" Opacity="0.7" Style="{ThemeResource BodyTextBlockStyle}"/>
+                    <TextBlock Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}">
+                        <Run Foreground="{ThemeResource SystemAccentColor}">Links</Run><LineBreak/>
+                        <Run>ProJend</Run>
+                    </TextBlock>
+                    <TextBlock Text="This is my first try to do UWP, wish this app will make you luck!" Foreground="DarkGray" Style="{ThemeResource BodyTextBlockStyle}"/>
                     <TextBlock Text="Report To Author"/>
                     <StackPanel Orientation="Horizontal">
                         <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="GitHub" v1709:Style="{StaticResource ButtonRevealStyle}">
@@ -158,7 +160,7 @@
                     <TextBlock/>
                     <TextBlock Text="Tim Bergling" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" ToolTipService.ToolTip="Remembering"/>
                     <TextBlock Text="(8 September 1989 – 20 April 2018), better known by his stage name Avicii, was a Swedish DJ, remixer, record producer, musician, and songwriter who specialized in audio programming, remixing, and record producing."
-                               x:Name="TimInfo" Opacity="0.7" Style="{ThemeResource BodyTextBlockStyle}"/>
+                               x:Name="TimInfo" Foreground="DarkGray" Style="{ThemeResource BodyTextBlockStyle}"/>
                     <TextBlock Text="Losing In Music"/>
                     <StackPanel Orientation="Horizontal">
                         <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Spotify" v1709:Style="{StaticResource ButtonRevealStyle}">
@@ -207,7 +209,7 @@
                             <FontIcon FontFamily="{ThemeResource iconfont}" Glyph="&#xe6df;"/>
                         </Button>
                     </StackPanel>
-                    <TextBlock Text="Missing You ❤" Opacity="0.7"/>
+                    <TextBlock Text="Missing You ❤" Foreground="DarkGray"/>
                     <TextBlock/>
                     <TextBlock Text="Fans" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>
                     <TextBlock Text="Made Of Love"/>
@@ -227,13 +229,13 @@
             <VisualStateGroup>
                 <VisualState>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="805"/>
+                        <AdaptiveTrigger MinWindowWidth="820"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="Content0.(Grid.Row)" Value="0"/>
-                        <Setter Target="Content0.(Grid.Column)" Value="1"/>
-                        <Setter Target="Content0.Margin" Value="30,0,0,0"/>
-                        <Setter Target="TimInfo.MaxWidth" Value="400"/>
+                        <Setter Target="Content2.(Grid.Row)" Value="0"/>
+                        <Setter Target="Content2.(Grid.Column)" Value="1"/>
+                        <Setter Target="Content2.Margin" Value="30,0,0,0"/>
+                        <Setter Target="TimInfo.MaxWidth" Value="410"/>
                     </VisualState.Setters>
                 </VisualState>
                 

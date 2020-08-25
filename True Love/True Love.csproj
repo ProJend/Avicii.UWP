@@ -135,13 +135,20 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\MobileScreenTrigger.cs" />
     <Compile Include="Helpers\Generic.cs" />
     <Compile Include="Helpers\LiveTileService.cs" />
     <Compile Include="Pages\CommentsPage.xaml.cs">
       <DependentUpon>CommentsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\LovePage.xaml.cs">
-      <DependentUpon>LovePage.xaml</DependentUpon>
+    <Compile Include="Pages\ImagesPage.xaml.cs">
+      <DependentUpon>ImagesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\HomePage.xaml.cs">
+      <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\HomePageforWP.xaml.cs">
+      <DependentUpon>HomePageforWP.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -170,14 +177,14 @@
     <Content Include="Assets\BadgeLogo.scale-150.png" />
     <Content Include="Assets\BadgeLogo.scale-200.png" />
     <Content Include="Assets\BadgeLogo.scale-400.png" />
-    <Content Include="Assets\Instagram\4B9B8C149E6AA28D7B85879D603A7372.jpg" />
-    <Content Include="Assets\Instagram\4F36282C98D429DA452A296A2215C5AC.jpg" />
-    <Content Include="Assets\Instagram\59F4AC4B4D42C13A26FCBB55B7971986.jpg" />
-    <Content Include="Assets\Instagram\5B1109A12575A0E83B396DCF03EFEF1C.jpg" />
-    <Content Include="Assets\Instagram\6DA947BFEC93B4CFCF2A98BB8E7D99E2.jpg" />
-    <Content Include="Assets\Instagram\C7E8ED931DE64E71F49FAB0332887D2F.jpg" />
-    <Content Include="Assets\Instagram\CBF4AA71C8EC345C0CDEBD88694EC92A.jpg" />
-    <Content Include="Assets\Instagram\CEDF07AD0F6EB2979DA192F2D23324B8.jpg" />
+    <Content Include="Assets\Instagram\1.jpg" />
+    <Content Include="Assets\Instagram\2.jpg" />
+    <Content Include="Assets\Instagram\3.jpg" />
+    <Content Include="Assets\Instagram\4.jpg" />
+    <Content Include="Assets\Instagram\5.jpg" />
+    <Content Include="Assets\Instagram\6.jpg" />
+    <Content Include="Assets\Instagram\7.jpg" />
+    <Content Include="Assets\Instagram\8.jpg" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-125.png" />
     <Content Include="Assets\SplashScreen.scale-150.png" />
@@ -239,7 +246,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\LovePage.xaml">
+    <Page Include="Pages\ImagesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\HomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\HomePageforWP.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

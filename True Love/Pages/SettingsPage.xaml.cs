@@ -53,16 +53,11 @@ namespace True_Love.Pages
                         break;
                 }
             }
-            if(Language != "zh-Hans-CN")
-                FAQ_CN.Visibility = Visibility.Collapsed;
+            if(Language != "zh-Hans-CN") FAQ_CN.Visibility = Visibility.Collapsed;
 
-            #region 兼容低版本号系统
-            if (!ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5))
-            {
-                HotKeys.Visibility = Visibility.Collapsed;
-                Header.Visibility = Visibility.Collapsed;
-            }
-            #endregion
+            if (!ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5)) HotKeys.Visibility = Visibility.Collapsed;
+
+            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar")) Header.Visibility = Visibility.Collapsed;
 
             ReadSettings();
         }
@@ -113,31 +108,21 @@ namespace True_Love.Pages
         private async void Release_Click(object sender, RoutedEventArgs e)
         {
             var myBrush = new SolidColorBrush(Colors.Black);
-            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5))
+
+            var release = new ContentDialog()
             {
-                var release = new ContentDialog()
-                {
-                    Title = titleText,
-                    Content = new Release(),
-                    CloseButtonText = closeText,
-                    FullSizeDesired = false,
-                    Background = myBrush,
-                    CloseButtonStyle = (Style)this.Resources["ButtonRevealStyle"],
-                };
-                await release.ShowAsync();
-            }
-            else
+                Title = titleText,
+                CloseButtonText = closeText,
+                Content = new Release(),
+                Background = myBrush,
+            };
+
+            if (!ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
             {
-                var release = new ContentDialog()
-                {
-                    Title = titleText,
-                    Content = new Release(),
-                    CloseButtonText = closeText,
-                    FullSizeDesired = false,
-                    Background = myBrush,
-                };
-                await release.ShowAsync();
+                release.CloseButtonStyle = (Style)this.Resources["ButtonRevealStyle"];
             }
+
+            await release.ShowAsync();
         }
 
         #region Links

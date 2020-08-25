@@ -43,7 +43,19 @@ namespace True_Love.Pages
             this.ManipulationDelta += The_ManipulationDelta; // 订阅手势滑动事件
 
             #region 兼容低版本号系统
-            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5)) // OS15063
+            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar") // = WP
+)
+            {
+                var myBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Colors.Black);
+                var myBrush2 = new Windows.UI.Xaml.Media.SolidColorBrush(Colors.Black);
+                myBrush2.Opacity = 0.7;
+
+                CommandBar.Background = myBrush2;
+                BackgroundOfBar.Background = myBrush;
+
+                BackgroundOfBar.Height = 45;              
+            }
+            else if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 4)) // >= OS15063
             {
                 // 背景
                 var myBrush = new AcrylicBrush
@@ -61,29 +73,21 @@ namespace True_Love.Pages
                 BackTopButton.Style = (Style)this.Resources["AppBarButtonRevealStyle"];
                 RefreshButton.Style = (Style)this.Resources["AppBarButtonRevealStyle"];
 
-                // 键盘快捷键             
-                var FrametoLove = new KeyboardAccelerator { Key = VirtualKey.F1 };
-                LovePage.KeyboardAccelerators.Add(FrametoLove);
+                if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5))// > OS15063
+                {
+                    // 键盘快捷键             
+                    var FrametoLove = new KeyboardAccelerator { Key = VirtualKey.F1 };
+                    LovePage.KeyboardAccelerators.Add(FrametoLove);
 
-                var FrametoMemory = new KeyboardAccelerator { Key = VirtualKey.F2 };
-                MemoryPage.KeyboardAccelerators.Add(FrametoMemory);
+                    var FrametoMemory = new KeyboardAccelerator { Key = VirtualKey.F2 };
+                    HomePage.KeyboardAccelerators.Add(FrametoMemory);
 
-                var BacktoTop = new KeyboardAccelerator { Key = VirtualKey.F6 };
-                BackTopButton.KeyboardAccelerators.Add(BacktoTop);
+                    var BacktoTop = new KeyboardAccelerator { Key = VirtualKey.F6 };
+                    BackTopButton.KeyboardAccelerators.Add(BacktoTop);
 
-                var Refresh = new KeyboardAccelerator { Key = VirtualKey.F5 };
-                RefreshButton.KeyboardAccelerators.Add(Refresh);
-            }
-            else
-            {
-                var myBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Colors.Black);
-                var myBrush2 = new Windows.UI.Xaml.Media.SolidColorBrush(Colors.Black);
-                myBrush2.Opacity = 0.7;
-
-                CommandBar.Background = myBrush2;
-                BackgroundOfBar.Background = myBrush;
-
-                BackgroundOfBar.Height = 45;
+                    var Refresh = new KeyboardAccelerator { Key = VirtualKey.F5 };
+                    RefreshButton.KeyboardAccelerators.Add(Refresh);
+                }             
             }
             #endregion
         }
@@ -94,8 +98,16 @@ namespace True_Love.Pages
         // List of ValueTuple holding the Navigation Tag and the relative Navigation Page
         private readonly List<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
         {
-            ("home", typeof(LovePage)),
+            ("home", typeof(HomePage)),
             ("comment", typeof(CommentsPage)),
+            ("image", typeof(ImagesPage)),
+        };
+
+        private readonly List<(string Tag, Type Page)> _pagesforWP = new List<(string Tag, Type Page)>
+        {
+            ("home", typeof(HomePageforWP)),
+            ("comment", typeof(CommentsPage)),
+            ("image", typeof(ImagesPage)),
         };
 
         private void NavView_Loaded(object sender, RoutedEventArgs e)
@@ -182,11 +194,17 @@ namespace True_Love.Pages
             {
                 _page = typeof(SettingsPage);
             }
+            else if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+            {
+                var item = _pagesforWP.FirstOrDefault(p => p.Tag.Equals(navItemTag));
+                _page = item.Page;
+            }
             else
             {
                 var item = _pages.FirstOrDefault(p => p.Tag.Equals(navItemTag));
                 _page = item.Page;
             }
+
             // Get the page type before navigation so you can prevent duplicate
             // entries in the backstack.
             var preNavPageType = ContentFrame.CurrentSourcePageType;
@@ -236,24 +254,28 @@ namespace True_Love.Pages
             {
                 // SettingsItem is not part of NavView.MenuItems, and doesn't have a Tag.
                 NavView.SelectedItem = (muxc.NavigationViewItem)NavView.SettingsItem;
-                if (!ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5)) NavView.Header = "SETTINGS";
+                if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar")) NavView.Header = "SETTINGS";
 
-                RefreshChanged("settings");
+                CommandBarChanged("settings");
+            }
+            else if (ContentFrame.SourcePageType != null && ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+            {
+                var item = _pagesforWP.FirstOrDefault(p => p.Page == e.SourcePageType);
+
+                NavView.SelectedItem = NavView.MenuItems.OfType<muxc.NavigationViewItem>().First(n => n.Tag.Equals(item.Tag));
+
+                NavView.Header = ((muxc.NavigationViewItem)NavView.SelectedItem)?.Content?.ToString().ToUpper();
+
+                CommandBarChanged(item.Tag.ToString());
             }
             else if (ContentFrame.SourcePageType != null)
             {
                 var item = _pages.FirstOrDefault(p => p.Page == e.SourcePageType);
 
-                NavView.SelectedItem = NavView.MenuItems
-                    .OfType<muxc.NavigationViewItem>()
-                    .First(n => n.Tag.Equals(item.Tag));
+                NavView.SelectedItem = NavView.MenuItems.OfType<muxc.NavigationViewItem>().First(n => n.Tag.Equals(item.Tag));
 
-                if (!ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5)) 
-                    NavView.Header = ((muxc.NavigationViewItem)NavView.SelectedItem)?.Content?.ToString().ToUpper();
-
-                RefreshChanged(item.Tag.ToString());
+                CommandBarChanged(item.Tag.ToString());
             }
-         
         }
         #endregion
 
@@ -342,8 +364,8 @@ namespace True_Love.Pages
         /// <param name="verticalOffset">Y：高度。</param>
         /// <param name="zoomFactor">Z：斜度。</param>
         public void ChangeView(double? horizontalOffset,
-                                                double? verticalOffset,
-                                                float? zoomFactor)
+                               double? verticalOffset,
+                               float? zoomFactor)
         {
 
         }
@@ -369,14 +391,21 @@ namespace True_Love.Pages
         /// 检查刷新按钮可用状态。
         /// </summary>
         /// <param name="tag">NavViewItem.Tag</param>
-        private void RefreshChanged(string tag)
+        private void CommandBarChanged(string tag)
         {
             switch (tag)
             {
-                case "comment":
-                    RefreshButton.IsEnabled = true;
+                case "home":
+                    CommandBar.Visibility = Visibility.Collapsed;
                     break;
+
+                case "comment":
+                    CommandBar.Visibility = Visibility.Visible;
+                    RefreshButton.IsEnabled = true;
+                    break;           
+
                 default:
+                    CommandBar.Visibility = Visibility.Visible;
                     RefreshButton.IsEnabled = false;
                     break;
             }

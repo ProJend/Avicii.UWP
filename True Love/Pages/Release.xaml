@@ -10,22 +10,28 @@
 
     <!--这里是储存更新记录的地方。
         This is the page of put down the released notes.-->
-    <StackPanel>
-        <!--<TextBlock Text="⚠ 注意" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
+
+    <ScrollViewer>
+        <StackPanel>
+            <!--<TextBlock Text="⚠ 注意" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
         <TextBlock Text="OS 1709 系统版本是分水岭，如果低于该版本会有如下的功能缺失：" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" TextWrapping="Wrap"/>
         
         <TextBlock><LineBreak/><LineBreak/></TextBlock>-->
-        
-        <TextBlock Text="🔈 0.1.1 - 2020/06/15" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
-        <TextBlock Text="改进：重写了设置页面"/>
-        <TextBlock Text="改进：底部工具栏增加动画，灵活多变" Style="{ThemeResource BodyTextBlockStyle}"/>
-        <TextBlock Text="新增：返回顶部功能"/>
-        <TextBlock Text="兼容：系统最低版本要求降至 OS : 1709 vs Value : 16299" Style="{ThemeResource BodyTextBlockStyle}"/>
-        <TextBlock/>
 
-        <TextBlock Text="🔈 0.1.0 - 2020/05/11" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
-        <TextBlock Text="改进：更换 FontIcon 矢量图标"/>
-        <TextBlock Text="改进：更具有人性化的导航栏"/>
-        <TextBlock Text="修复：返回导航功能已生效"/>
-    </StackPanel>
+            <TextBlock Text="🚲 0.1.1 - 2020/06/15" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
+            <TextBlock Style="{ThemeResource BodyTextBlockStyle}">
+            <Run>改进：重写了设置页面</Run><LineBreak/>
+            <Run>改进：底部工具栏增加动画，灵活多变</Run><LineBreak/>
+            <Run>新增：返回顶部功能</Run><LineBreak/>
+            <Run>兼容：系统最低版本要求降至 OS : 1709 vs Value : 16299</Run><LineBreak/>
+            </TextBlock>
+
+            <TextBlock Text="🚀 0.1.0 - 2020/05/11" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
+            <TextBlock Style="{ThemeResource BodyTextBlockStyle}">
+            <Run>改进：更换 FontIcon 矢量图标</Run><LineBreak/>
+            <Run>改进：更具有人性化的导航栏</Run><LineBreak/>
+            <Run>修复：返回导航功能已生效</Run><LineBreak/>
+            </TextBlock>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

@@ -12,7 +12,7 @@
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <ProgressRing Foreground="White" IsActive="True" Width="50" Height="50"/>
             <TextBlock/>
-            <TextBlock>Lodding web page...</TextBlock>
+            <TextBlock>Loading web page...</TextBlock>
         </StackPanel>
 
         <WebView Source="http://avicii.com" x:Name="webview" x:FieldModifier="Public"/>
