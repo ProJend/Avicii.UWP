@@ -383,8 +383,7 @@ namespace True_Love.Pages
         /// </summary>
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
-            CommentsPage.Current.webview.Refresh();
-            
+            CommentsPage.Current.webview.Refresh();           
         }
 
         /// <summary>
@@ -409,6 +408,7 @@ namespace True_Love.Pages
                     RefreshButton.IsEnabled = false;
                     break;
             }
+            GC.Collect();
         }
         #endregion
     }

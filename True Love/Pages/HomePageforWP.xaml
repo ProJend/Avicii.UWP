@@ -9,8 +9,37 @@
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:v1709="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 5)"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    
+    <Page.Resources>
+        <Style TargetType="StackPanel" x:Key="Left">
+            <Setter Property="Grid.RowSpan" Value="2"/>
+            <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="StackPanel" x:Key="Bottom">
+            <Setter Property="Grid.Row" Value="1"/>
+            <Setter Property="Grid.ColumnSpan" Value="2"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="StackPanel" x:Key="Bottom2">
+            <Setter Property="Grid.RowSpan" Value="2"/>
+            <Setter Property="Grid.ColumnSpan" Value="2"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+        </Style>
+        <ItemsPanelTemplate x:Key="PC">
+            <ItemsWrapGrid x:Name="MaxItemsWrapGrid" MaximumRowsOrColumns="4"
+                                Orientation="Horizontal" Margin="400 0 400 0"/>
+        </ItemsPanelTemplate>
+        <ItemsPanelTemplate x:Key="Mobile">
+            <ItemsWrapGrid x:Name="MaxItemsWrapGrid" MaximumRowsOrColumns="2"
+                                Orientation="Horizontal"/>
+        </ItemsPanelTemplate>
+    </Page.Resources>
 
-    <Grid ManipulationMode="System,TranslateX">
+    <Grid>
         <FlipView>
             <FlipView.Background>
                 <ImageBrush ImageSource="/Assets/Background/BG1.jpg" Stretch="UniformToFill" AlignmentX="Left"/>
@@ -26,14 +55,8 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <StackPanel x:Name="a1" VerticalAlignment="Center" Grid.Column="1" Grid.RowSpan="2" Visibility="Collapsed">
-                        <TextBlock Text="the Avicii UWP" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}"/>
-                        <TextBlock Text="T I M   B E R G L I N G" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}"/>
-                        <TextBlock Text="F O U N D A T I O N" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}"/>
-                        <TextBlock Text="1 9 8 9 . 0 9 . 0 8 - 2 0 1 8 . 0 4 . 2 0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}"/>
-                    </StackPanel>
 
-                    <StackPanel Name="a2" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="1" Margin="0 0 0 70">
+                    <StackPanel Name="a" Style="{StaticResource Bottom}" Margin="0 0 0 51">
                         <TextBlock Text="the Avicii UWP" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}"/>
                         <TextBlock Text="T I M   B E R G L I N G" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}"/>
                         <TextBlock Text="F O U N D A T I O N" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}"/>
@@ -52,32 +75,16 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <StackPanel x:Name="b1" VerticalAlignment="Center" Grid.Column="1" Grid.RowSpan="2" Visibility="Collapsed">
-                        <TextBlock Text="Avicii Memory boaid" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}"/>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="15 0 0 0">
-                            <TextBlock Text="C O M M E N T S" Style="{StaticResource BaseTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 2"/>
-                            <Button Background="Transparent" Width="40" Height="40" Click="Button_Click" Tag="Shop" v1709:Style="{StaticResource ButtonRevealStyle}" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE761;"/>
-                            </Button>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="15 0 0 0">
-                            <TextBlock Text="I M A G E S" Style="{StaticResource BaseTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 2"/>
-                            <Button Background="Transparent" Width="40" Height="40" Click="Button_Click" Tag="Shop" v1709:Style="{StaticResource ButtonRevealStyle}" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE761;"/>
-                            </Button>
-                        </StackPanel>
-                        <TextBlock Text="I N   L O V I N G   M E M O R Y" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}"/>
-                    </StackPanel>
 
-                    <StackPanel Name="b2" VerticalAlignment="Center" Grid.ColumnSpan="2" Grid.Row="1" Margin="0 0 0 110">
-                        <TextBlock Text="Avicii Memory boaid" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}"/>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="15 0 0 0">
+                    <StackPanel Name="b" Style="{StaticResource Bottom}" Margin="0 0 0 71">
+                        <TextBlock Text="Avicii Memory boaid" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="16 0 0 0">
                             <TextBlock Text="C O M M E N T S" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            <Button Background="Transparent" Width="40" Height="40" Click="Button_Click" Tag="Shop" v1709:Style="{StaticResource ButtonRevealStyle}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Button Background="Transparent" Margin="0 0 0 0" Width="40" Height="40" Click="Button_Click" Tag="Shop" v1709:Style="{StaticResource ButtonRevealStyle}" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE761;"/>
                             </Button>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="15 0 0 0">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="16 0 0 0">
                             <TextBlock Text="I M A G E S" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             <Button Background="Transparent" Width="40" Height="40" Click="Button_Click" Tag="Shop" v1709:Style="{StaticResource ButtonRevealStyle}" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE761;"/>
@@ -98,20 +105,10 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <StackPanel x:Name="c1" VerticalAlignment="Center" Grid.Column="1" Grid.RowSpan="2" Visibility="Collapsed">
-                        <TextBlock Text="◢◤" Style="{StaticResource TitleTextBlockStyle}" HorizontalAlignment="Center"/>
-                        <TextBlock Text="Remembering Tim Bergling" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center"/>
-                        <TextBlock MaxWidth="320" Style="{ThemeResource CaptionTextBlockStyle}" TextAlignment="Center">
-                            <LineBreak/>
-                            <Run x:Uid="Lt1"/><LineBreak/><LineBreak/>
-                            <Run x:Uid="Lt2"/><LineBreak/><LineBreak/>
-                            <Run x:Uid="Lt3"/>
-                        </TextBlock>
-                    </StackPanel>
 
-                    <StackPanel Name="c2" VerticalAlignment="Bottom" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0 0 0 122">
+                    <StackPanel Name="c" Style="{StaticResource Bottom2}" Margin="0 0 0 111">
                         <TextBlock Text="◢◤" Style="{StaticResource SubheaderTextBlockStyle}" HorizontalAlignment="Center"/>
-                        <TextBlock Text="Remembering Tim Bergling" Style="{StaticResource TitleTextBlockStyle}" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Remembering Tim Bergling" Style="{StaticResource SubtitleTextBlockStyle}" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center"/>
                         <TextBlock MaxWidth="320" Style="{ThemeResource CaptionTextBlockStyle}" TextAlignment="Center">
                             <LineBreak/>
                             <Run x:Uid="Lt1"/><LineBreak/><LineBreak/>
@@ -123,48 +120,45 @@
             </FlipViewItem>
 
             <FlipViewItem ManipulationMode="System,TranslateX">
-                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <TextBlock Text="I N S T A G R A M" Style="{ThemeResource TitleTextBlockStyle}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <TextBlock><LineBreak/></TextBlock>
-                    <GridView x:Name="ImageGridView" ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Disabled">
-                        <GridView.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <ItemsWrapGrid x:Name="MaxItemsWrapGrid" MaximumRowsOrColumns="2"
-                                Orientation="Horizontal" ItemHeight="80" Margin="40"/>
-                            </ItemsPanelTemplate>
-                        </GridView.ItemsPanel>
+                <StackPanel Name="d" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 20">
+                    <TextBlock Style="{ThemeResource TitleTextBlockStyle}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Run>I N S T A G R A M</Run><LineBreak/>
+                    </TextBlock>
+                    <Viewbox>
+                        <GridView x:Name="ImageGridView" ItemsPanel="{StaticResource Mobile}" ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Disabled">
 
-                        <!--<GridView.ItemTemplate>
+                            <!--<GridView.ItemTemplate>
                             <DataTemplate>
                                 <Image Stretch="UniformToFill" Source="{Binding}"/>
                             </DataTemplate>
                         </GridView.ItemTemplate>-->
 
-                        <GridViewItem>
-                            <Image Source="/Assets/Instagram/1.jpg"/>
-                        </GridViewItem>
-                        <GridViewItem>
-                            <Image Source="/Assets/Instagram/2.jpg"/>
-                        </GridViewItem>
-                        <GridViewItem>
-                            <Image Source="/Assets/Instagram/3.jpg"/>
-                        </GridViewItem>
-                        <GridViewItem>
-                            <Image Source="/Assets/Instagram/4.jpg"/>
-                        </GridViewItem>
-                        <GridViewItem>
-                            <Image Source="/Assets/Instagram/5.jpg"/>
-                        </GridViewItem>
-                        <GridViewItem>
-                            <Image Source="/Assets/Instagram/6.jpg"/>
-                        </GridViewItem>
-                        <GridViewItem>
-                            <Image Source="/Assets/Instagram/7.jpg"/>
-                        </GridViewItem>
-                        <GridViewItem>
-                            <Image Source="/Assets/Instagram/8.jpg"/>
-                        </GridViewItem>
-                    </GridView>
+                            <GridViewItem>
+                                <Image Source="/Assets/Instagram/1.jpg"/>
+                            </GridViewItem>
+                            <GridViewItem>
+                                <Image Source="/Assets/Instagram/2.jpg"/>
+                            </GridViewItem>
+                            <GridViewItem>
+                                <Image Source="/Assets/Instagram/3.jpg"/>
+                            </GridViewItem>
+                            <GridViewItem>
+                                <Image Source="/Assets/Instagram/4.jpg"/>
+                            </GridViewItem>
+                            <GridViewItem>
+                                <Image Source="/Assets/Instagram/5.jpg"/>
+                            </GridViewItem>
+                            <GridViewItem>
+                                <Image Source="/Assets/Instagram/6.jpg"/>
+                            </GridViewItem>
+                            <GridViewItem>
+                                <Image Source="/Assets/Instagram/7.jpg"/>
+                            </GridViewItem>
+                            <GridViewItem>
+                                <Image Source="/Assets/Instagram/8.jpg"/>
+                            </GridViewItem>
+                        </GridView>
+                    </Viewbox>
                 </StackPanel>
             </FlipViewItem>
 
@@ -188,14 +182,15 @@
                         <AdaptiveTrigger MinWindowWidth="476"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <!--❗FlipView 控件里的子元素不能进行移动，不清楚是不是 Bug-->
-                        <Setter Target="a1.Visibility" Value="Visible"/>
-                        <Setter Target="a2.Visibility" Value="Collapsed"/>
-                        <Setter Target="b1.Visibility" Value="Visible"/>
-                        <Setter Target="b2.Visibility" Value="Collapsed"/>
-                        <Setter Target="c1.Visibility" Value="Visible"/>
-                        <Setter Target="c2.Visibility" Value="Collapsed"/>
-                        <Setter Target="MaxItemsWrapGrid.MaximumRowsOrColumns" Value="4"/>
+                        <Setter Target="a.Style" Value="{StaticResource Left}"/>
+                        <Setter Target="a.Margin" Value="0,0,0,0"/>
+                        <Setter Target="b.Style" Value="{StaticResource Left}"/>
+                        <Setter Target="b.Margin" Value="0,0,0,0"/>
+                        <Setter Target="c.Style" Value="{StaticResource Left}"/>
+                        <Setter Target="c.Margin" Value="0,0,0,0"/>
+                        <Setter Target="d.Margin" Value="0,0,0,0"/>
+
+                        <Setter Target="ImageGridView.ItemsPanel" Value="{StaticResource PC}"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

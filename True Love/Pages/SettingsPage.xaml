@@ -63,9 +63,9 @@
                             <Run>ESC or Win + Backspace</Run><LineBreak/><LineBreak/>
                             <Run Foreground="DarkGray">Fullscreen</Run><LineBreak/>
                             <Run>Shift + Win + Enter</Run><LineBreak/><LineBreak/>
-                            <Run Foreground="DarkGray">Page Love</Run><LineBreak/>
-                            <Run>F1</Run><LineBreak/><LineBreak/>
                             <Run Foreground="DarkGray">Page Memory</Run><LineBreak/>
+                            <Run>F1</Run><LineBreak/><LineBreak/>
+                            <Run Foreground="DarkGray">Page Comments</Run><LineBreak/>
                             <Run>F2</Run><LineBreak/><LineBreak/>
                             <Run Foreground="DarkGray">Refresh</Run><LineBreak/>
                             <Run>F5</Run><LineBreak/><LineBreak/>
@@ -98,11 +98,12 @@
 
                     <TextBlock Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}">
                         <Run Foreground="{ThemeResource SystemAccentColor}">What's New</Run><LineBreak/>
-                        <Run>Recent Records : 17/07/2020</Run>
+                        <Run>Recent Records : 26/08/2020</Run>
                     </TextBlock>
                     <TextBlock Foreground="DarkGray">
-                        <Run>新增：触摸右滑展开汉堡菜单，反之左滑关闭</Run><LineBreak/>
-                        <Run>修复：低版本号系统打开应用闪退问题</Run><LineBreak/>
+                        <Run>新增：增加了底部工具栏，带有刷新网页，回到顶部的功能，并具有出色的动画</Run><LineBreak/>
+                        <Run>新增：可以滑出滑入汉堡菜单</Run><LineBreak/>
+                        <Run>改进：重写了主页、设置 UI</Run><LineBreak/>
                         <Run>兼容：支援 WP</Run><LineBreak/>
 
                     </TextBlock>

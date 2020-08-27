@@ -17,7 +17,7 @@
                 <Run>S O M E T I M E   A   P I C T U R E   I S   W O R T H   M O R E   T H A N   A   T H O U S A N D   W O R D S .</Run>
                 <LineBreak/>
             </TextBlock>
-            <GridView>
+            <GridView x:Name="MyGridView" ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Disabled">
                 <!--<GridView.ItemTemplate>
                     <DataTemplate>
                         <Grid>

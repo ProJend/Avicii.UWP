@@ -4,15 +4,20 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:True_Love.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid ManipulationMode="System,TranslateX" x:Name="grid" ScrollViewer.VerticalScrollMode="Disabled">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <ProgressRing Foreground="White" IsActive="True" Width="50" Height="50"/>
-            <TextBlock/>
-            <TextBlock>Loading web page...</TextBlock>
+            <Grid>
+                <ProgressRing Foreground="White" IsActive="True" Width="50" Height="50"/>
+                <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xEB41;" FontSize="25" Foreground="{ThemeResource SystemAccentColor}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+            <TextBlock>
+                <LineBreak/>
+                <Run>Loading web page...</Run>
+            </TextBlock>
         </StackPanel>
 
         <WebView Source="http://avicii.com" x:Name="webview" x:FieldModifier="Public"/>
