@@ -83,14 +83,12 @@
                         <Run x:Uid="2Sf1" Foreground="DarkGray"></Run><LineBreak/>
                         <Run x:Uid="2Sa1"/>
                     </TextBlock>
-                    <StackPanel x:Name="FAQ_CN">
-                        <TextBlock Style="{ThemeResource BodyTextBlockStyle}"> 
+                    <TextBlock x:Name="FAQ_CN" Style="{ThemeResource BodyTextBlockStyle}"> 
+                            <LineBreak/>
                             <Run x:Uid="2Sf2" Foreground="DarkGray"></Run><LineBreak/>
                             <Run x:Uid="2Sa2"/>
-                        </TextBlock>
-                    </StackPanel>
-                    <!--<TextBlock/>
-                        <HyperlinkButton Content="GitHub Wiki"/>-->
+                    </TextBlock>
+                    <!--<HyperlinkButton Content="GitHub Wiki"/>-->
 
                     <!--最近更新 : 🚀
                             What's New-->
