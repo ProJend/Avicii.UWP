@@ -32,61 +32,33 @@ namespace True_Love.Pages
         public MainPage()
         {
             this.InitializeComponent();
-            if (!ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
-            {
-                AppTitleBar.Visibility = Visibility.Visible;
-                Window.Current.SetTitleBar(AppTitleBar);
-            }
 
             this.ManipulationMode = ManipulationModes.TranslateX; // 设置这个页面的手势模式为横向滑动
             this.ManipulationCompleted += The_ManipulationCompleted; // 订阅手势滑动结束后的事件
             this.ManipulationDelta += The_ManipulationDelta; // 订阅手势滑动事件
 
             #region 兼容低版本号系统
-            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar") // = WP
-)
+            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar")) // = WP
             {
-                var myBrush = new Windows.UI.Xaml.Media.SolidColorBrush(Colors.Black);
-                var myBrush2 = new Windows.UI.Xaml.Media.SolidColorBrush(Colors.Black);
-                myBrush2.Opacity = 0.7;
+                BackgroundOfBar.Background = new Windows.UI.Xaml.Media.SolidColorBrush(Colors.Black);
+                CommandBar.Background = new Windows.UI.Xaml.Media.SolidColorBrush { Color = Colors.Black, Opacity = 0.7 };
 
-                CommandBar.Background = myBrush2;
-                BackgroundOfBar.Background = myBrush;
-
-                BackgroundOfBar.Height = 45;              
+                BackgroundOfBar.Height = 45;
             }
-            else if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 4)) // >= OS15063
+            else // = PC
             {
-                // 背景
-                var myBrush = new AcrylicBrush
-                {
-                    BackgroundSource = AcrylicBackgroundSource.Backdrop,
-                    TintColor = Color.FromArgb(255, 0, 0, 1),
-                    FallbackColor = Colors.Black,
-                    TintOpacity = 0.7,
-                };
-                CommandBar.Background = myBrush;
-                BackgroundOfBar.Background = myBrush;
-
-                BackgroundOfBar.Height = 40;
+                Window.Current.SetTitleBar(AppTitleBar);
 
                 BackTopButton.Style = (Style)this.Resources["AppBarButtonRevealStyle"];
                 RefreshButton.Style = (Style)this.Resources["AppBarButtonRevealStyle"];
 
                 if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5))// > OS15063
                 {
-                    // 键盘快捷键             
-                    var FrametoLove = new KeyboardAccelerator { Key = VirtualKey.F1 };
-                    LovePage.KeyboardAccelerators.Add(FrametoLove);
-
-                    var FrametoMemory = new KeyboardAccelerator { Key = VirtualKey.F2 };
-                    HomePage.KeyboardAccelerators.Add(FrametoMemory);
-
-                    var BacktoTop = new KeyboardAccelerator { Key = VirtualKey.F6 };
-                    BackTopButton.KeyboardAccelerators.Add(BacktoTop);
-
-                    var Refresh = new KeyboardAccelerator { Key = VirtualKey.F5 };
-                    RefreshButton.KeyboardAccelerators.Add(Refresh);
+                    // 键盘快捷键
+                    LovePage.KeyboardAccelerators.Add(new KeyboardAccelerator { Key = VirtualKey.F1 });
+                    HomePage.KeyboardAccelerators.Add(new KeyboardAccelerator { Key = VirtualKey.F2 });
+                    BackTopButton.KeyboardAccelerators.Add(new KeyboardAccelerator { Key = VirtualKey.F6 });
+                    RefreshButton.KeyboardAccelerators.Add(new KeyboardAccelerator { Key = VirtualKey.F5 });
                 }             
             }
             #endregion

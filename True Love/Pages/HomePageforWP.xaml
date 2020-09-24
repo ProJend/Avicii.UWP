@@ -57,6 +57,11 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Name="a" Style="{StaticResource Bottom}" Margin="0 0 0 51">
+                        <StackPanel.Transitions>
+                            <TransitionCollection>
+                                <EdgeUIThemeTransition/>
+                            </TransitionCollection>
+                        </StackPanel.Transitions>
                         <TextBlock Text="the Avicii UWP" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}"/>
                         <TextBlock Text="T I M   B E R G L I N G" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}"/>
                         <TextBlock Text="F O U N D A T I O N" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}"/>
@@ -77,6 +82,11 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Name="b" Style="{StaticResource Bottom}" Margin="0 0 0 71">
+                        <StackPanel.Transitions>
+                            <TransitionCollection>
+                                <EdgeUIThemeTransition/>
+                            </TransitionCollection>
+                        </StackPanel.Transitions>
                         <TextBlock Text="Avicii Memory boaid" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="16 0 0 0">
                             <TextBlock Text="C O M M E N T S" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -107,6 +117,11 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Name="c" Style="{StaticResource Bottom2}" Margin="0 0 0 111">
+                        <StackPanel.Transitions>
+                            <TransitionCollection>
+                                <EdgeUIThemeTransition/>
+                            </TransitionCollection>
+                        </StackPanel.Transitions>
                         <TextBlock Text="◢◤" Style="{StaticResource SubheaderTextBlockStyle}" HorizontalAlignment="Center"/>
                         <TextBlock Text="Remembering Tim Bergling" Style="{StaticResource SubtitleTextBlockStyle}" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center"/>
                         <TextBlock MaxWidth="320" Style="{ThemeResource CaptionTextBlockStyle}" TextAlignment="Center">
@@ -121,6 +136,11 @@
 
             <FlipViewItem ManipulationMode="System,TranslateX">
                 <StackPanel Name="d" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 20">
+                    <StackPanel.Transitions>
+                        <TransitionCollection>
+                            <EdgeUIThemeTransition/>
+                        </TransitionCollection>
+                    </StackPanel.Transitions>
                     <TextBlock Style="{ThemeResource TitleTextBlockStyle}" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <Run>I N S T A G R A M</Run><LineBreak/>
                     </TextBlock>
@@ -164,7 +184,13 @@
 
             <FlipViewItem ManipulationMode="System,TranslateX">
                 <Grid Background="Black">
-                    <Image Source="/Assets/SplashScreen.png" Height="100" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Image Source="/Assets/SplashScreen.png" Height="100" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image.Transitions>
+                            <TransitionCollection>
+                                <EdgeUIThemeTransition/>
+                            </TransitionCollection>
+                        </Image.Transitions>
+                    </Image>
                 </Grid>
             </FlipViewItem>
 

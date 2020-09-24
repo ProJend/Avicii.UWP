@@ -46,6 +46,11 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Style="{StaticResource Bottom}" Name="a" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <StackPanel.Transitions>
+                            <TransitionCollection>
+                                <EdgeUIThemeTransition/>
+                            </TransitionCollection>
+                        </StackPanel.Transitions>
                         <TextBlock Text="the Avicii UWP" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}"/>
                         <TextBlock Text="T I M   B E R G L I N G" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}"/>
                         <TextBlock Text="F O U N D A T I O N" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}"/>
@@ -66,6 +71,11 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Style="{StaticResource Bottom}" Name="b" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <StackPanel.Transitions>
+                            <TransitionCollection>
+                                <EdgeUIThemeTransition/>
+                            </TransitionCollection>
+                        </StackPanel.Transitions>
                         <TextBlock Text="Avicii Memory boaid" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="16 0 0 0">
                             <TextBlock Text="C O M M E N T S" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -96,6 +106,11 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Style="{StaticResource Bottom}" Name="c" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <StackPanel.Transitions>
+                            <TransitionCollection>
+                                <EdgeUIThemeTransition/>
+                            </TransitionCollection>
+                        </StackPanel.Transitions>
                         <TextBlock Text="◢◤" Style="{StaticResource HeaderTextBlockStyle}" HorizontalAlignment="Center"/>
                         <TextBlock Text="Remembering Tim Bergling" Style="{StaticResource SubheaderTextBlockStyle}" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center"/>
                         <TextBlock MaxWidth="350" Style="{ThemeResource BodyTextBlockStyle}" TextAlignment="Center">
@@ -156,7 +171,13 @@
 
             <FlipViewItem ManipulationMode="System,TranslateX">
                 <Grid Background="Black">
-                    <Image Source="/Assets/SplashScreen.png" Height="150" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Image Source="/Assets/SplashScreen.png" Height="150" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image.Transitions>
+                            <TransitionCollection>
+                                <EdgeUIThemeTransition/>
+                            </TransitionCollection>
+                        </Image.Transitions>
+                    </Image>
                 </Grid>
             </FlipViewItem>
 

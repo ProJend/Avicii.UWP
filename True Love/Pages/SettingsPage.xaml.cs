@@ -53,32 +53,21 @@ namespace True_Love.Pages
                         break;
                 }
             }
-            if(Language != "zh-Hans-CN") FAQ_CN.Visibility = Visibility.Collapsed;
 
+            // 判定状态
+            if (Language != "zh-Hans-CN") FAQ_CN.Visibility = Visibility.Collapsed;
             if (!ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5)) HotKeys.Visibility = Visibility.Collapsed;
-
             if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar")) Header.Visibility = Visibility.Collapsed;
-
-            ReadSettings();
-        }
-
-        /// <summary>
-        /// 读取选项状态
-        /// </summary>
-        private void ReadSettings()
-        {
-            // Live Tiles
-            switch (localSettings.Values["SetLiveTiles"])
+            try
             {
-                case true:
-                    LiveTiles.IsOn = true;
-                    break;
-                case false:
-                    LiveTiles.IsOn = false;
-                    break;
+                LiveTiles.IsOn = (bool)localSettings.Values["SetLiveTiles"];
+            }
+            catch (NullReferenceException)
+            {
+                localSettings.Values["SetLiveTiles"] = true;
+                LiveTiles.IsOn = (bool)localSettings.Values["SetLiveTiles"];
             }
         }
-
 
         /// <summary>
         /// 动态磁贴开关。
