@@ -253,31 +253,11 @@ namespace True_Love.Pages
 
         #region 底部工具栏
         /// <summary>
-        /// 加载相关代码
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CommandBar_Loaded(object sender, RoutedEventArgs e)
-        {
-            CommandBarTransition();
-        }
-
-        /// <summary>
         /// 鼠标右击工具栏活动。
         /// </summary>
         private void CommandBar_RightTapped(object sender, RightTappedRoutedEventArgs e)
         {
             CommandBar.IsOpen = !CommandBar.IsOpen == true;
-        }
-
-        /// <summary>
-        /// 工具栏跟随窗口移动动画。
-        /// </summary>
-        private void CommandBarTransition()
-        {
-            EdgeUIThemeTransition inStoryoard = new EdgeUIThemeTransition { Edge = EdgeTransitionLocation.Bottom };
-            var tc = new TransitionCollection { inStoryoard };
-            bar.Transitions = tc;
         }
 
         /// <summary>

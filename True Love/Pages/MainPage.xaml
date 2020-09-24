@@ -40,7 +40,7 @@
             </v1809:Grid.TranslationTransition>-->
 
             <CommandBar DefaultLabelPosition="Bottom" v1709:ToolTipService.ToolTip="Right tag on here to switch CommandBar." Background="{ThemeResource NavigationViewTopPaneBackground}" 
-                        Loaded="CommandBar_Loaded" RightTapped="CommandBar_RightTapped" x:Name="CommandBar" FlowDirection="LeftToRight" OverflowButtonVisibility="Auto">
+                        RightTapped="CommandBar_RightTapped" x:Name="CommandBar" FlowDirection="LeftToRight" OverflowButtonVisibility="Auto">
                 <CommandBar.RenderTransform>
                     <TranslateTransform x:Name="Translate"/>
                 </CommandBar.RenderTransform>
