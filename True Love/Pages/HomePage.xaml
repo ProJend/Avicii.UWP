@@ -115,9 +115,9 @@
                         <TextBlock Text="Remembering Tim Bergling" Style="{StaticResource SubheaderTextBlockStyle}" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center"/>
                         <TextBlock MaxWidth="350" Style="{ThemeResource BodyTextBlockStyle}" TextAlignment="Center">
                            <LineBreak/>
-                            <Run x:Uid="Lt1"/><LineBreak/><LineBreak/>
-                            <Run x:Uid="Lt2"/><LineBreak/><LineBreak/>
-                            <Run x:Uid="Lt3"/>
+                            <Run>Tim created music that brought people together with timeless memories from all over the world.</Run><LineBreak/><LineBreak/>
+                            <Run>We created this space so you could share your memories with all of us and let the world know what Avicii meant to you.</Run><LineBreak/><LineBreak/>
+                            <Run>His music and your memories are forever.</Run>
                         </TextBlock>
                     </StackPanel>
                 </Grid>

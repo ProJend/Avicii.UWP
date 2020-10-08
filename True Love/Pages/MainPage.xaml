@@ -38,18 +38,18 @@
             <!--<v1809:Grid.TranslationTransition>
                 <Vector3Transition/>
             </v1809:Grid.TranslationTransition>-->
+            <Grid.Transitions>
+                <TransitionCollection>
+                    <EdgeUIThemeTransition/>
+                </TransitionCollection>
+            </Grid.Transitions>
 
             <CommandBar DefaultLabelPosition="Bottom" v1709:ToolTipService.ToolTip="Right tag on here to switch CommandBar." Background="{ThemeResource NavigationViewTopPaneBackground}" 
                         RightTapped="CommandBar_RightTapped" x:Name="CommandBar" FlowDirection="LeftToRight" OverflowButtonVisibility="Auto">
                 <CommandBar.RenderTransform>
                     <TranslateTransform x:Name="Translate"/>
                 </CommandBar.RenderTransform>
-                <CommandBar.Transitions>
-                    <TransitionCollection>
-                        <EdgeUIThemeTransition/>
-                    </TransitionCollection>
-                </CommandBar.Transitions>
-                
+
                 <!--<AppBarButton Icon="Add" Label="分享故事" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="分享你与 Avicii 的故事"/>-->
                 <AppBarButton x:Name="BackTopButton" IsEnabled="False" Icon="Upload" Label="Back To Top" ToolTipService.ToolTip="Back to top" Click="BackToTop_Click">
                 </AppBarButton>
@@ -69,7 +69,7 @@
                              IsBackButtonVisible="Auto"
                              IsTitleBarAutoPaddingEnabled="False">
             <muxc:NavigationView.MenuItems>
-                <muxc:NavigationViewItemHeader x:Uid="Mnh1" x:Name="MainPagesHeader"/>
+                <muxc:NavigationViewItemHeader Content="True" x:Name="MainPagesHeader"/>
                 <muxc:NavigationViewItem Content="Memory" x:Name="LovePage" Icon="Home" Tag="home"/>
                 <muxc:NavigationViewItemSeparator/>
                 <muxc:NavigationViewItem Content="Comments" x:Name="HomePage" Icon="World" Tag="comment"/>

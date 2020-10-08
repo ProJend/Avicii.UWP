@@ -7,6 +7,16 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     xmlns:v1709="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 5)">
+    <Page.Resources>
+        <DataTemplate x:Key="ToggleSwitchHeaderWithLineBreak">
+            <TextBlock Foreground="DarkGray">
+                <LineBreak/><Run Text="{Binding}"/>
+            </TextBlock>
+        </DataTemplate>
+        <DataTemplate x:Key="ToggleSwitchHeader">
+            <TextBlock Text="{Binding}" Foreground="DarkGray"/>
+        </DataTemplate>
+    </Page.Resources>
 
     <Grid ManipulationMode="System,TranslateX">
         <Grid.ColumnDefinitions>
@@ -28,7 +38,7 @@
             <!--标头 :
                 Header-->
             <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Margin="1,0,0,0" x:Name="Header" Grid.Row="0">
-                    <Run>Settings</Run><LineBreak/>
+                <Run>Settings</Run><LineBreak/>
             </TextBlock>
 
             <!--内容 :
@@ -47,8 +57,8 @@
                     <!--选项 : ⚙
                             Options-->
                     <TextBlock Text="Options" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
-                    <TextBlock Foreground="DarkGray">Live Tiles</TextBlock>
-                    <ToggleSwitch x:Name="LiveTiles"  ToolTipService.ToolTip="Show Avicii on tile" Toggled="ToggleSwitch_Toggled"/>
+                    <ToggleSwitch x:Name="LiveTiles" Tag="liveTiles" Header="Live Tiles" ToolTipService.ToolTip="Show Avicii on tile" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeader}"/>
+                    <ToggleSwitch x:Name="HideCommandbar" Tag="hideCommandbar" Header="Auto Hide CommandBar" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeaderWithLineBreak}"/>
 
                     <!--热键 : ⌨
                             Hot Keys-->
@@ -63,10 +73,12 @@
                             <Run>ESC or Win + Backspace</Run><LineBreak/><LineBreak/>
                             <Run Foreground="DarkGray">Fullscreen</Run><LineBreak/>
                             <Run>Shift + Win + Enter</Run><LineBreak/><LineBreak/>
-                            <Run Foreground="DarkGray">Page Memory</Run><LineBreak/>
+                            <Run Foreground="DarkGray">Page Settings</Run><LineBreak/>
                             <Run>F1</Run><LineBreak/><LineBreak/>
-                            <Run Foreground="DarkGray">Page Comments</Run><LineBreak/>
+                            <Run Foreground="DarkGray">Page Memory</Run><LineBreak/>
                             <Run>F2</Run><LineBreak/><LineBreak/>
+                            <Run Foreground="DarkGray">Page Comments</Run><LineBreak/>
+                            <Run>F3</Run><LineBreak/><LineBreak/>
                             <Run Foreground="DarkGray">Refresh</Run><LineBreak/>
                             <Run>F5</Run><LineBreak/><LineBreak/>
                             <Run Foreground="DarkGray">Back To Top</Run><LineBreak/>
@@ -80,13 +92,13 @@
 
                     <TextBlock Text="FAQ" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
                     <TextBlock Style="{ThemeResource BodyTextBlockStyle}">
-                        <Run x:Uid="2Sf1" Foreground="DarkGray"></Run><LineBreak/>
-                        <Run x:Uid="2Sa1"/>
+                        <Run Foreground="DarkGray">Why don't upload at Microsoft Store?</Run><LineBreak/>
+                        <Run>Sorry, Ain't Developer ID right now.</Run>
                     </TextBlock>
                     <TextBlock x:Name="FAQ_CN" Style="{ThemeResource BodyTextBlockStyle}"> 
                             <LineBreak/>
-                            <Run x:Uid="2Sf2" Foreground="DarkGray"></Run><LineBreak/>
-                            <Run x:Uid="2Sa2"/>
+                            <Run Foreground="DarkGray">为什么不能购买 Tim 的商品以及发表评论？</Run><LineBreak/>
+                            <Hyperlink NavigateUri="https://www.google.com">Google</Hyperlink><Run Text=" 一下，你就知道。"/>
                     </TextBlock>
                     <!--<HyperlinkButton Content="GitHub Wiki"/>-->
 

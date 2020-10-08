@@ -9,10 +9,9 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using muxc = Microsoft.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
 using Windows.Foundation.Metadata;
-using Microsoft.UI.Xaml.Media;
 using Windows.UI;
+using Windows.Storage;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -28,6 +27,7 @@ namespace True_Love.Pages
         // 导航栏当前显示状态（这个是为了减少不必要的开销，因为我做的是动画隐藏显示效果如果不用一个变量来记录当前导航栏状态的会重复执行隐藏或显示）
         bool isshowbmbar = true;
         double x = 0;
+        public static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
 
         public MainPage()
         {
@@ -42,8 +42,6 @@ namespace True_Love.Pages
             {
                 BackgroundOfBar.Background = new Windows.UI.Xaml.Media.SolidColorBrush(Colors.Black);
                 CommandBar.Background = new Windows.UI.Xaml.Media.SolidColorBrush { Color = Colors.Black, Opacity = 0.7 };
-
-                BackgroundOfBar.Height = 45;
             }
             else // = PC
             {
@@ -55,8 +53,8 @@ namespace True_Love.Pages
                 if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5))// > OS15063
                 {
                     // 键盘快捷键
-                    LovePage.KeyboardAccelerators.Add(new KeyboardAccelerator { Key = VirtualKey.F1 });
-                    HomePage.KeyboardAccelerators.Add(new KeyboardAccelerator { Key = VirtualKey.F2 });
+                    LovePage.KeyboardAccelerators.Add(new KeyboardAccelerator { Key = VirtualKey.F2 });
+                    HomePage.KeyboardAccelerators.Add(new KeyboardAccelerator { Key = VirtualKey.F3 });
                     BackTopButton.KeyboardAccelerators.Add(new KeyboardAccelerator { Key = VirtualKey.F6 });
                     RefreshButton.KeyboardAccelerators.Add(new KeyboardAccelerator { Key = VirtualKey.F5 });
                 }             
@@ -268,29 +266,39 @@ namespace True_Love.Pages
         {
             if (sv.VerticalOffset != scrlocation)
             {
-                //滚动条当前位置大于存储的变量值时代表往下滑，隐藏底部栏
-                if (sv.VerticalOffset > scrlocation)
-                {                 
-                    //隐藏
-                    if (isshowbmbar)
+                if ((bool)localSettings.Values["SetHideCommandBar"])
+                {
+                    //滚动条当前位置大于存储的变量值时代表往下滑，隐藏底部栏
+                    if (sv.VerticalOffset > scrlocation)
                     {
-                        //通过动画来隐藏
-                        //bar.Translation = new Vector3(0, 40, 0);
-                        Close.Begin();
-
-                        isshowbmbar = false;
+                        //隐藏
+                        if (isshowbmbar)
+                        {
+                            //通过动画来隐藏
+                            //bar.Translation = new Vector3(0, 40, 0);
+                            Close.Begin();
+                            isshowbmbar = false;
+                        }
+                    }
+                    //反之展开
+                    else
+                    {
+                        //显示
+                        if (isshowbmbar == false)
+                        {
+                            //通过动画来隐藏
+                            //bar.Translation = new Vector3(0, 0, 0);
+                            Open.Begin();
+                            isshowbmbar = true;
+                        }
                     }
                 }
-                //反之展开
                 else
                 {
-                    //显示
                     if (isshowbmbar == false)
                     {
-                        //通过动画来隐藏
                         //bar.Translation = new Vector3(0, 0, 0);
                         Open.Begin();
-
                         isshowbmbar = true;
                     }
                 }

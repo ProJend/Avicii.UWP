@@ -91,13 +91,13 @@
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="16 0 0 0">
                             <TextBlock Text="C O M M E N T S" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             <Button Background="Transparent" Margin="0 0 0 0" Width="40" Height="40" Click="Button_Click" Tag="Shop" v1709:Style="{StaticResource ButtonRevealStyle}" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE761;"/>
+                                <FontIcon Margin="0 0 0 2" Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE761;"/>
                             </Button>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="16 0 0 0">
                             <TextBlock Text="I M A G E S" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             <Button Background="Transparent" Width="40" Height="40" Click="Button_Click" Tag="Shop" v1709:Style="{StaticResource ButtonRevealStyle}" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE761;"/>
+                                <FontIcon Margin="0 0 0 2" Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE761;"/>
                             </Button>
                         </StackPanel>
                         <TextBlock Text="I N   L O V I N G   M E M O R Y" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}"/>
@@ -126,9 +126,9 @@
                         <TextBlock Text="Remembering Tim Bergling" Style="{StaticResource SubtitleTextBlockStyle}" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center"/>
                         <TextBlock MaxWidth="320" Style="{ThemeResource CaptionTextBlockStyle}" TextAlignment="Center">
                             <LineBreak/>
-                            <Run x:Uid="Lt1"/><LineBreak/><LineBreak/>
-                            <Run x:Uid="Lt2"/><LineBreak/><LineBreak/>
-                            <Run x:Uid="Lt3"/>
+                            <Run>Tim created music that brought people together with timeless memories from all over the world.</Run><LineBreak/><LineBreak/>
+                            <Run>We created this space so you could share your memories with all of us and let the world know what Avicii meant to you.</Run><LineBreak/><LineBreak/>
+                            <Run>His music and your memories are forever.</Run>
                         </TextBlock>
                     </StackPanel>
                 </Grid>

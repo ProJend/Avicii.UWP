@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>True_Love</RootNamespace>
     <AssemblyName>True Love</AssemblyName>
-    <DefaultLanguage>zh-CN</DefaultLanguage>
+    <DefaultLanguage>en</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.18362.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
@@ -304,14 +304,15 @@
     <Content Include="Assets\Fonts\Freeland.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <PRIResource Include="String\en-US\Resources.resw" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Assets\Fonts\IconFont.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="TrueLove.pfx" />
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

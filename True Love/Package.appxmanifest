@@ -3,7 +3,7 @@
   <Identity Name="Tim" Publisher="CN=True Love, O=Ben, C=CN" Version="0.2.0.0" />
   <mp:PhoneIdentity PhoneProductId="cf0148d5-01bb-4b60-b53b-da3346bf8e5e" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>True Love - Avicii Memory Library</DisplayName>
+    <DisplayName>True Love - Tim Bergling Foundtion</DisplayName>
     <PublisherDisplayName>ProJend</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>

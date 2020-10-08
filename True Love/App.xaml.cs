@@ -10,6 +10,7 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using Windows.Storage;
 
 namespace True_Love
 {
@@ -18,6 +19,8 @@ namespace True_Love
     /// </summary>
     sealed partial class App : Application
     {
+        public static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+
         /// <summary>
         /// 初始化单一实例应用程序对象。这是执行的创作代码的第一行，
         /// 已执行，逻辑上等同于 main() 或 WinMain()。
@@ -66,6 +69,12 @@ namespace True_Love
                 }
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
+
+                //首次打开先过一边设置
+                if (localSettings.Values["SetLiveTiles"] == null)
+                {
+                    new SettingsPage();
+                }
 
                 if (!ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar")) HideTitleBar();
                 //else ExtendAcrylicIntoStatusBar();

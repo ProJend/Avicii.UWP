@@ -19,18 +19,70 @@ namespace True_Love.Pages
     /// </summary>
     public sealed partial class SettingsPage : Page
     {
-        private readonly LiveTileService liveTileService;
-        private readonly string source;
+        private LiveTileService liveTileService;
+        private string source;
         public static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
-        private readonly string closeText, titleText; // 声明更新记录字符串
+        private string closeText, titleText; // 声明更新记录字符串
  
         public SettingsPage()
         {
-            liveTileService = new LiveTileService();
-            source = "ms-appx:///Assets/Background/BG1.jpg";
+            this.InitializeComponent();           
 
-            this.InitializeComponent();
+            // 判定状态
+            if (Language != "zh-Hans-CN") FAQ_CN.Visibility = Visibility.Collapsed;
+            if (!ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5)) HotKeys.Visibility = Visibility.Collapsed;
+            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar")) Header.Visibility = Visibility.Collapsed;
+            try
+            {
+                LiveTiles.IsOn = (bool)localSettings.Values["SetLiveTiles"];
+                HideCommandbar.IsOn = (bool)localSettings.Values["SetHideCommandBar"];
+            }
+            catch (NullReferenceException)
+            {
+                localSettings.Values["SetLiveTiles"] = true;
+                localSettings.Values["SetHideCommandBar"] = false;
+                LiveTiles.IsOn = (bool)localSettings.Values["SetLiveTiles"];
+                HideCommandbar.IsOn = (bool)localSettings.Values["SetHideCommandBar"];
+            }
+        }
 
+        /// <summary>
+        /// 切换开关。
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+        {
+            FrameworkElement toggleSwitch = sender as FrameworkElement;
+            switch (toggleSwitch.Tag as string)
+            {
+                case "liveTiles":
+                    liveTileService = new LiveTileService();
+                    source = "ms-appx:///Assets/Background/BG1.jpg";
+
+                    if (LiveTiles.IsOn == true)
+                    {
+                        liveTileService.AddTile("adad", "dadd", source); // 添加新磁贴
+                        localSettings.Values["SetLiveTiles"] = true;
+                    }
+                    else
+                    {
+                        TileUpdateManager.CreateTileUpdaterForApplication().Clear(); // 清空队列
+                        localSettings.Values["SetLiveTiles"] = false;
+                    }
+                    break;
+
+                case "hideCommandbar":
+                    localSettings.Values["SetHideCommandBar"] = HideCommandbar.IsOn == true ? true : (object)false;
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// 更新记录
+        /// </summary>
+        private async void Release_Click(object sender, RoutedEventArgs e)
+        {
             if (!string.IsNullOrEmpty(Language)) // 判断对传的值进行是否为空值
             {
                 switch (Language) // 匹对语种
@@ -54,56 +106,12 @@ namespace True_Love.Pages
                 }
             }
 
-            // 判定状态
-            if (Language != "zh-Hans-CN") FAQ_CN.Visibility = Visibility.Collapsed;
-            if (!ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5)) HotKeys.Visibility = Visibility.Collapsed;
-            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar")) Header.Visibility = Visibility.Collapsed;
-            try
-            {
-                LiveTiles.IsOn = (bool)localSettings.Values["SetLiveTiles"];
-            }
-            catch (NullReferenceException)
-            {
-                localSettings.Values["SetLiveTiles"] = true;
-                LiveTiles.IsOn = (bool)localSettings.Values["SetLiveTiles"];
-            }
-        }
-
-        /// <summary>
-        /// 动态磁贴开关。
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
-        {
-            if (sender is ToggleSwitch toggleSwitch)
-            {
-                if (toggleSwitch.IsOn == true)
-                {
-                    liveTileService.AddTile("adad", "dadd", source); // 添加新磁贴
-                    localSettings.Values["SetLiveTiles"] = true;
-                }
-                else
-                {
-                    TileUpdateManager.CreateTileUpdaterForApplication().Clear(); // 清空队列
-                    localSettings.Values["SetLiveTiles"] = false;
-                }
-            }
-        }
-
-        /// <summary>
-        /// 更新记录
-        /// </summary>
-        private async void Release_Click(object sender, RoutedEventArgs e)
-        {
-            var myBrush = new SolidColorBrush(Colors.Black);
-
             var release = new ContentDialog()
             {
                 Title = titleText,
                 CloseButtonText = closeText,
                 Content = new Release(),
-                Background = myBrush,
+                Background = new SolidColorBrush(Colors.Black),
             };
 
             if (!ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
