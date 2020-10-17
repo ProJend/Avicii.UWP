@@ -20,10 +20,9 @@ namespace True_Love.Pages
     public sealed partial class SettingsPage : Page
     {
         private LiveTileService liveTileService;
-        private string source;
         public static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
         private string closeText, titleText; // 声明更新记录字符串
- 
+
         public SettingsPage()
         {
             this.InitializeComponent();           
@@ -32,18 +31,16 @@ namespace True_Love.Pages
             if (Language != "zh-Hans-CN") FAQ_CN.Visibility = Visibility.Collapsed;
             if (!ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5)) HotKeys.Visibility = Visibility.Collapsed;
             if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar")) Header.Visibility = Visibility.Collapsed;
-            try
-            {
-                LiveTiles.IsOn = (bool)localSettings.Values["SetLiveTiles"];
-                HideCommandbar.IsOn = (bool)localSettings.Values["SetHideCommandBar"];
-            }
-            catch (NullReferenceException)
-            {
-                localSettings.Values["SetLiveTiles"] = true;
-                localSettings.Values["SetHideCommandBar"] = false;
-                LiveTiles.IsOn = (bool)localSettings.Values["SetLiveTiles"];
-                HideCommandbar.IsOn = (bool)localSettings.Values["SetHideCommandBar"];
-            }
+            LiveTiles.IsOn = (bool)localSettings.Values["SetLiveTiles"];
+            HideCommandbar.IsOn = (bool)localSettings.Values["SetHideCommandBar"];
+        }
+
+        /// <summary>
+        /// 留给首次运行应用
+        /// </summary>
+        public void FirstRun()
+        {
+            
         }
 
         /// <summary>
@@ -58,17 +55,16 @@ namespace True_Love.Pages
             {
                 case "liveTiles":
                     liveTileService = new LiveTileService();
-                    source = "ms-appx:///Assets/Background/BG1.jpg";
-
                     if (LiveTiles.IsOn == true)
                     {
-                        liveTileService.AddTile("adad", "dadd", source); // 添加新磁贴
+                        liveTileService.AddTile(); // 添加新磁贴
                         localSettings.Values["SetLiveTiles"] = true;
                     }
                     else
                     {
                         TileUpdateManager.CreateTileUpdaterForApplication().Clear(); // 清空队列
                         localSettings.Values["SetLiveTiles"] = false;
+                        localSettings.Values["OnlyLiveTiles"] = true;
                     }
                     break;
 

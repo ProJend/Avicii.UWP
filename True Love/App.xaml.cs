@@ -70,10 +70,16 @@ namespace True_Love
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
 
-                //首次打开先过一边设置
+               //首次打开先过一边设置
                 if (localSettings.Values["SetLiveTiles"] == null)
                 {
-                    new SettingsPage();
+                    localSettings.Values["SetLiveTiles"] = true;
+                    localSettings.Values["SetHideCommandBar"] = false;
+                    localSettings.Values["OnlyLiveTiles"] = true;
+                    var a = new SettingsPage();
+                    //a.FirstRun();
+                    a = null;
+                    GC.Collect();
                 }
 
                 if (!ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar")) HideTitleBar();

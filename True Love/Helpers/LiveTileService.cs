@@ -1,4 +1,6 @@
-﻿using Microsoft.Toolkit.Uwp.Notifications;
+﻿using System;
+using Microsoft.Toolkit.Uwp.Notifications;
+using Windows.Storage;
 using Windows.UI.Notifications;
 
 namespace True_Love.Helpers
@@ -8,18 +10,24 @@ namespace True_Love.Helpers
     /// </summary>
     public class LiveTileService
     {
+        public static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+
         //添加动态磁贴，title为磁贴的标题，detail为磁贴的内容，source为背景图片
-        public void AddTile(string title, string detail, string source)
+        public void AddTile()
         {
-            //得到磁贴的对象
-            TileContent content = CreateTileContent(title, detail, source);
-            var notification = new TileNotification(content.GetXml());
-            //添加到磁贴的队列
-            TileUpdateManager.CreateTileUpdaterForApplication().Update(notification);
+            if ((bool)localSettings.Values["OnlyLiveTiles"])
+            {
+                //得到磁贴的对象
+                TileContent content = CreateTileContent();
+                var notification = new TileNotification(content.GetXml());
+                //添加到磁贴的队列
+                TileUpdateManager.CreateTileUpdaterForApplication().Update(notification);
+                localSettings.Values["OnlyLiveTiles"] = false;
+            }            
         }
 
         //创建磁贴对象并返回
-        private TileContent CreateTileContent(string title, string detail, string source)
+        private TileContent CreateTileContent()
         {
             return new TileContent()
             {
