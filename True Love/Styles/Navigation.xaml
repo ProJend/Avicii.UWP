@@ -202,7 +202,7 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <StackPanel x:Name="TopNavArea" Background="{ThemeResource NavigationViewTopPaneBackground}" HorizontalAlignment="Stretch" Grid.Row="0" VerticalAlignment="Top" XYFocusKeyboardNavigation="Enabled" Canvas.ZIndex="1">
+                            <StackPanel x:Name="TopNavArea" Background="Transparent" HorizontalAlignment="Left" Grid.Row="0" VerticalAlignment="Top" XYFocusKeyboardNavigation="Enabled" Canvas.ZIndex="1">
                                 <Grid x:Name="TopNavTopPadding" Height="{Binding TemplateSettings.TopPadding, RelativeSource={RelativeSource Mode=TemplatedParent}}" Visibility="{Binding TemplateSettings.TopPaneVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                                 <Grid x:Name="TopNavGrid" Height="{ThemeResource NavigationViewTopPaneHeight}" Visibility="{Binding TemplateSettings.TopPaneVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}">
                                     <Grid.ColumnDefinitions>
@@ -211,7 +211,7 @@
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition MinWidth="48" Width="*"/>
+                                        <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="Auto"/>

@@ -33,8 +33,10 @@
         </ScrollViewer>
 
         <Grid x:Name="BackgroundOfBar" Height="40" VerticalAlignment="Top" Background="{ThemeResource NavigationViewTopPaneBackground}"/>
+        
+        <Grid Height="40" VerticalAlignment="Top" HorizontalAlignment="Stretch" x:Name="AppTitleBar" Background="Transparent" Margin="80,0,0,0"/>
 
-        <Grid x:Name="bar" VerticalAlignment="Bottom">
+        <Grid x:Name="bar" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
             <!--<v1809:Grid.TranslationTransition>
                 <Vector3Transition/>
             </v1809:Grid.TranslationTransition>-->
@@ -55,19 +57,19 @@
                 </AppBarButton>
                 <AppBarButton x:Name="RefreshButton" Icon="Refresh" Label="Refresh" ToolTipService.ToolTip="Refresh dates" Click="Refresh_Click"/>
                 <!--<AppBarButton Icon="Setting" Label="设置" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="打开设置"/>-->
-                <CommandBar.SecondaryCommands >
+                <CommandBar.SecondaryCommands>
 
                 </CommandBar.SecondaryCommands>
             </CommandBar>
         </Grid>
-
         <muxc:NavigationView x:Name="NavView"                      
                              Loaded="NavView_Loaded"
                              BackRequested="NavView_BackRequested"
                              ItemInvoked="NavView_ItemInvoked"
                              PaneDisplayMode="Auto"
                              IsBackButtonVisible="Auto"
-                             IsTitleBarAutoPaddingEnabled="False">
+                             IsTitleBarAutoPaddingEnabled="False"
+                             PaneTitle=" ">
             <muxc:NavigationView.MenuItems>
                 <muxc:NavigationViewItemHeader Content="True" x:Name="MainPagesHeader"/>
                 <muxc:NavigationViewItem Content="Memory" x:Name="LovePage" Icon="Home" Tag="home"/>
@@ -81,8 +83,6 @@
             </muxc:NavigationView.MenuItems>
         </muxc:NavigationView>
 
-        <Grid Height="40" VerticalAlignment="Top" HorizontalAlignment="Stretch" x:Name="AppTitleBar" Background="Transparent" Margin="80,0,0,0"/>
-
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState>
@@ -95,8 +95,22 @@
                         <Setter Target="NavView.PaneDisplayMode" Value="Top"/>
                         <Setter Target="MainPagesHeader.Visibility" Value="Collapsed"/>
                         <!-- Leave the next line for left-only navigation. -->
-                        <Setter Target="AppTitleBar.Margin" Value="340,0,0,0"/>
-                        <Setter Target="BackgroundOfBar.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="900"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="NavView.PaneDisplayMode" Value="Top"/>
+                        <Setter Target="MainPagesHeader.Visibility" Value="Collapsed"/>
+                        <!-- Leave the next line for left-only navigation. -->
+                        <Setter Target="CommandBar.DefaultLabelPosition" Value="Right"/>
+                        <Setter Target="CommandBar.Background" Value="Transparent"/>
+                        <Setter Target="bar.VerticalAlignment" Value="Top"/>
+                        <Setter Target="bar.HorizontalAlignment" Value="Center"/>
+                        <Setter Target="bar.IsTapEnabled" Value="false"/>
+                        <Setter Target="CommandBar.(ToolTipService.ToolTip)" Value="Can't drag!"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

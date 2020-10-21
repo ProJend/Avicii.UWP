@@ -266,27 +266,39 @@ namespace True_Love.Pages
         {
             if (sv.VerticalOffset != scrlocation)
             {
-                if ((bool)localSettings.Values["SetHideCommandBar"])
+                if(bar.IsTapEnabled != false)
                 {
-                    //滚动条当前位置大于存储的变量值时代表往下滑，隐藏底部栏
-                    if (sv.VerticalOffset > scrlocation)
+                    if ((bool)localSettings.Values["SetHideCommandBar"])
                     {
-                        //隐藏
-                        if (isshowbmbar)
+                        //滚动条当前位置大于存储的变量值时代表往下滑，隐藏底部栏
+                        if (sv.VerticalOffset > scrlocation)
                         {
-                            //通过动画来隐藏
-                            //bar.Translation = new Vector3(0, 40, 0);
-                            Close.Begin();
-                            isshowbmbar = false;
+                            //隐藏
+                            if (isshowbmbar)
+                            {
+                                //通过动画来隐藏
+                                //bar.Translation = new Vector3(0, 40, 0);
+                                Close.Begin();
+                                isshowbmbar = false;
+                            }
+                        }
+                        //反之展开
+                        else
+                        {
+                            //显示
+                            if (isshowbmbar == false)
+                            {
+                                //通过动画来隐藏
+                                //bar.Translation = new Vector3(0, 0, 0);
+                                Open.Begin();
+                                isshowbmbar = true;
+                            }
                         }
                     }
-                    //反之展开
                     else
                     {
-                        //显示
                         if (isshowbmbar == false)
                         {
-                            //通过动画来隐藏
                             //bar.Translation = new Vector3(0, 0, 0);
                             Open.Begin();
                             isshowbmbar = true;

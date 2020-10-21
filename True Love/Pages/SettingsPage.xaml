@@ -110,7 +110,7 @@
                         <Run Foreground="{ThemeResource SystemAccentColor}">What's New</Run><LineBreak/>
                         <Run>Recent Records : 26/08/2020</Run>
                     </TextBlock>
-                    <TextBlock Foreground="DarkGray">
+                    <TextBlock Foreground="DarkGray" Style="{ThemeResource BodyTextBlockStyle}">
                         <Run>新增：增加了底部工具栏，带有刷新网页，回到顶部的功能，并具有出色的动画</Run><LineBreak/>
                         <Run>新增：可以滑出滑入汉堡菜单</Run><LineBreak/>
                         <Run>改进：重写了主页、设置 UI</Run><LineBreak/>
