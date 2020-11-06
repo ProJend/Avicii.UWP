@@ -29,7 +29,7 @@
     </Page.Resources>
 
     <Grid>
-        <FlipView IsTabStop="False">
+        <FlipView Style="{StaticResource FlipView}" IsTabStop="False">
             <FlipView.Background>
                 <ImageBrush ImageSource="/Assets/Background/BG1.jpg" Stretch="UniformToFill" AlignmentX="Left"/>
             </FlipView.Background>
@@ -130,40 +130,11 @@
                     </TextBlock>
                     <Viewbox>
                         <GridView x:Name="ImageGridView" ItemsPanel="{StaticResource Mobile}" ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Disabled">
-                            <!--<GridView.ItemsPanel>
-                                
-                            </GridView.ItemsPanel>-->
-
                             <GridView.ItemTemplate>
                                 <DataTemplate>
                                     <Image Stretch="UniformToFill" Source="{Binding}"/>
                                 </DataTemplate>
                             </GridView.ItemTemplate>
-
-                            <GridViewItem>
-                                <Image Source="/Assets/Instagram/1.jpg"/>
-                            </GridViewItem>
-                            <GridViewItem>
-                                <Image Source="/Assets/Instagram/2.jpg"/>
-                            </GridViewItem>
-                            <GridViewItem>
-                                <Image Source="/Assets/Instagram/3.jpg"/>
-                            </GridViewItem>
-                            <GridViewItem>
-                                <Image Source="/Assets/Instagram/4.jpg"/>
-                            </GridViewItem>
-                            <GridViewItem>
-                                <Image Source="/Assets/Instagram/5.jpg"/>
-                            </GridViewItem>
-                            <GridViewItem>
-                                <Image Source="/Assets/Instagram/6.jpg"/>
-                            </GridViewItem>
-                            <GridViewItem>
-                                <Image Source="/Assets/Instagram/7.jpg"/>
-                            </GridViewItem>
-                            <GridViewItem>
-                                <Image Source="/Assets/Instagram/8.jpg"/>
-                            </GridViewItem>
                         </GridView>
                     </Viewbox>
                 </StackPanel>
@@ -183,7 +154,7 @@
 
             <FlipView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <VirtualizingStackPanel Orientation="Vertical"/>
+                    <VirtualizingStackPanel AreScrollSnapPointsRegular="True" Orientation="Vertical"/>
                 </ItemsPanelTemplate>
             </FlipView.ItemsPanel>
         </FlipView>

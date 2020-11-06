@@ -30,7 +30,6 @@ namespace True_Love.Pages
             // 判定状态
             if (Language != "zh-Hans-CN") FAQ_CN.Visibility = Visibility.Collapsed;
             if (!ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5)) HotKeys.Visibility = Visibility.Collapsed;
-            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar")) Header.Visibility = Visibility.Collapsed;
             LiveTiles.IsOn = (bool)localSettings.Values["SetLiveTiles"];
             HideCommandbar.IsOn = (bool)localSettings.Values["SetHideCommandBar"];
         }

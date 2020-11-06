@@ -224,26 +224,22 @@ namespace True_Love.Pages
             {
                 // SettingsItem is not part of NavView.MenuItems, and doesn't have a Tag.
                 NavView.SelectedItem = (muxc.NavigationViewItem)NavView.SettingsItem;
-                if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar")) NavView.Header = "SETTINGS";
+                NavView.Header = "SETTINGS";
 
                 CommandBarChanged("settings");
             }
             else if (ContentFrame.SourcePageType != null && ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
             {
                 var item = _pagesforWP.FirstOrDefault(p => p.Page == e.SourcePageType);
-
                 NavView.SelectedItem = NavView.MenuItems.OfType<muxc.NavigationViewItem>().First(n => n.Tag.Equals(item.Tag));
-
                 NavView.Header = ((muxc.NavigationViewItem)NavView.SelectedItem)?.Content?.ToString().ToUpper();
-
                 CommandBarChanged(item.Tag.ToString());
             }
             else if (ContentFrame.SourcePageType != null)
             {
                 var item = _pages.FirstOrDefault(p => p.Page == e.SourcePageType);
-
                 NavView.SelectedItem = NavView.MenuItems.OfType<muxc.NavigationViewItem>().First(n => n.Tag.Equals(item.Tag));
-
+                NavView.Header = ((muxc.NavigationViewItem)NavView.SelectedItem)?.Content?.ToString().ToUpper();
                 CommandBarChanged(item.Tag.ToString());
             }
         }

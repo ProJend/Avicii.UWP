@@ -37,7 +37,7 @@
 
             <!--标头 :
                 Header-->
-            <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Margin="1,0,0,0" x:Name="Header" Grid.Row="0">
+            <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Margin="1,0,0,0" x:Name="Header" Grid.Row="0" Visibility="Collapsed">
                 <Run>Settings</Run><LineBreak/>
             </TextBlock>
 
@@ -240,9 +240,18 @@
             <VisualStateGroup>
                 <VisualState>
                     <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="641"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Header.Visibility" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="820"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
+                        <Setter Target="Header.Visibility" Value="Visible"/>
                         <Setter Target="Content2.(Grid.Row)" Value="0"/>
                         <Setter Target="Content2.(Grid.Column)" Value="1"/>
                         <Setter Target="Content2.Margin" Value="30,0,0,0"/>
@@ -250,20 +259,7 @@
                     </VisualState.Setters>
                 </VisualState>
                 
-                <!--<VisualState>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1210"/>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="Content2.(RelativePanel.Below)" Value=""/>
-                        <Setter Target="Content2.(RelativePanel.RightOf)" Value="Content1"/>
-                        <Setter Target="Content2.Margin" Value="30,0,30,0"/>
-
-                        <Setter Target="TimInfo.MaxWidth" Value="390"/>
-                        <Setter Target="Content0.(Grid.Row)" Value="0"/>
-                        <Setter Target="Content0.(Grid.Column)" Value="1"/>
-                    </VisualState.Setters>
-                </VisualState>-->
+               
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
     </Grid>

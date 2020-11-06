@@ -34,7 +34,7 @@
 
         <Grid x:Name="BackgroundOfBar" Height="40" VerticalAlignment="Top" Background="{ThemeResource NavigationViewTopPaneBackground}"/>
         
-        <Grid Height="40" VerticalAlignment="Top" HorizontalAlignment="Stretch" x:Name="AppTitleBar" Background="Transparent" Margin="80,0,0,0"/>
+        <Grid Height="40" VerticalAlignment="Top" HorizontalAlignment="Stretch" x:Name="AppTitleBar" Background="Transparent"/>
 
         <Grid x:Name="bar" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
             <!--<v1809:Grid.TranslationTransition>
@@ -69,17 +69,17 @@
                              PaneDisplayMode="Auto"
                              IsBackButtonVisible="Auto"
                              IsTitleBarAutoPaddingEnabled="False"
-                             PaneTitle=" ">
+                             PaneTitle="    I N   L O V I N G   M E M O R Y">
             <muxc:NavigationView.MenuItems>
                 <muxc:NavigationViewItemHeader Content="True" x:Name="MainPagesHeader"/>
                 <muxc:NavigationViewItem Content="Memory" x:Name="LovePage" Icon="Home" Tag="home"/>
                 <muxc:NavigationViewItemSeparator/>
                 <muxc:NavigationViewItem Content="Comments" x:Name="HomePage" Icon="World" Tag="comment"/>
-                <!--<muxc:NavigationViewItem Content="Images" x:Name="ImagesPage" Tag="image">
+                <muxc:NavigationViewItem Content="Images" x:Name="ImagesPage" Tag="image">
                     <muxc:NavigationViewItem.Icon>
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEB9F;"/>
                     </muxc:NavigationViewItem.Icon>
-                </muxc:NavigationViewItem>-->
+                </muxc:NavigationViewItem>
             </muxc:NavigationView.MenuItems>
         </muxc:NavigationView>
 
