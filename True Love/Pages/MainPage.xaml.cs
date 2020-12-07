@@ -12,6 +12,8 @@ using muxc = Microsoft.UI.Xaml.Controls;
 using Windows.Foundation.Metadata;
 using Windows.UI;
 using Windows.Storage;
+using System.Numerics;
+using Microsoft.Toolkit.Uwp.Connectivity;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -28,6 +30,7 @@ namespace True_Love.Pages
         bool isshowbmbar = true;
         double x = 0;
         public static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+        public double OpaqueIfEnabled(bool IsEnabled) => IsEnabled ? 1.0 : 0.5;
 
         public MainPage()
         {
@@ -262,7 +265,7 @@ namespace True_Love.Pages
         {
             if (sv.VerticalOffset != scrlocation)
             {
-                if(bar.IsTapEnabled != false)
+                if (bar.IsTapEnabled != false)
                 {
                     if ((bool)localSettings.Values["SetHideCommandBar"])
                     {
@@ -364,20 +367,66 @@ namespace True_Love.Pages
             {
                 case "home":
                     CommandBar.Visibility = Visibility.Collapsed;
+                    if (CheckInfo.Visibility == Visibility.Visible && CheckInfo.Opacity == 1)
+                    {
+                        CheckInfo.Opacity = 0;
+                        if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7)) BackgroundOfBar.Translation = new Vector3(0, -40, 0);
+                        else CheckInfo.Visibility = Visibility.Collapsed;
+                    }
                     break;
 
                 case "comment":
                     CommandBar.Visibility = Visibility.Visible;
                     RefreshButton.IsEnabled = true;
-                    break;           
+                    if (!NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
+                    {
+                        Icon.Text = "⚠";
+                        NameInfo.Text = "NetWork error, ";
+                        HyperlinkInfo.Text = "please check out your setting.";
+                        CheckHyperlink.NavigateUri = new Uri("ms-settings:network-status");
+                        if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7)) BackgroundOfBar.Translation = new Vector3(0, 0, 0);
+                        else CheckInfo.Visibility = Visibility.Visible;
+                        CheckInfo.Opacity = 1;
+                       
+                    }
+                    else
+                    {
+                        CheckInfo.Opacity = 0;
+                        if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7)) BackgroundOfBar.Translation = new Vector3(0, -40, 0);
+                        else CheckInfo.Visibility = Visibility.Collapsed;
+                    }
+                    break;
 
                 default:
                     CommandBar.Visibility = Visibility.Visible;
                     RefreshButton.IsEnabled = false;
+                    if (CheckInfo.Visibility == Visibility.Visible && CheckInfo.Opacity == 1)
+                    {
+                        CheckInfo.Opacity = 0;
+                        if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7)) BackgroundOfBar.Translation = new Vector3(0, -40, 0);
+                        else CheckInfo.Visibility = Visibility.Collapsed;
+                    }
+                    if (NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
+                    {
+                        Icon.Text = "⚠";
+                        NameInfo.Text = "NetWork error, ";
+                        HyperlinkInfo.Text = "please check out your setting.";
+                        CheckHyperlink.NavigateUri = new Uri("ms-settings:network-status");
+                        if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7)) BackgroundOfBar.Translation = new Vector3(0, 0, 0);
+                        else CheckInfo.Visibility = Visibility.Visible;
+                        CheckInfo.Opacity = 1;
+
+                    }
+                    else
+                    {
+                        CheckInfo.Opacity = 0;
+                        if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7)) BackgroundOfBar.Translation = new Vector3(0, -40, 0);
+                        else CheckInfo.Visibility = Visibility.Collapsed;
+                    }
                     break;
             }
             GC.Collect();
         }
-        #endregion
+        #endregion        
     }
 }

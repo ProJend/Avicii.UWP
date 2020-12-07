@@ -10,7 +10,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid ManipulationMode="System,TranslateX">
-        <StackPanel Margin="0 45 0 0" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <StackPanel Margin="0 40 0 0" VerticalAlignment="Center" HorizontalAlignment="Center">
             <TextBlock Style="{ThemeResource SubheaderTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}" VerticalAlignment="Center" HorizontalAlignment="Center">I M A G E S</TextBlock>
             <TextBlock Margin="30 0 30 0" Style="{ThemeResource SubtitleTextBlockStyle}" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <LineBreak/>

@@ -30,11 +30,26 @@
     <Grid x:Name="LayoutRoot">
         <ScrollViewer x:Name="sv" ViewChanged="Sv_ViewChanged" VerticalScrollBarVisibility="Hidden" HorizontalScrollMode="Disabled" VerticalScrollMode="Enabled">
             <Frame x:Name="ContentFrame"/>
+          
         </ScrollViewer>
 
-        <Grid x:Name="BackgroundOfBar" Height="40" VerticalAlignment="Top" Background="{ThemeResource NavigationViewTopPaneBackground}"/>
-        
-        <Grid Height="40" VerticalAlignment="Top" HorizontalAlignment="Stretch" x:Name="AppTitleBar" Background="Transparent"/>
+        <Grid x:Name="BackgroundOfBar" MinHeight="40" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="{ThemeResource NavigationViewTopPaneBackground}">
+            <v1809:Grid.TranslationTransition>
+                <Vector3Transition/>
+            </v1809:Grid.TranslationTransition>
+            <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" x:Name="AppTitleBar" Background="Transparent"/>
+            <TextBlock x:Name="CheckInfo" Height="40" Margin="6 40 0 0">                 
+                <v1809:TextBlock.OpacityTransition>
+                    <ScalarTransition/>
+                </v1809:TextBlock.OpacityTransition>
+                <Run x:Name="Icon" FontSize="20"></Run>
+                <Run Text="   "/>
+                <Run x:Name="NameInfo"></Run>
+                <Hyperlink x:Name="CheckHyperlink">
+                    <Run x:Name="HyperlinkInfo"/>
+                </Hyperlink>
+            </TextBlock>
+        </Grid>
 
         <Grid x:Name="bar" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
             <!--<v1809:Grid.TranslationTransition>
@@ -42,7 +57,7 @@
             </v1809:Grid.TranslationTransition>-->
             <Grid.Transitions>
                 <TransitionCollection>
-                    <EdgeUIThemeTransition/>
+                    <PaneThemeTransition/>
                 </TransitionCollection>
             </Grid.Transitions>
 
@@ -53,15 +68,23 @@
                 </CommandBar.RenderTransform>
 
                 <!--<AppBarButton Icon="Add" Label="分享故事" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="分享你与 Avicii 的故事"/>-->
-                <AppBarButton x:Name="BackTopButton" IsEnabled="False" Icon="Upload" Label="Back To Top" ToolTipService.ToolTip="Back to top" Click="BackToTop_Click">
+                <AppBarButton x:Name="BackTopButton" IsEnabled="False" Icon="Upload" Label="Back To Top" ToolTipService.ToolTip="Back to top" Click="BackToTop_Click" Opacity="{x:Bind OpaqueIfEnabled(BackTopButton.IsEnabled), Mode=OneWay}">
+                    <v1809:AppBarButton.OpacityTransition>
+                        <ScalarTransition/>
+                    </v1809:AppBarButton.OpacityTransition>
                 </AppBarButton>
-                <AppBarButton x:Name="RefreshButton" Icon="Refresh" Label="Refresh" ToolTipService.ToolTip="Refresh dates" Click="Refresh_Click"/>
-                <!--<AppBarButton Icon="Setting" Label="设置" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="打开设置"/>-->
+                <AppBarButton x:Name="RefreshButton" Icon="Refresh" Label="Refresh" ToolTipService.ToolTip="Refresh dates" Click="Refresh_Click" Opacity="{x:Bind OpaqueIfEnabled(RefreshButton.IsEnabled), Mode=OneWay}">
+                    <v1809:AppBarButton.OpacityTransition>
+                        <ScalarTransition/>
+                    </v1809:AppBarButton.OpacityTransition>
+                </AppBarButton>
+                <!--<AppBarButton Name="Settings" Icon="Setting" Label="设置" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="打开设置"/>-->
                 <CommandBar.SecondaryCommands>
 
                 </CommandBar.SecondaryCommands>
             </CommandBar>
         </Grid>
+
         <muxc:NavigationView x:Name="NavView"                      
                              Loaded="NavView_Loaded"
                              BackRequested="NavView_BackRequested"

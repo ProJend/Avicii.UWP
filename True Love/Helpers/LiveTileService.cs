@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Toolkit.Uwp.Notifications;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
 using Windows.Storage;
 using Windows.UI.Notifications;
 
@@ -27,102 +26,99 @@ namespace True_Love.Helpers
         }
 
         //创建磁贴对象并返回
-        private TileContent CreateTileContent()
+        private TileContent CreateTileContent() => new TileContent()
         {
-            return new TileContent()
+            Visual = new TileVisual()
             {
-                Visual = new TileVisual()
-                {
-                    //TileSmall = new TileBinding()
-                    //{
-                    //    Content = new TileBindingContentAdaptive()
-                    //    {
-                    //        TextStacking = TileTextStacking.Center,
-                    //        Children =
-                    //        {
-                    //            new AdaptiveText()
-                    //            {
-                    //                Text="◢◤",
-                    //                HintAlign=AdaptiveTextAlign.Center,
-                    //                HintStyle=AdaptiveTextStyle.Title
-                    //            }                                        
-                    //        }
-                    //    }
-                    //},
+                //TileSmall = new TileBinding()
+                //{
+                //    Content = new TileBindingContentAdaptive()
+                //    {
+                //        TextStacking = TileTextStacking.Center,
+                //        Children =
+                //        {
+                //            new AdaptiveText()
+                //            {
+                //                Text="◢◤",
+                //                HintAlign=AdaptiveTextAlign.Center,
+                //                HintStyle=AdaptiveTextStyle.Title
+                //            }                                        
+                //        }
+                //    }
+                //},
 
-                    TileMedium = new TileBinding()
+                TileMedium = new TileBinding()
+                {
+                    Content = new TileBindingContentAdaptive()
                     {
-                        Content = new TileBindingContentAdaptive()
-                        {
-                            TextStacking = TileTextStacking.Center,
-                            Children =
+                        TextStacking = TileTextStacking.Center,
+                        Children =
                             {
                                 new AdaptiveText()
                                 {
-                                    Text="Something want to talk to Tim Bergling?",
-                                    HintAlign=AdaptiveTextAlign.Center,
+                                    Text = "Something want to talk to Tim Bergling?",
+                                    HintAlign = AdaptiveTextAlign.Center,
                                     HintWrap = true,
                                     //HintStyle=(Style)this.Resources["AccentButtonStyle"],
                                     //HintStyle=AdaptiveTextStyle.CaptionSubtle,
                                 },
                             },
-                            PeekImage = new TilePeekImage()
-                             {
-                                 Source = "Assets/Wide310x150Logo.png",
-                                 //HintOverlay = 20
-                             }
-                        }
-                    },
-                 
-                    TileWide = new TileBinding()
-                    {
-                        Content = new TileBindingContentAdaptive()
+                        PeekImage = new TilePeekImage()
                         {
-                            Children =
-                        {
-                            new AdaptiveText()
-                            {
-                                Text = "Tim Bergling",//设置标题
-                                HintStyle = AdaptiveTextStyle.Base,
-                                HintAlign = AdaptiveTextAlign.Right,
-                            },
-                            new AdaptiveText()
-                            {
-                                Text = "Foundation",//设置内容
-                                HintStyle = AdaptiveTextStyle.Body,
-                                HintAlign = AdaptiveTextAlign.Right
-                            }
-                        },
-                            BackgroundImage = new TileBackgroundImage()
-                            {
-                                Source = "Assets/Background/BG1.jpg"
-                            },
-                            PeekImage = new TilePeekImage()
-                            {
-                                Source = "Assets/Wide310x150Logo.png",
-                                //HintOverlay = 20
-                            }
+                            Source = "Assets/Wide310x150Logo.png",
+                            //HintOverlay = 20
                         }
-                    },
+                    }
+                },
 
-                    //TileLarge = new TileBinding()
-                    //{
-                    //    Content = new TileBindingContentAdaptive()
-                    //    {
-                    //        TextStacking = TileTextStacking.Center,
-                    //        Children =
-                    //        {
-                    //            new AdaptiveText()
-                    //            {
-                    //                Text="◢◤",
-                    //                HintAlign=AdaptiveTextAlign.Center,
-                    //                HintStyle=AdaptiveTextStyle.Title
-                    //            }
-                    //        }
-                    //    }
-                    //},
-                }
-            };
-        }
+                TileWide = new TileBinding()
+                {
+                    Content = new TileBindingContentAdaptive()
+                    {
+                        Children =
+                            {
+                                new AdaptiveText()
+                                {
+                                    Text = "Tim Bergling",//设置标题
+                                    HintStyle = AdaptiveTextStyle.Base,
+                                    HintAlign = AdaptiveTextAlign.Right,
+                                },
+                                new AdaptiveText()
+                                {
+                                    Text = "Foundation",//设置内容
+                                    HintStyle = AdaptiveTextStyle.Body,
+                                    HintAlign = AdaptiveTextAlign.Right
+                                }
+                            },
+                        BackgroundImage = new TileBackgroundImage()
+                        {
+                            Source = "Assets/Background/BG1.jpg"
+                        },
+                        PeekImage = new TilePeekImage()
+                        {
+                            Source = "Assets/Wide310x150Logo.png",
+                            //HintOverlay = 20
+                        }
+                    }
+                },
+
+                //TileLarge = new TileBinding()
+                //{
+                //    Content = new TileBindingContentAdaptive()
+                //    {
+                //        TextStacking = TileTextStacking.Center,
+                //        Children =
+                //        {
+                //            new AdaptiveText()
+                //            {
+                //                Text="◢◤",
+                //                HintAlign=AdaptiveTextAlign.Center,
+                //                HintStyle=AdaptiveTextStyle.Title
+                //            }
+                //        }
+                //    }
+                //},
+            }
+        };
     }
 }
