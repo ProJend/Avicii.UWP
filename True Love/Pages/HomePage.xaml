@@ -29,7 +29,7 @@
     </Page.Resources>
 
     <Grid>
-        <FlipView Style="{StaticResource FlipView}" IsTabStop="False">
+        <FlipView IsTabStop="False">
             <FlipView.Background>
                 <ImageBrush ImageSource="/Assets/Background/BG1.jpg" Stretch="UniformToFill" AlignmentX="Left"/>
             </FlipView.Background>

@@ -4,7 +4,8 @@
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:contract5Present="using:Microsoft.UI.Xaml.Controls?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 5)"
     xmlns:v1709="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 5)"
->
+    xmlns:v1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
+    >
 
     <!--#region NavigationView-->
     <Style x:Key="NavigationBackButtonNormalStyle" TargetType="Button">
@@ -101,15 +102,6 @@
                                     </VisualState.Setters>
                                 </VisualState>
                             </VisualStateGroup>
-                            <VisualStateGroup x:Name="SettingsGroup">
-                                <VisualState x:Name="SettingsVisible"/>
-                                <VisualState x:Name="SettingsCollapsed">
-                                    <VisualState.Setters>
-                                        <Setter Target="SettingsNavPaneItem.Visibility" Value="Collapsed"/>
-                                        <Setter Target="SettingsTopNavPaneItem.Visibility" Value="Collapsed"/>
-                                    </VisualState.Setters>
-                                </VisualState>
-                            </VisualStateGroup>
                             <VisualStateGroup x:Name="AutoSuggestGroup">
                                 <VisualState x:Name="AutoSuggestBoxVisible"/>
                                 <VisualState x:Name="AutoSuggestBoxCollapsed">
@@ -133,7 +125,6 @@
                                 <VisualState x:Name="ListSizeCompact">
                                     <VisualState.Setters>
                                         <Setter Target="PaneContentGrid.Width" Value="{Binding CompactPaneLength, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-                                        <Setter Target="SettingsNavPaneItem.HorizontalAlignment" Value="Left"/>
                                         <Setter Target="PaneTitleTextBlock.Visibility" Value="Collapsed"/>
                                         <Setter Target="PaneHeaderContentBorder.Visibility" Value="Collapsed"/>
                                         <Setter Target="PaneCustomContentBorder.HorizontalAlignment" Value="Left"/>
@@ -231,22 +222,32 @@
                                             </muxc:ItemsRepeater>
                                         </ScrollViewer>
                                     </muxc:ItemsRepeaterScrollHost>
-                                    <Button x:Name="TopNavOverflowButton" Content="More" Grid.Column="4" Style="{StaticResource NavigationViewOverflowButtonStyleWhenPaneOnTop}" Visibility="{Binding TemplateSettings.OverflowButtonVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                    <Button x:Name="TopNavOverflowButton" Content="More" Grid.Column="4" Margin="{ThemeResource TopNavigationViewOverflowButtonMargin}" Style="{StaticResource NavigationViewOverflowButtonStyleWhenPaneOnTop}" Visibility="{Binding TemplateSettings.OverflowButtonVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}">
                                         <Button.Flyout>
                                             <Flyout ElementSoundMode="{Binding ElementSoundMode, RelativeSource={RelativeSource Mode=TemplatedParent}}" Placement="Bottom">
                                                 <Flyout.FlyoutPresenterStyle>
                                                     <Style TargetType="FlyoutPresenter">
-                                                        <Setter Property="Padding" Value="0,8"/>
+                                                        <Setter Property="Padding" Value="{ThemeResource TopNavigationViewOverflowMenuPadding}"/>
                                                         <Setter Property="Margin" Value="0,-4,0,0"/>
+                                                        <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Auto"/>
+                                                        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+                                                        <Setter Property="ScrollViewer.VerticalScrollMode" Value="Auto"/>
+                                                        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+                                                        <Setter Property="ScrollViewer.ZoomMode" Value="Disabled"/>
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="FlyoutPresenter">
+                                                                    <ScrollViewer x:Name="ScrollViewer" AutomationProperties.AccessibilityView="Raw" HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}" HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}" VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}" VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}" ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}">
+                                                                        <ContentPresenter x:Name="ContentPresenter" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" CornerRadius="{ThemeResource OverlayCornerRadius}" ContentTransitions="{TemplateBinding ContentTransitions}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                                                    </ScrollViewer>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
                                                     </Style>
                                                 </Flyout.FlyoutPresenterStyle>
                                                 <muxc:ItemsRepeaterScrollHost>
                                                     <ScrollViewer VerticalScrollBarVisibility="Auto">
-                                                        <muxc:ItemsRepeater x:Name="TopNavMenuItemsOverflowHost" AutomationProperties.AccessibilityView="Content">
-                                                            <muxc:ItemsRepeater.Layout>
-                                                                <muxc:StackLayout Orientation="Vertical"/>
-                                                            </muxc:ItemsRepeater.Layout>
-                                                        </muxc:ItemsRepeater>
+                                                        <muxc:ItemsRepeater x:Name="TopNavMenuItemsOverflowHost" AutomationProperties.AccessibilityView="Content"/>
                                                     </ScrollViewer>
                                                 </muxc:ItemsRepeaterScrollHost>
                                             </Flyout>
@@ -254,16 +255,17 @@
                                     </Button>
                                     <ContentControl x:Name="PaneCustomContentOnTopPane" Grid.Column="5" HorizontalContentAlignment="Stretch" IsTabStop="False" VerticalContentAlignment="Stretch"/>
                                     <Grid x:Name="TopPaneAutoSuggestArea" Grid.Column="6" Height="{ThemeResource NavigationViewTopPaneHeight}">
-                                        <ContentControl x:Name="TopPaneAutoSuggestBoxPresenter" HorizontalContentAlignment="Stretch" IsTabStop="False" MinWidth="48" Margin="12,0,12,0" VerticalContentAlignment="Center"/>
+                                        <ContentControl x:Name="TopPaneAutoSuggestBoxPresenter" HorizontalContentAlignment="Stretch" IsTabStop="False" MinWidth="48" Margin="{ThemeResource TopNavigationViewAutoSuggestBoxMargin}" VerticalContentAlignment="Center"/>
                                     </Grid>
                                     <ContentControl x:Name="PaneFooterOnTopPane" Grid.Column="7" HorizontalContentAlignment="Stretch" IsTabStop="False" VerticalContentAlignment="Stretch"/>
-                                    <Grid Grid.Column="2">
-                                        <muxc:NavigationViewItem x:Name="SettingsTopNavPaneItem" Icon="Setting" Style="{ThemeResource MUX_NavigationViewSettingsItemStyleWhenOnTopPane}">
-                                            <contract5Present:NavigationViewItem.KeyboardAccelerators>
-                                                <KeyboardAccelerator Key="F1"/>
-                                            </contract5Present:NavigationViewItem.KeyboardAccelerators>
-                                        </muxc:NavigationViewItem>
-                                    </Grid>
+                                    <muxc:ItemsRepeater x:Name="TopFooterMenuItemsHost" AutomationProperties.AccessibilityView="Content" Grid.Column="4" AutomationProperties.LandmarkType="Navigation" >
+                                        <muxc:ItemsRepeater.Layout>
+                                            <muxc:StackLayout Orientation="Horizontal"/>
+                                        </muxc:ItemsRepeater.Layout>
+                                        <contract5Present:ItemsRepeater.KeyboardAccelerators>
+                                            <KeyboardAccelerator Key="F1"/>
+                                        </contract5Present:ItemsRepeater.KeyboardAccelerators>
+                                    </muxc:ItemsRepeater>
                                 </Grid>
                                 <Border x:Name="TopNavContentOverlayAreaGrid" Child="{TemplateBinding ContentOverlay}"/>
                             </StackPanel>
@@ -277,10 +279,7 @@
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="8"/>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="0"/>
+                                            <RowDefinition x:Name="ItemsContainerRow" Height="*"/>
                                         </Grid.RowDefinitions>
                                         <Grid x:Name="ContentPaneTopPadding" Height="{Binding TemplateSettings.TopPadding, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                                         <Grid Grid.Row="2">
@@ -299,22 +298,26 @@
                                             <Button x:Name="PaneAutoSuggestButton" Style="{ThemeResource NavigationViewPaneSearchButtonStyle}" Visibility="Collapsed" Width="{TemplateBinding CompactPaneLength}"/>
                                         </Grid>
                                         <ContentControl x:Name="PaneCustomContentBorder" HorizontalContentAlignment="Stretch" IsTabStop="False" Grid.Row="4" VerticalContentAlignment="Stretch"/>
-                                        <muxc:ItemsRepeaterScrollHost HorizontalAlignment="Stretch" Margin="0,0,0,20" Grid.Row="6" VerticalAlignment="Top">
-                                            <ScrollViewer TabNavigation="Once" VerticalScrollBarVisibility="Auto">
-                                                <muxc:ItemsRepeater x:Name="MenuItemsHost" AutomationProperties.AccessibilityView="Content" AutomationProperties.Name="{TemplateBinding AutomationProperties.Name}">
-                                                    <muxc:ItemsRepeater.Layout>
-                                                        <muxc:StackLayout Orientation="Vertical"/>
-                                                    </muxc:ItemsRepeater.Layout>
-                                                </muxc:ItemsRepeater>
-                                            </ScrollViewer>
-                                        </muxc:ItemsRepeaterScrollHost>
-                                        <ContentControl x:Name="FooterContentBorder" HorizontalContentAlignment="Stretch" IsTabStop="False" Grid.Row="7" VerticalContentAlignment="Stretch"/>
-                                        <muxc:NavigationViewItem x:Name="SettingsNavPaneItem" Icon="Setting" Grid.Row="8">
-                                            <contract5Present:NavigationViewItem.KeyboardAccelerators>
-                                                <KeyboardAccelerator Key="F1"/>
-                                            </contract5Present:NavigationViewItem.KeyboardAccelerators>
-                                        </muxc:NavigationViewItem>
-                                        <TextBlock Text="IN  LOVING  MEMORY" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="9"/>
+                                        <Grid x:Name="ItemsContainerGrid" Grid.Row="6">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition x:Name="MenuItemsRow" Height="Auto" MinHeight="{ThemeResource NavigationViewItemOnLeftMinHeight}"/>
+                                                <RowDefinition Height="*" MinHeight="21"/>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition x:Name="FooterItemsRow" Height="Auto" MinHeight="{ThemeResource NavigationViewItemOnLeftMinHeight}"/>
+                                            </Grid.RowDefinitions>
+                                            <muxc:ItemsRepeaterScrollHost HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                                <ScrollViewer x:Name="MenuItemsScrollViewer" TabNavigation="Local" VerticalScrollBarVisibility="Auto">
+                                                    <muxc:ItemsRepeater x:Name="MenuItemsHost" AutomationProperties.AccessibilityView="Content" AutomationProperties.Name="{TemplateBinding AutomationProperties.Name}"/>
+                                                </ScrollViewer>
+                                            </muxc:ItemsRepeaterScrollHost>
+                                            <muxc:NavigationViewItemSeparator x:Name="VisualItemsSeparator" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Center" Visibility="Collapsed"/>
+                                            <ContentControl x:Name="FooterContentBorder" HorizontalContentAlignment="Stretch" IsTabStop="False" Grid.Row="2" VerticalContentAlignment="Stretch"/>
+                                            <muxc:ItemsRepeaterScrollHost Grid.Row="3">
+                                                <ScrollViewer x:Name="FooterItemsScrollViewer">
+                                                    <muxc:ItemsRepeater x:Name="FooterMenuItemsHost" AutomationProperties.AccessibilityView="Content"/>
+                                                </ScrollViewer>
+                                            </muxc:ItemsRepeaterScrollHost>
+                                        </Grid>
                                     </Grid>
                                 </SplitView.Pane>
                                 <Grid x:Name="ContentGrid">
@@ -323,14 +326,14 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="4"/>
-                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="3"/>
+                                        <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
                                     <Grid x:Name="ContentTopPadding" Grid.ColumnSpan="2" Height="{Binding TemplateSettings.TopPadding, RelativeSource={RelativeSource Mode=TemplatedParent}}" Visibility="{Binding TemplateSettings.LeftPaneVisibility, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                                     <Grid x:Name="ContentLeftPadding" Grid.Row="1"/>
-                                    <ContentControl x:Name="HeaderContent" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" HorizontalContentAlignment="Stretch" IsTabStop="False" MinHeight="{StaticResource PaneToggleButtonHeight}" 
-                                                     FontSize="16" Grid.Column="1" Grid.Row="1" Visibility="Collapsed"/>
+                                    <ContentControl x:Name="HeaderContent" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" HorizontalContentAlignment="Stretch" IsTabStop="False" MinHeight="{StaticResource PaneToggleButtonHeight}"
+                                                    FontSize="16" Grid.Column="1" Grid.Row="1" Visibility="Collapsed"/>
                                     <ContentPresenter Content="{TemplateBinding Content}" Grid.ColumnSpan="2" AutomationProperties.LandmarkType="Main" Grid.Row="2"/>
                                 </Grid>
                             </SplitView>
@@ -590,7 +593,7 @@
     </Style>
     <!--#endregion-->
     <!--#region FlipView-->
-    <Style x:Key="FlipView" TargetType="FlipView">
+    <Style TargetType="FlipView">
         <Setter Property="Background" Value="{ThemeResource FlipViewBackground}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="TabNavigation" Value="Once"/>
@@ -767,11 +770,11 @@
                         <Button x:Name="PreviousButtonHorizontal" HorizontalAlignment="Left" Height="36" IsTabStop="False" Template="{StaticResource HorizontalPreviousTemplate}" UseSystemFocusVisuals="False" VerticalAlignment="Center" Width="20"/>
                         <Button x:Name="NextButtonHorizontal" HorizontalAlignment="Right" Height="36" IsTabStop="False" Template="{StaticResource HorizontalNextTemplate}" UseSystemFocusVisuals="False" VerticalAlignment="Center" Width="20"/>
                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right">
-                            <Button x:Name="PreviousButtonVertical" IsTabStop="False" UseSystemFocusVisuals="False"
+                            <Button x:Name="PreviousButtonVertical" IsTabStop="False" UseSystemFocusVisuals="False" v1809:CornerRadius="2 2 0 0"
                                     v1709:Style="{StaticResource ButtonRevealStyle}" Width="40" Height="40" Background="Transparent">
                                 <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE96D;"/>
                             </Button>
-                            <Button x:Name="NextButtonVertical" IsTabStop="False" UseSystemFocusVisuals="False" 
+                            <Button x:Name="NextButtonVertical" IsTabStop="False" UseSystemFocusVisuals="False" v1809:CornerRadius="0 0 2 2"
                                     v1709:Style="{StaticResource ButtonRevealStyle}" Width="40" Height="40" Background="Transparent">
                                 <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE96E;"/>
                             </Button>

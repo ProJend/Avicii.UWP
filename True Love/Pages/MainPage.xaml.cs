@@ -30,7 +30,7 @@ namespace True_Love.Pages
         bool isshowbmbar = true;
         double x = 0;
         public static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
-        public double OpaqueIfEnabled(bool IsEnabled) => IsEnabled ? 1.0 : 0.5;
+        public double OpaqueIfEnabled(bool IsEnabled) => IsEnabled ? 1.0 : 0.6;
 
         public MainPage()
         {
@@ -56,8 +56,9 @@ namespace True_Love.Pages
                 if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5))// > OS15063
                 {
                     // 键盘快捷键
-                    LovePage.KeyboardAccelerators.Add(new KeyboardAccelerator { Key = VirtualKey.F2 });
-                    HomePage.KeyboardAccelerators.Add(new KeyboardAccelerator { Key = VirtualKey.F3 });
+                    MemoryPage.KeyboardAccelerators.Add(new KeyboardAccelerator { Key = VirtualKey.F1 });
+                    HomePage.KeyboardAccelerators.Add(new KeyboardAccelerator { Key = VirtualKey.F2 });
+                    ImagesPage.KeyboardAccelerators.Add(new KeyboardAccelerator { Key = VirtualKey.F3 });
                     BackTopButton.KeyboardAccelerators.Add(new KeyboardAccelerator { Key = VirtualKey.F6 });
                     RefreshButton.KeyboardAccelerators.Add(new KeyboardAccelerator { Key = VirtualKey.F5 });
                 }             
@@ -229,21 +230,21 @@ namespace True_Love.Pages
                 NavView.SelectedItem = (muxc.NavigationViewItem)NavView.SettingsItem;
                 NavView.Header = "SETTINGS";
 
-                CommandBarChanged("settings");
+                ControlsChanged("settings");
             }
             else if (ContentFrame.SourcePageType != null && ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
             {
                 var item = _pagesforWP.FirstOrDefault(p => p.Page == e.SourcePageType);
                 NavView.SelectedItem = NavView.MenuItems.OfType<muxc.NavigationViewItem>().First(n => n.Tag.Equals(item.Tag));
                 NavView.Header = ((muxc.NavigationViewItem)NavView.SelectedItem)?.Content?.ToString().ToUpper();
-                CommandBarChanged(item.Tag.ToString());
+                ControlsChanged(item.Tag.ToString());
             }
             else if (ContentFrame.SourcePageType != null)
             {
                 var item = _pages.FirstOrDefault(p => p.Page == e.SourcePageType);
                 NavView.SelectedItem = NavView.MenuItems.OfType<muxc.NavigationViewItem>().First(n => n.Tag.Equals(item.Tag));
                 NavView.Header = ((muxc.NavigationViewItem)NavView.SelectedItem)?.Content?.ToString().ToUpper();
-                CommandBarChanged(item.Tag.ToString());
+                ControlsChanged(item.Tag.ToString());
             }
         }
         #endregion
@@ -358,25 +359,20 @@ namespace True_Love.Pages
         }
 
         /// <summary>
-        /// 检查刷新按钮可用状态。
+        /// 检查控件可用状态
         /// </summary>
         /// <param name="tag">NavViewItem.Tag</param>
-        private void CommandBarChanged(string tag)
+        private void ControlsChanged(string tag)
         {
             switch (tag)
             {
                 case "home":
-                    CommandBar.Visibility = Visibility.Collapsed;
-                    if (CheckInfo.Visibility == Visibility.Visible && CheckInfo.Opacity == 1)
-                    {
-                        CheckInfo.Opacity = 0;
-                        if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7)) BackgroundOfBar.Translation = new Vector3(0, -40, 0);
-                        else CheckInfo.Visibility = Visibility.Collapsed;
-                    }
+                    CommandBarCollapsed();
+                    if (Notification.Visibility == Visibility.Visible && Notification.Opacity == 1) NotificationCollapsed();
                     break;
 
                 case "comment":
-                    CommandBar.Visibility = Visibility.Visible;
+                    CommandBarVisible();
                     RefreshButton.IsEnabled = true;
                     if (!NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
                     {
@@ -385,47 +381,45 @@ namespace True_Love.Pages
                         HyperlinkInfo.Text = "please check out your setting.";
                         CheckHyperlink.NavigateUri = new Uri("ms-settings:network-status");
                         if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7)) BackgroundOfBar.Translation = new Vector3(0, 0, 0);
-                        else CheckInfo.Visibility = Visibility.Visible;
-                        CheckInfo.Opacity = 1;
+                        else Notification.Visibility = Visibility.Visible;
+                        Notification.Opacity = 1;
                        
                     }
-                    else
-                    {
-                        CheckInfo.Opacity = 0;
-                        if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7)) BackgroundOfBar.Translation = new Vector3(0, -40, 0);
-                        else CheckInfo.Visibility = Visibility.Collapsed;
-                    }
+                    else NotificationCollapsed();
                     break;
 
                 default:
-                    CommandBar.Visibility = Visibility.Visible;
+                    CommandBarVisible();
                     RefreshButton.IsEnabled = false;
-                    if (CheckInfo.Visibility == Visibility.Visible && CheckInfo.Opacity == 1)
-                    {
-                        CheckInfo.Opacity = 0;
-                        if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7)) BackgroundOfBar.Translation = new Vector3(0, -40, 0);
-                        else CheckInfo.Visibility = Visibility.Collapsed;
-                    }
-                    if (NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
-                    {
-                        Icon.Text = "⚠";
-                        NameInfo.Text = "NetWork error, ";
-                        HyperlinkInfo.Text = "please check out your setting.";
-                        CheckHyperlink.NavigateUri = new Uri("ms-settings:network-status");
-                        if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7)) BackgroundOfBar.Translation = new Vector3(0, 0, 0);
-                        else CheckInfo.Visibility = Visibility.Visible;
-                        CheckInfo.Opacity = 1;
-
-                    }
-                    else
-                    {
-                        CheckInfo.Opacity = 0;
-                        if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7)) BackgroundOfBar.Translation = new Vector3(0, -40, 0);
-                        else CheckInfo.Visibility = Visibility.Collapsed;
-                    }
+                    if (Notification.Visibility == Visibility.Visible && Notification.Opacity == 1) NotificationCollapsed();
                     break;
             }
             GC.Collect();
+
+            void CommandBarCollapsed()
+            {
+                if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar")) CommandBar.Visibility = Visibility.Collapsed;
+                else
+                {
+                    bar.Opacity = 0;
+                    CommandBar.IsEnabled = false;
+                }
+            }
+            void CommandBarVisible()
+            {
+                if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar")) CommandBar.Visibility = Visibility.Visible;
+                else
+                {
+                    bar.Opacity = 1;
+                    CommandBar.IsEnabled = true;
+                }
+            }
+            void NotificationCollapsed()
+            {
+                Notification.Opacity = 0;
+                if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7)) BackgroundOfBar.Translation = new Vector3(0, -40, 0);
+                else Notification.Visibility = Visibility.Collapsed;
+            }
         }
         #endregion        
     }
