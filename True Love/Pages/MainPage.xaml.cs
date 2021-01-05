@@ -63,7 +63,7 @@ namespace True_Love.Pages
                     RefreshButton.KeyboardAccelerators.Add(new KeyboardAccelerator { Key = VirtualKey.F5 });
                 }             
             }
-            #endregion
+            #endregion   
         }
 
         #region NavigationView
@@ -223,7 +223,6 @@ namespace True_Love.Pages
         private void On_Navigated(object sender, NavigationEventArgs e)
         {
             NavView.IsBackEnabled = ContentFrame.CanGoBack;
-
             if (ContentFrame.SourcePageType == typeof(SettingsPage))
             {
                 // SettingsItem is not part of NavView.MenuItems, and doesn't have a Tag.
@@ -246,6 +245,9 @@ namespace True_Love.Pages
                 NavView.Header = ((muxc.NavigationViewItem)NavView.SelectedItem)?.Content?.ToString().ToUpper();
                 ControlsChanged(item.Tag.ToString());
             }
+            if ((bool)localSettings.Values["SetBackgroundColor"]) ContentFrame.Background = new Windows.UI.Xaml.Media.SolidColorBrush(Colors.Black);
+            else ContentFrame.Background = new Windows.UI.Xaml.Media.SolidColorBrush(Color.FromArgb(0xFF, 38, 38, 38));
+            GC.Collect();
         }
         #endregion
 
@@ -394,8 +396,6 @@ namespace True_Love.Pages
                     if (Notification.Visibility == Visibility.Visible && Notification.Opacity == 1) NotificationCollapsed();
                     break;
             }
-            GC.Collect();
-
             void CommandBarCollapsed()
             {
                 if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar")) CommandBar.Visibility = Visibility.Collapsed;

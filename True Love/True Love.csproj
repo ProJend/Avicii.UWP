@@ -135,6 +135,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dates\Comment.cs" />
+    <Compile Include="Dates\Comments.cs" />
     <Compile Include="Helpers\MobileScreenTrigger.cs" />
     <Compile Include="Helpers\Generic.cs" />
     <Compile Include="Helpers\LiveTileService.cs" />
@@ -315,7 +317,6 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

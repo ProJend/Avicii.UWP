@@ -9,7 +9,7 @@
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid ManipulationMode="System,TranslateX">
+    <Grid ManipulationMode="System,TranslateX" x:Name="Main">
         <StackPanel Margin="0 40 0 0" VerticalAlignment="Center" HorizontalAlignment="Center">
             <TextBlock Style="{ThemeResource SubheaderTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}" VerticalAlignment="Center" HorizontalAlignment="Center">I M A G E S</TextBlock>
             <TextBlock Margin="30 0 30 0" Style="{ThemeResource SubtitleTextBlockStyle}" VerticalAlignment="Center" HorizontalAlignment="Center">

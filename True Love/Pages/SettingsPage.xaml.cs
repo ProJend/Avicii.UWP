@@ -32,6 +32,9 @@ namespace True_Love.Pages
             if (!ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5)) HotKeys.Visibility = Visibility.Collapsed;
             LiveTiles.IsOn = (bool)localSettings.Values["SetLiveTiles"];
             HideCommandbar.IsOn = (bool)localSettings.Values["SetHideCommandBar"];
+            BackgroundColor.IsOn = (bool)localSettings.Values["SetBackgroundColor"];
+            if ((bool)localSettings.Values["SetBackgroundColor"]) Main.Background = new SolidColorBrush(Colors.Black);
+            else Main.Background = new SolidColorBrush(Color.FromArgb(0xFF, 38, 38, 38));
         }
 
         /// <summary>
@@ -68,7 +71,20 @@ namespace True_Love.Pages
                     break;
 
                 case "hideCommandbar":
-                    localSettings.Values["SetHideCommandBar"] = HideCommandbar.IsOn == true ? true : (object)false;
+                    localSettings.Values["SetHideCommandBar"] = HideCommandbar.IsOn == true ? true : false;
+                    break;
+
+                case "backgroundColor":
+                    if (BackgroundColor.IsOn == true)
+                    {
+                        Main.Background = new SolidColorBrush(Colors.Black);
+                        localSettings.Values["SetBackgroundColor"] = true;
+                    }
+                    else
+                    {
+                        Main.Background = new SolidColorBrush(Color.FromArgb(0xFF, 26, 26, 26));
+                        localSettings.Values["SetBackgroundColor"] = false;
+                    }
                     break;
             }
         }

@@ -19,7 +19,7 @@
         </DataTemplate>
     </Page.Resources>
 
-    <Grid ManipulationMode="System,TranslateX">
+    <Grid ManipulationMode="System,TranslateX" x:Name="Main">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="42*"/>
@@ -29,6 +29,9 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <v1809:Grid.BackgroundTransition>
+            <BrushTransition />
+        </v1809:Grid.BackgroundTransition>
 
         <Grid VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="1">
             <Grid.RowDefinitions>
@@ -58,9 +61,9 @@
                     <!--选项 : ⚙
                             Options-->
                     <TextBlock Text="Options" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
-                    <ToggleSwitch x:Name="LiveTiles" Tag="liveTiles" Header="Live Tiles" ToolTipService.ToolTip="Show Avicii on tile" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeader}"/>
+                    <ToggleSwitch x:Name="BackgroundColor" Tag="backgroundColor" Header="Dark Theme" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeader}" OffContent="Night" OnContent="Midnight (AMOLED)"/>
+                    <ToggleSwitch x:Name="LiveTiles" Tag="liveTiles" Header="Live Tiles" ToolTipService.ToolTip="Show Avicii on tile" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeaderWithLineBreak}"/>
                     <ToggleSwitch x:Name="HideCommandbar" Tag="hideCommandbar" Header="Auto Hide CommandBar" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeaderWithLineBreak}"/>
-
                     <!--热键 : ⌨
                             Hot Keys-->
                     <StackPanel x:Name="HotKeys">

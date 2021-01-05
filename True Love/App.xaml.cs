@@ -76,6 +76,7 @@ namespace True_Love
                     localSettings.Values["SetLiveTiles"] = true;
                     localSettings.Values["SetHideCommandBar"] = false;
                     localSettings.Values["OnlyLiveTiles"] = true;
+                    localSettings.Values["SetBackgroundColor"] = true;               
                     var a = new SettingsPage();
                     //a.FirstRun();
                     a = null;
