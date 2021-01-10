@@ -33,8 +33,6 @@ namespace True_Love.Pages
             LiveTiles.IsOn = (bool)localSettings.Values["SetLiveTiles"];
             HideCommandbar.IsOn = (bool)localSettings.Values["SetHideCommandBar"];
             BackgroundColor.IsOn = (bool)localSettings.Values["SetBackgroundColor"];
-            if ((bool)localSettings.Values["SetBackgroundColor"]) Main.Background = new SolidColorBrush(Colors.Black);
-            else Main.Background = new SolidColorBrush(Color.FromArgb(0xFF, 38, 38, 38));
         }
 
         /// <summary>
@@ -79,11 +77,13 @@ namespace True_Love.Pages
                     {
                         Main.Background = new SolidColorBrush(Colors.Black);
                         localSettings.Values["SetBackgroundColor"] = true;
+                        MainPage.Current.PageBackgroundChange();
                     }
                     else
                     {
-                        Main.Background = new SolidColorBrush(Color.FromArgb(0xFF, 26, 26, 26));
+                        Main.Background = new SolidColorBrush((Color)this.Resources["SystemChromeMediumColor"]);
                         localSettings.Values["SetBackgroundColor"] = false;
+                        MainPage.Current.PageBackgroundChange();
                     }
                     break;
             }

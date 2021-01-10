@@ -14,6 +14,7 @@ using Windows.UI;
 using Windows.Storage;
 using System.Numerics;
 using Microsoft.Toolkit.Uwp.Connectivity;
+using Windows.UI.Xaml.Media;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -31,11 +32,12 @@ namespace True_Love.Pages
         double x = 0;
         public static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
         public double OpaqueIfEnabled(bool IsEnabled) => IsEnabled ? 1.0 : 0.6;
+        public static MainPage Current;
 
         public MainPage()
         {
             this.InitializeComponent();
-
+            Current = this;
             this.ManipulationMode = ManipulationModes.TranslateX; // 设置这个页面的手势模式为横向滑动
             this.ManipulationCompleted += The_ManipulationCompleted; // 订阅手势滑动结束后的事件
             this.ManipulationDelta += The_ManipulationDelta; // 订阅手势滑动事件
@@ -104,6 +106,12 @@ namespace True_Love.Pages
                 goBack.Invoked += BackInvoked;
                 this.KeyboardAccelerators.Add(goBack);
             }
+
+            // Listen to the window directly so we will respond to hotkeys regardless
+            // of which element has focus.
+            Window.Current.CoreWindow.PointerPressed += this.CoreWindow_PointerPressed;
+
+            PageBackgroundChange();
         }
 
         /// <summary>
@@ -220,6 +228,34 @@ namespace True_Love.Pages
             return true;
         }
 
+        /// <summary>
+        /// Invoked on every mouse click, touch screen tap, or equivalent interaction.
+        /// Used to detect browser-style next and previous mouse button clicks
+        /// to navigate between pages.
+        /// </summary>
+        /// <param name="sender">Instance that triggered the event.</param>
+        /// <param name="e">Event data describing the conditions that led to the event.</param>
+        private void CoreWindow_PointerPressed(CoreWindow sender, PointerEventArgs e)
+        {
+            var properties = e.CurrentPoint.Properties;
+
+            // Ignore button chords with the left, right, and middle buttons
+            if (properties.IsLeftButtonPressed || properties.IsRightButtonPressed ||
+                properties.IsMiddleButtonPressed)
+                return;
+
+            // If back or forward are pressed (but not both) navigate appropriately
+            bool backPressed = properties.IsXButton1Pressed;
+            bool forwardPressed = properties.IsXButton2Pressed;
+            if (backPressed ^ forwardPressed)
+            {
+                e.Handled = true;
+                if (backPressed) this.On_BackRequested();
+                //if (forwardPressed) this.TryGoForward();
+            }
+
+        }
+
         private void On_Navigated(object sender, NavigationEventArgs e)
         {
             NavView.IsBackEnabled = ContentFrame.CanGoBack;
@@ -245,8 +281,7 @@ namespace True_Love.Pages
                 NavView.Header = ((muxc.NavigationViewItem)NavView.SelectedItem)?.Content?.ToString().ToUpper();
                 ControlsChanged(item.Tag.ToString());
             }
-            if ((bool)localSettings.Values["SetBackgroundColor"]) ContentFrame.Background = new Windows.UI.Xaml.Media.SolidColorBrush(Colors.Black);
-            else ContentFrame.Background = new Windows.UI.Xaml.Media.SolidColorBrush(Color.FromArgb(0xFF, 38, 38, 38));
+
             GC.Collect();
         }
         #endregion
@@ -422,5 +457,11 @@ namespace True_Love.Pages
             }
         }
         #endregion        
+
+        public void PageBackgroundChange()
+        {
+            if ((bool)localSettings.Values["SetBackgroundColor"]) Main.Background = new SolidColorBrush(Colors.Black);
+            else Main.Background = new SolidColorBrush((Color)this.Resources["SystemChromeMediumColor"]);
+        }
     }
 }

@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="Transparent">
 
     <Grid ManipulationMode="System,TranslateX" x:Name="Main">
         <StackPanel Margin="0 40 0 0" VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -18,13 +18,13 @@
                 <LineBreak/>
             </TextBlock>
             <GridView x:Name="MyGridView" ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Disabled">
-                <!--<GridView.ItemTemplate>
+                <GridView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
                             <Image Source="{Binding Item.Thumbnail}" Stretch="Uniform"/>
                         </Grid>
                     </DataTemplate>
-                </GridView.ItemTemplate>-->
+                </GridView.ItemTemplate>
                 <GridView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <controls:StaggeredPanel DesiredColumnWidth="250"
