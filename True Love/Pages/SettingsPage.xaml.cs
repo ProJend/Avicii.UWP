@@ -75,14 +75,14 @@ namespace True_Love.Pages
                 case "backgroundColor":
                     if (BackgroundColor.IsOn == true)
                     {
-                        Main.Background = new SolidColorBrush(Colors.Black);
                         localSettings.Values["SetBackgroundColor"] = true;
+                        Main.Background = new SolidColorBrush(Colors.Black);
                         MainPage.Current.PageBackgroundChange();
                     }
                     else
                     {
-                        Main.Background = new SolidColorBrush((Color)this.Resources["SystemChromeMediumColor"]);
                         localSettings.Values["SetBackgroundColor"] = false;
+                        Main.Background = new SolidColorBrush((Color)this.Resources["SystemChromeMediumColor"]);
                         MainPage.Current.PageBackgroundChange();
                     }
                     break;

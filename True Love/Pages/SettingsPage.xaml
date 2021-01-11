@@ -114,7 +114,7 @@
 
                     <TextBlock Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}">
                         <Run Foreground="{ThemeResource SystemAccentColor}">What's New</Run><LineBreak/>
-                        <Run>Recent Records : 26/08/2020</Run>
+                        <Run>Recent Records : 11/01/2021</Run>
                     </TextBlock>
                     <TextBlock Foreground="DarkGray" Style="{ThemeResource BodyTextBlockStyle}">
                         <Run>新增：提示网络错误</Run><LineBreak/>

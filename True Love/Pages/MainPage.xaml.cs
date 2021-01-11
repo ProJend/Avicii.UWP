@@ -15,6 +15,7 @@ using Windows.Storage;
 using System.Numerics;
 using Microsoft.Toolkit.Uwp.Connectivity;
 using Windows.UI.Xaml.Media;
+using System.Xml.Serialization;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -45,8 +46,9 @@ namespace True_Love.Pages
             #region 兼容低版本号系统
             if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar")) // = WP
             {
-                BackgroundOfBar.Background = new Windows.UI.Xaml.Media.SolidColorBrush(Colors.Black);
-                CommandBar.Background = new Windows.UI.Xaml.Media.SolidColorBrush { Color = Colors.Black, Opacity = 0.7 };
+                if ((bool)localSettings.Values["SetBackgroundColor"]) BackgroundOfBar.Background = new SolidColorBrush(Colors.Black);
+                else BackgroundOfBar.Background = new SolidColorBrush((Color)this.Resources["SystemChromeMediumColor"]);
+                CommandBar.Background = new SolidColorBrush { Color = Colors.Black, Opacity = 0.7 };
             }
             else // = PC
             {
@@ -79,13 +81,6 @@ namespace True_Love.Pages
             ("image", typeof(ImagesPage)),
         };
 
-        private readonly List<(string Tag, Type Page)> _pagesforWP = new List<(string Tag, Type Page)>
-        {
-            ("home", typeof(HomePageforWP)),
-            ("comment", typeof(CommentsPage)),
-            ("image", typeof(ImagesPage)),
-        };
-
         private void NavView_Loaded(object sender, RoutedEventArgs e)
         {
             SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
@@ -110,8 +105,6 @@ namespace True_Love.Pages
             // Listen to the window directly so we will respond to hotkeys regardless
             // of which element has focus.
             Window.Current.CoreWindow.PointerPressed += this.CoreWindow_PointerPressed;
-
-            PageBackgroundChange();
         }
 
         /// <summary>
@@ -175,11 +168,6 @@ namespace True_Love.Pages
             if (navItemTag == "settings")
             {
                 _page = typeof(SettingsPage);
-            }
-            else if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
-            {
-                var item = _pagesforWP.FirstOrDefault(p => p.Tag.Equals(navItemTag));
-                _page = item.Page;
             }
             else
             {
@@ -266,13 +254,6 @@ namespace True_Love.Pages
                 NavView.Header = "SETTINGS";
 
                 ControlsChanged("settings");
-            }
-            else if (ContentFrame.SourcePageType != null && ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
-            {
-                var item = _pagesforWP.FirstOrDefault(p => p.Page == e.SourcePageType);
-                NavView.SelectedItem = NavView.MenuItems.OfType<muxc.NavigationViewItem>().First(n => n.Tag.Equals(item.Tag));
-                NavView.Header = ((muxc.NavigationViewItem)NavView.SelectedItem)?.Content?.ToString().ToUpper();
-                ControlsChanged(item.Tag.ToString());
             }
             else if (ContentFrame.SourcePageType != null)
             {
@@ -458,10 +439,33 @@ namespace True_Love.Pages
         }
         #endregion        
 
+        /// <summary>
+        /// 更改主题颜色
+        /// 方法
+        /// 即时变更
+        /// </summary>
         public void PageBackgroundChange()
         {
             if ((bool)localSettings.Values["SetBackgroundColor"]) Main.Background = new SolidColorBrush(Colors.Black);
             else Main.Background = new SolidColorBrush((Color)this.Resources["SystemChromeMediumColor"]);
+            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar") && (bool)localSettings.Values["SetBackgroundColor"]) BackgroundOfBar.Background = new SolidColorBrush(Colors.Black);
+            else BackgroundOfBar.Background = new SolidColorBrush((Color)this.Resources["SystemChromeMediumColor"]);
+
+        }
+
+        /// <summary>
+        /// 更改主题颜色
+        /// 数据绑定
+        /// 需要重启应用
+        /// </summary>
+        [XmlIgnore]
+        public string Color
+        {
+            get
+            {
+                if ((bool)localSettings.Values["SetBackgroundColor"]) return "Black";
+                else return "#FF1F1F1F";
+            }
         }
     }
 }
