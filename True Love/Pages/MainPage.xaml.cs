@@ -16,6 +16,9 @@ using System.Numerics;
 using Microsoft.Toolkit.Uwp.Connectivity;
 using Windows.UI.Xaml.Media;
 using System.Xml.Serialization;
+using Microsoft.Toolkit.Uwp.Notifications;
+using Windows.UI.Notifications;
+using Microsoft.QueryStringDotNET;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -392,16 +395,45 @@ namespace True_Love.Pages
                 case "comment":
                     CommandBarVisible();
                     RefreshButton.IsEnabled = true;
-                    if (!NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
+                    if (!NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable && (bool)localSettings.Values["ToastIsPush"] == false)
                     {
                         Icon.Text = "⚠";
-                        NameInfo.Text = "NetWork error, ";
-                        HyperlinkInfo.Text = "please check out your setting.";
-                        CheckHyperlink.NavigateUri = new Uri("ms-settings:network-status");
+                        NameInfo.Text = "There's no network available.";
                         if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7)) BackgroundOfBar.Translation = new Vector3(0, 0, 0);
                         else Notification.Visibility = Visibility.Visible;
                         Notification.Opacity = 1;
-                       
+                        if ((bool)localSettings.Values["ToastIsPush"] == false)
+                        {
+                            int conversationId = 384928;
+                            var content = new ToastContentBuilder()
+                            .AddToastActivationInfo(new QueryString()
+                            {
+                                { "action", "checkNetwork" },
+                                { "conversationId", conversationId.ToString() }
+                            }.ToString(), ToastActivationType.Foreground)
+                            .AddText("Time Out")
+                            .AddText("There's no network available.")
+                            .AddButton("Settings", ToastActivationType.Foreground, new QueryString()
+                            {
+                                { "action", "Settings" },
+                                { "conversationId", conversationId.ToString() }
+                            }.ToString())
+                            .AddButton("Close", ToastActivationType.Foreground, new QueryString()
+                            {
+                                { "action", "Close" },
+                                { "conversationId", conversationId.ToString() }
+                            }.ToString())
+                            .GetToastContent();
+
+                            // Create the notification
+                            var notif = new ToastNotification(content.GetXml())
+                            {
+                                ExpirationTime = DateTime.Now.AddSeconds(10)
+                            };
+
+                            // And show it!
+                            ToastNotificationManager.CreateToastNotifier().Show(notif);
+                        }
                     }
                     else NotificationCollapsed();
                     break;
@@ -449,7 +481,7 @@ namespace True_Love.Pages
             if ((bool)localSettings.Values["SetBackgroundColor"]) Main.Background = new SolidColorBrush(Colors.Black);
             else Main.Background = new SolidColorBrush((Color)this.Resources["SystemChromeMediumColor"]);
             if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar") && (bool)localSettings.Values["SetBackgroundColor"]) BackgroundOfBar.Background = new SolidColorBrush(Colors.Black);
-            else BackgroundOfBar.Background = new SolidColorBrush((Color)this.Resources["SystemChromeMediumColor"]);
+            else if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar")) BackgroundOfBar.Background = new SolidColorBrush((Color)this.Resources["SystemChromeMediumColor"]);
 
         }
 

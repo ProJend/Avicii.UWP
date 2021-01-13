@@ -11,6 +11,8 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Windows.Storage;
+using Windows.Foundation.Collections;
+using Microsoft.QueryStringDotNET;
 
 namespace True_Love
 {
@@ -70,24 +72,45 @@ namespace True_Love
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
 
-               //首次打开先过一边设置
+                //首次打开先过一边设置
                 if (localSettings.Values["SetLiveTiles"] == null)
                 {
                     localSettings.Values["SetLiveTiles"] = true;
                     localSettings.Values["SetHideCommandBar"] = false;
                     localSettings.Values["OnlyLiveTiles"] = true;
-                    localSettings.Values["SetBackgroundColor"] = true;               
+                    localSettings.Values["SetBackgroundColor"] = true;
+                    localSettings.Values["ToastIsPush"] = false;
                     var a = new SettingsPage();
                     //a.FirstRun();
                     a = null;
                     GC.Collect();
                 }
+                else localSettings.Values["ToastIsPush"] = false;
 
                 if (!ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar")) HideTitleBar();
                 //else ExtendAcrylicIntoStatusBar();
             }
         }
 
+        protected override async void OnActivated(IActivatedEventArgs e)
+        {
+            // Handle notification activation
+            if (e is ToastNotificationActivatedEventArgs toastActivationArgs)
+            {
+                QueryString args = QueryString.Parse(toastActivationArgs.Argument);
+                switch (args["action"])
+                {
+                    case "Settings":
+                        var settings = new Uri("ms-settings:network-status");
+                        var success = await Windows.System.Launcher.LaunchUriAsync(settings);
+                        localSettings.Values["ToastIsPush"] = true;
+                        break;
+                    case "Close":
+                        localSettings.Values["ToastIsPush"] = true;
+                        break;
+                }
+            }
+        }
 
         /// <summary>
         /// 导航到特定页失败时调用

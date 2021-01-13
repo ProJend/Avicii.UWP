@@ -28,7 +28,6 @@
     <Grid x:Name="LayoutRoot">
         <ScrollViewer x:Name="sv" ViewChanged="Sv_ViewChanged" VerticalScrollBarVisibility="Hidden" HorizontalScrollMode="Disabled" VerticalScrollMode="Enabled">
             <Frame x:Name="ContentFrame"/>
-          
         </ScrollViewer>
 
         <Grid x:Name="BackgroundOfBar" MinHeight="40" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="{ThemeResource NavigationViewTopPaneBackground}">
@@ -43,9 +42,6 @@
                 <Run x:Name="Icon" FontSize="20"></Run>
                 <Run Text="   "/>
                 <Run x:Name="NameInfo"></Run>
-                <Hyperlink x:Name="CheckHyperlink">
-                    <Run x:Name="HyperlinkInfo"/>
-                </Hyperlink>
             </TextBlock>
         </Grid>
 
