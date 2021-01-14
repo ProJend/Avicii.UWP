@@ -29,19 +29,14 @@ namespace True_Love.Pages
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        // 滚动条位置变量
-        public double scrlocation = 0;
-        // 导航栏当前显示状态（这个是为了减少不必要的开销，因为我做的是动画隐藏显示效果如果不用一个变量来记录当前导航栏状态的会重复执行隐藏或显示）
-        bool isshowbmbar = true;
-        double x = 0;
-        public static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
-        public double OpaqueIfEnabled(bool IsEnabled) => IsEnabled ? 1.0 : 0.6;
-        public static MainPage Current;
-
         public MainPage()
         {
             this.InitializeComponent();
-            Current = this;
+            Current = this;        
+        }
+
+        private void Main_Loaded(object sender, RoutedEventArgs e)
+        {
             this.ManipulationMode = ManipulationModes.TranslateX; // 设置这个页面的手势模式为横向滑动
             this.ManipulationCompleted += The_ManipulationCompleted; // 订阅手势滑动结束后的事件
             this.ManipulationDelta += The_ManipulationDelta; // 订阅手势滑动事件
@@ -68,9 +63,9 @@ namespace True_Love.Pages
                     ImagesPage.KeyboardAccelerators.Add(new KeyboardAccelerator { Key = VirtualKey.F3 });
                     BackTopButton.KeyboardAccelerators.Add(new KeyboardAccelerator { Key = VirtualKey.F6 });
                     RefreshButton.KeyboardAccelerators.Add(new KeyboardAccelerator { Key = VirtualKey.F5 });
-                }             
+                }
             }
-            #endregion   
+            #endregion
         }
 
         #region NavigationView
@@ -499,5 +494,14 @@ namespace True_Love.Pages
                 else return "#FF1F1F1F";
             }
         }
+
+        // 滚动条位置变量
+        public double scrlocation = 0;
+        // 导航栏当前显示状态（这个是为了减少不必要的开销，因为我做的是动画隐藏显示效果如果不用一个变量来记录当前导航栏状态的会重复执行隐藏或显示）
+        bool isshowbmbar = true;
+        double x = 0;
+        public static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+        public double OpaqueIfEnabled(bool IsEnabled) => IsEnabled ? 1.0 : 0.6;
+        public static MainPage Current;
     }
 }

@@ -127,7 +127,7 @@
   </PropertyGroup>
   <PropertyGroup Label="MultilingualAppToolkit">
     <MultilingualAppToolkitVersion>4.0</MultilingualAppToolkitVersion>
-    <MultilingualFallbackLanguage>zh-CN</MultilingualFallbackLanguage>
+    <MultilingualFallbackLanguage>en</MultilingualFallbackLanguage>
     <TranslationReport Condition="'$(Configuration)' == 'Release'">true</TranslationReport>
     <SuppressPseudoWarning Condition="'$(Configuration)' == 'Debug'">true</SuppressPseudoWarning>
   </PropertyGroup>
@@ -312,12 +312,19 @@
     <Content Include="Assets\Fonts\IconFont.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <PRIResource Include="String\en\Resources.resw" />
+    <PRIResource Include="String\zh-Hans\Resources.resw" />
+    <PRIResource Include="String\zh-Hant\Resources.resw" />
     <None Include="TrueLove.pfx" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <XliffResource Include="MultilingualResources\True Love.zh-Hans.xlf" />
+    <XliffResource Include="MultilingualResources\True Love.zh-Hant.xlf" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

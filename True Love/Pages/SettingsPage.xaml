@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" RequestedTheme="Dark"
-    Background="Transparent"
+    Background="Transparent" Loaded="Settings_Loaded"
     xmlns:v1709="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 5)"
     xmlns:v1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)">
     <Page.Resources>
@@ -136,8 +136,8 @@
                         <Run Foreground="{ThemeResource SystemAccentColor}">About This App</Run><LineBreak/>
                         <Run>TRUE LOVE</Run>
                     </TextBlock>
-                    <TextBlock Style="{ThemeResource BodyTextBlockStyle}">
-                        <Run Foreground="DarkGray">Version : 0.2.0.0</Run><LineBreak/>
+                    <TextBlock Style="{ThemeResource BodyTextBlockStyle}">                       
+                        <Run x:Name="VersionInfo" Foreground="DarkGray"></Run><LineBreak/>
                         <Run Foreground="DarkGray">2020 @ ProJend</Run><LineBreak/>
                         <Run Foreground="DarkGray">Power By Tim Bergling</Run><LineBreak/>
                         <Run>This App will help you easy to browse all about Tim Bergling.</Run>

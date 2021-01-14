@@ -5,8 +5,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" RequestedTheme="Dark"
-    xmlns:v1709="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 5)"
-    xmlns:v1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.Resources>
         <Style TargetType="StackPanel" x:Key="Left">
@@ -88,13 +86,13 @@
                         <TextBlock Text="Avicii Memory boaid" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource TitleTextBlockStyle}"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="16 0 0 0">
                             <TextBlock Text="C O M M E N T S" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            <Button Background="Transparent" Margin="0 0 0 0" Width="40" Height="40" Click="Button_Click" Tag="Shop" v1709:Style="{StaticResource ButtonRevealStyle}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Button Background="Transparent" Margin="0 0 0 0" Width="40" Height="40" Click="Button_Click" Tag="Shop" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <FontIcon Margin="0 0 0 2" Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE761;"/>
                             </Button>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="16 0 0 0">
                             <TextBlock Text="I M A G E S" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            <Button Background="Transparent" Width="40" Height="40" Click="Button_Click" Tag="Shop" v1709:Style="{StaticResource ButtonRevealStyle}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Button Background="Transparent" Width="40" Height="40" Click="Button_Click" Tag="Shop" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <FontIcon Margin="0 0 0 2" Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE761;"/>
                             </Button>
                         </StackPanel>

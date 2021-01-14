@@ -9,6 +9,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.Foundation.Metadata;
 using Windows.UI;
 using Windows.UI.Xaml.Media;
+using Windows.ApplicationModel;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -26,13 +27,18 @@ namespace True_Love.Pages
         public SettingsPage()
         {
             this.InitializeComponent();           
+        }
 
+        private void Settings_Loaded(object sender, RoutedEventArgs e)
+        {
             // 判定状态
             if (Language != "zh-Hans-CN") FAQ_CN.Visibility = Visibility.Collapsed;
             if (!ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5)) HotKeys.Visibility = Visibility.Collapsed;
             LiveTiles.IsOn = (bool)localSettings.Values["SetLiveTiles"];
             HideCommandbar.IsOn = (bool)localSettings.Values["SetHideCommandBar"];
             BackgroundColor.IsOn = (bool)localSettings.Values["SetBackgroundColor"];
+            var version = Package.Current.Id.Version;
+            VersionInfo.Text = $"Version : {version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
         }
 
         /// <summary>
