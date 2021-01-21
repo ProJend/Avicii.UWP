@@ -10,6 +10,7 @@ using Windows.Foundation.Metadata;
 using Windows.UI;
 using Windows.UI.Xaml.Media;
 using Windows.ApplicationModel;
+using True_Love.Pages.XAML_ContentDialog;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -127,15 +128,14 @@ namespace True_Love.Pages
             {
                 Title = titleText,
                 CloseButtonText = closeText,
-                Content = new Release(),
+                Content = new ReleaseNotes(),
                 Background = new SolidColorBrush(Colors.Black),
+                BorderBrush = (Brush)this.Resources["SystemControlBackgroundListMediumRevealBorderBrush"],
             };
-
             if (!ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
             {
                 release.CloseButtonStyle = (Style)this.Resources["ButtonRevealStyle"];
             }
-
             await release.ShowAsync();
         }
 

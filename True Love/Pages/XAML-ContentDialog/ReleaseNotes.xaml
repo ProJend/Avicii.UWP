@@ -1,8 +1,8 @@
 ﻿<Page
-    x:Class="True_Love.Pages.Release"
+    x:Class="True_Love.Pages.XAML_ContentDialog.ReleaseNotes"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:True_Love.Pages"
+    xmlns:local="using:True_Love.Pages.XAML_ContentDialog"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" RequestedTheme="Dark"
@@ -17,7 +17,7 @@
             <TextBlock Text="OS 1709 系统版本是分水岭，如果低于该版本会有如下的功能缺失：" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" TextWrapping="Wrap"/>
         
             <TextBlock><LineBreak/><LineBreak/></TextBlock>-->
-            <TextBlock Text="🚀 0.2.0.0 - 2020/26/08" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
+            <TextBlock Text="🚀 0.2.0.0 - 2020/08/26" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
             <TextBlock Style="{ThemeResource BodyTextBlockStyle}">
                 <Run>新增：增加了底部工具栏，带有刷新网页，回到顶部的功能，并具有出色的动画</Run><LineBreak/>
                 <Run>新增：可以滑出滑入汉堡菜单</Run><LineBreak/>

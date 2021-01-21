@@ -19,6 +19,7 @@ using System.Xml.Serialization;
 using Microsoft.Toolkit.Uwp.Notifications;
 using Windows.UI.Notifications;
 using Microsoft.QueryStringDotNET;
+using True_Love.Pages.XAML_ContentDialog;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -66,6 +67,10 @@ namespace True_Love.Pages
                 }
             }
             #endregion
+#if RELEASE
+            ImagesPage.Visibility = Visibility.Collapsed;
+            AddButton.Visibility = Visibility.Collapsed;
+#endif
         }
 
         #region NavigationView
@@ -263,9 +268,9 @@ namespace True_Love.Pages
 
             GC.Collect();
         }
-        #endregion
+#endregion
 
-        #region 底部工具栏
+#region 底部工具栏
         /// <summary>
         /// 鼠标右击工具栏活动。
         /// </summary>
@@ -373,7 +378,34 @@ namespace True_Love.Pages
         {
             CommentsPage.Current.webview.Refresh();           
         }
+        /// <summary>
+        /// 新建评论按钮。
+        /// </summary>
+        private async void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            var release = new ContentDialog()
+            {
+                Title = "Write your story of love here:",
+                CloseButtonText = "Cancel",
+                PrimaryButtonText = "Send",
+                BorderBrush = (Brush)this.Resources["SystemControlBackgroundListMediumRevealBorderBrush"],
+                PrimaryButtonStyle = (Style)this.Resources["AccentButtonStyle"],
+                SecondaryButtonText = "Save",
+                //DefaultButton = ContentDialogButton.Primary,
+                Content = new NewComment(),
+                Background = new SolidColorBrush(Colors.Black),
+            };
+            if (!ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+            {
+                release.CloseButtonStyle = (Style)this.Resources["ButtonRevealStyle"];
+                release.SecondaryButtonStyle = (Style)this.Resources["ButtonRevealStyle"];
+            }
+            var a = await release.ShowAsync();
+            if (a == ContentDialogResult.Primary)
+            {
 
+            }
+        }
         /// <summary>
         /// 检查控件可用状态
         /// </summary>
@@ -383,7 +415,10 @@ namespace True_Love.Pages
             switch (tag)
             {
                 case "home":
+#if RELEASE
                     CommandBarCollapsed();
+#endif
+                    RefreshButton.IsEnabled = false;
                     if (Notification.Visibility == Visibility.Visible && Notification.Opacity == 1) NotificationCollapsed();
                     break;
 
@@ -464,7 +499,7 @@ namespace True_Love.Pages
                 else Notification.Visibility = Visibility.Collapsed;
             }
         }
-        #endregion        
+        #endregion
 
         /// <summary>
         /// 更改主题颜色
@@ -488,11 +523,7 @@ namespace True_Love.Pages
         [XmlIgnore]
         public string Color
         {
-            get
-            {
-                if ((bool)localSettings.Values["SetBackgroundColor"]) return "Black";
-                else return "#FF1F1F1F";
-            }
+            get => (bool)localSettings.Values["SetBackgroundColor"] ? "Black" : "#FF1F1F1F";
         }
 
         // 滚动条位置变量
@@ -502,6 +533,6 @@ namespace True_Love.Pages
         double x = 0;
         public static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
         public double OpaqueIfEnabled(bool IsEnabled) => IsEnabled ? 1.0 : 0.6;
-        public static MainPage Current;
+        public static MainPage Current;     
     }
 }

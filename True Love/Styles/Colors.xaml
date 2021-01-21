@@ -5,7 +5,25 @@
     xmlns:local="using:True_Love.Styles">
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Dark">
-            <Color x:Key="SystemAccentColor">#addbe0</Color>
+            <Color x:Key="SystemAccentColor">#ADDBE0</Color>
+            <Color x:Key="SystemAccentColorLight1">#DFFEFF</Color>
+            <Color x:Key="SystemAccentColorLight2">#DFFEFF</Color>
+            <Color x:Key="SystemAccentColorLight3">#DFFEFF</Color>
+            <Color x:Key="SystemAccentColorDark1">#8FC5CB</Color>
+            <Color x:Key="SystemAccentColorDark2">#71AFB6</Color>
+            <Color x:Key="SystemAccentColorDark3">#539AA2</Color>
+            <muxm:RevealBackgroundBrush x:Key="AccentRevealBackgroundBrush"
+                                          FallbackColor="{ThemeResource SystemAccentColor}"
+                                          TargetTheme="Dark"
+                                          Color="{ThemeResource SystemAccentColor}"/>
+            <muxm:RevealBackgroundBrush x:Key="DarkAccentRevealBackgroundBrush"
+                                          FallbackColor="{ThemeResource SystemAccentColorDark2}"
+                                          TargetTheme="Dark"
+                                          Color="{ThemeResource SystemAccentColorDark2}"/>
+            <muxm:RevealBackgroundBrush x:Key="LightAccentRevealBackgroundBrush"
+                                          FallbackColor="{ThemeResource SystemAccentColorLight3}"
+                                          TargetTheme="Dark"
+                                          Color="{ThemeResource SystemAccentColorLight3}"/>
             <muxm:AcrylicBrush x:Key="NavigationViewDefaultPaneBackground"
                                           BackgroundSource="Backdrop"
                                           TintColor="Black"
@@ -20,6 +38,9 @@
                                           BackgroundSource="HostBackdrop" 
                                           TintColor="Black"
                                           TintOpacity=".5"/>
+            <Style TargetType="Button" x:Key="SystemAccentColorButton">
+                <Setter Property="Foreground" Value="Black"/>
+            </Style>
         </ResourceDictionary>
         <ResourceDictionary x:Key="HighContrast">
             <Color x:Key="SystemAccentColor">#1AEBFF</Color>
@@ -37,6 +58,9 @@
                                           BackgroundSource="HostBackdrop" 
                                           TintColor="Black"
                                           TintOpacity=".5"/>
+            <Style TargetType="Button" x:Key="SystemAccentColorButton">
+                <Setter Property="Foreground" Value="Black"/>
+            </Style>
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
 </ResourceDictionary>
