@@ -31,12 +31,12 @@ namespace True_Love.Pages.XAML_ContentDialog
             {
                 // Application now has read/write access to the picked file
                 this.imageInfo.Text = "Picked photo : " + file.Name;
-                imageInfo.Visibility = Visibility.Visible;
+                imageInfo.Opacity = 1;
             }
             else
             {
                 this.imageInfo.Text = "Operation cancelled.";
-                imageInfo.Visibility = Visibility.Visible;
+                imageInfo.Opacity = 1;
             }
         }
 
@@ -44,6 +44,27 @@ namespace True_Love.Pages.XAML_ContentDialog
         {
             int i = 500 - comment.Text.Length;
             textLength.Text = i + " of 500 Character(s) left";
+            text.Opacity = 1;
+        }
+
+        public void Save()
+        {
+            comment.Text = MainPage.Current.comment;
+            nickName.Text = MainPage.Current.nickName;
+        }
+
+        public string commentPlain
+        {
+            get => comment.Text.ToString();
+        }
+        public string nicknamePlain
+        {
+            get => nickName.Text.ToString();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            datePicker.Date = DateTime.Today;
         }
     }
 }

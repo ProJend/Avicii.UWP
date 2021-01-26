@@ -40,14 +40,7 @@ namespace True_Love.Pages
             BackgroundColor.IsOn = (bool)localSettings.Values["SetBackgroundColor"];
             var version = Package.Current.Id.Version;
             VersionInfo.Text = $"Version : {version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
-        }
-
-        /// <summary>
-        /// 留给首次运行应用
-        /// </summary>
-        public void FirstRun()
-        {
-            
+            releasedDate.Text = $"Installation Date : {Package.Current.InstalledDate.ToLocalTime().DateTime}";
         }
 
         /// <summary>
@@ -130,13 +123,17 @@ namespace True_Love.Pages
                 CloseButtonText = closeText,
                 Content = new ReleaseNotes(),
                 Background = new SolidColorBrush(Colors.Black),
-                BorderBrush = (Brush)this.Resources["SystemControlBackgroundListMediumRevealBorderBrush"],
             };
             if (!ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
             {
                 release.CloseButtonStyle = (Style)this.Resources["ButtonRevealStyle"];
+                release.BorderBrush = (Brush)this.Resources["SystemControlBackgroundListMediumRevealBorderBrush"];
             }
-            await release.ShowAsync();
+            try
+            {
+                await release.ShowAsync();
+            }
+            catch (System.Runtime.InteropServices.COMException) { } //Nothing todo.
         }
 
         #region Links

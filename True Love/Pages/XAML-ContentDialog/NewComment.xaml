@@ -6,19 +6,31 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" RequestedTheme="Dark"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    xmlns:v1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
+    >
 
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
-        <TextBox x:Name="comment" TextChanged="comment_TextChanged" MaxLength="500" TextWrapping="Wrap" MinWidth="400" MaxWidth="700" MaxHeight="600" Padding="15" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"/>
+        <DatePicker HorizontalAlignment="Stretch" x:Name="datePicker" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"/>
         <TextBlock>
+            <LineBreak/>
+        </TextBlock>
+        <TextBox x:Name="comment" TextChanged="comment_TextChanged" PlaceholderText="Comment"  MaxLength="500" TextWrapping="Wrap" MinWidth="400" MaxWidth="700" MaxHeight="600" Padding="10" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"/>
+        <TextBlock Opacity="0" x:Name="text">
+            <v1809:TextBlock.OpacityTransition>
+                <ScalarTransition/>
+            </v1809:TextBlock.OpacityTransition>
             <Run x:Name="textLength"></Run><LineBreak/>
         </TextBlock>
-        <TextBox MaxHeight="80" PlaceholderText="Your name"  Padding="15 5 15 5" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"/>
+        <TextBox x:Name="nickName" MaxHeight="80" PlaceholderText="Your name" Padding="10 5 10 5" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"/>
         <TextBlock>
             <LineBreak/><Run Foreground="DarkGray">Your images must be .jpg, .gif, or .png and max 3MB</Run><LineBreak/>
         </TextBlock>
         <Button x:Name="SelectFiles" Content="Select Files" Click="SelectFiles_Click" Height="32" HorizontalAlignment="Stretch" Style="{ThemeResource ButtonRevealStyle}"/>
-        <TextBlock Visibility="Collapsed" x:Name="imageInfo">
+        <TextBlock Opacity="0" x:Name="imageInfo">
+            <v1809:TextBlock.OpacityTransition>
+                <ScalarTransition/>
+            </v1809:TextBlock.OpacityTransition>
             <Run ></Run>
         </TextBlock>
         <!--<Image x:Name="image"/>-->

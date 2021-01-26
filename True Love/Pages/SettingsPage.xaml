@@ -88,7 +88,7 @@
                             <Run Foreground="DarkGray">Back</Run><LineBreak/>
                             <Run>ESC or Win + Backspace</Run><LineBreak/><LineBreak/>
                             <Run Foreground="DarkGray">Fullscreen</Run><LineBreak/>
-                            <Run>Shift + Win + Enter</Run><LineBreak/><LineBreak/>
+                            <Run>Shift + Win + Enter</Run>
                         </TextBlock>
                     </StackPanel>
 
@@ -112,9 +112,9 @@
                             What's New-->
                     <TextBlock><LineBreak/><LineBreak/></TextBlock>
 
-                    <TextBlock Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}">
+                    <TextBlock Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" TextWrapping="Wrap">
                         <Run Foreground="{ThemeResource SystemAccentColor}">What's New</Run><LineBreak/>
-                        <Run>Recent Records : 11/01/2021</Run>
+                        <Run x:Name="releasedDate"></Run>
                     </TextBlock>
                     <TextBlock Foreground="DarkGray" Style="{ThemeResource BodyTextBlockStyle}">
                         <Run>新增：提示网络错误</Run><LineBreak/>

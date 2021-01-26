@@ -52,10 +52,8 @@ namespace True_Love.Pages
             else // = PC
             {
                 Window.Current.SetTitleBar(AppTitleBar);
-
                 BackTopButton.Style = (Style)this.Resources["AppBarButtonRevealStyle"];
                 RefreshButton.Style = (Style)this.Resources["AppBarButtonRevealStyle"];
-
                 if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5))// > OS15063
                 {
                     // 键盘快捷键
@@ -67,7 +65,7 @@ namespace True_Love.Pages
                 }
             }
             #endregion
-#if RELEASE
+#if !DEBUG
             ImagesPage.Visibility = Visibility.Collapsed;
             AddButton.Visibility = Visibility.Collapsed;
 #endif
@@ -214,7 +212,6 @@ namespace True_Love.Pages
                 (NavView.DisplayMode == muxc.NavigationViewDisplayMode.Compact ||
                  NavView.DisplayMode == muxc.NavigationViewDisplayMode.Minimal))
                 return false;
-
             ContentFrame.GoBack();
             return true;
         }
@@ -255,7 +252,6 @@ namespace True_Love.Pages
                 // SettingsItem is not part of NavView.MenuItems, and doesn't have a Tag.
                 NavView.SelectedItem = (muxc.NavigationViewItem)NavView.SettingsItem;
                 NavView.Header = "SETTINGS";
-
                 ControlsChanged("settings");
             }
             else if (ContentFrame.SourcePageType != null)
@@ -268,16 +264,12 @@ namespace True_Love.Pages
 
             GC.Collect();
         }
-#endregion
-
-#region 底部工具栏
+        #endregion
+        #region 底部工具栏
         /// <summary>
         /// 鼠标右击工具栏活动。
         /// </summary>
-        private void CommandBar_RightTapped(object sender, RightTappedRoutedEventArgs e)
-        {
-            CommandBar.IsOpen = !CommandBar.IsOpen == true;
-        }
+        private void CommandBar_RightTapped(object sender, RightTappedRoutedEventArgs e) => CommandBar.IsOpen = !CommandBar.IsOpen == true;
 
         /// <summary>
         /// 检查工具栏相关的按钮可用状态。
@@ -287,53 +279,24 @@ namespace True_Love.Pages
         {
             if (sv.VerticalOffset != scrlocation)
             {
-                if (bar.IsTapEnabled != false)
-                {
-                    if ((bool)localSettings.Values["SetHideCommandBar"])
-                    {
-                        //滚动条当前位置大于存储的变量值时代表往下滑，隐藏底部栏
-                        if (sv.VerticalOffset > scrlocation)
-                        {
-                            //隐藏
-                            if (isshowbmbar)
-                            {
-                                //通过动画来隐藏
-                                //bar.Translation = new Vector3(0, 40, 0);
-                                Close.Begin();
-                                isshowbmbar = false;
-                            }
-                        }
-                        //反之展开
-                        else
-                        {
-                            //显示
-                            if (isshowbmbar == false)
-                            {
-                                //通过动画来隐藏
-                                //bar.Translation = new Vector3(0, 0, 0);
-                                Open.Begin();
-                                isshowbmbar = true;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        if (isshowbmbar == false)
-                        {
-                            //bar.Translation = new Vector3(0, 0, 0);
-                            Open.Begin();
-                            isshowbmbar = true;
-                        }
+                bool IsWide;
+                if (!bar.IsTapEnabled) IsWide = false;
+                else if ((bool)localSettings.Values["SetHideCommandBar"]) IsWide = true;
+                else IsWide = false;
+                if (sv.VerticalOffset > scrlocation && IsWide)
+                {   //滚动条当前位置大于存储的变量值时代表往下滑，隐藏底部栏
+                    if (IsShowBar)
+                    {   //通过动画来隐藏
+                        //bar.Translation = new Vector3(0, 40, 0);
+                        Close.Begin();
+                        IsShowBar = false;
                     }
                 }
-                else
-                {
-                    if (isshowbmbar == false)
-                    {
-                        //bar.Translation = new Vector3(0, 0, 0);
-                        Open.Begin();
-                        isshowbmbar = true;
-                    }
+                else if(!IsShowBar)
+                {   //通过动画来隐藏
+                    //bar.Translation = new Vector3(0, 0, 0);
+                    Open.Begin();
+                    IsShowBar = true;
                 }
 
                 //当滚动条高度大于1时，返回顶部按钮维持使用状态
@@ -358,54 +321,61 @@ namespace True_Love.Pages
         /// <param name="zoomFactor">Z：斜度。</param>
         public void ChangeView(double? horizontalOffset,
                                double? verticalOffset,
-                               float? zoomFactor)
-        {
-
-        }
+                               float? zoomFactor) { }
 
         /// <summary>
         /// 返回顶部按钮。
         /// </summary>
-        private void BackToTop_Click(object sender, RoutedEventArgs e)
-        {
-            sv.ChangeView(null, 0, null);
-        }
+        private void BackToTop_Click(object sender, RoutedEventArgs e) => sv.ChangeView(null, 0, null);
 
         /// <summary>
         /// 刷新按钮。
         /// </summary>
-        private void Refresh_Click(object sender, RoutedEventArgs e)
-        {
-            CommentsPage.Current.webview.Refresh();           
-        }
+        private void Refresh_Click(object sender, RoutedEventArgs e) => CommentsPage.Current.webview.Refresh();
+
         /// <summary>
         /// 新建评论按钮。
         /// </summary>
         private async void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            var release = new ContentDialog()
+            var newComment = new NewComment();
+            if (!string.IsNullOrEmpty(comment) || !string.IsNullOrEmpty(nickName))
+            {
+                newComment.Save();
+            }        
+            var Comment = new ContentDialog()
             {
                 Title = "Write your story of love here:",
                 CloseButtonText = "Cancel",
                 PrimaryButtonText = "Send",
-                BorderBrush = (Brush)this.Resources["SystemControlBackgroundListMediumRevealBorderBrush"],
                 PrimaryButtonStyle = (Style)this.Resources["AccentButtonStyle"],
                 SecondaryButtonText = "Save",
                 //DefaultButton = ContentDialogButton.Primary,
-                Content = new NewComment(),
+                Content = newComment,
                 Background = new SolidColorBrush(Colors.Black),
             };
             if (!ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
             {
-                release.CloseButtonStyle = (Style)this.Resources["ButtonRevealStyle"];
-                release.SecondaryButtonStyle = (Style)this.Resources["ButtonRevealStyle"];
+                Comment.CloseButtonStyle = (Style)this.Resources["ButtonRevealStyle"];
+                Comment.SecondaryButtonStyle = (Style)this.Resources["ButtonRevealStyle"];
+                Comment.BorderBrush = (Brush)this.Resources["SystemControlBackgroundListMediumRevealBorderBrush"];
             }
-            var a = await release.ShowAsync();
-            if (a == ContentDialogResult.Primary)
+            try
             {
+                var a = await Comment.ShowAsync();
+                if (a == ContentDialogResult.Primary)
+                {
 
+                }
+                else if (a == ContentDialogResult.Secondary)
+                {
+                    comment = newComment.commentPlain;
+                    nickName = newComment.nicknamePlain;
+                }
             }
+            catch (System.Runtime.InteropServices.COMException) { } //Nothing todo.
         }
+
         /// <summary>
         /// 检查控件可用状态
         /// </summary>
@@ -415,7 +385,7 @@ namespace True_Love.Pages
             switch (tag)
             {
                 case "home":
-#if RELEASE
+#if !DEBUG
                     CommandBarCollapsed();
 #endif
                     RefreshButton.IsEnabled = false;
@@ -512,7 +482,6 @@ namespace True_Love.Pages
             else Main.Background = new SolidColorBrush((Color)this.Resources["SystemChromeMediumColor"]);
             if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar") && (bool)localSettings.Values["SetBackgroundColor"]) BackgroundOfBar.Background = new SolidColorBrush(Colors.Black);
             else if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar")) BackgroundOfBar.Background = new SolidColorBrush((Color)this.Resources["SystemChromeMediumColor"]);
-
         }
 
         /// <summary>
@@ -529,10 +498,12 @@ namespace True_Love.Pages
         // 滚动条位置变量
         public double scrlocation = 0;
         // 导航栏当前显示状态（这个是为了减少不必要的开销，因为我做的是动画隐藏显示效果如果不用一个变量来记录当前导航栏状态的会重复执行隐藏或显示）
-        bool isshowbmbar = true;
+        bool IsShowBar = true;
         double x = 0;
         public static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
         public double OpaqueIfEnabled(bool IsEnabled) => IsEnabled ? 1.0 : 0.6;
-        public static MainPage Current;     
+        public static MainPage Current;
+        public string comment;
+        public string nickName;
     }
 }

@@ -203,7 +203,7 @@
                 </VisualState>
                 <VisualState>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1130"/>
+                        <AdaptiveTrigger MinWindowWidth="1000"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="NavView.PaneDisplayMode" Value="Top"/>
@@ -213,9 +213,10 @@
                         <Setter Target="CommandBar.DefaultLabelPosition" Value="Right"/>
                         <Setter Target="CommandBar.Background" Value="Transparent"/>
                         <Setter Target="bar.VerticalAlignment" Value="Top"/>
-                        <Setter Target="bar.HorizontalAlignment" Value="Center"/>
+                        <Setter Target="bar.HorizontalAlignment" Value="Right"/>
                         <Setter Target="bar.IsTapEnabled" Value="false"/>
                         <Setter Target="CommandBar.(ToolTipService.ToolTip)" Value="Can't drag!"/>
+                        <Setter Target="bar.Margin" Value="0 0 157 0"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
