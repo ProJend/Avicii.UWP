@@ -23,7 +23,18 @@ Certificate Passwords : abc123
 ### Translation
 Begin soon with the Release of v1.0 out.
 
-## Installation
+### Installation
 For sideloaded packages, see [this](https://docs.microsoft.com/en-us/windows/application-management/sideload-apps-in-windows-10).
 
-😕 This time is no available on Microsoft Store.
+😕 This time is no available at Microsoft Store.
+
+## License
+### Nuget
+- [WindowsCommunityToolkit](https://github.com/windows-toolkit/WindowsCommunityToolkit) is licensed under [MIT](https://github.com/windows-toolkit/WindowsCommunityToolkit/blob/master/license.md).
+- [microsoft-ui-xaml](https://github.com/microsoft/microsoft-ui-xaml) is licensed under [MIT](https://github.com/microsoft/microsoft-ui-xaml/blob/master/LICENSE).
+
+### Quotation
+- [上滑隐藏导航栏下滑显示](https://www.cnblogs.com/lonelyxmas/p/9919869.html) - NET未来之路
+- [制作汉堡菜单及添加滑动手势](https://blog.csdn.net/github_36704374/article/details/59580697) - C_Li_
+- [Live Tile](https://github.com/LittleFish33/UWPSample) - LittleFish33
+- [唤起应用商城，邮件](https://www.cnblogs.com/MzwCat/p/7667702.html) - 5只猫

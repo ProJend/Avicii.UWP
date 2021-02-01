@@ -24,6 +24,7 @@
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
+        <!--#region AccentButtonStyle-->
         <Style x:Key="AccentButtonStyle" TargetType="Button">
             <Setter Property="Foreground" Value="Black" />
             <Setter Property="Background" Value="{ThemeResource AccentRevealBackgroundBrush}" />
@@ -101,6 +102,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
+            <!--#endregion-->
     </Page.Resources>
 
     <Grid x:Name="LayoutRoot">
@@ -113,7 +115,7 @@
                 <Vector3Transition/>
             </v1809:Grid.TranslationTransition>
             <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" x:Name="AppTitleBar" Background="Transparent"/>
-            <TextBlock x:Name="Notification" Height="40" Margin="6 40 0 0">                 
+            <TextBlock x:Name="Notification" Height="40" Margin="6 40 0 0">
                 <v1809:TextBlock.OpacityTransition>
                     <ScalarTransition/>
                 </v1809:TextBlock.OpacityTransition>
@@ -153,7 +155,7 @@
                         <ScalarTransition/>
                     </v1809:AppBarButton.OpacityTransition>
                 </AppBarButton>
-                <AppBarButton x:Name="AddButton" Icon="Add" Label="New Comment" ToolTipService.ToolTip="Share your menory" Click="AddButton_Click" Opacity="{x:Bind OpaqueIfEnabled(AddButton.IsEnabled), Mode=OneWay}">
+                <AppBarButton Visibility="Collapsed" x:Name="AddButton" Icon="Add" Label="New Comment" ToolTipService.ToolTip="Share your menory" Click="AddButton_Click" Opacity="{x:Bind OpaqueIfEnabled(AddButton.IsEnabled), Mode=OneWay}">
                     <v1809:AppBarButton.OpacityTransition>
                         <ScalarTransition/>
                     </v1809:AppBarButton.OpacityTransition>
@@ -177,7 +179,7 @@
                 <muxc:NavigationViewItemHeader Content="True" x:Name="MainPagesHeader"/>
                 <muxc:NavigationViewItem Content="Memory" x:Name="MemoryPage" Icon="Home" Tag="home"/>
                 <muxc:NavigationViewItem Content="Comments" x:Name="HomePage" Icon="World" Tag="comment"/>
-                <muxc:NavigationViewItem Content="Images" x:Name="ImagesPage" Tag="image" Visibility="Visible">
+                <muxc:NavigationViewItem Content="Images" x:Name="ImagesPage" Tag="image" Visibility="Collapsed">
                     <muxc:NavigationViewItem.Icon>
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEB9F;"/>
                     </muxc:NavigationViewItem.Icon>
@@ -188,7 +190,7 @@
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
-                <VisualState>
+                <VisualState x:Name="g">
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger
                         MinWindowWidth="{x:Bind NavView.CompactModeThresholdWidth}"/>
@@ -199,26 +201,29 @@
                         <Setter Target="MainPagesHeader.Visibility" Value="Collapsed"/>
                         <Setter Target="NavSeparator.Visibility" Value="Visible"/>
                         <!-- Leave the next line for left-only navigation. -->
+                        <Setter Target="bar.VerticalAlignment" Value="Top"/>
+                        <Setter Target="bar.HorizontalAlignment" Value="Right"/>
+                        <Setter Target="bar.Margin" Value="0 0 157 0"/>
+                        <Setter Target="CommandBar.Background" Value="Transparent"/>
+                        <Setter Target="CommandBar.Height" Value="40"/>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1000"/>
+                        <AdaptiveTrigger MinWindowWidth="920"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="NavView.PaneDisplayMode" Value="Top"/>
                         <Setter Target="MainPagesHeader.Visibility" Value="Collapsed"/>
                         <Setter Target="NavSeparator.Visibility" Value="Visible"/>
-                        <!-- Leave the next line for left-only navigation. -->
-                        <Setter Target="CommandBar.DefaultLabelPosition" Value="Right"/>
-                        <Setter Target="CommandBar.Background" Value="Transparent"/>
                         <Setter Target="bar.VerticalAlignment" Value="Top"/>
-                        <Setter Target="bar.HorizontalAlignment" Value="Right"/>
-                        <Setter Target="bar.IsTapEnabled" Value="false"/>
-                        <Setter Target="CommandBar.(ToolTipService.ToolTip)" Value="Can't drag!"/>
-                        <Setter Target="bar.Margin" Value="0 0 157 0"/>
+                        <Setter Target="bar.HorizontalAlignment" Value="Center"/>
+                        <Setter Target="CommandBar.Background" Value="Transparent"/>
+                        <Setter Target="CommandBar.Height" Value="40"/>
+                        <Setter Target="CommandBar.DefaultLabelPosition" Value="Right"/>
                     </VisualState.Setters>
                 </VisualState>
+
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
     </Grid>
