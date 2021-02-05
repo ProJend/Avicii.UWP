@@ -9,7 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <!--这里是储存更新记录的地方。
-        This is the page of put down the released notes.-->
+        This page for put down the released notes.-->
 
     <ScrollViewer>
         <StackPanel>
@@ -17,14 +17,21 @@
             <TextBlock Text="OS 1709 系统版本是分水岭，如果低于该版本会有如下的功能缺失：" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" TextWrapping="Wrap"/>
         
             <TextBlock><LineBreak/><LineBreak/></TextBlock>-->
-            <TextBlock Text="🚀 0.2.0.0 - 2020/08/26" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
+            <TextBlock Text="🚲 0.2.2.0 - 2021/01/26" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
             <TextBlock Style="{ThemeResource BodyTextBlockStyle}">
-                <Run>新增：增加了底部工具栏，带有刷新网页，回到顶部的功能，并具有出色的动画</Run><LineBreak/>
+                <Run>新增：提示网络错误</Run><LineBreak/>
+                <Run>新增：深灰色夜间主题</Run><LineBreak/>
+                <Run>改进：响应鼠标返回键</Run><LineBreak/>
+                <Run>改进：New Logo</Run><LineBreak/>
+            </TextBlock>
+            <TextBlock Text="🚀 0.2.0.0 - 2020/08/27" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
+            <TextBlock Style="{ThemeResource BodyTextBlockStyle}">
+                <Run>新增：增加了底部工具栏，带有刷新网页，回到顶部的功能，并具备出色的动画</Run><LineBreak/>
                 <Run>新增：可以滑出滑入汉堡菜单</Run><LineBreak/>
                 <Run>改进：重写了主页、设置 UI</Run><LineBreak/>
                 <Run>兼容：支援 WP</Run><LineBreak/>
             </TextBlock>
-            <TextBlock Text="🚀 0.1.0.0 - 2020/05/11" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
+            <TextBlock Text="🚀 0.1.0.0 - 2020/05/12" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
             <TextBlock Style="{ThemeResource BodyTextBlockStyle}">
                 <Run>改进：更换 FontIcon 矢量图标</Run><LineBreak/>
                 <Run>改进：更具有人性化的导航栏</Run><LineBreak/>

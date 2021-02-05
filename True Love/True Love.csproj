@@ -20,7 +20,7 @@
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <PackageCertificateThumbprint>29F6537728765FAF67443D9451DFF697CD2BA4DB</PackageCertificateThumbprint>
-    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
@@ -28,6 +28,8 @@
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
     <PackageCertificateKeyFile />
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
+    <AppInstallerUpdateFrequency>0</AppInstallerUpdateFrequency>
+    <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -137,8 +139,6 @@
     </Compile>
     <Compile Include="Dates\Comment.cs" />
     <Compile Include="Dates\Comments.cs" />
-    <Compile Include="Helpers\MobileScreenTrigger.cs" />
-    <Compile Include="Helpers\Generic.cs" />
     <Compile Include="Helpers\LiveTileService.cs" />
     <Compile Include="Pages\CommentsPage.xaml.cs">
       <DependentUpon>CommentsPage.xaml</DependentUpon>
@@ -158,9 +158,6 @@
     <Compile Include="Pages\XAML-ContentDialog\NewComment.xaml.cs">
       <DependentUpon>NewComment.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\XAML-ContentDialog\BlankPage.xaml.cs">
-      <DependentUpon>BlankPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\XAML-ContentDialog\ReleaseNotes.xaml.cs">
       <DependentUpon>ReleaseNotes.xaml</DependentUpon>
     </Compile>
@@ -172,11 +169,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Background\AVICII.jpg" />
-    <Content Include="Assets\Background\BG1.jpg" />
-    <Content Include="Assets\Background\BG2.png" />
-    <Content Include="Assets\Background\BG3.png" />
-    <Content Include="Assets\Background\在恩.png" />
+    <Content Include="Assets\Background.jpg" />
     <Content Include="Assets\BadgeLogo.scale-100.png" />
     <Content Include="Assets\BadgeLogo.scale-125.png" />
     <Content Include="Assets\BadgeLogo.scale-150.png" />
@@ -272,10 +265,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\XAML-ContentDialog\NewComment.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\XAML-ContentDialog\BlankPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

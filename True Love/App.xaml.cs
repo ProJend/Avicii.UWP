@@ -3,7 +3,6 @@ using True_Love.Pages;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
-using Windows.Foundation.Metadata;
 using Windows.UI;
 using Windows.UI.Notifications;
 using Windows.UI.ViewManagement;
@@ -11,8 +10,8 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Windows.Storage;
-using Windows.Foundation.Collections;
 using Microsoft.QueryStringDotNET;
+using Windows.System.Profile;
 
 namespace True_Love
 {
@@ -51,10 +50,10 @@ namespace True_Love
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                {
-                    //TODO: 从之前挂起的应用程序加载状态
-                }
+                //if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
+                //{
+                //    // TODO: 从之前挂起的应用程序加载状态
+                //}
 
                 // 将框架放在当前窗口中
                 Window.Current.Content = rootFrame;
@@ -72,23 +71,25 @@ namespace True_Love
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
 
-                //首次打开先过一边设置
                 if (localSettings.Values["SetLiveTiles"] == null)
-                {
+                {   // 首次打开先过一边设置
                     localSettings.Values["SetLiveTiles"] = true;
                     localSettings.Values["SetHideCommandBar"] = false;
                     localSettings.Values["OnlyLiveTiles"] = true;
                     localSettings.Values["SetBackgroundColor"] = true;
-                    localSettings.Values["ToastIsPush"] = false;
+                    localSettings.Values["IsToastPush"] = false;
                     var a = new SettingsPage();
                     //a.FirstRun();
                     a = null;
                     GC.Collect();
                 }
-                else localSettings.Values["ToastIsPush"] = false;
+                else
+                {
+                    localSettings.Values["IsToastPush"] = false;
+                }
 
-                if (!ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar")) HideTitleBar();
-                //else ExtendAcrylicIntoStatusBar();
+                if (AnalyticsInfo.VersionInfo.DeviceFamily != "Windows.Mobile") HideTitleBar();
+                //else HideStatusBar();
             }
         }
 
@@ -103,10 +104,10 @@ namespace True_Love
                     case "Settings":
                         var settings = new Uri("ms-settings:network-status");
                         var success = await Windows.System.Launcher.LaunchUriAsync(settings);
-                        localSettings.Values["ToastIsPush"] = true;
+                        localSettings.Values["IsToastPush"] = true;
                         break;
                     case "Close":
-                        localSettings.Values["ToastIsPush"] = true;
+                        localSettings.Values["IsToastPush"] = true;
                         break;
                 }
             }

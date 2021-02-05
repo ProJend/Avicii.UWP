@@ -9,7 +9,6 @@
     xmlns:v1709="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 5)"
     xmlns:v1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
     <Page.Resources>
         <Style TargetType="StackPanel" x:Key="Left">
             <Setter Property="Grid.RowSpan" Value="2"/>
@@ -19,162 +18,155 @@
             <Setter Property="Grid.Row" Value="1"/>
             <Setter Property="Grid.ColumnSpan" Value="2"/>
         </Style>
-        <ItemsPanelTemplate x:Key="PC">
+        <ItemsPanelTemplate x:Key="Open">
             <ItemsWrapGrid x:Name="MaxItemsWrapGrid" MaximumRowsOrColumns="4"
                                 Orientation="Horizontal" Margin="700 0 700 0"/>
         </ItemsPanelTemplate>
-        <ItemsPanelTemplate x:Key="Mobile">
+        <ItemsPanelTemplate x:Key="Close">
             <ItemsWrapGrid x:Name="MaxItemsWrapGrid" MaximumRowsOrColumns="3"
                                 Orientation="Horizontal"/>
         </ItemsPanelTemplate>
     </Page.Resources>
 
-    <Grid>
-        <FlipView IsTapEnabled="False" IsTabStop="False">
-            <FlipView.Background>
-                <ImageBrush ImageSource="/Assets/Background/BG1.jpg" Stretch="UniformToFill" AlignmentX="Left"/>
-            </FlipView.Background>
+    <FlipView SelectionChanged="FlipView_SelectionChanged" x:Name="flipview" IsTapEnabled="False" IsTabStop="False">
+        <FlipView.Background>
+            <ImageBrush ImageSource="/Assets/Background.jpg" Stretch="UniformToFill" AlignmentX="Left"/>
+        </FlipView.Background>
+        <FlipViewItem ManipulationMode="System,TranslateX" IsTapEnabled="False" IsTabStop="False">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
 
-            <FlipViewItem ManipulationMode="System,TranslateX">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
+                <StackPanel Style="{StaticResource Bottom}" Name="a" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel.Transitions>
+                        <TransitionCollection>
+                            <EdgeUIThemeTransition/>
+                        </TransitionCollection>
+                    </StackPanel.Transitions>
+                    <TextBlock Text="the Avicii UWP" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}"/>
+                    <TextBlock Text="T I M   B E R G L I N G" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}"/>
+                    <TextBlock Text="F O U N D A T I O N" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}"/>
+                    <TextBlock Text="1 9 8 9 . 0 9 . 0 8 - 2 0 1 8 . 0 4 . 2 0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}"/>
+                </StackPanel>
+            </Grid>
+        </FlipViewItem>
+        <FlipViewItem ManipulationMode="System,TranslateX" IsTapEnabled="False" IsTabStop="False">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
 
-                    <StackPanel Style="{StaticResource Bottom}" Name="a" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <StackPanel.Transitions>
-                            <TransitionCollection>
-                                <EdgeUIThemeTransition/>
-                            </TransitionCollection>
-                        </StackPanel.Transitions>
-                        <TextBlock Text="the Avicii UWP" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}"/>
-                        <TextBlock Text="T I M   B E R G L I N G" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}"/>
-                        <TextBlock Text="F O U N D A T I O N" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}"/>
-                        <TextBlock Text="1 9 8 9 . 0 9 . 0 8 - 2 0 1 8 . 0 4 . 2 0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}"/>
+                <StackPanel Style="{StaticResource Bottom}" Name="b" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel.Transitions>
+                        <TransitionCollection>
+                            <EdgeUIThemeTransition/>
+                        </TransitionCollection>
+                    </StackPanel.Transitions>
+                    <TextBlock Text="Avicii Memory boaid" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="16 0 0 0">
+                        <TextBlock Text="C O M M E N T S" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Button Background="Transparent" Width="40" Height="40" Click="Button_Click" Tag="Shop" HorizontalAlignment="Center" VerticalAlignment="Center" v1809:CornerRadius="2 2 2 0">
+                            <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE761;"/>
+                        </Button>
                     </StackPanel>
-                </Grid>
-            </FlipViewItem>
-
-            <FlipViewItem ManipulationMode="System,TranslateX">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-
-                    <StackPanel Style="{StaticResource Bottom}" Name="b" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <StackPanel.Transitions>
-                            <TransitionCollection>
-                                <EdgeUIThemeTransition/>
-                            </TransitionCollection>
-                        </StackPanel.Transitions>
-                        <TextBlock Text="Avicii Memory boaid" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}"/>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="16 0 0 0">
-                            <TextBlock Text="C O M M E N T S" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            <Button Background="Transparent" Width="40" Height="40" Click="Button_Click" Tag="Shop" HorizontalAlignment="Center" VerticalAlignment="Center" v1809:CornerRadius="2 2 2 0">
-                                <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE761;"/>
-                            </Button>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="16 0 0 0">
-                            <TextBlock Text="I M A G E S" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            <Button Background="Transparent" Width="40" Height="40" Click="Button_Click" Tag="Shop" HorizontalAlignment="Center" VerticalAlignment="Center" v1809:CornerRadius="2 0 2 2">
-                                <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE761;"/>
-                            </Button>
-                        </StackPanel>
-                        <TextBlock Text="I N   L O V I N G   M E M O R Y" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="16 0 0 0">
+                        <TextBlock Text="I M A G E S" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Button Background="Transparent" Width="40" Height="40" Click="Button_Click" Tag="Shop" HorizontalAlignment="Center" VerticalAlignment="Center" v1809:CornerRadius="2 0 2 2">
+                            <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE761;"/>
+                        </Button>
                     </StackPanel>
-                </Grid>
-            </FlipViewItem>
+                    <TextBlock Text="I N   L O V I N G   M E M O R Y" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}"/>
+                </StackPanel>
+            </Grid>
+        </FlipViewItem>
+        <FlipViewItem ManipulationMode="System,TranslateX" IsTapEnabled="False" IsTabStop="False">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
 
-            <FlipViewItem ManipulationMode="System,TranslateX">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-
-                    <StackPanel Style="{StaticResource Bottom}" Name="c" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <StackPanel.Transitions>
-                            <TransitionCollection>
-                                <EdgeUIThemeTransition/>
-                            </TransitionCollection>
-                        </StackPanel.Transitions>
-                        <TextBlock Text="◢◤" Style="{StaticResource HeaderTextBlockStyle}" HorizontalAlignment="Center"/>
-                        <TextBlock Text="Remembering Tim Bergling" Style="{StaticResource SubheaderTextBlockStyle}" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center"/>
-                        <TextBlock MaxWidth="350" Style="{ThemeResource BodyTextBlockStyle}" TextAlignment="Center">
+                <StackPanel Style="{StaticResource Bottom}" Name="c" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <StackPanel.Transitions>
+                        <TransitionCollection>
+                            <EdgeUIThemeTransition/>
+                        </TransitionCollection>
+                    </StackPanel.Transitions>
+                    <TextBlock Text="◢◤" Style="{StaticResource HeaderTextBlockStyle}" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Remembering Tim Bergling" Style="{StaticResource SubheaderTextBlockStyle}" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center"/>
+                    <TextBlock MaxWidth="350" Style="{ThemeResource BodyTextBlockStyle}" TextAlignment="Center">
                            <LineBreak/>
                             <Run>Tim created music that brought people together with timeless memories from all over the world.</Run><LineBreak/><LineBreak/>
                             <Run>We created this space so you could share your memories with all of us and let the world know what Avicii meant to you.</Run><LineBreak/><LineBreak/>
                             <Run>His music and your memories are forever.</Run>
-                        </TextBlock>
-                    </StackPanel>
-                </Grid>
-            </FlipViewItem>
-
-            <FlipViewItem ManipulationMode="System,TranslateX">
-                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <TextBlock Style="{ThemeResource TitleTextBlockStyle}" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <Run>I N S T A G R A M</Run><LineBreak/>
                     </TextBlock>
-                    <Viewbox>
-                        <GridView x:Name="ImageGridView" ItemsPanel="{StaticResource Mobile}" ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Disabled">
-                            <GridView.ItemTemplate>
-                                <DataTemplate>
-                                    <Image Stretch="UniformToFill" Source="{Binding}"/>
-                                </DataTemplate>
-                            </GridView.ItemTemplate>
-                        </GridView>
-                    </Viewbox>
                 </StackPanel>
-            </FlipViewItem>
+            </Grid>
+        </FlipViewItem>
+        <FlipViewItem ManipulationMode="System,TranslateX" IsTapEnabled="False" IsTabStop="False">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <ProgressRing Name="ImageIsLoading" Foreground="White" IsActive="True" Width="50" Height="50" Margin="0 0 0 30"/>
+                <TextBlock Style="{ThemeResource TitleTextBlockStyle}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Run>I N S T A G R A M</Run><LineBreak/>
+                </TextBlock>
+                <Viewbox>
+                    <GridView x:Name="ImageGridView" ItemsPanel="{StaticResource Close}" ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Disabled">
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Image Stretch="UniformToFill" Source="{Binding}"/>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+                </Viewbox>
+            </StackPanel>
+        </FlipViewItem>
+        <FlipViewItem ManipulationMode="System,TranslateX" IsTapEnabled="False" IsTabStop="False">
+            <Grid Background="Black">
+                <Image Source="/Assets/SplashScreen.png" Height="150" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Image.Transitions>
+                        <TransitionCollection>
+                            <EdgeUIThemeTransition/>
+                        </TransitionCollection>
+                    </Image.Transitions>
+                </Image>
+            </Grid>
+        </FlipViewItem>
 
-            <FlipViewItem ManipulationMode="System,TranslateX">
-                <Grid Background="Black">
-                    <Image Source="/Assets/SplashScreen.png" Height="150" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <Image.Transitions>
-                            <TransitionCollection>
-                                <EdgeUIThemeTransition/>
-                            </TransitionCollection>
-                        </Image.Transitions>
-                    </Image>
-                </Grid>
-            </FlipViewItem>
-
-            <FlipView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <VirtualizingStackPanel AreScrollSnapPointsRegular="True" Orientation="Vertical"/>
-                </ItemsPanelTemplate>
-            </FlipView.ItemsPanel>
-        </FlipView>
+        <FlipView.ItemsPanel>
+            <ItemsPanelTemplate>
+                <VirtualizingStackPanel AreScrollSnapPointsRegular="True" Orientation="Vertical"/>
+            </ItemsPanelTemplate>
+        </FlipView.ItemsPanel>
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="1000"/>
+                        <AdaptiveTrigger MinWindowWidth="820"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="a.Style" Value="{StaticResource Left}"/>
                         <Setter Target="b.Style" Value="{StaticResource Left}"/>
                         <Setter Target="c.Style" Value="{StaticResource Left}"/>
-
-                        <Setter Target="ImageGridView.ItemsPanel" Value="{StaticResource PC}"/>
+                        <Setter Target="ImageGridView.ItemsPanel" Value="{StaticResource Open}"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-    </Grid>
+    </FlipView>
 </Page>

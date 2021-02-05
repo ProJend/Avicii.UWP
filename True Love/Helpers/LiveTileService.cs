@@ -59,7 +59,7 @@ namespace True_Love.Helpers
                                     Text = "Something want to talk to Tim Bergling?",
                                     HintAlign = AdaptiveTextAlign.Center,
                                     HintWrap = true,
-                                    //HintStyle=(Style)this.Resources["AccentButtonStyle"],
+                                    //HintStyle=(Style)Resources["AccentButtonStyle"],
                                     //HintStyle=AdaptiveTextStyle.CaptionSubtle,
                                 },
                             },

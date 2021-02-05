@@ -102,10 +102,10 @@
                 </Setter.Value>
             </Setter>
         </Style>
-            <!--#endregion-->
+        <!--#endregion-->
     </Page.Resources>
 
-    <Grid x:Name="LayoutRoot">
+    <Grid x:Name="LayoutRoot" ManipulationMode="System,TranslateX">
         <ScrollViewer x:Name="sv" ViewChanged="Sv_ViewChanged" VerticalScrollBarVisibility="Hidden" HorizontalScrollMode="Disabled" VerticalScrollMode="Enabled">
             <Frame x:Name="ContentFrame"/>
         </ScrollViewer>
@@ -179,7 +179,7 @@
                 <muxc:NavigationViewItemHeader Content="True" x:Name="MainPagesHeader"/>
                 <muxc:NavigationViewItem Content="Memory" x:Name="MemoryPage" Icon="Home" Tag="home"/>
                 <muxc:NavigationViewItem Content="Comments" x:Name="HomePage" Icon="World" Tag="comment"/>
-                <muxc:NavigationViewItem Content="Images" x:Name="ImagesPage" Tag="image" Visibility="Collapsed">
+                <muxc:NavigationViewItem Content="Images" x:Name="ImagesPage" Tag="image" Visibility="Visible">
                     <muxc:NavigationViewItem.Icon>
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEB9F;"/>
                     </muxc:NavigationViewItem.Icon>
@@ -190,7 +190,7 @@
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
-                <VisualState x:Name="g">
+                <VisualState>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger
                         MinWindowWidth="{x:Bind NavView.CompactModeThresholdWidth}"/>
@@ -201,6 +201,7 @@
                         <Setter Target="MainPagesHeader.Visibility" Value="Collapsed"/>
                         <Setter Target="NavSeparator.Visibility" Value="Visible"/>
                         <!-- Leave the next line for left-only navigation. -->
+                        <Setter Target="bar.IsTapEnabled" Value="false"/>
                         <Setter Target="bar.VerticalAlignment" Value="Top"/>
                         <Setter Target="bar.HorizontalAlignment" Value="Right"/>
                         <Setter Target="bar.Margin" Value="0 0 157 0"/>
@@ -216,6 +217,7 @@
                         <Setter Target="NavView.PaneDisplayMode" Value="Top"/>
                         <Setter Target="MainPagesHeader.Visibility" Value="Collapsed"/>
                         <Setter Target="NavSeparator.Visibility" Value="Visible"/>
+                        <Setter Target="bar.IsTapEnabled" Value="false"/>
                         <Setter Target="bar.VerticalAlignment" Value="Top"/>
                         <Setter Target="bar.HorizontalAlignment" Value="Center"/>
                         <Setter Target="CommandBar.Background" Value="Transparent"/>

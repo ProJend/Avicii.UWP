@@ -20,6 +20,7 @@ using Microsoft.Toolkit.Uwp.Notifications;
 using Windows.UI.Notifications;
 using Microsoft.QueryStringDotNET;
 using True_Love.Pages.XAML_ContentDialog;
+using Windows.System.Profile;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -38,22 +39,19 @@ namespace True_Love.Pages
 
         private void Main_Loaded(object sender, RoutedEventArgs e)
         {
-            this.ManipulationMode = ManipulationModes.TranslateX; // 设置这个页面的手势模式为横向滑动
             this.ManipulationCompleted += The_ManipulationCompleted; // 订阅手势滑动结束后的事件
-            this.ManipulationDelta += The_ManipulationDelta; // 订阅手势滑动事件
-
             #region 兼容低版本号系统
-            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar")) // = WP
+            if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile") // = WP
             {
                 if ((bool)localSettings.Values["SetBackgroundColor"]) BackgroundOfBar.Background = new SolidColorBrush(Colors.Black);
-                else BackgroundOfBar.Background = new SolidColorBrush((Color)this.Resources["SystemChromeMediumColor"]);
+                else BackgroundOfBar.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
                 CommandBar.Background = new SolidColorBrush { Color = Colors.Black, Opacity = 0.7 };
             }
             else // = PC
             {
                 Window.Current.SetTitleBar(AppTitleBar);
-                BackTopButton.Style = (Style)this.Resources["AppBarButtonRevealStyle"];
-                RefreshButton.Style = (Style)this.Resources["AppBarButtonRevealStyle"];
+                BackTopButton.Style = (Style)Resources["AppBarButtonRevealStyle"];
+                RefreshButton.Style = (Style)Resources["AppBarButtonRevealStyle"];
                 if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5))// > OS15063
                 {
                     // 键盘快捷键
@@ -109,36 +107,17 @@ namespace True_Love.Pages
         }
 
         /// <summary>
-        /// 手势滑动中 https://blog.csdn.net/github_36704374/article/details/59580697
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void The_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
-        {
-            x += e.Delta.Translation.X; // 将滑动的值赋给 x
-        }
-
-        /// <summary>
         /// 手势滑动结束
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void The_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
-        {
-            if (x > 100) // 判断滑动的距离
-                NavView.IsPaneOpen = true; // 打开汉堡菜单            
-            if (x < -100)
-                NavView.IsPaneOpen = false; // 关闭汉堡菜单
-            x = 0;  // 清零 x，不然x会累加
+        {   // 判断滑动的距离
+            if (e.Cumulative.Translation.X > 100 && bar.IsTapEnabled) NavView.IsPaneOpen = true; // 打开汉堡菜单            
+            if (e.Cumulative.Translation.X < -100) NavView.IsPaneOpen = false; // 关闭汉堡菜单
         }
 
-        private void NavView_ItemInvoked(muxc.NavigationView sender,
-                                         muxc.NavigationViewItemInvokedEventArgs args)
+        private void NavView_ItemInvoked(muxc.NavigationView sender, muxc.NavigationViewItemInvokedEventArgs args)
         {
-            if (args.IsSettingsInvoked == true)
-            {
-                NavView_Navigate("settings", args.RecommendedNavigationTransitionInfo);
-            }
+            if (args.IsSettingsInvoked == true) NavView_Navigate("settings", args.RecommendedNavigationTransitionInfo);
             else if (args.InvokedItemContainer != null)
             {
                 var navItemTag = args.InvokedItemContainer.Tag.ToString();
@@ -146,30 +125,10 @@ namespace True_Love.Pages
             }
         }
 
-        // NavView_SelectionChanged is not used in this example, but is shown for completeness.
-        // You will typically handle either ItemInvoked or SelectionChanged to perform navigation,
-        // but not both.
-        private void NavView_SelectionChanged(muxc.NavigationView sender,
-                                              muxc.NavigationViewSelectionChangedEventArgs args)
-        {
-            if (args.IsSettingsSelected == true)
-            {
-                NavView_Navigate("settings", args.RecommendedNavigationTransitionInfo);
-            }
-            else if (args.SelectedItemContainer != null)
-            {
-                var navItemTag = args.SelectedItemContainer.Tag.ToString();
-                NavView_Navigate(navItemTag, args.RecommendedNavigationTransitionInfo);
-            }
-        }
-
         private void NavView_Navigate(string navItemTag, NavigationTransitionInfo transitionInfo)
         {
             Type _page = null;
-            if (navItemTag == "settings")
-            {
-                _page = typeof(SettingsPage);
-            }
+            if (navItemTag == "settings") _page = typeof(SettingsPage);
             else
             {
                 var item = _pages.FirstOrDefault(p => p.Tag.Equals(navItemTag));
@@ -181,20 +140,17 @@ namespace True_Love.Pages
             var preNavPageType = ContentFrame.CurrentSourcePageType;
 
             // Only navigate if the selected page isn't currently loaded.
-            if (!(_page is null) && !Equals(preNavPageType, _page))
-            {
-                ContentFrame.Navigate(_page, null, transitionInfo);
-            }
+            if (!(_page is null) && !Equals(preNavPageType, _page)) ContentFrame.Navigate(_page, null, transitionInfo);
         }
 
         private void NavView_BackRequested(muxc.NavigationView sender, muxc.NavigationViewBackRequestedEventArgs args) => On_BackRequested();
 
-        private void BackInvoked(KeyboardAccelerator sender,
-                                 KeyboardAcceleratorInvokedEventArgs args)
+        private void BackInvoked(KeyboardAccelerator sender,KeyboardAcceleratorInvokedEventArgs args)
         {
             On_BackRequested();
             args.Handled = true;     
         }
+
         private void MainPage_BackRequested(object sender, BackRequestedEventArgs e)
         {
             if (!ContentFrame.CanGoBack) return;
@@ -204,8 +160,7 @@ namespace True_Love.Pages
 
         private bool On_BackRequested()
         {
-            if (!ContentFrame.CanGoBack)
-                return false;
+            if (!ContentFrame.CanGoBack) return false;
 
             // Don't go back if the nav pane is overlayed.
             if (NavView.IsPaneOpen &&
@@ -229,8 +184,7 @@ namespace True_Love.Pages
 
             // Ignore button chords with the left, right, and middle buttons
             if (properties.IsLeftButtonPressed || properties.IsRightButtonPressed ||
-                properties.IsMiddleButtonPressed)
-                return;
+                properties.IsMiddleButtonPressed) return;
 
             // If back or forward are pressed (but not both) navigate appropriately
             bool backPressed = properties.IsXButton1Pressed;
@@ -261,7 +215,6 @@ namespace True_Love.Pages
                 NavView.Header = ((muxc.NavigationViewItem)NavView.SelectedItem)?.Content?.ToString().ToUpper();
                 ControlsChanged(item.Tag.ToString());
             }
-
             GC.Collect();
         }
         #endregion
@@ -284,32 +237,23 @@ namespace True_Love.Pages
                 else if ((bool)localSettings.Values["SetHideCommandBar"]) IsWide = true;
                 else IsWide = false;
                 if (sv.VerticalOffset > scrlocation && IsWide)
-                {   //滚动条当前位置大于存储的变量值时代表往下滑，隐藏底部栏
+                {   // 滚动条当前位置大于存储的变量值时代表往下滑，隐藏底部栏
                     if (IsShowBar)
-                    {   //通过动画来隐藏
-                        //bar.Translation = new Vector3(0, 40, 0);
+                    {   // 通过动画来隐藏
+                        // bar.Translation = new Vector3(0, 40, 0);
                         Close.Begin();
                         IsShowBar = false;
                     }
                 }
                 else if(!IsShowBar)
-                {   //通过动画来隐藏
-                    //bar.Translation = new Vector3(0, 0, 0);
+                {   // 通过动画来隐藏
+                    // bar.Translation = new Vector3(0, 0, 0);
                     Open.Begin();
                     IsShowBar = true;
                 }
-
-                //当滚动条高度大于1时，返回顶部按钮维持使用状态
-                if (sv.VerticalOffset > 1)
-                {
-                    BackTopButton.IsEnabled = true;
-                }
-                //反之停用此按钮
-                else if (sv.VerticalOffset < sv.ViewportHeight)
-                {
-                    BackTopButton.IsEnabled = false;
-                }
-            }  
+                if (sv.VerticalOffset > 1) BackTopButton.IsEnabled = true; // 当滚动条高度大于 1 时，返回顶部按钮维持使用状态
+                else if (sv.VerticalOffset < sv.ViewportHeight) BackTopButton.IsEnabled = false; // 反之停用此按钮
+            }
             scrlocation = sv.VerticalOffset;  
         }
 
@@ -319,9 +263,7 @@ namespace True_Love.Pages
         /// <param name="horizontalOffset">X：横度。</param>
         /// <param name="verticalOffset">Y：高度。</param>
         /// <param name="zoomFactor">Z：斜度。</param>
-        public void ChangeView(double? horizontalOffset,
-                               double? verticalOffset,
-                               float? zoomFactor) { }
+        public void ChangeView(double? horizontalOffset, double? verticalOffset, float? zoomFactor) { }
 
         /// <summary>
         /// 返回顶部按钮。
@@ -339,41 +281,34 @@ namespace True_Love.Pages
         private async void AddButton_Click(object sender, RoutedEventArgs e)
         {
             var newComment = new NewComment();
-            if (!string.IsNullOrEmpty(comment) || !string.IsNullOrEmpty(nickName))
-            {
-                newComment.Save();
-            }        
+            if (!string.IsNullOrEmpty(comment) || !string.IsNullOrEmpty(nickName)) newComment.Save();
             var Comment = new ContentDialog()
             {
                 Title = "Write your story of love here:",
                 CloseButtonText = "Cancel",
                 PrimaryButtonText = "Send",
-                PrimaryButtonStyle = (Style)this.Resources["AccentButtonStyle"],
+                PrimaryButtonStyle = (Style)Resources["AccentButtonStyle"],
                 SecondaryButtonText = "Save",
                 //DefaultButton = ContentDialogButton.Primary,
                 Content = newComment,
                 Background = new SolidColorBrush(Colors.Black),
             };
-            if (!ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+            if (AnalyticsInfo.VersionInfo.DeviceFamily != "Windows.Mobile")
             {
-                Comment.CloseButtonStyle = (Style)this.Resources["ButtonRevealStyle"];
-                Comment.SecondaryButtonStyle = (Style)this.Resources["ButtonRevealStyle"];
-                Comment.BorderBrush = (Brush)this.Resources["SystemControlBackgroundListMediumRevealBorderBrush"];
+                Comment.CloseButtonStyle = (Style)Resources["ButtonRevealStyle"];
+                Comment.SecondaryButtonStyle = (Style)Resources["ButtonRevealStyle"];
+                Comment.BorderBrush = (Brush)Resources["SystemControlBackgroundListMediumRevealBorderBrush"];
             }
             try
             {
                 var a = await Comment.ShowAsync();
-                if (a == ContentDialogResult.Primary)
-                {
-
-                }
-                else if (a == ContentDialogResult.Secondary)
+                if (a == ContentDialogResult.Secondary)
                 {
                     comment = newComment.commentPlain;
                     nickName = newComment.nicknamePlain;
                 }
             }
-            catch (System.Runtime.InteropServices.COMException) { } //Nothing todo.
+            catch (System.Runtime.InteropServices.COMException) { } // Nothing todo.
         }
 
         /// <summary>
@@ -446,7 +381,7 @@ namespace True_Love.Pages
             }
             void CommandBarCollapsed()
             {
-                if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar")) CommandBar.Visibility = Visibility.Collapsed;
+                if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile") CommandBar.Visibility = Visibility.Collapsed;
                 else
                 {
                     bar.Opacity = 0;
@@ -455,7 +390,7 @@ namespace True_Love.Pages
             }
             void CommandBarVisible()
             {
-                if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar")) CommandBar.Visibility = Visibility.Visible;
+                if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile") CommandBar.Visibility = Visibility.Visible;
                 else
                 {
                     bar.Opacity = 1;
@@ -479,9 +414,9 @@ namespace True_Love.Pages
         public void PageBackgroundChange()
         {
             if ((bool)localSettings.Values["SetBackgroundColor"]) Main.Background = new SolidColorBrush(Colors.Black);
-            else Main.Background = new SolidColorBrush((Color)this.Resources["SystemChromeMediumColor"]);
-            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar") && (bool)localSettings.Values["SetBackgroundColor"]) BackgroundOfBar.Background = new SolidColorBrush(Colors.Black);
-            else if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar")) BackgroundOfBar.Background = new SolidColorBrush((Color)this.Resources["SystemChromeMediumColor"]);
+            else Main.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
+            if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile" && (bool)localSettings.Values["SetBackgroundColor"]) BackgroundOfBar.Background = new SolidColorBrush(Colors.Black);
+            else if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile") BackgroundOfBar.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
         }
 
         /// <summary>
@@ -490,16 +425,12 @@ namespace True_Love.Pages
         /// 需要重启应用
         /// </summary>
         [XmlIgnore]
-        public string Color
-        {
-            get => (bool)localSettings.Values["SetBackgroundColor"] ? "Black" : "#FF1F1F1F";
-        }
+        public string Color => (bool)localSettings.Values["SetBackgroundColor"] ? "Black" : "#FF1F1F1F";
 
         // 滚动条位置变量
         public double scrlocation = 0;
         // 导航栏当前显示状态（这个是为了减少不必要的开销，因为我做的是动画隐藏显示效果如果不用一个变量来记录当前导航栏状态的会重复执行隐藏或显示）
         bool IsShowBar = true;
-        double x = 0;
         public static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
         public double OpaqueIfEnabled(bool IsEnabled) => IsEnabled ? 1.0 : 0.6;
         public static MainPage Current;

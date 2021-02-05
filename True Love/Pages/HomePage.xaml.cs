@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Windows.ApplicationModel;
 using Windows.Storage;
+using Windows.Storage.Streams;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -19,7 +21,6 @@ namespace True_Love.Pages
         public HomePage()
         {
             this.InitializeComponent();
-            GetFiles();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -28,40 +29,42 @@ namespace True_Love.Pages
         }
 
         private async void GetFiles()
-        {          
-            try
+        {
+            string path = Package.Current.InstalledLocation.Path + @"\Assets\Instagram";
+            var storageFolder = await StorageFolder.GetFolderFromPathAsync(path);
+            IReadOnlyList<StorageFile> sortedItems = await storageFolder.GetFilesAsync();
+            var images = new List<BitmapImage>();
+            isRunning = true;
+            if (sortedItems.Any())
             {
-                string path = Windows.ApplicationModel.Package.Current.InstalledLocation.Path + @"\Assets\Instagram";
-                var storageFolder = await StorageFolder.GetFolderFromPathAsync(path);
-                IReadOnlyList<StorageFile> sortedItems = await storageFolder.GetFilesAsync();
-                var images = new List<BitmapImage>();
-                if (sortedItems.Any())
+                foreach (StorageFile file in sortedItems)
                 {
-                    foreach (StorageFile file in sortedItems)
+                    if (file.FileType.ToUpper() == ".JPG")
                     {
-                        if (file.FileType.ToUpper() == ".JPG")
+                        using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.Read))
                         {
-                            using (Windows.Storage.Streams.IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.Read))
-                            {
-                                BitmapImage bitmapImage = new BitmapImage();
-                                await bitmapImage.SetSourceAsync(fileStream);
-                                images.Add(bitmapImage);
-                            }
+                            BitmapImage bitmapImage = new BitmapImage();
+                            await bitmapImage.SetSourceAsync(fileStream);
+                            images.Add(bitmapImage);
                         }
                     }
                 }
-                else
-                {
-                    var message = new MessageDialog("There are no images in the Instagram's Pictures Library.");
-                    await message.ShowAsync();
-                }
-                ImageGridView.ItemsSource = images;
             }
-            catch (UnauthorizedAccessException)
+            else
             {
-                var message = new MessageDialog("The app does not have access to the Instagram's Pictures Library on this device.");
+                var message = new MessageDialog("There are no images in the Instagram's Pictures Library.");
                 await message.ShowAsync();
             }
+            ImageGridView.ItemsSource = images;
+            ImageIsLoading.IsActive = false;
+            ImageIsLoading.Height = 0;
         }
+
+        private void FlipView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!isRunning && flipview.SelectedIndex == 3) GetFiles();
+        }
+
+        bool isRunning = false;
     }
 }
