@@ -137,8 +137,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dates\Comment.cs" />
-    <Compile Include="Dates\Comments.cs" />
+    <Compile Include="Helpers\Generic.cs" />
     <Compile Include="Helpers\LiveTileService.cs" />
     <Compile Include="Pages\CommentsPage.xaml.cs">
       <DependentUpon>CommentsPage.xaml</DependentUpon>

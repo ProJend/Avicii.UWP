@@ -11,7 +11,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Windows.Storage;
 using Microsoft.QueryStringDotNET;
-using Windows.System.Profile;
+using static True_Love.Helpers.Generic;
 
 namespace True_Love
 {
@@ -88,7 +88,7 @@ namespace True_Love
                     localSettings.Values["IsToastPush"] = false;
                 }
 
-                if (AnalyticsInfo.VersionInfo.DeviceFamily != "Windows.Mobile") HideTitleBar();
+                if (!IdentifyDeviceFamily("mobile")) HideTitleBar();
                 //else HideStatusBar();
             }
         }

@@ -11,8 +11,7 @@ using Windows.UI;
 using Windows.UI.Xaml.Media;
 using Windows.ApplicationModel;
 using True_Love.Pages.XAML_ContentDialog;
-using Windows.System.Profile;
-using Windows.ApplicationModel.Resources;
+using static True_Love.Helpers.Generic;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -41,7 +40,7 @@ namespace True_Love.Pages
             HideCommandbar.IsOn = (bool)localSettings.Values["SetHideCommandBar"];
             BackgroundColor.IsOn = (bool)localSettings.Values["SetBackgroundColor"];
             var version = Package.Current.Id.Version;
-            VersionInfo.Text = $"Version : {version.Major}.{version.Minor}.{version.Build}.{version.Revision}" + ResourceLoader.GetForCurrentView().GetString("pDisplayName");
+            VersionInfo.Text = $"Version : {version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
             releasedDate.Text = $"Installation Date : {Package.Current.InstalledDate.ToLocalTime().DateTime}";
         }
 
@@ -127,7 +126,7 @@ namespace True_Love.Pages
                 Content = new ReleaseNotes(),
                 Background = new SolidColorBrush(Colors.Black),
             };
-            if (AnalyticsInfo.VersionInfo.DeviceFamily != "Windows.Mobile")
+            if (!IdentifyDeviceFamily("mobile"))
             {
                 release.CloseButtonStyle = (Style)Resources["ButtonRevealStyle"];
                 release.BorderBrush = (Brush)Resources["SystemControlBackgroundListMediumRevealBorderBrush"];

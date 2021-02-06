@@ -179,7 +179,7 @@
                 <muxc:NavigationViewItemHeader Content="True" x:Name="MainPagesHeader"/>
                 <muxc:NavigationViewItem Content="Memory" x:Name="MemoryPage" Icon="Home" Tag="home"/>
                 <muxc:NavigationViewItem Content="Comments" x:Name="HomePage" Icon="World" Tag="comment"/>
-                <muxc:NavigationViewItem Content="Images" x:Name="ImagesPage" Tag="image" Visibility="Visible">
+                <muxc:NavigationViewItem Content="Images" x:Name="ImagesPage" Tag="image" Visibility="Collapsed">
                     <muxc:NavigationViewItem.Icon>
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEB9F;"/>
                     </muxc:NavigationViewItem.Icon>

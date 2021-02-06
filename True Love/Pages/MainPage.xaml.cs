@@ -20,7 +20,7 @@ using Microsoft.Toolkit.Uwp.Notifications;
 using Windows.UI.Notifications;
 using Microsoft.QueryStringDotNET;
 using True_Love.Pages.XAML_ContentDialog;
-using Windows.System.Profile;
+using static True_Love.Helpers.Generic;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -41,7 +41,7 @@ namespace True_Love.Pages
         {
             this.ManipulationCompleted += The_ManipulationCompleted; // 订阅手势滑动结束后的事件
             #region 兼容低版本号系统
-            if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile") // = WP
+            if (IdentifyDeviceFamily("mobile")) // = WP
             {
                 if ((bool)localSettings.Values["SetBackgroundColor"]) BackgroundOfBar.Background = new SolidColorBrush(Colors.Black);
                 else BackgroundOfBar.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
@@ -293,7 +293,7 @@ namespace True_Love.Pages
                 Content = newComment,
                 Background = new SolidColorBrush(Colors.Black),
             };
-            if (AnalyticsInfo.VersionInfo.DeviceFamily != "Windows.Mobile")
+            if (!IdentifyDeviceFamily("mobile"))
             {
                 Comment.CloseButtonStyle = (Style)Resources["ButtonRevealStyle"];
                 Comment.SecondaryButtonStyle = (Style)Resources["ButtonRevealStyle"];
@@ -381,7 +381,7 @@ namespace True_Love.Pages
             }
             void CommandBarCollapsed()
             {
-                if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile") CommandBar.Visibility = Visibility.Collapsed;
+                if (IdentifyDeviceFamily("mobile")) CommandBar.Visibility = Visibility.Collapsed;
                 else
                 {
                     bar.Opacity = 0;
@@ -390,7 +390,7 @@ namespace True_Love.Pages
             }
             void CommandBarVisible()
             {
-                if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile") CommandBar.Visibility = Visibility.Visible;
+                if (IdentifyDeviceFamily("mobile")) CommandBar.Visibility = Visibility.Visible;
                 else
                 {
                     bar.Opacity = 1;
@@ -415,8 +415,8 @@ namespace True_Love.Pages
         {
             if ((bool)localSettings.Values["SetBackgroundColor"]) Main.Background = new SolidColorBrush(Colors.Black);
             else Main.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
-            if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile" && (bool)localSettings.Values["SetBackgroundColor"]) BackgroundOfBar.Background = new SolidColorBrush(Colors.Black);
-            else if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile") BackgroundOfBar.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
+            if (IdentifyDeviceFamily("mobile") && (bool)localSettings.Values["SetBackgroundColor"]) BackgroundOfBar.Background = new SolidColorBrush(Colors.Black);
+            else if (IdentifyDeviceFamily("mobile")) BackgroundOfBar.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
         }
 
         /// <summary>
