@@ -92,7 +92,7 @@ namespace True_Love.Helpers
                             },
                         BackgroundImage = new TileBackgroundImage()
                         {
-                            Source = "Assets/Background/BG1.jpg"
+                            Source = "Assets/Background.jpg"
                         },
                         PeekImage = new TilePeekImage()
                         {

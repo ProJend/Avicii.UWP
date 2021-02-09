@@ -42,6 +42,7 @@ namespace True_Love.Pages
             var version = Package.Current.Id.Version;
             VersionInfo.Text = $"Version : {version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
             releasedDate.Text = $"Installation Date : {Package.Current.InstalledDate.ToLocalTime().DateTime}";
+            Settings.Loaded -= Settings_Loaded;
         }
 
         /// <summary>

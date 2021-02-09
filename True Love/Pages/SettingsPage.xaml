@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" RequestedTheme="Dark"
+    mc:Ignorable="d" RequestedTheme="Dark" x:Name="Settings"
     Background="Transparent" Loaded="Settings_Loaded"
     xmlns:v1709="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 5)"
     xmlns:v1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)">
@@ -41,8 +41,8 @@
 
             <!--标头 :
                 Header-->
-            <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Margin="1,0,0,0" x:Name="Header" Grid.Row="0" Visibility="Collapsed">
-                <Run>Settings</Run><LineBreak/>
+            <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Margin="1,5,0,20" x:Name="Header" Grid.Row="0" Visibility="Collapsed">
+                <Run>Settings</Run>
             </TextBlock>
 
             <!--内容 :
@@ -72,15 +72,7 @@
                             <Run>Hot Keys</Run>
                         </TextBlock>
                         <!--<TextBlock Text="Keyboard Shortcuts" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>-->
-                        <TextBlock>                                                     
-                            <Run Foreground="DarkGray">Page Memory</Run><LineBreak/>
-                            <Run>F1</Run><LineBreak/><LineBreak/>
-                            <Run Foreground="DarkGray">Page Comments</Run><LineBreak/>
-                            <Run>F2</Run><LineBreak/><LineBreak/>
-                            <Run Foreground="DarkGray">Page Images</Run><LineBreak/>
-                            <Run>F3</Run><LineBreak/><LineBreak/>
-                            <!--<Run Foreground="DarkGray">Page Settings</Run><LineBreak/>
-                            <Run>F4</Run><LineBreak/><LineBreak/>-->
+                        <TextBlock>
                             <Run Foreground="DarkGray">Refresh</Run><LineBreak/>
                             <Run>F5</Run><LineBreak/><LineBreak/>
                             <Run Foreground="DarkGray">Back To Top</Run><LineBreak/>
@@ -116,10 +108,11 @@
                         <Run x:Name="releasedDate"></Run>
                     </TextBlock>
                     <TextBlock Foreground="DarkGray" Style="{ThemeResource BodyTextBlockStyle}">
-                        <Run>解决物理内存使用翻倍问题</Run><LineBreak/>
-                        <Run>解决界面处于宽屏下右滑滑出空白汉堡菜单问题</Run><LineBreak/>
-                        <Run>解决工具栏走位问题</Run><LineBreak/>
-                        <Run>解决打开应用围绕一圈白线问题</Run><LineBreak/>                        <Run>解决界面处于宽屏下右滑滑出空白汉堡菜单问题</Run><LineBreak/>
+                        <Run>🔧 解决物理内存使用翻倍问题</Run><LineBreak/>
+                        <Run>🔧 解决界面处于宽屏下右滑滑出空白汉堡菜单问题</Run><LineBreak/>
+                        <Run>🔧 解决工具栏走位问题</Run><LineBreak/>
+                        <Run>🔧 解决打开应用围绕一圈白线问题</Run><LineBreak/>
+                        <Run>🔧 删除不能正确工作的快捷键</Run><LineBreak/>
                     </TextBlock>
                     <HyperlinkButton Content="Learn More" Click="Release_Click"/>
 
@@ -139,7 +132,7 @@
                         <Run x:Name="VersionInfo" Foreground="DarkGray"></Run><LineBreak/>
                         <Run Foreground="DarkGray">2021 © ProJend</Run><LineBreak/>
                         <Run Foreground="DarkGray">Tim Bergling Foundation</Run><LineBreak/>
-                        <Run>we will comprehend Tim Bergling more and more and more...</Run>
+                        <Run>We will comprehend Tim Bergling more and more and more...</Run>
                     </TextBlock>
                     
                     <!--链接 : 🔗
@@ -150,7 +143,7 @@
                         <Run Foreground="{ThemeResource SystemAccentColor}">Links</Run><LineBreak/>
                         <Run>ProJend</Run>
                     </TextBlock>
-                    <TextBlock Text="A new UWP!" Foreground="DarkGray" Style="{ThemeResource BodyTextBlockStyle}"/>
+                    <TextBlock Text="A new challenge!" Foreground="DarkGray" Style="{ThemeResource BodyTextBlockStyle}"/>
                     <TextBlock Text="Report To Author"/>
                     <StackPanel Orientation="Horizontal">
                         <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="GitHub" v1709:Style="{StaticResource ButtonRevealStyle}" v1809:CornerRadius="2 0 0 2">

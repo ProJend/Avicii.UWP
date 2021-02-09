@@ -145,20 +145,24 @@
                 </CommandBar.RenderTransform>
 
                 <!--<AppBarButton Icon="Add" Label="分享故事" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="分享你与 Avicii 的故事"/>-->
-                <AppBarButton x:Name="BackTopButton" IsEnabled="False" Icon="Upload" Label="Back To Top" ToolTipService.ToolTip="Back to top" Click="BackToTop_Click" Opacity="{x:Bind OpaqueIfEnabled(BackTopButton.IsEnabled), Mode=OneWay}">
+                <AppBarButton x:Name="BackTopButton" IsEnabled="False" Icon="Upload" Label="Back To Top" ToolTipService.ToolTip="Back to top" 
+                              Click="BackToTop_Click" Opacity="{x:Bind OpaqueIfEnabled(BackTopButton.IsEnabled), Mode=OneWay}">
                     <v1809:AppBarButton.OpacityTransition>
                         <ScalarTransition/>
                     </v1809:AppBarButton.OpacityTransition>
                 </AppBarButton>
-                <AppBarButton x:Name="RefreshButton" Icon="Refresh" Label="Refresh" ToolTipService.ToolTip="Refresh dates" Click="Refresh_Click" Opacity="{x:Bind OpaqueIfEnabled(RefreshButton.IsEnabled), Mode=OneWay}">
+                <AppBarButton x:Name="RefreshButton" Icon="Refresh" Label="Refresh" ToolTipService.ToolTip="Refresh dates" 
+                              Click="Refresh_Click" Opacity="{x:Bind OpaqueIfEnabled(RefreshButton.IsEnabled), Mode=OneWay}">
                     <v1809:AppBarButton.OpacityTransition>
                         <ScalarTransition/>
                     </v1809:AppBarButton.OpacityTransition>
                 </AppBarButton>
-                <AppBarButton Visibility="Collapsed" x:Name="AddButton" Icon="Add" Label="New Comment" ToolTipService.ToolTip="Share your menory" Click="AddButton_Click" Opacity="{x:Bind OpaqueIfEnabled(AddButton.IsEnabled), Mode=OneWay}">
+                <AppBarButton Visibility="Collapsed" x:Name="AddButton" Icon="Add" Label="New Comment" ToolTipService.ToolTip="Share your menory" 
+                              Click="AddButton_Click" Opacity="{x:Bind OpaqueIfEnabled(AddButton.IsEnabled), Mode=OneWay}">
                     <v1809:AppBarButton.OpacityTransition>
                         <ScalarTransition/>
                     </v1809:AppBarButton.OpacityTransition>
+                
                 </AppBarButton>
                 <!--<AppBarButton Name="Settings" Icon="Setting" Label="设置" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="打开设置"/>-->
                 <!--<CommandBar.SecondaryCommands>

@@ -28,11 +28,11 @@
         </ItemsPanelTemplate>
     </Page.Resources>
 
-    <FlipView SelectionChanged="FlipView_SelectionChanged" x:Name="flipview" IsTapEnabled="False" IsTabStop="False">
+    <FlipView SelectionChanged="FlipView_SelectionChanged" x:Name="flipview" IsTabStop="False">
         <FlipView.Background>
             <ImageBrush ImageSource="/Assets/Background.jpg" Stretch="UniformToFill" AlignmentX="Left"/>
         </FlipView.Background>
-        <FlipViewItem ManipulationMode="System,TranslateX" IsTapEnabled="False" IsTabStop="False">
+        <FlipViewItem ManipulationMode="System,TranslateX" IsTabStop="False">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -56,7 +56,7 @@
                 </StackPanel>
             </Grid>
         </FlipViewItem>
-        <FlipViewItem ManipulationMode="System,TranslateX" IsTapEnabled="False" IsTabStop="False">
+        <FlipViewItem ManipulationMode="System,TranslateX" IsTabStop="False">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -90,7 +90,7 @@
                 </StackPanel>
             </Grid>
         </FlipViewItem>
-        <FlipViewItem ManipulationMode="System,TranslateX" IsTapEnabled="False" IsTabStop="False">
+        <FlipViewItem ManipulationMode="System,TranslateX" IsTabStop="False">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -118,7 +118,7 @@
                 </StackPanel>
             </Grid>
         </FlipViewItem>
-        <FlipViewItem ManipulationMode="System,TranslateX" IsTapEnabled="False" IsTabStop="False">
+        <FlipViewItem ManipulationMode="System,TranslateX" IsTabStop="False">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                 <ProgressRing Name="ImageIsLoading" Foreground="White" IsActive="True" Width="50" Height="50" Margin="0 0 0 30"/>
                 <TextBlock Style="{ThemeResource TitleTextBlockStyle}" VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -135,7 +135,7 @@
                 </Viewbox>
             </StackPanel>
         </FlipViewItem>
-        <FlipViewItem ManipulationMode="System,TranslateX" IsTapEnabled="False" IsTabStop="False">
+        <FlipViewItem ManipulationMode="System,TranslateX" IsTabStop="False">
             <Grid Background="Black">
                 <Image Source="/Assets/SplashScreen.png" Height="150" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <Image.Transitions>
@@ -146,7 +146,7 @@
                 </Image>
             </Grid>
         </FlipViewItem>
-
+    
         <FlipView.ItemsPanel>
             <ItemsPanelTemplate>
                 <VirtualizingStackPanel AreScrollSnapPointsRegular="True" Orientation="Vertical"/>

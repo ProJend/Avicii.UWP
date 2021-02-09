@@ -34,7 +34,7 @@ namespace True_Love.Pages
         public MainPage()
         {
             this.InitializeComponent();
-            Current = this;        
+            Current = this;
         }
 
         private void Main_Loaded(object sender, RoutedEventArgs e)
@@ -48,25 +48,33 @@ namespace True_Love.Pages
                 CommandBar.Background = new SolidColorBrush { Color = Colors.Black, Opacity = 0.7 };
             }
             else // = PC
-            {
+            {   // Listen to the window directly so we will respond to hotkeys regardless
+                // of which element has focus.
+                Window.Current.CoreWindow.PointerPressed += this.CoreWindow_PointerPressed;
                 Window.Current.SetTitleBar(AppTitleBar);
                 BackTopButton.Style = (Style)Resources["AppBarButtonRevealStyle"];
                 RefreshButton.Style = (Style)Resources["AppBarButtonRevealStyle"];
                 if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5))// > OS15063
-                {
-                    // 键盘快捷键
-                    MemoryPage.KeyboardAccelerators.Add(new KeyboardAccelerator { Key = VirtualKey.F1 });
-                    HomePage.KeyboardAccelerators.Add(new KeyboardAccelerator { Key = VirtualKey.F2 });
-                    ImagesPage.KeyboardAccelerators.Add(new KeyboardAccelerator { Key = VirtualKey.F3 });
+                {   // 键盘快捷键
+                    //MemoryPage.KeyboardAccelerators.Add(new KeyboardAccelerator { Key = VirtualKey.F1 });
+                    //HomePage.KeyboardAccelerators.Add(new KeyboardAccelerator { Key = VirtualKey.F2 });
+                    //ImagesPage.KeyboardAccelerators.Add(new KeyboardAccelerator { Key = VirtualKey.F3 });
                     BackTopButton.KeyboardAccelerators.Add(new KeyboardAccelerator { Key = VirtualKey.F6 });
                     RefreshButton.KeyboardAccelerators.Add(new KeyboardAccelerator { Key = VirtualKey.F5 });
+
+                    // Add keyboard accelerators for backwards navigation.
+                    var goBack = new KeyboardAccelerator { Key = VirtualKey.Escape };
+                    goBack.Invoked += BackInvoked;
+                    this.KeyboardAccelerators.Add(goBack);
                 }
             }
             #endregion
+            SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
 #if !DEBUG
             ImagesPage.Visibility = Visibility.Collapsed;
             AddButton.Visibility = Visibility.Collapsed;
 #endif
+            Main.Loaded -= Main_Loaded;
         }
 
         #region NavigationView
@@ -81,29 +89,17 @@ namespace True_Love.Pages
         };
 
         private void NavView_Loaded(object sender, RoutedEventArgs e)
-        {
-            SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
-            // Add handler for ContentFrame navigation.
+        {   // Add handler for ContentFrame navigation.
             ContentFrame.Navigated += On_Navigated;
 
             // NavView doesn't load any page by default, so load home page.
             NavView.SelectedItem = NavView.MenuItems[0];
+
             // If navigation occurs on SelectionChanged, this isn't needed.
             // Because we use ItemInvoked to navigate, we need to call Navigate
             // here to load the home page.
             NavView_Navigate("home", new EntranceNavigationTransitionInfo());
-
-            // Add keyboard accelerators for backwards navigation.
-            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5))
-            {
-                var goBack = new KeyboardAccelerator { Key = VirtualKey.Escape };
-                goBack.Invoked += BackInvoked;
-                this.KeyboardAccelerators.Add(goBack);
-            }
-
-            // Listen to the window directly so we will respond to hotkeys regardless
-            // of which element has focus.
-            Window.Current.CoreWindow.PointerPressed += this.CoreWindow_PointerPressed;
+            NavView.Loaded -= NavView_Loaded;
         }
 
         /// <summary>
@@ -181,7 +177,7 @@ namespace True_Love.Pages
         private void CoreWindow_PointerPressed(CoreWindow sender, PointerEventArgs e)
         {
             var properties = e.CurrentPoint.Properties;
-
+            
             // Ignore button chords with the left, right, and middle buttons
             if (properties.IsLeftButtonPressed || properties.IsRightButtonPressed ||
                 properties.IsMiddleButtonPressed) return;
@@ -195,7 +191,6 @@ namespace True_Love.Pages
                 if (backPressed) this.On_BackRequested();
                 //if (forwardPressed) this.TryGoForward();
             }
-
         }
 
         private void On_Navigated(object sender, NavigationEventArgs e)

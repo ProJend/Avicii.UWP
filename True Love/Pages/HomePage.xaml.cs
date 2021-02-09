@@ -58,6 +58,7 @@ namespace True_Love.Pages
             ImageGridView.ItemsSource = images;
             ImageIsLoading.IsActive = false;
             ImageIsLoading.Height = 0;
+            flipview.SelectionChanged -= FlipView_SelectionChanged;
         }
 
         private void FlipView_SelectionChanged(object sender, SelectionChangedEventArgs e)
