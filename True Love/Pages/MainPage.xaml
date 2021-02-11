@@ -157,14 +157,12 @@
                         <ScalarTransition/>
                     </v1809:AppBarButton.OpacityTransition>
                 </AppBarButton>
-                <AppBarButton Visibility="Collapsed" x:Name="AddButton" Icon="Add" Label="New Comment" ToolTipService.ToolTip="Share your menory" 
+                <AppBarButton Visibility="Visible" x:Name="AddButton" Icon="Comment" Label="New Comment" ToolTipService.ToolTip="Share your menory" 
                               Click="AddButton_Click" Opacity="{x:Bind OpaqueIfEnabled(AddButton.IsEnabled), Mode=OneWay}">
                     <v1809:AppBarButton.OpacityTransition>
                         <ScalarTransition/>
                     </v1809:AppBarButton.OpacityTransition>
-                
                 </AppBarButton>
-                <!--<AppBarButton Name="Settings" Icon="Setting" Label="设置" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="打开设置"/>-->
                 <!--<CommandBar.SecondaryCommands>
 
                 </CommandBar.SecondaryCommands>-->
@@ -183,13 +181,20 @@
                 <muxc:NavigationViewItemHeader Content="True" x:Name="MainPagesHeader"/>
                 <muxc:NavigationViewItem Content="Memory" x:Name="MemoryPage" Icon="Home" Tag="home"/>
                 <muxc:NavigationViewItem Content="Comments" x:Name="HomePage" Icon="World" Tag="comment"/>
-                <muxc:NavigationViewItem Content="Images" x:Name="ImagesPage" Tag="image" Visibility="Collapsed">
+                <muxc:NavigationViewItem Content="Images" x:Name="ImagesPage" Tag="image" Visibility="Visible">
                     <muxc:NavigationViewItem.Icon>
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEB9F;"/>
                     </muxc:NavigationViewItem.Icon>
                 </muxc:NavigationViewItem>
-                <muxc:NavigationViewItemSeparator x:Name="NavSeparator" Visibility="Collapsed"/>
             </muxc:NavigationView.MenuItems>
+            <muxc:NavigationView.FooterMenuItems>
+                <muxc:NavigationViewItemSeparator x:Name="NavSeparator"/>
+                <muxc:NavigationViewItem Tag="settings" x:Name="a">
+                    <muxc:NavigationViewItem.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE721;"/>
+                    </muxc:NavigationViewItem.Icon>
+                </muxc:NavigationViewItem>
+            </muxc:NavigationView.FooterMenuItems>
         </muxc:NavigationView>
 
         <VisualStateManager.VisualStateGroups>
@@ -203,7 +208,6 @@
                         <!-- Remove the next 3 lines for left-only navigation. -->
                         <Setter Target="NavView.PaneDisplayMode" Value="Top"/>
                         <Setter Target="MainPagesHeader.Visibility" Value="Collapsed"/>
-                        <Setter Target="NavSeparator.Visibility" Value="Visible"/>
                         <!-- Leave the next line for left-only navigation. -->
                         <Setter Target="bar.IsTapEnabled" Value="false"/>
                         <Setter Target="bar.VerticalAlignment" Value="Top"/>
