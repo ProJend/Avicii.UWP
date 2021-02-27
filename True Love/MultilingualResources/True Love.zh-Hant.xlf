@@ -5,17 +5,16 @@
       <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.6916.0" tool-company="Microsoft" />
     </header>
     <body>
-      <group id="TRUE LOVE/STRING/EN/RESOURCES.RESW" datatype="resx">
+      <group id="TRUE LOVE - UWP/STRING/EN/RESOURCES.RESW">
         <trans-unit id="pDisplayName" translate="yes" xml:space="preserve">
           <source>True Love</source>
-          <target state="translated">真愛</target>
+           <target state="translated">真愛</target>
           <note from="MultilingualBuild" annotates="source" priority="2">DisplayName</note>
         </trans-unit>
         <trans-unit id="pPackageDisplayName" translate="yes" xml:space="preserve">
           <source>True Love - Tim Bergling Foundtion</source>
-          <target state="needs-review-translation">True Love - Tim Bergling Foundtion</target>
+          <target state="translated">True Love - Tim Bergling Foundtion</target>
           <note from="MultilingualBuild" annotates="source" priority="2">PackageDisplayName</note>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
       </group>
     </body>

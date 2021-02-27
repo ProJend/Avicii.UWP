@@ -7,9 +7,9 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls"/>
-                <ResourceDictionary Source="Styles/Colors.xaml"/>
-                <ResourceDictionary Source="Styles/Fonts.xaml"/>
-                <ResourceDictionary Source="Styles/Navigation.xaml"/>
+                <ResourceDictionary Source="Template/Colors.xaml"/>
+                <ResourceDictionary Source="Template/Fonts.xaml"/>
+                <ResourceDictionary Source="Template/Navigation.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -1,14 +1,14 @@
 ﻿<Page
     x:Class="True_Love.Pages.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Windows10version1709="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 5)"
+    xmlns:Windows10version1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" x:Name="Main" RequestedTheme="Dark" Background="{x:Bind Color}"
-    Loaded="Main_Loaded"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    xmlns:v1709="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 5)"
-    xmlns:v1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)">
+    mc:Ignorable="d" x:Name="Main" RequestedTheme="Dark" Background="{x:Bind PageBackgroundColor}"
+    Loaded="Main_Loaded">
     <Page.Resources>
         <Storyboard x:Name="Close">
             <DoubleAnimation Storyboard.TargetName="Translate" Storyboard.TargetProperty="Y" From="0" To="40" >
@@ -110,18 +110,18 @@
             <Frame x:Name="ContentFrame"/>
         </ScrollViewer>
 
-        <Grid x:Name="BackgroundOfBar" MinHeight="40" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="{ThemeResource NavigationViewTopPaneBackground}">
-            <v1809:Grid.TranslationTransition>
+        <Grid x:Name="BackgroundOfBar" MinHeight="80" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="{ThemeResource NavigationViewTopPaneBackground}">
+            <Windows10version1809:Grid.TranslationTransition>
                 <Vector3Transition/>
-            </v1809:Grid.TranslationTransition>
+            </Windows10version1809:Grid.TranslationTransition>
             <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" x:Name="AppTitleBar" Background="Transparent"/>
-            <TextBlock x:Name="Notification" Height="40" Margin="6 40 0 0">
-                <v1809:TextBlock.OpacityTransition>
+            <TextBlock x:Name="NotificationGrid" Height="40" Margin="6 0 0 0" VerticalAlignment="Bottom">
+                <Windows10version1809:TextBlock.OpacityTransition>
                     <ScalarTransition/>
-                </v1809:TextBlock.OpacityTransition>
-                <Run x:Name="Icon" FontSize="20"></Run>
+                </Windows10version1809:TextBlock.OpacityTransition>
+                <Run x:Name="NotificationIcon" FontSize="20"></Run>
                 <Run Text="   "/>
-                <Run x:Name="NameInfo"></Run>
+                <Run x:Name="NotificationHint"></Run>
             </TextBlock>
         </Grid>
 
@@ -129,16 +129,16 @@
             <!--<v1809:Grid.TranslationTransition>
                 <Vector3Transition/>
             </v1809:Grid.TranslationTransition>-->
-            <v1809:Grid.OpacityTransition>
+            <Windows10version1809:Grid.OpacityTransition>
                 <ScalarTransition/>
-            </v1809:Grid.OpacityTransition>
+            </Windows10version1809:Grid.OpacityTransition>
             <Grid.Transitions>
                 <TransitionCollection>
                     <PaneThemeTransition/>
                 </TransitionCollection>
             </Grid.Transitions>
 
-            <CommandBar DefaultLabelPosition="Bottom" v1709:ToolTipService.ToolTip="Right tag on here to switch CommandBar." Background="{ThemeResource NavigationViewTopPaneBackground}"
+            <CommandBar DefaultLabelPosition="Bottom" Windows10version1709:ToolTipService.ToolTip="Right tag on here to switch CommandBar." Background="{ThemeResource NavigationViewTopPaneBackground}"
                         RightTapped="CommandBar_RightTapped" x:Name="CommandBar" FlowDirection="LeftToRight" OverflowButtonVisibility="Auto">
                 <CommandBar.RenderTransform>
                     <TranslateTransform x:Name="Translate"/>
@@ -147,21 +147,21 @@
                 <!--<AppBarButton Icon="Add" Label="分享故事" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="分享你与 Avicii 的故事"/>-->
                 <AppBarButton x:Name="BackTopButton" IsEnabled="False" Icon="Upload" Label="Back To Top" ToolTipService.ToolTip="Back to top" 
                               Click="BackToTop_Click" Opacity="{x:Bind OpaqueIfEnabled(BackTopButton.IsEnabled), Mode=OneWay}">
-                    <v1809:AppBarButton.OpacityTransition>
+                    <Windows10version1809:AppBarButton.OpacityTransition>
                         <ScalarTransition/>
-                    </v1809:AppBarButton.OpacityTransition>
+                    </Windows10version1809:AppBarButton.OpacityTransition>
                 </AppBarButton>
                 <AppBarButton x:Name="RefreshButton" Icon="Refresh" Label="Refresh" ToolTipService.ToolTip="Refresh dates" 
                               Click="Refresh_Click" Opacity="{x:Bind OpaqueIfEnabled(RefreshButton.IsEnabled), Mode=OneWay}">
-                    <v1809:AppBarButton.OpacityTransition>
+                    <Windows10version1809:AppBarButton.OpacityTransition>
                         <ScalarTransition/>
-                    </v1809:AppBarButton.OpacityTransition>
+                    </Windows10version1809:AppBarButton.OpacityTransition>
                 </AppBarButton>
                 <AppBarButton Visibility="Visible" x:Name="AddButton" Icon="Comment" Label="New Comment" ToolTipService.ToolTip="Share your menory" 
                               Click="AddButton_Click" Opacity="{x:Bind OpaqueIfEnabled(AddButton.IsEnabled), Mode=OneWay}">
-                    <v1809:AppBarButton.OpacityTransition>
+                    <Windows10version1809:AppBarButton.OpacityTransition>
                         <ScalarTransition/>
-                    </v1809:AppBarButton.OpacityTransition>
+                    </Windows10version1809:AppBarButton.OpacityTransition>
                 </AppBarButton>
                 <!--<CommandBar.SecondaryCommands>
 

@@ -1,8 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:muxm="using:Microsoft.UI.Xaml.Media"
-    xmlns:local="using:True_Love.Styles">
+    xmlns:muxm="using:Microsoft.UI.Xaml.Media">
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Dark">
             <Color x:Key="SystemAccentColor">#ADDBE0</Color>

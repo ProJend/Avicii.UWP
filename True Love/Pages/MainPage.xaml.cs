@@ -1,26 +1,27 @@
-﻿using System;
+﻿using Microsoft.QueryStringDotNET;
+using Microsoft.Toolkit.Uwp.Connectivity;
+using Microsoft.Toolkit.Uwp.Notifications;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
+using System.Xml.Serialization;
+using True_Love.Pages.XAML_ContentDialog;
+using TrueLove.Notification.Toast;
+using Windows.Foundation.Metadata;
+using Windows.Storage;
 using Windows.System;
+using Windows.UI;
 using Windows.UI.Core;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
-using muxc = Microsoft.UI.Xaml.Controls;
-using Windows.Foundation.Metadata;
-using Windows.UI;
-using Windows.Storage;
-using System.Numerics;
-using Microsoft.Toolkit.Uwp.Connectivity;
-using Windows.UI.Xaml.Media;
-using System.Xml.Serialization;
-using Microsoft.Toolkit.Uwp.Notifications;
-using Windows.UI.Notifications;
-using Microsoft.QueryStringDotNET;
-using True_Love.Pages.XAML_ContentDialog;
 using static True_Love.Helpers.Generic;
+using muxc = Microsoft.UI.Xaml.Controls;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -43,7 +44,7 @@ namespace True_Love.Pages
             #region 兼容低版本号系统
             if (IdentifyDeviceFamily("mobile")) // = WP
             {
-                if ((bool)localSettings.Values["SetBackgroundColor"]) BackgroundOfBar.Background = new SolidColorBrush(Colors.Black);
+                if ((bool)localSettings.Values["SetPageBackgroundColor"]) BackgroundOfBar.Background = new SolidColorBrush(Colors.Black);
                 else BackgroundOfBar.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
                 CommandBar.Background = new SolidColorBrush { Color = Colors.Black, Opacity = 0.7 };
             }
@@ -319,51 +320,26 @@ namespace True_Love.Pages
                     CommandBarCollapsed();
 #endif
                     RefreshButton.IsEnabled = false;
-                    if (Notification.Visibility == Visibility.Visible && Notification.Opacity == 1) NotificationCollapsed();
+                    if (NotificationGrid.Visibility == Visibility.Visible && NotificationGrid.Opacity == 1) NotificationCollapsed();
                     break;
 
                 case "comment":
                     CommandBarVisible();
                     RefreshButton.IsEnabled = true;
-                    if (!NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable && (bool)localSettings.Values["ToastIsPush"] == false)
+                    if (!NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
                     {
-                        Icon.Text = "⚠";
-                        NameInfo.Text = "There's no network available.";
+                        NotificationIcon.Text = "⚠";
+                        NotificationHint.Text = "There's no network available.";
+
                         if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7)) BackgroundOfBar.Translation = new Vector3(0, 0, 0);
-                        else Notification.Visibility = Visibility.Visible;
-                        Notification.Opacity = 1;
-                        if ((bool)localSettings.Values["ToastIsPush"] == false)
+                        else NotificationGrid.Visibility = Visibility.Visible;
+                        NotificationGrid.Opacity = 1;
+
+                        if (!(bool)ToastConfig.NetworkisPush)
                         {
-                            int conversationId = 384928;
-                            var content = new ToastContentBuilder()
-                            .AddToastActivationInfo(new QueryString()
-                            {
-                                { "action", "checkNetwork" },
-                                { "conversationId", conversationId.ToString() }
-                            }.ToString(), ToastActivationType.Foreground)
-                            .AddText("Time Out")
-                            .AddText("There's no network available.")
-                            .AddButton("Settings", ToastActivationType.Foreground, new QueryString()
-                            {
-                                { "action", "Settings" },
-                                { "conversationId", conversationId.ToString() }
-                            }.ToString())
-                            .AddButton("Close", ToastActivationType.Foreground, new QueryString()
-                            {
-                                { "action", "Close" },
-                                { "conversationId", conversationId.ToString() }
-                            }.ToString())
-                            .GetToastContent();
-
-                            // Create the notification
-                            var notif = new ToastNotification(content.GetXml())
-                            {
-                                ExpirationTime = DateTime.Now.AddSeconds(10)
-                            };
-
-                            // And show it!
-                            ToastNotificationManager.CreateToastNotifier().Show(notif);
-                        }
+                            ToastAdd.AddToast();
+                            ToastConfig.NetworkisPush = true;
+                        }                     
                     }
                     else NotificationCollapsed();
                     break;
@@ -371,9 +347,10 @@ namespace True_Love.Pages
                 default:
                     CommandBarVisible();
                     RefreshButton.IsEnabled = false;
-                    if (Notification.Visibility == Visibility.Visible && Notification.Opacity == 1) NotificationCollapsed();
+                    if (NotificationGrid.Visibility == Visibility.Visible && NotificationGrid.Opacity == 1) NotificationCollapsed();
                     break;
             }
+
             void CommandBarCollapsed()
             {
                 if (IdentifyDeviceFamily("mobile")) CommandBar.Visibility = Visibility.Collapsed;
@@ -394,9 +371,9 @@ namespace True_Love.Pages
             }
             void NotificationCollapsed()
             {
-                Notification.Opacity = 0;
+                NotificationGrid.Opacity = 0;
                 if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7)) BackgroundOfBar.Translation = new Vector3(0, -40, 0);
-                else Notification.Visibility = Visibility.Collapsed;
+                else NotificationGrid.Visibility = Visibility.Collapsed;
             }
         }
         #endregion
@@ -408,9 +385,9 @@ namespace True_Love.Pages
         /// </summary>
         public void PageBackgroundChange()
         {
-            if ((bool)localSettings.Values["SetBackgroundColor"]) Main.Background = new SolidColorBrush(Colors.Black);
+            if ((bool)localSettings.Values["SetPageBackgroundColor"]) Main.Background = new SolidColorBrush(Colors.Black);
             else Main.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
-            if (IdentifyDeviceFamily("mobile") && (bool)localSettings.Values["SetBackgroundColor"]) BackgroundOfBar.Background = new SolidColorBrush(Colors.Black);
+            if (IdentifyDeviceFamily("mobile") && (bool)localSettings.Values["SetPageBackgroundColor"]) BackgroundOfBar.Background = new SolidColorBrush(Colors.Black);
             else if (IdentifyDeviceFamily("mobile")) BackgroundOfBar.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
         }
 
@@ -420,7 +397,7 @@ namespace True_Love.Pages
         /// 需要重启应用
         /// </summary>
         [XmlIgnore]
-        public string Color => (bool)localSettings.Values["SetBackgroundColor"] ? "Black" : "#FF1F1F1F";
+        public string PageBackgroundColor => (bool)localSettings.Values["SetPageBackgroundColor"] ? "Black" : "#F1F1F1F";
 
         // 滚动条位置变量
         public double scrlocation = 0;

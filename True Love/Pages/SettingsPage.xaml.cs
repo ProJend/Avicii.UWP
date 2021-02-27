@@ -1,17 +1,18 @@
 ﻿using System;
-using True_Love.Helpers;
+using True_Love.Pages.XAML_ContentDialog;
+using TrueLove.Notification.LiveTile;
+using TrueLove.Notification.Toast;
+using Windows.ApplicationModel;
 using Windows.ApplicationModel.Email;
+using Windows.Foundation.Metadata;
 using Windows.Storage;
-using static Windows.System.Launcher;
+using Windows.UI;
 using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.Foundation.Metadata;
-using Windows.UI;
 using Windows.UI.Xaml.Media;
-using Windows.ApplicationModel;
-using True_Love.Pages.XAML_ContentDialog;
 using static True_Love.Helpers.Generic;
+using static Windows.System.Launcher;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -22,7 +23,6 @@ namespace True_Love.Pages
     /// </summary>
     public sealed partial class SettingsPage : Page
     {
-        private LiveTileService liveTileService;
         public static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
         private string closeText, titleText; // 声明更新记录字符串
 
@@ -38,7 +38,7 @@ namespace True_Love.Pages
             if (!ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5)) HotKeys.Visibility = Visibility.Collapsed;
             LiveTiles.IsOn = (bool)localSettings.Values["SetLiveTiles"];
             HideCommandbar.IsOn = (bool)localSettings.Values["SetHideCommandBar"];
-            BackgroundColor.IsOn = (bool)localSettings.Values["SetBackgroundColor"];
+            BackgroundColor.IsOn = (bool)localSettings.Values["SetPageBackgroundColor"];
             var version = Package.Current.Id.Version;
             VersionInfo.Text = $"Version : {version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
             releasedDate.Text = $"Installation Date : {Package.Current.InstalledDate.ToLocalTime().DateTime}";
@@ -56,10 +56,9 @@ namespace True_Love.Pages
             switch (toggleSwitch.Tag as string)
             {
                 case "liveTiles":
-                    liveTileService = new LiveTileService();
                     if (LiveTiles.IsOn == true)
                     {
-                        liveTileService.AddTile(); // 添加新磁贴
+                        LVAdd.AddTile(); // 添加新磁贴
                         localSettings.Values["SetLiveTiles"] = true;
                     }
                     else
@@ -77,13 +76,13 @@ namespace True_Love.Pages
                 case "backgroundColor":
                     if (BackgroundColor.IsOn == true)
                     {
-                        localSettings.Values["SetBackgroundColor"] = true;
+                        localSettings.Values["SetPageBackgroundColor"] = true;
                         Main.Background = new SolidColorBrush(Colors.Black);
                         MainPage.Current.PageBackgroundChange();
                     }
                     else
                     {
-                        localSettings.Values["SetBackgroundColor"] = false;
+                        localSettings.Values["SetPageBackgroundColor"] = false;
                         Main.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
                         MainPage.Current.PageBackgroundChange();
                     }
