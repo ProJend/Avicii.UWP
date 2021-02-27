@@ -5,8 +5,8 @@ Tim Bergling (8 September 1989 – 20 April 2018), better known by his stage nam
 Information from [WIKIPEDIA](https://en.wikipedia.org/wiki/Avicii).
 
 ### About This APP
-This is a UWP about Tim Bergling , and you can browse the pieces of information of him.
-- It's building...
+This is a UWP about Tim Bergling , and you can browse the pieces of his information.
+- Under building...
 
 ## Debug Support
 Certificate Passwords : abc123
@@ -18,15 +18,15 @@ Certificate Passwords : abc123
   - &gt; Windows 1703
 - [Visual Studio](https://visualstudio.microsoft.com/downloads/) with UWP : Version 2017 or higher
 - [SDK](https://developer.microsoft.com/en-us/windows/downloads/sdk-archive/) : Windows 10 SDK (10.0.18362.0)
-  - Also can download in the Visual Studio Installer.
+  - Can be installed in the Visual Studio Installer as well.
 
 ### Translation
 Begin soon with the Release of v1.0 out.
 
 ### Installation
-For sideloaded packages, see [this](https://docs.microsoft.com/en-us/windows/application-management/sideload-apps-in-windows-10).
+For sideloaded packages, more info [here](https://docs.microsoft.com/en-us/windows/application-management/sideload-apps-in-windows-10).
 
-😕 This time is no available at Microsoft Store.
+😕 Not available at Microsoft Store.
 
 ## License
 ### Nuget
