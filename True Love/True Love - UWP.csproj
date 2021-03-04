@@ -137,7 +137,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\Generic.cs" />
     <Compile Include="Pages\CommentsPage.xaml.cs">
       <DependentUpon>CommentsPage.xaml</DependentUpon>
     </Compile>
@@ -152,12 +151,6 @@
     </Compile>
     <Compile Include="Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\XAML-ContentDialog\NewComment.xaml.cs">
-      <DependentUpon>NewComment.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\XAML-ContentDialog\ReleaseNotes.xaml.cs">
-      <DependentUpon>ReleaseNotes.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -262,11 +255,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\XAML-ContentDialog\NewComment.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\XAML-ContentDialog\ReleaseNotes.xaml">
+    <Page Include="Template\Button.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -320,6 +309,10 @@
     <XliffResource Include="MultilingualResources\True Love.zh-Hant.xlf" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TrueLove.Lib\True Love - Lib.csproj">
+      <Project>{be71c6bf-09b2-48d7-9290-e97be9b8d622}</Project>
+      <Name>True Love - Lib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TrueLove.Notification\True Love - Notification.csproj">
       <Project>{9aa648db-585b-4da3-98ee-260088f147e0}</Project>
       <Name>True Love - Notification</Name>

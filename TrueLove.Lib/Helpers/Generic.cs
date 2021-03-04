@@ -2,7 +2,7 @@
 using Windows.ApplicationModel.Resources;
 using Windows.System.Profile;
 
-namespace True_Love.Helpers
+namespace TrueLove.Lib.Helpers
 {
     public static class Generic
     {
@@ -21,13 +21,13 @@ namespace True_Love.Helpers
         /// <summary>
         /// 识别设备。
         /// </summary>
-        /// <param name="DeviceOS">Desktop, Mobile, Team, IoT, Holographic or Xbox</param>
+        /// <param name="deviceOS">Desktop, Mobile, Team, IoT, Holographic or Xbox</param>
         /// <returns></returns>
-        public static bool IdentifyDeviceFamily(string DeviceOS)
+        public static bool DeviceFamilyMatch(string deviceOS)
         {
-            var DeviceFamily = AnalyticsInfo.VersionInfo.DeviceFamily;
-            var CurrentDevice = "Windows." + DeviceOS.Substring(0, 1).ToUpper() + DeviceOS.Substring(1).ToLower(); // 首字母大写
-            switch (CurrentDevice)
+            var deviceFamily = AnalyticsInfo.VersionInfo.DeviceFamily;
+            var currentDevice = deviceOS; // 首字母大写
+            switch (currentDevice)
             {   // 确认设备输入正确
                 case "Windows.Desktop":
                 case "Windows.Mobile":
@@ -35,11 +35,22 @@ namespace True_Love.Helpers
                 case "Windows.IoT":
                 case "Windows.Holographic":
                 case "Windows.Xbox":
-                    if (DeviceFamily == CurrentDevice) return true;
+                    if (deviceFamily == currentDevice) return true;
                     else return false;
                 default:
-                    throw new ArgumentException($"The parameter is incorrect : {DeviceOS}.\nTap Ctrl + F to search and find it out in current project.");
+                    throw new ArgumentException($"The parameter is incorrect : {deviceOS}.\nTap Ctrl + F to search and find it out in current project.");
             }          
         }
+    }
+
+    public class DeviceFamilyList
+    {
+        public static string Desktop = "Windows.Desktop";
+        public static string Mobile = "Windows.Mobile";
+        public static string Team = "Windows.Team";
+        public static string IoT = "Windows.IoT";
+        public static string Holographic = "Windows.Holographic";
+        public static string Xbox = "Windows.Xbox";
+        public static string UnknowDevice = "UnknowDevice";
     }
 }

@@ -2,7 +2,7 @@
 
 namespace TrueLove.Notification.LiveTile
 {
-    class LVTemplate
+    class TileTemplate
     {
         public static TileContent StaticTemplate() => new TileContent()
         {   // 创建静态磁贴对象并返回

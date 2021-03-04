@@ -1,17 +1,17 @@
-﻿using System;
+﻿using Microsoft.QueryStringDotNET;
+using System;
 using True_Love.Pages;
+using TrueLove.Lib.Helpers;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
+using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Notifications;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Windows.Storage;
-using Microsoft.QueryStringDotNET;
-using static True_Love.Helpers.Generic;
 
 namespace True_Love
 {
@@ -88,7 +88,7 @@ namespace True_Love
                     localSettings.Values["IsToastPush"] = false;
                 }
 
-                if (!IdentifyDeviceFamily("mobile")) HideTitleBar();
+                if (!Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile)) HideTitleBar();
                 //else HideStatusBar();
             }
         }
@@ -143,8 +143,8 @@ namespace True_Love
             var titleBar = ApplicationView.GetForCurrentView().TitleBar;
             titleBar.ButtonBackgroundColor = Colors.Transparent;
             titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
-            titleBar.ButtonHoverBackgroundColor = Color.FromArgb(0xFF, 173, 219, 224);
-            titleBar.ButtonPressedBackgroundColor = Color.FromArgb(0xFF, 173, 219, 224);
+            titleBar.ButtonHoverBackgroundColor = Colors.PaleTurquoise;
+            titleBar.ButtonPressedBackgroundColor = Colors.PaleTurquoise;
             titleBar.ButtonHoverForegroundColor = Colors.Black;
         }
 

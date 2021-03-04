@@ -2,6 +2,6 @@
 {
     public class ToastConfig
     {
-        public static bool NetworkisPush;
+        public static bool isNetworkPush;
     }
 }

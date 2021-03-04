@@ -4,13 +4,13 @@
     xmlns:muxm="using:Microsoft.UI.Xaml.Media">
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Dark">
-            <Color x:Key="SystemAccentColor">#ADDBE0</Color>
-            <Color x:Key="SystemAccentColorLight1">#DFFEFF</Color>
-            <Color x:Key="SystemAccentColorLight2">#DFFEFF</Color>
-            <Color x:Key="SystemAccentColorLight3">#DFFEFF</Color>
-            <Color x:Key="SystemAccentColorDark1">#8FC5CB</Color>
-            <Color x:Key="SystemAccentColorDark2">#71AFB6</Color>
-            <Color x:Key="SystemAccentColorDark3">#539AA2</Color>
+            <Color x:Key="SystemAccentColor">PaleTurquoise</Color>
+            <Color x:Key="SystemAccentColorLight1">#91D7D7</Color>
+            <Color x:Key="SystemAccentColorLight2">#73BFC0</Color>
+            <Color x:Key="SystemAccentColorLight3">#54A8A9</Color>
+            <Color x:Key="SystemAccentColorDark1">#369092</Color>
+            <Color x:Key="SystemAccentColorDark2">#18797B</Color>
+            <Color x:Key="SystemAccentColorDark3">#136263</Color>
             <muxm:RevealBackgroundBrush x:Key="AccentRevealBackgroundBrush"
                                           FallbackColor="{ThemeResource SystemAccentColor}"
                                           TargetTheme="Dark"

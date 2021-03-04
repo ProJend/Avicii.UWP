@@ -1,7 +1,6 @@
 ﻿using System;
-using True_Love.Pages.XAML_ContentDialog;
+using TrueLove.Notification.ContentDialog;
 using TrueLove.Notification.LiveTile;
-using TrueLove.Notification.Toast;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Email;
 using Windows.Foundation.Metadata;
@@ -11,7 +10,6 @@ using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
-using static True_Love.Helpers.Generic;
 using static Windows.System.Launcher;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
@@ -24,7 +22,6 @@ namespace True_Love.Pages
     public sealed partial class SettingsPage : Page
     {
         public static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
-        private string closeText, titleText; // 声明更新记录字符串
 
         public SettingsPage()
         {
@@ -58,15 +55,14 @@ namespace True_Love.Pages
                 case "liveTiles":
                     if (LiveTiles.IsOn == true)
                     {
-                        LVAdd.AddTile(); // 添加新磁贴
-                        localSettings.Values["SetLiveTiles"] = true;
+                        if (!TileConfig.staticLiveTile)
+                        {
+                            TileCreate.AddTile(); // 添加新磁贴
+                            TileConfig.staticLiveTile = true;
+                        }
                     }
-                    else
-                    {
-                        TileUpdateManager.CreateTileUpdaterForApplication().Clear(); // 清空队列
-                        localSettings.Values["SetLiveTiles"] = false;
-                        localSettings.Values["OnlyLiveTiles"] = true;
-                    }
+                    else TileUpdateManager.CreateTileUpdaterForApplication().Clear(); // 清空队列
+                    localSettings.Values["SetLiveTiles"] = LiveTiles.IsOn == true ? true : false;
                     break;
 
                 case "hideCommandbar":
@@ -76,16 +72,15 @@ namespace True_Love.Pages
                 case "backgroundColor":
                     if (BackgroundColor.IsOn == true)
                     {
-                        localSettings.Values["SetPageBackgroundColor"] = true;
                         Main.Background = new SolidColorBrush(Colors.Black);
                         MainPage.Current.PageBackgroundChange();
                     }
                     else
                     {
-                        localSettings.Values["SetPageBackgroundColor"] = false;
                         Main.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
                         MainPage.Current.PageBackgroundChange();
                     }
+                    localSettings.Values["SetPageBackgroundColor"] = HideCommandbar.IsOn == true ? true : false;
                     break;
             }
         }
@@ -93,49 +88,10 @@ namespace True_Love.Pages
         /// <summary>
         /// 更新记录
         /// </summary>
-        private async void Release_Click(object sender, RoutedEventArgs e)
+        private void Release_Click(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(Language)) // 判断对传的值进行是否为空值
-            {
-                switch (Language) // 匹对语种
-                {
-                    case "en-US":
-                        closeText = "Get it!";
-                        titleText = "Release Notes";
-                        //Application.Current.Resources["Key"];
-                        break;
-                    case "zh-Hans-CN":
-                        closeText = "好哒！";
-                        titleText = "更新记录";
-                        break;
-                    case "zh-Hant-HK":
-                        closeText = "好嘅！";
-                        titleText = "更新日志";
-                        break;
-                    default:
-                        closeText = "OK";
-                        titleText = "Release Notes";
-                        break;
-                }
-            }
+            DialogCreate.DialogAdd(AddList.ReleaseNotes);
 
-            var release = new ContentDialog()
-            {
-                Title = titleText,
-                CloseButtonText = closeText,
-                Content = new ReleaseNotes(),
-                Background = new SolidColorBrush(Colors.Black),
-            };
-            if (!IdentifyDeviceFamily("mobile"))
-            {
-                release.CloseButtonStyle = (Style)Resources["ButtonRevealStyle"];
-                release.BorderBrush = (Brush)Resources["SystemControlBackgroundListMediumRevealBorderBrush"];
-            }
-            try
-            {
-                await release.ShowAsync();
-            }
-            catch (System.Runtime.InteropServices.COMException) { } //Nothing todo.
         }
 
         #region Links

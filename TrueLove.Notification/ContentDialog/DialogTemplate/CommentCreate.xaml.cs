@@ -5,14 +5,14 @@ using Windows.UI.Xaml.Controls;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace True_Love.Pages.XAML_ContentDialog
+namespace TrueLove.Notification.ContentDialog.DialogTemplate
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class NewComment : Page
+    public sealed partial class CommentCreate : Page
     {
-        public NewComment()
+        public CommentCreate()
         {
             this.InitializeComponent();
         }
@@ -47,24 +47,22 @@ namespace True_Love.Pages.XAML_ContentDialog
             text.Opacity = 1;
         }
 
-        public void Save()
+        public void LoadingDate()
         {
-            comment.Text = MainPage.Current.comment;
-            nickName.Text = MainPage.Current.nickName;
+            comment.Text = DateSave.commentPlain;
+            nickName.Text = DateSave.nicknamePlain;
         }
 
-        public string commentPlain
+        public void SavingDate()
         {
-            get => comment.Text.ToString();
-        }
-        public string nicknamePlain
-        {
-            get => nickName.Text.ToString();
+            DateSave.commentPlain = comment.Text;
+            DateSave.nicknamePlain = nickName.Text;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             datePicker.Date = DateTime.Today;
+            if (!string.IsNullOrEmpty(DateSave.commentPlain) || !string.IsNullOrEmpty(DateSave.nicknamePlain)) LoadingDate();
         }
     }
 }

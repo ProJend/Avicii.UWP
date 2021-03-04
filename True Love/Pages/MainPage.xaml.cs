@@ -1,26 +1,23 @@
-﻿using Microsoft.QueryStringDotNET;
-using Microsoft.Toolkit.Uwp.Connectivity;
-using Microsoft.Toolkit.Uwp.Notifications;
+﻿using Microsoft.Toolkit.Uwp.Connectivity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Xml.Serialization;
-using True_Love.Pages.XAML_ContentDialog;
+using TrueLove.Lib.Helpers;
+using TrueLove.Notification.ContentDialog;
 using TrueLove.Notification.Toast;
 using Windows.Foundation.Metadata;
 using Windows.Storage;
 using Windows.System;
 using Windows.UI;
 using Windows.UI.Core;
-using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
-using static True_Love.Helpers.Generic;
 using muxc = Microsoft.UI.Xaml.Controls;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
@@ -42,7 +39,7 @@ namespace True_Love.Pages
         {
             this.ManipulationCompleted += The_ManipulationCompleted; // 订阅手势滑动结束后的事件
             #region 兼容低版本号系统
-            if (IdentifyDeviceFamily("mobile")) // = WP
+            if (Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile)) // = WP
             {
                 if ((bool)localSettings.Values["SetPageBackgroundColor"]) BackgroundOfBar.Background = new SolidColorBrush(Colors.Black);
                 else BackgroundOfBar.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
@@ -274,38 +271,7 @@ namespace True_Love.Pages
         /// <summary>
         /// 新建评论按钮。
         /// </summary>
-        private async void AddButton_Click(object sender, RoutedEventArgs e)
-        {
-            var newComment = new NewComment();
-            if (!string.IsNullOrEmpty(comment) || !string.IsNullOrEmpty(nickName)) newComment.Save();
-            var Comment = new ContentDialog()
-            {
-                Title = "Write your story of love here:",
-                CloseButtonText = "Cancel",
-                PrimaryButtonText = "Send",
-                PrimaryButtonStyle = (Style)Resources["AccentButtonStyle"],
-                SecondaryButtonText = "Save",
-                //DefaultButton = ContentDialogButton.Primary,
-                Content = newComment,
-                Background = new SolidColorBrush(Colors.Black),
-            };
-            if (!IdentifyDeviceFamily("mobile"))
-            {
-                Comment.CloseButtonStyle = (Style)Resources["ButtonRevealStyle"];
-                Comment.SecondaryButtonStyle = (Style)Resources["ButtonRevealStyle"];
-                Comment.BorderBrush = (Brush)Resources["SystemControlBackgroundListMediumRevealBorderBrush"];
-            }
-            try
-            {
-                var a = await Comment.ShowAsync();
-                if (a == ContentDialogResult.Secondary)
-                {
-                    comment = newComment.commentPlain;
-                    nickName = newComment.nicknamePlain;
-                }
-            }
-            catch (System.Runtime.InteropServices.COMException) { } // Nothing todo.
-        }
+        private void AddButton_Click(object sender, RoutedEventArgs e) => DialogCreate.DialogAdd(AddList.CommentCreate);
 
         /// <summary>
         /// 检查控件可用状态
@@ -335,11 +301,7 @@ namespace True_Love.Pages
                         else NotificationGrid.Visibility = Visibility.Visible;
                         NotificationGrid.Opacity = 1;
 
-                        if (!(bool)ToastConfig.NetworkisPush)
-                        {
-                            ToastAdd.AddToast();
-                            ToastConfig.NetworkisPush = true;
-                        }                     
+                        if (!ToastConfig.isNetworkPush) ToastAdd.AddToast();
                     }
                     else NotificationCollapsed();
                     break;
@@ -353,7 +315,7 @@ namespace True_Love.Pages
 
             void CommandBarCollapsed()
             {
-                if (IdentifyDeviceFamily("mobile")) CommandBar.Visibility = Visibility.Collapsed;
+                if (Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile)) CommandBar.Visibility = Visibility.Collapsed;
                 else
                 {
                     bar.Opacity = 0;
@@ -362,7 +324,7 @@ namespace True_Love.Pages
             }
             void CommandBarVisible()
             {
-                if (IdentifyDeviceFamily("mobile")) CommandBar.Visibility = Visibility.Visible;
+                if (Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile)) CommandBar.Visibility = Visibility.Visible;
                 else
                 {
                     bar.Opacity = 1;
@@ -372,7 +334,8 @@ namespace True_Love.Pages
             void NotificationCollapsed()
             {
                 NotificationGrid.Opacity = 0;
-                if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7)) BackgroundOfBar.Translation = new Vector3(0, -40, 0);
+                if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7))
+                    BackgroundOfBar.Translation = new Vector3(0, -40, 0);
                 else NotificationGrid.Visibility = Visibility.Collapsed;
             }
         }
@@ -387,8 +350,10 @@ namespace True_Love.Pages
         {
             if ((bool)localSettings.Values["SetPageBackgroundColor"]) Main.Background = new SolidColorBrush(Colors.Black);
             else Main.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
-            if (IdentifyDeviceFamily("mobile") && (bool)localSettings.Values["SetPageBackgroundColor"]) BackgroundOfBar.Background = new SolidColorBrush(Colors.Black);
-            else if (IdentifyDeviceFamily("mobile")) BackgroundOfBar.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
+            if (Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile) && (bool)localSettings.Values["SetPageBackgroundColor"]) 
+                BackgroundOfBar.Background = new SolidColorBrush(Colors.Black);
+            else if (Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile)) 
+                BackgroundOfBar.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
         }
 
         /// <summary>
@@ -397,7 +362,7 @@ namespace True_Love.Pages
         /// 需要重启应用
         /// </summary>
         [XmlIgnore]
-        public string PageBackgroundColor => (bool)localSettings.Values["SetPageBackgroundColor"] ? "Black" : "#F1F1F1F";
+        public string PageBackgroundColor => (bool)localSettings.Values["SetPageBackgroundColor"] ? "Black" : "#FF1F1F1F";
 
         // 滚动条位置变量
         public double scrlocation = 0;
@@ -406,7 +371,5 @@ namespace True_Love.Pages
         public static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
         public double OpaqueIfEnabled(bool IsEnabled) => IsEnabled ? 1.0 : 0.6;
         public static MainPage Current;
-        public string comment;
-        public string nickName;
     }
 }
