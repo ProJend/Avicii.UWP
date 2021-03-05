@@ -1,13 +1,14 @@
 ﻿<Page
     x:Class="True_Love.Pages.SettingsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:downupOS1709="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract, 5)"
+    xmlns:upOS1709="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 5)"
+    xmlns:upOS1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" RequestedTheme="Dark" x:Name="Settings"
-    Background="Transparent" Loaded="Settings_Loaded"
-    xmlns:v1709="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 5)"
-    xmlns:v1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)">
+    Background="Transparent" Loaded="Settings_Loaded">
     <Page.Resources>
         <DataTemplate x:Key="ToggleSwitchHeaderWithLineBreak">
             <TextBlock Foreground="DarkGray">
@@ -29,9 +30,9 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <v1809:Grid.BackgroundTransition>
+        <upOS1809:Grid.BackgroundTransition>
             <BrushTransition />
-        </v1809:Grid.BackgroundTransition>
+        </upOS1809:Grid.BackgroundTransition>
 
         <Grid VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="1">
             <Grid.RowDefinitions>
@@ -66,7 +67,7 @@
                     <ToggleSwitch x:Name="HideCommandbar" Tag="hideCommandbar" Header="Auto Hide CommandBar" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeaderWithLineBreak}"/>
                     <!--热键 : ⌨
                             Hot Keys-->
-                    <StackPanel x:Name="HotKeys">
+                    <StackPanel x:Name="HotKeys" upOS1709:Visibility="Visible" downupOS1709:Visibility="Collapsed">
                         <TextBlock><LineBreak/><LineBreak/></TextBlock>
                         <TextBlock Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}">
                             <Run>Hot Keys</Run>
@@ -146,22 +147,22 @@
                     <TextBlock Text="A new challenge!" Foreground="DarkGray" Style="{ThemeResource BodyTextBlockStyle}"/>
                     <TextBlock Text="Report To Author"/>
                     <StackPanel Orientation="Horizontal">
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="GitHub" v1709:Style="{StaticResource ButtonRevealStyle}" v1809:CornerRadius="2 0 0 2">
+                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="GitHub" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="2 0 0 2">
                             <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource  iconfont}" Glyph="&#xe64a;"/>
                         </Button>
-                        <Button Background="Transparent" Width="42" Height="42" Click="Mail_Click" v1709:Style="{StaticResource ButtonRevealStyle}" v1809:CornerRadius="0">
+                        <Button Background="Transparent" Width="42" Height="42" Click="Mail_Click" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="0">
                             <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE715;"/>
                         </Button>
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Weibo" v1709:Style="{StaticResource ButtonRevealStyle}" v1809:CornerRadius="0 2 2 0">
+                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Weibo" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="0 2 2 0">
                             <FontIcon FontFamily="{ThemeResource  iconfont}" Glyph="&#xe737;"/>
                         </Button>
                     </StackPanel>
                     <TextBlock Text="Brag With Guys"/>
                     <StackPanel Orientation="Horizontal">
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Telegram" v1709:Style="{StaticResource ButtonRevealStyle}">
+                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Telegram" upOS1709:Style="{StaticResource ButtonRevealStyle}">
                             <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource  iconfont}" Glyph="&#xe639;"/>
                         </Button>
-                        <!--<Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Skype" v1709:Style="{StaticResource ButtonRevealStyle}">
+                        <!--<Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Skype" upOS1709:Style="{StaticResource ButtonRevealStyle}">
                             <FontIcon FontFamily="{ThemeResource  iconfont}" Glyph="&#xe773;"/>
                         </Button>-->
                     </StackPanel>
@@ -171,49 +172,49 @@
                                x:Name="TimInfo" Foreground="DarkGray" Style="{ThemeResource BodyTextBlockStyle}"/>
                     <TextBlock Text="Losing In Music"/>
                     <StackPanel Orientation="Horizontal">
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Spotify" v1709:Style="{StaticResource ButtonRevealStyle}" v1809:CornerRadius="2 0 0 2">
+                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Spotify" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="2 0 0 2">
                             <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource  iconfont}" Glyph="&#xeaae;"/>
                         </Button>
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="YouTube" v1709:Style="{StaticResource ButtonRevealStyle}" v1809:CornerRadius="0">
+                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="YouTube" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="0">
                             <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource  iconfont}" Glyph="&#xe660;"/>
                         </Button>
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Apple" v1709:Style="{StaticResource ButtonRevealStyle}" v1809:CornerRadius="0">
+                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Apple" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="0">
                             <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource  iconfont}" Glyph="&#xe61a;"/>
                         </Button>
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Netease" v1709:Style="{StaticResource ButtonRevealStyle}" v1809:CornerRadius="0">
+                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Netease" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="0">
                             <FontIcon FontFamily="{ThemeResource  iconfont}" Glyph="&#xe628;"/>
                         </Button>
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="QQ" v1709:Style="{StaticResource ButtonRevealStyle}" v1809:CornerRadius="0">
+                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="QQ" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="0">
                             <FontIcon FontFamily="{ThemeResource  iconfont}" Glyph="&#xe6c6;"/>
                         </Button>
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Kugou" v1709:Style="{StaticResource ButtonRevealStyle}" v1809:CornerRadius="0 2 2 0">
+                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Kugou" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="0 2 2 0">
                             <FontIcon FontFamily="{ThemeResource  iconfont}" Glyph="&#xe62d;"/>
                         </Button>
                     </StackPanel>
                     <TextBlock Text="All My Life"/>
                     <StackPanel Orientation="Horizontal">
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Instagram" v1709:Style="{StaticResource ButtonRevealStyle}" v1809:CornerRadius="2 0 0 2">
+                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Instagram" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="2 0 0 2">
                             <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource  iconfont}" Glyph="&#xe62e;"/>
                         </Button>
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Facebook" v1709:Style="{StaticResource ButtonRevealStyle}" v1809:CornerRadius="0">
+                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Facebook" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="0">
                             <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource  iconfont}" Glyph="&#xe665;"/>
                         </Button>
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Twitter" v1709:Style="{StaticResource ButtonRevealStyle}" v1809:CornerRadius="0 2 2 0">
+                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Twitter" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="0 2 2 0">
                             <FontIcon FontFamily="{ThemeResource  iconfont}" Glyph="&#xe600;"/>
                         </Button>
                     </StackPanel>
                     <TextBlock Text="True Stories"/>
                     <StackPanel Orientation="Horizontal">
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Shop" v1709:Style="{StaticResource ButtonRevealStyle}" v1809:CornerRadius="2 0 0 2">
+                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Shop" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="2 0 0 2">
                             <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE719;"/>
                         </Button>
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Foundation" v1709:Style="{StaticResource ButtonRevealStyle}" v1809:CornerRadius="0">
+                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Foundation" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="0">
                             <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE95E;"/>
                         </Button>
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Memory" v1709:Style="{StaticResource ButtonRevealStyle}" v1809:CornerRadius="0">
+                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Memory" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="0">
                             <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE909;"/>
                         </Button>
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Quora" v1709:Style="{StaticResource ButtonRevealStyle}" v1809:CornerRadius="0 2 2 0">
+                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Quora" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="0 2 2 0">
                             <FontIcon FontFamily="{ThemeResource iconfont}" Glyph="&#xe6df;"/>
                         </Button>
                     </StackPanel>
@@ -222,7 +223,7 @@
                     <TextBlock Text="Fans" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>
                     <TextBlock Text="Made For Love"/>
                     <StackPanel Orientation="Horizontal">
-                        <Button ToolTipService.ToolTip="#projectOne" Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="One" v1709:Style="{StaticResource ButtonRevealStyle}">
+                        <Button ToolTipService.ToolTip="#projectOne" Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="One" upOS1709:Style="{StaticResource ButtonRevealStyle}">
                             <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7F6;"/>
                             <!--Headphone = xE7F6 ; Music = xEC4F-->
                         </Button>

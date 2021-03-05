@@ -3,7 +3,6 @@ using TrueLove.Notification.ContentDialog;
 using TrueLove.Notification.LiveTile;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Email;
-using Windows.Foundation.Metadata;
 using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Notifications;
@@ -21,8 +20,6 @@ namespace True_Love.Pages
     /// </summary>
     public sealed partial class SettingsPage : Page
     {
-        public static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
-
         public SettingsPage()
         {
             this.InitializeComponent();           
@@ -32,13 +29,14 @@ namespace True_Love.Pages
         {
             // 判定状态
             if (Language != "zh-Hans-CN") FAQ_CN.Visibility = Visibility.Collapsed;
-            if (!ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5)) HotKeys.Visibility = Visibility.Collapsed;
+            preventLoad = false;
             LiveTiles.IsOn = (bool)localSettings.Values["SetLiveTiles"];
             HideCommandbar.IsOn = (bool)localSettings.Values["SetHideCommandBar"];
             BackgroundColor.IsOn = (bool)localSettings.Values["SetPageBackgroundColor"];
+            preventLoad = true;
             var version = Package.Current.Id.Version;
             VersionInfo.Text = $"Version : {version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
-            releasedDate.Text = $"Installation Date : {Package.Current.InstalledDate.ToLocalTime().DateTime}";
+            releasedDate.Text = $"Installed Date : {Package.Current.InstalledDate.ToLocalTime().DateTime}";
             Settings.Loaded -= Settings_Loaded;
         }
 
@@ -49,40 +47,47 @@ namespace True_Love.Pages
         /// <param name="e"></param>
         private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
         {
-            FrameworkElement toggleSwitch = sender as FrameworkElement;
-            switch (toggleSwitch.Tag as string)
+            if (preventLoad)
             {
-                case "liveTiles":
-                    if (LiveTiles.IsOn == true)
-                    {
-                        if (!TileConfig.staticLiveTile)
+                FrameworkElement toggleSwitch = sender as FrameworkElement;
+                switch (toggleSwitch.Tag as string)
+                {
+                    case "liveTiles":
+                        if (LiveTiles.IsOn)
                         {
-                            TileCreate.AddTile(); // 添加新磁贴
-                            TileConfig.staticLiveTile = true;
+                            if (!TileConfig.staticLiveTile)
+                            {
+                                TileCreate.AddTile(); // 添加新磁贴
+                                TileConfig.staticLiveTile = true;
+                            }
                         }
-                    }
-                    else TileUpdateManager.CreateTileUpdaterForApplication().Clear(); // 清空队列
-                    localSettings.Values["SetLiveTiles"] = LiveTiles.IsOn == true ? true : false;
-                    break;
+                        else
+                        {
+                            TileUpdateManager.CreateTileUpdaterForApplication().Clear(); // 清空队列
+                            TileConfig.staticLiveTile = false;
+                        }
+                        localSettings.Values["SetLiveTiles"] = LiveTiles.IsOn == true ? true : false;
+                        break;
 
-                case "hideCommandbar":
-                    localSettings.Values["SetHideCommandBar"] = HideCommandbar.IsOn == true ? true : false;
-                    break;
+                    case "hideCommandbar":
+                        localSettings.Values["SetHideCommandBar"] = HideCommandbar.IsOn == true ? true : false;
+                        break;
 
-                case "backgroundColor":
-                    if (BackgroundColor.IsOn == true)
-                    {
-                        Main.Background = new SolidColorBrush(Colors.Black);
-                        MainPage.Current.PageBackgroundChange();
-                    }
-                    else
-                    {
-                        Main.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
-                        MainPage.Current.PageBackgroundChange();
-                    }
-                    localSettings.Values["SetPageBackgroundColor"] = HideCommandbar.IsOn == true ? true : false;
-                    break;
-            }
+                    case "backgroundColor":
+                        if (BackgroundColor.IsOn)
+                        {
+                            Main.Background = new SolidColorBrush(Colors.Black);
+                            MainPage.Current.PageBackgroundChange();
+                        }
+                        else
+                        {
+                            Main.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
+                            MainPage.Current.PageBackgroundChange();
+                        }
+                        localSettings.Values["SetPageBackgroundColor"] = BackgroundColor.IsOn == true ? true : false;
+                        break;
+                }
+            }          
         }
 
         /// <summary>
@@ -91,7 +96,6 @@ namespace True_Love.Pages
         private void Release_Click(object sender, RoutedEventArgs e)
         {
             DialogCreate.DialogAdd(AddList.ReleaseNotes);
-
         }
 
         #region Links
@@ -153,6 +157,20 @@ namespace True_Love.Pages
                 case "One": await LaunchUriAsync(new Uri("https://avicii.one")); break;
             }
         }
-        #endregion 
+        #endregion
+
+        /// <summary>
+        /// 留给 App 第一次运行加载设置
+        /// </summary>
+        public void AppFirstRun()
+        {
+            preventLoad = true;
+            LiveTiles.IsOn = (bool)localSettings.Values["SetLiveTiles"];
+            HideCommandbar.IsOn = (bool)localSettings.Values["SetHideCommandBar"];
+            BackgroundColor.IsOn = (bool)localSettings.Values["SetPageBackgroundColor"];
+        }
+
+        public static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+        public bool preventLoad;
     }
 }

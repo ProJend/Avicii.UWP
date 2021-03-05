@@ -75,11 +75,10 @@ namespace True_Love
                 {   // 首次打开先过一边设置
                     localSettings.Values["SetLiveTiles"] = true;
                     localSettings.Values["SetHideCommandBar"] = false;
-                    localSettings.Values["OnlyLiveTiles"] = true;
                     localSettings.Values["SetPageBackgroundColor"] = true;
                     localSettings.Values["IsToastPush"] = false;
                     var a = new SettingsPage();
-                    //a.FirstRun();
+                    a.AppFirstRun();
                     a = null;
                     GC.Collect();
                 }
