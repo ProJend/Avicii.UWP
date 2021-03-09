@@ -1,6 +1,6 @@
 ﻿using Microsoft.QueryStringDotNET;
 using System;
-using True_Love.Pages;
+using TrueLove.UWP.Pages;
 using TrueLove.Lib.Helpers;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -13,7 +13,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace True_Love
+namespace TrueLove.UWP
 {
     /// <summary>
     /// 提供特定于应用程序的行为，以补充默认的应用程序类。
