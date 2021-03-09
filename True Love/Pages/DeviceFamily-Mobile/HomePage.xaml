@@ -134,6 +134,7 @@
                         <EdgeUIThemeTransition/>
                     </TransitionCollection>
                 </StackPanel.Transitions>
+                <ProgressRing Name="ImageIsLoading" Foreground="White" IsActive="True" Width="50" Height="50" Margin="0 0 0 30"/>
                 <TextBlock Style="{ThemeResource TitleTextBlockStyle}" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <Run>I N S T A G R A M</Run><LineBreak/>
                 </TextBlock>

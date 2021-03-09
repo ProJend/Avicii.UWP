@@ -76,15 +76,10 @@ namespace True_Love
                     localSettings.Values["SetLiveTiles"] = true;
                     localSettings.Values["SetHideCommandBar"] = false;
                     localSettings.Values["SetPageBackgroundColor"] = true;
-                    localSettings.Values["IsToastPush"] = false;
                     var a = new SettingsPage();
                     a.AppFirstRun();
                     a = null;
                     GC.Collect();
-                }
-                else
-                {
-                    localSettings.Values["IsToastPush"] = false;
                 }
 
                 if (!Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile)) HideTitleBar();

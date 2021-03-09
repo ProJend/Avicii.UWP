@@ -17,7 +17,7 @@ Certificate Passwords : abc123
 - [Windows10 OS](https://www.microsoft.com/en-us/software-download/windows10) (ARM64) : Windows 10 Fall Creators Update (10.0; version 16299) or higher
   - &gt; Windows 1703
 - [Visual Studio](https://visualstudio.microsoft.com/downloads/) with UWP : Version 2017 or higher
-- [SDK](https://developer.microsoft.com/en-us/windows/downloads/sdk-archive/) : Windows 10 SDK (10.0.18362.0)
+- [SDK](https://developer.microsoft.com/en-us/windows/downloads/sdk-archive/) : Windows 10 SDK (10.0.19041.0)
   - Can be installed in the Visual Studio Installer as well.
 
 ### Translation

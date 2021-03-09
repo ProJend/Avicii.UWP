@@ -31,12 +31,12 @@
             <Frame x:Name="ContentFrame"/>
         </ScrollViewer>
 
-        <Grid x:Name="BackgroundOfBar" MinHeight="80" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="{ThemeResource NavigationViewTopPaneBackground}">
+        <Grid x:Name="BackgroundOfBar" MinHeight="40" VerticalAlignment="Top" HorizontalAlignment="Stretch" Background="{ThemeResource NavigationViewTopPaneBackground}">
             <Windows10version1809:Grid.TranslationTransition>
                 <Vector3Transition/>
             </Windows10version1809:Grid.TranslationTransition>
             <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" x:Name="AppTitleBar" Background="Transparent"/>
-            <TextBlock x:Name="NotificationGrid" Height="40" Margin="6 0 0 0" VerticalAlignment="Bottom">
+            <TextBlock x:Name="NotificationGrid" Height="40" Margin="6 40 0 0" VerticalAlignment="Bottom">
                 <Windows10version1809:TextBlock.OpacityTransition>
                     <ScalarTransition/>
                 </Windows10version1809:TextBlock.OpacityTransition>

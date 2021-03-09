@@ -348,9 +348,9 @@ namespace True_Love.Pages
         /// </summary>
         public void PageBackgroundChange()
         {
-            if ((bool)localSettings.Values["SetPageBackgroundColor"]) Main.Background = new SolidColorBrush(Colors.Black);
+            if (!(bool)localSettings.Values["SetPageBackgroundColor"]) Main.Background = new SolidColorBrush(Colors.Black);
             else Main.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
-            if (Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile) && (bool)localSettings.Values["SetPageBackgroundColor"]) 
+            if (Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile) && !(bool)localSettings.Values["SetPageBackgroundColor"]) 
                 BackgroundOfBar.Background = new SolidColorBrush(Colors.Black);
             else if (Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile)) 
                 BackgroundOfBar.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
