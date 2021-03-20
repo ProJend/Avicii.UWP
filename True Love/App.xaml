@@ -2,6 +2,7 @@
     x:Class="TrueLove.UWP.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:downOS1709="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract, 6)"
     RequestedTheme="Dark">
     <Application.Resources>
         <ResourceDictionary>
@@ -11,6 +12,7 @@
                 <ResourceDictionary Source="Template/Colors.xaml"/>
                 <ResourceDictionary Source="Template/Fonts.xaml"/>
                 <ResourceDictionary Source="Template/Navigation.xaml"/>
+                <!--<ResourceDictionary Source="Template/Reveal.xaml"/>-->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -1,15 +1,15 @@
 ﻿using Microsoft.Toolkit.Uwp.Notifications;
 using Windows.UI.Notifications;
-using static TrueLove.Notification.LiveTile.TileTemplate;
+using static TrueLove.Lib.Notification.LiveTile.TileTemplate;
 
-namespace TrueLove.Notification.LiveTile
+namespace TrueLove.Lib.Notification.LiveTile
 {
     /// <summary>
     /// 动态磁贴
     /// </summary>
-    public class TileCreate
+    public class TileSetup
     {
-        public static void AddTile()
+        public static void SetupTile()
         {   
             TileUpdateManager.CreateTileUpdaterForApplication().Clear(); // 清空队列
             TileContent content = StaticTemplate(); // 得到磁贴的对象

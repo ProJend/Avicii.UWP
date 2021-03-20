@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:downupOS1709="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract, 5)"
+    xmlns:downOS1709="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract, 5)"
     xmlns:upOS1709="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 5)"
     xmlns:upOS1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -67,7 +67,7 @@
                     <ToggleSwitch x:Name="HideCommandbar" Tag="hideCommandbar" Header="Auto Hide CommandBar" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeaderWithLineBreak}"/>
                     <!--热键 : ⌨
                             Hot Keys-->
-                    <StackPanel x:Name="HotKeys" upOS1709:Visibility="Visible" downupOS1709:Visibility="Collapsed">
+                    <StackPanel x:Name="HotKeys" upOS1709:Visibility="Visible" downOS1709:Visibility="Collapsed">
                         <TextBlock><LineBreak/><LineBreak/></TextBlock>
                         <TextBlock Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}">
                             <Run>Hot Keys</Run>

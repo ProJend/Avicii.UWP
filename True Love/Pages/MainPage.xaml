@@ -7,7 +7,8 @@
     xmlns:Windows10version1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    mc:Ignorable="d" x:Name="Main" RequestedTheme="Dark" Background="{x:Bind PageBackgroundColor}"
+    mc:Ignorable="d" x:Name="Main" RequestedTheme="Dark" 
+    Background="{x:Bind PageBackgroundColor}"
     Loaded="Main_Loaded">
     <Page.Resources>
         <Storyboard x:Name="Close">
@@ -23,6 +24,13 @@
                     <ExponentialEase Exponent="7" EasingMode="EaseOut"/>
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
+        </Storyboard>
+
+        <Storyboard x:Name="EnterStoryboard">
+            <FadeOutThemeAnimation Storyboard.TargetName="CommandBar" />
+        </Storyboard>
+        <Storyboard x:Name="ExitStoryboard">
+            <FadeInThemeAnimation Storyboard.TargetName="CommandBar" />
         </Storyboard>
     </Page.Resources>
 
@@ -59,7 +67,8 @@
                 </TransitionCollection>
             </Grid.Transitions>
 
-            <CommandBar DefaultLabelPosition="Bottom" Windows10version1709:ToolTipService.ToolTip="Right tag on here to switch CommandBar." Background="{ThemeResource NavigationViewTopPaneBackground}"
+            <CommandBar DefaultLabelPosition="Bottom" Windows10version1709:ToolTipService.ToolTip="Right tag on here to switch CommandBar." 
+                        Background="{ThemeResource NavigationViewTopPaneBackground}"
                         RightTapped="CommandBar_RightTapped" x:Name="CommandBar" FlowDirection="LeftToRight" OverflowButtonVisibility="Auto">
                 <CommandBar.RenderTransform>
                     <TranslateTransform x:Name="Translate"/>
@@ -67,19 +76,22 @@
 
                 <!--<AppBarButton Icon="Add" Label="分享故事" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="分享你与 Avicii 的故事"/>-->
                 <AppBarButton x:Name="BackTopButton" IsEnabled="False" Icon="Upload" Label="Back To Top" ToolTipService.ToolTip="Back to top" 
-                              Click="BackToTop_Click" Opacity="{x:Bind OpaqueIfEnabled(BackTopButton.IsEnabled), Mode=OneWay}">
+                              Click="BackToTop_Click" Opacity="{x:Bind OpaqueIfEnabled(BackTopButton.IsEnabled), Mode=OneWay}"
+                               Windows10version1709:Style="{StaticResource AppBarButtonRevealStyle}">
                     <Windows10version1809:AppBarButton.OpacityTransition>
                         <ScalarTransition/>
                     </Windows10version1809:AppBarButton.OpacityTransition>
                 </AppBarButton>
                 <AppBarButton x:Name="RefreshButton" Icon="Refresh" Label="Refresh" ToolTipService.ToolTip="Refresh dates" 
-                              Click="Refresh_Click" Opacity="{x:Bind OpaqueIfEnabled(RefreshButton.IsEnabled), Mode=OneWay}">
+                              Click="Refresh_Click" Opacity="{x:Bind OpaqueIfEnabled(RefreshButton.IsEnabled), Mode=OneWay}"
+                              IsEnabled="{Binding ElementName=CommentPage,Path=IsSelected}" Windows10version1709:Style="{StaticResource AppBarButtonRevealStyle}">
                     <Windows10version1809:AppBarButton.OpacityTransition>
                         <ScalarTransition/>
                     </Windows10version1809:AppBarButton.OpacityTransition>
                 </AppBarButton>
-                <AppBarButton Visibility="Visible" x:Name="AddButton" Icon="Comment" Label="New Comment" ToolTipService.ToolTip="Share your menory" 
-                              Click="AddButton_Click" Opacity="{x:Bind OpaqueIfEnabled(AddButton.IsEnabled), Mode=OneWay}">
+                <AppBarButton x:Name="CreatComment" Icon="Comment" Label="New Comment" ToolTipService.ToolTip="Share your menory" 
+                              Click="CreatComment_Click" Opacity="{x:Bind OpaqueIfEnabled(CreatComment.IsEnabled), Mode=OneWay}"
+                              Windows10version1709:Style="{StaticResource AppBarButtonRevealStyle}">
                     <Windows10version1809:AppBarButton.OpacityTransition>
                         <ScalarTransition/>
                     </Windows10version1809:AppBarButton.OpacityTransition>
@@ -97,11 +109,12 @@
                              PaneDisplayMode="Auto"
                              IsBackButtonVisible="Auto"
                              IsTitleBarAutoPaddingEnabled="False"
-                             PaneTitle="    I N   L O V I N G   M E M O R Y">
+                             PaneTitle="    I N   L O V I N G   M E M O R Y"
+                             >
             <muxc:NavigationView.MenuItems>
                 <muxc:NavigationViewItemHeader Content="True" x:Name="MainPagesHeader"/>
-                <muxc:NavigationViewItem Content="Memory" x:Name="MemoryPage" Icon="Home" Tag="home"/>
-                <muxc:NavigationViewItem Content="Comments" x:Name="HomePage" Icon="World" Tag="comment"/>
+                <muxc:NavigationViewItem Content="Memory" x:Name="HomePage" Icon="Home" Tag="home"/>
+                <muxc:NavigationViewItem Content="Comments" x:Name="CommentPage" Icon="World" Tag="comment"/>
                 <muxc:NavigationViewItem Content="Images" x:Name="ImagesPage" Tag="image" Visibility="Visible">
                     <muxc:NavigationViewItem.Icon>
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEB9F;"/>
@@ -145,7 +158,6 @@
                     <VisualState.Setters>
                         <Setter Target="NavView.PaneDisplayMode" Value="Top"/>
                         <Setter Target="MainPagesHeader.Visibility" Value="Collapsed"/>
-                        <Setter Target="NavSeparator.Visibility" Value="Visible"/>
                         <Setter Target="bar.IsTapEnabled" Value="false"/>
                         <Setter Target="bar.VerticalAlignment" Value="Top"/>
                         <Setter Target="bar.HorizontalAlignment" Value="Center"/>
@@ -154,7 +166,6 @@
                         <Setter Target="CommandBar.DefaultLabelPosition" Value="Right"/>
                     </VisualState.Setters>
                 </VisualState>
-
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
     </Grid>

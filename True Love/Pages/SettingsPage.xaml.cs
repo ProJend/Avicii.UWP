@@ -1,7 +1,11 @@
 ﻿using System;
-using TrueLove.Notification.ContentDialog;
-using TrueLove.Notification.LiveTile;
+using TrueLove.Lib;
+using TrueLove.Lib.Models.Enum;
+using TrueLove.Lib.Notification.ContentDialog;
+using TrueLove.Lib.Notification.LiveTile;
+
 using Windows.ApplicationModel;
+using Windows.ApplicationModel.Background;
 using Windows.ApplicationModel.Email;
 using Windows.Storage;
 using Windows.UI;
@@ -45,7 +49,7 @@ namespace TrueLove.UWP.Pages
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+        private async void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
         {
             if (preventLoad)
             {
@@ -55,16 +59,14 @@ namespace TrueLove.UWP.Pages
                     case "liveTiles":
                         if (LiveTiles.IsOn)
                         {
-                            if (!TileConfig.staticLiveTile)
-                            {
-                                TileCreate.AddTile(); // 添加新磁贴
-                                TileConfig.staticLiveTile = true;
-                            }
+                            TileSetup.SetupTile(); // 添加新磁贴
+
+                            //await Register.RegisterBackgroundTask("BackgroundTask.BackgroundTask", "LiveTile", new TimeTrigger(30, false), null);
                         }
+
                         else
                         {
                             TileUpdateManager.CreateTileUpdaterForApplication().Clear(); // 清空队列
-                            TileConfig.staticLiveTile = false;
                         }
                         localSettings.Values["SetLiveTiles"] = LiveTiles.IsOn == true ? true : false;
                         break;
@@ -95,7 +97,7 @@ namespace TrueLove.UWP.Pages
         /// </summary>
         private void Release_Click(object sender, RoutedEventArgs e)
         {
-            DialogCreate.DialogAdd(AddList.ReleaseNotes);
+            DialogSetup.SetupDialog(GetDialogInfo.ReleaseNotes);
         }
 
         #region Links

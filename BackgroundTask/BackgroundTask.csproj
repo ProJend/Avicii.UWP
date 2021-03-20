@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9AA648DB-585B-4DA3-98EE-260088F147E0}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{32288EDB-3F7F-479A-8303-7BB6705E0636}</ProjectGuid>
+    <OutputType>winmdobj</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TrueLove.Notification</RootNamespace>
-    <AssemblyName>TrueLove.Notification</AssemblyName>
+    <RootNamespace>BackgroundTask</RootNamespace>
+    <AssemblyName>BackgroundTask</AssemblyName>
     <DefaultLanguage>zh-CN</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.19041.0</TargetPlatformVersion>
@@ -16,6 +16,7 @@
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <AllowCrossPlatformRetargeting>false</AllowCrossPlatformRetargeting>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -120,50 +121,19 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ContentDialog\DialogConfig.cs" />
-    <Compile Include="ContentDialog\DialogCreate.cs" />
-    <Compile Include="ContentDialog\DialogTemplate\CommentCreate.xaml.cs">
-      <DependentUpon>CommentCreate.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ContentDialog\DialogTemplate\ReleaseNotes.xaml.cs">
-      <DependentUpon>ReleaseNotes.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="LiveTile\TileConfig.cs" />
-    <Compile Include="LiveTile\TileCreate.cs" />
-    <Compile Include="LiveTile\TileTemplate.cs" />
+    <Compile Include="BackgroundTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Toast\ToastAdd.cs" />
-    <Compile Include="Toast\ToastTemplate.cs" />
-    <Compile Include="Toast\ToastConfig.cs" />
-    <EmbeddedResource Include="Properties\TrueLove.Notification.rd.xml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.12</Version>
     </PackageReference>
-    <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications">
-      <Version>6.1.1</Version>
-    </PackageReference>
-    <PackageReference Include="QueryString.NET">
-      <Version>1.0.0</Version>
-    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TrueLove.Lib\True Love - Lib.csproj">
-      <Project>{be71c6bf-09b2-48d7-9290-e97be9b8d622}</Project>
+      <Project>{BE71C6BF-09B2-48D7-9290-E97BE9B8D622}</Project>
       <Name>True Love - Lib</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <Page Include="ContentDialog\DialogTemplate\CommentCreate.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="ContentDialog\DialogTemplate\ReleaseNotes.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

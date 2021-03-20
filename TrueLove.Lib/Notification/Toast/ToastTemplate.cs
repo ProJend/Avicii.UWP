@@ -1,7 +1,7 @@
 ﻿using Microsoft.QueryStringDotNET;
 using Microsoft.Toolkit.Uwp.Notifications;
 
-namespace TrueLove.Notification.Toast
+namespace TrueLove.Lib.Notification.Toast
 {
     class ToastTemplate
     {

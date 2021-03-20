@@ -5,8 +5,9 @@ using System.Linq;
 using System.Numerics;
 using System.Xml.Serialization;
 using TrueLove.Lib.Helpers;
-using TrueLove.Notification.ContentDialog;
-using TrueLove.Notification.Toast;
+using TrueLove.Lib.Models.Enum;
+using TrueLove.Lib.Notification.ContentDialog;
+using TrueLove.Lib.Notification.Toast;
 using Windows.Foundation.Metadata;
 using Windows.Storage;
 using Windows.System;
@@ -50,8 +51,7 @@ namespace TrueLove.UWP.Pages
                 // of which element has focus.
                 Window.Current.CoreWindow.PointerPressed += this.CoreWindow_PointerPressed;
                 Window.Current.SetTitleBar(AppTitleBar);
-                BackTopButton.Style = (Style)Resources["AppBarButtonRevealStyle"];
-                RefreshButton.Style = (Style)Resources["AppBarButtonRevealStyle"];
+
                 if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5))// > OS15063
                 {   // 键盘快捷键
                     //MemoryPage.KeyboardAccelerators.Add(new KeyboardAccelerator { Key = VirtualKey.F1 });
@@ -70,7 +70,7 @@ namespace TrueLove.UWP.Pages
             SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
 #if !DEBUG
             ImagesPage.Visibility = Visibility.Collapsed;
-            AddButton.Visibility = Visibility.Collapsed;
+            CreatComment.Visibility = Visibility.Collapsed;
 #endif
             Main.Loaded -= Main_Loaded;
         }
@@ -210,6 +210,52 @@ namespace TrueLove.UWP.Pages
             }
             GC.Collect();
         }
+
+        /// <summary>
+        /// 检查控件可用状态
+        /// </summary>
+        /// <param name="tag">NavViewItem.Tag</param>
+        private void ControlsChanged(string tag)
+        {
+            switch (tag)
+            {
+                case "home":
+#if !DEBUG
+                    EnterStoryboard.Begin();
+#endif
+                    NotificationCollapsed();
+                    break;
+
+                case "comment":
+                    if (!NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
+                    {
+                        NotificationIcon.Text = "⚠";
+                        NotificationHint.Text = "There's no network available.";
+
+                        NotificationGrid.Opacity = 1;
+                        if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7)) BackgroundOfBar.Translation = new Vector3(0, 0, 0);
+                        else NotificationGrid.Visibility = Visibility.Visible;
+
+                        ToastSetup.SetupToast();
+                    }
+                    else NotificationCollapsed();
+                    ExitStoryboard.Begin();
+                    break;
+
+                default:
+                    NotificationCollapsed();
+                    ExitStoryboard.Begin();
+                    break;
+            }
+
+            void NotificationCollapsed()
+            {
+                NotificationGrid.Opacity = 0;
+                if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7))
+                    BackgroundOfBar.Translation = new Vector3(0, -40, 0);
+                else NotificationGrid.Visibility = Visibility.Collapsed;
+            }
+        }
         #endregion
         #region 底部工具栏
         /// <summary>
@@ -225,11 +271,11 @@ namespace TrueLove.UWP.Pages
         {
             if (sv.VerticalOffset != scrlocation)
             {
-                bool IsWide;
-                if (!bar.IsTapEnabled) IsWide = false;
-                else if ((bool)localSettings.Values["SetHideCommandBar"]) IsWide = true;
-                else IsWide = false;
-                if (sv.VerticalOffset > scrlocation && IsWide)
+                bool isWide;
+                if (!bar.IsTapEnabled) isWide = false;
+                else if ((bool)localSettings.Values["SetHideCommandBar"]) isWide = true;
+                else isWide = false;
+                if (sv.VerticalOffset > scrlocation && isWide)
                 {   // 滚动条当前位置大于存储的变量值时代表往下滑，隐藏底部栏
                     if (IsShowBar)
                     {   // 通过动画来隐藏
@@ -251,14 +297,6 @@ namespace TrueLove.UWP.Pages
         }
 
         /// <summary>
-        /// 返回滑动条参数。
-        /// </summary>
-        /// <param name="horizontalOffset">X：横度。</param>
-        /// <param name="verticalOffset">Y：高度。</param>
-        /// <param name="zoomFactor">Z：斜度。</param>
-        public void ChangeView(double? horizontalOffset, double? verticalOffset, float? zoomFactor) { }
-
-        /// <summary>
         /// 返回顶部按钮。
         /// </summary>
         private void BackToTop_Click(object sender, RoutedEventArgs e) => sv.ChangeView(null, 0, null);
@@ -271,74 +309,7 @@ namespace TrueLove.UWP.Pages
         /// <summary>
         /// 新建评论按钮。
         /// </summary>
-        private void AddButton_Click(object sender, RoutedEventArgs e) => DialogCreate.DialogAdd(AddList.CommentCreate);
-
-        /// <summary>
-        /// 检查控件可用状态
-        /// </summary>
-        /// <param name="tag">NavViewItem.Tag</param>
-        private void ControlsChanged(string tag)
-        {
-            switch (tag)
-            {
-                case "home":
-#if !DEBUG
-                    CommandBarCollapsed();
-#endif
-                    RefreshButton.IsEnabled = false;
-                    if (NotificationGrid.Visibility == Visibility.Visible && NotificationGrid.Opacity == 1) NotificationCollapsed();
-                    break;
-
-                case "comment":
-                    CommandBarVisible();
-                    RefreshButton.IsEnabled = true;
-                    if (!NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
-                    {
-                        NotificationIcon.Text = "⚠";
-                        NotificationHint.Text = "There's no network available.";
-
-                        if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7)) BackgroundOfBar.Translation = new Vector3(0, 0, 0);
-                        else NotificationGrid.Visibility = Visibility.Visible;
-                        NotificationGrid.Opacity = 1;
-
-                        if (!ToastConfig.isNetworkPush) ToastAdd.AddToast();
-                    }
-                    else NotificationCollapsed();
-                    break;
-
-                default:
-                    CommandBarVisible();
-                    RefreshButton.IsEnabled = false;
-                    if (NotificationGrid.Visibility == Visibility.Visible && NotificationGrid.Opacity == 1) NotificationCollapsed();
-                    break;
-            }
-
-            void CommandBarCollapsed()
-            {
-                if (Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile)) CommandBar.Visibility = Visibility.Collapsed;
-                else
-                {
-                    bar.Opacity = 0;
-                    CommandBar.IsEnabled = false;
-                }
-            }
-            void CommandBarVisible()
-            {
-                if (Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile)) CommandBar.Visibility = Visibility.Visible;
-                else
-                {
-                    bar.Opacity = 1;
-                    CommandBar.IsEnabled = true;
-                }
-            }
-            void NotificationCollapsed()
-            {
-                NotificationGrid.Opacity = 0;
-                if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7))
-                    BackgroundOfBar.Translation = new Vector3(0, -40, 0);
-                else NotificationGrid.Visibility = Visibility.Collapsed;
-            }
-        }
+        private void CreatComment_Click(object sender, RoutedEventArgs e) => DialogSetup.SetupDialog(GetDialogInfo.CommentCreate);       
         #endregion
 
         /// <summary>

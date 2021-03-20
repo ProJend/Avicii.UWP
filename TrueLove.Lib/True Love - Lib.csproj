@@ -121,6 +121,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Helpers\Generic.cs" />
+    <Compile Include="Helpers\Register.cs" />
+    <Compile Include="Models\Enum\GetDialogInfo.cs" />
+    <Compile Include="Notification\ContentDialog\DialogSetup.cs" />
+    <Compile Include="Notification\ContentDialog\DialogTemplate\CommentCreate.xaml.cs">
+      <DependentUpon>CommentCreate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Notification\ContentDialog\DialogTemplate\ReleaseNotes.xaml.cs">
+      <DependentUpon>ReleaseNotes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Notification\LiveTile\TileSetup.cs" />
+    <Compile Include="Notification\LiveTile\TileTemplate.cs" />
+    <Compile Include="Models\CandidateInfo.cs" />
+    <Compile Include="Models\ProvisionalDatebase.cs" />
+    <Compile Include="Models\VariableConverter.cs" />
+    <Compile Include="Notification\Toast\ToastSetup.cs" />
+    <Compile Include="Notification\Toast\ToastTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\TrueLove.Lib.rd.xml" />
   </ItemGroup>
@@ -128,10 +144,26 @@
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.12</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications">
+      <Version>7.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="QueryString.NET">
+      <Version>1.0.0</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Datebase\" />
     <Folder Include="Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Notification\ContentDialog\DialogTemplate\CommentCreate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Notification\ContentDialog\DialogTemplate\ReleaseNotes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

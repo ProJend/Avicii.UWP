@@ -1,7 +1,7 @@
 ﻿using Microsoft.QueryStringDotNET;
 using System;
-using TrueLove.UWP.Pages;
 using TrueLove.Lib.Helpers;
+using TrueLove.UWP.Pages;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
@@ -83,7 +83,7 @@ namespace TrueLove.UWP
                 }
 
                 if (!Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile)) HideTitleBar();
-                //else HideStatusBar();
+                else HideStatusBar();
             }
         }
 
@@ -145,12 +145,12 @@ namespace TrueLove.UWP
         /// <summary>
         /// 沉淀状态栏 for Phone
         /// </summary>
-        //private void HideStatusBar()
-        //{
-        //    var applicationView = ApplicationView.GetForCurrentView();
-        //    applicationView.SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
-        //    var statusbar = StatusBar.GetForCurrentView();
-        //    statusbar.BackgroundColor = Colors.Transparent;
-        //}
+        private void HideStatusBar()
+        {
+            var applicationView = ApplicationView.GetForCurrentView();
+            applicationView.SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
+            var statusbar = StatusBar.GetForCurrentView();
+            statusbar.BackgroundColor = Colors.Transparent;
+        }
     }
 }

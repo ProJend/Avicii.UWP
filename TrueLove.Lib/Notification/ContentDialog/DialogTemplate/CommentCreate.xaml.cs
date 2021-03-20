@@ -1,11 +1,12 @@
 ﻿using System;
+using TrueLove.Lib.Notification.Models;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace TrueLove.Notification.ContentDialog.DialogTemplate
+namespace TrueLove.Lib.Notification.ContentDialog.DialogTemplate
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -49,20 +50,20 @@ namespace TrueLove.Notification.ContentDialog.DialogTemplate
 
         public void LoadingDate()
         {
-            comment.Text = DateSave.commentPlain;
-            nickName.Text = DateSave.nicknamePlain;
+            comment.Text = ProvisionalDatebase.COMMENT_TXT;
+            nickName.Text = ProvisionalDatebase.NICKNAME_TXT;
         }
 
         public void SavingDate()
         {
-            DateSave.commentPlain = comment.Text;
-            DateSave.nicknamePlain = nickName.Text;
+            ProvisionalDatebase.COMMENT_TXT = comment.Text;
+            ProvisionalDatebase.NICKNAME_TXT = nickName.Text;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             datePicker.Date = DateTime.Today;
-            if (!string.IsNullOrEmpty(DateSave.commentPlain) || !string.IsNullOrEmpty(DateSave.nicknamePlain)) LoadingDate();
+            if (!string.IsNullOrEmpty(ProvisionalDatebase.COMMENT_TXT) || !string.IsNullOrEmpty(ProvisionalDatebase.NICKNAME_TXT)) LoadingDate();
         }
     }
 }

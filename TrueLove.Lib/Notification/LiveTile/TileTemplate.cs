@@ -1,6 +1,6 @@
-﻿using Microsoft.Toolkit.Uwp.Notifications;
+﻿    using Microsoft.Toolkit.Uwp.Notifications;
 
-namespace TrueLove.Notification.LiveTile
+namespace TrueLove.Lib.Notification.LiveTile
 {
     class TileTemplate
     {
