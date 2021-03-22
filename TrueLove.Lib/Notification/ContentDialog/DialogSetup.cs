@@ -39,11 +39,11 @@ namespace TrueLove.Lib.Notification.ContentDialog
                     dialogCreate.CloseButtonText = "Okay";
                     dialogCreate.Content = new ReleaseNotes();
                     dialogCreate.Background = new SolidColorBrush(Colors.Black);
-                    if (!Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile))
-                    {
-                        dialogCreate.CloseButtonStyle = (Style)Application.Current.Resources["ButtonRevealStyle"];
-                        dialogCreate.BorderBrush = (Brush)Application.Current.Resources["SystemControlBackgroundListMediumRevealBorderBrush"];
-                    }
+                    //if (!Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile))
+                    //{
+                    //    dialogCreate.CloseButtonStyle = (Style)Application.Current.Resources["ButtonRevealStyle"];
+                    //    dialogCreate.BorderBrush = (Brush)Application.Current.Resources["SystemControlBackgroundListMediumRevealBorderBrush"];
+                    //}
                     break;                  
 
               

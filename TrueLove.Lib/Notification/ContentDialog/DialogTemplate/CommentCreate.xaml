@@ -13,14 +13,16 @@
         <TextBlock>
             <LineBreak/>
         </TextBlock>
-        <TextBox x:Name="comment" TextChanged="comment_TextChanged" PlaceholderText="Comment"  MaxLength="500" TextWrapping="Wrap" MinWidth="400" MaxWidth="700" MaxHeight="600" Padding="10" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"/>
+        <TextBox x:Name="comment" TextChanged="comment_TextChanged" PlaceholderText="Comment" x:FieldModifier="Public"
+                 MaxLength="500" TextWrapping="Wrap" MinWidth="400" MaxWidth="700" MaxHeight="600" Padding="10" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"/>
         <TextBlock Opacity="0" x:Name="text">
             <Windows10version1809:TextBlock.OpacityTransition>
                 <ScalarTransition/>
             </Windows10version1809:TextBlock.OpacityTransition>
             <Run x:Name="textLength"></Run><LineBreak/>
         </TextBlock>
-        <TextBox x:Name="nickName" MaxHeight="80" PlaceholderText="Your name" Padding="10 5 10 5" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"/>
+        <TextBox x:Name="nickName" MaxHeight="80" PlaceholderText="Your name" x:FieldModifier="Public"
+                 Padding="10 5 10 5" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"/>
         <TextBlock>
             <LineBreak/><Run Foreground="DarkGray">Your images must be .jpg, .gif, or .png and max 3MB</Run><LineBreak/>
         </TextBlock>

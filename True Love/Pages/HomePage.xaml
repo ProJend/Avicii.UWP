@@ -157,7 +157,8 @@
             <VisualStateGroup>
                 <VisualState>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="820"/>
+                        <AdaptiveTrigger 
+                            MinWindowWidth="{StaticResource LargeWindowBreakpoint}"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="a.Style" Value="{StaticResource Left}"/>

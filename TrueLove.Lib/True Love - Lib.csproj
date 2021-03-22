@@ -123,6 +123,7 @@
     <Compile Include="Helpers\Generic.cs" />
     <Compile Include="Helpers\Register.cs" />
     <Compile Include="Models\Enum\GetDialogInfo.cs" />
+    <Compile Include="Models\SettingsVariableConverter.cs" />
     <Compile Include="Notification\ContentDialog\DialogSetup.cs" />
     <Compile Include="Notification\ContentDialog\DialogTemplate\CommentCreate.xaml.cs">
       <DependentUpon>CommentCreate.xaml</DependentUpon>
@@ -134,7 +135,7 @@
     <Compile Include="Notification\LiveTile\TileTemplate.cs" />
     <Compile Include="Models\CandidateInfo.cs" />
     <Compile Include="Models\ProvisionalDatebase.cs" />
-    <Compile Include="Models\VariableConverter.cs" />
+    <Compile Include="Models\GenericVariableConverter.cs" />
     <Compile Include="Notification\Toast\ToastSetup.cs" />
     <Compile Include="Notification\Toast\ToastTemplate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

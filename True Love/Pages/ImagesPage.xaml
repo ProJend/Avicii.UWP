@@ -12,7 +12,7 @@
     <Grid ManipulationMode="System,TranslateX" x:Name="Main">
         <StackPanel Margin="0 40 0 0" VerticalAlignment="Center" HorizontalAlignment="Center">
             <TextBlock Style="{ThemeResource SubheaderTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}" VerticalAlignment="Center" HorizontalAlignment="Center">I M A G E S</TextBlock>
-            <TextBlock Margin="30 0 30 0" Style="{ThemeResource SubtitleTextBlockStyle}" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Margin="33 0 33 0" Style="{ThemeResource SubtitleTextBlockStyle}" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <LineBreak/>
                 <Run Text="S O M E T I M E   A   P I C T U R E   I S   W O R T H   M O R E   T H A N   A   T H O U S A N D   W O R D S ."></Run>
                 <LineBreak/>

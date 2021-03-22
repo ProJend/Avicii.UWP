@@ -1,11 +1,9 @@
 ﻿using System;
-using TrueLove.Lib;
+using TrueLove.Lib.Models;
 using TrueLove.Lib.Models.Enum;
 using TrueLove.Lib.Notification.ContentDialog;
 using TrueLove.Lib.Notification.LiveTile;
-
 using Windows.ApplicationModel;
-using Windows.ApplicationModel.Background;
 using Windows.ApplicationModel.Email;
 using Windows.Storage;
 using Windows.UI;
@@ -34,9 +32,9 @@ namespace TrueLove.UWP.Pages
             // 判定状态
             if (Language != "zh-Hans-CN") FAQ_CN.Visibility = Visibility.Collapsed;
             preventLoad = false;
-            LiveTiles.IsOn = (bool)localSettings.Values["SetLiveTiles"];
-            HideCommandbar.IsOn = (bool)localSettings.Values["SetHideCommandBar"];
-            BackgroundColor.IsOn = (bool)localSettings.Values["SetPageBackgroundColor"];
+            LiveTiles.IsOn = SettingsVariableConverter.setLiveTiles;
+            HideCommandbar.IsOn = SettingsVariableConverter.setHideBottonBar;
+            BackgroundColor.IsOn = SettingsVariableConverter.setPageBackgroundColor;
             preventLoad = true;
             var version = Package.Current.Id.Version;
             VersionInfo.Text = $"Version : {version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
@@ -49,7 +47,7 @@ namespace TrueLove.UWP.Pages
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+        private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
         {
             if (preventLoad)
             {
@@ -68,11 +66,11 @@ namespace TrueLove.UWP.Pages
                         {
                             TileUpdateManager.CreateTileUpdaterForApplication().Clear(); // 清空队列
                         }
-                        localSettings.Values["SetLiveTiles"] = LiveTiles.IsOn == true ? true : false;
+                        SettingsVariableConverter.setLiveTiles = LiveTiles.IsOn == true ? true : false;
                         break;
 
                     case "hideCommandbar":
-                        localSettings.Values["SetHideCommandBar"] = HideCommandbar.IsOn == true ? true : false;
+                        SettingsVariableConverter.setHideBottonBar = HideCommandbar.IsOn == true ? true : false;
                         break;
 
                     case "backgroundColor":
@@ -86,7 +84,7 @@ namespace TrueLove.UWP.Pages
                             Main.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
                             MainPage.Current.PageBackgroundChange();
                         }
-                        localSettings.Values["SetPageBackgroundColor"] = BackgroundColor.IsOn == true ? true : false;
+                        SettingsVariableConverter.setPageBackgroundColor = BackgroundColor.IsOn == true ? true : false;
                         break;
                 }
             }          
@@ -166,13 +164,16 @@ namespace TrueLove.UWP.Pages
         /// </summary>
         public void AppFirstRun()
         {
+            SettingsVariableConverter.setLiveTiles = true;
+            SettingsVariableConverter.setHideBottonBar = false;
+            SettingsVariableConverter.setPageBackgroundColor = true;
+
             preventLoad = true;
-            LiveTiles.IsOn = (bool)localSettings.Values["SetLiveTiles"];
-            HideCommandbar.IsOn = (bool)localSettings.Values["SetHideCommandBar"];
-            BackgroundColor.IsOn = (bool)localSettings.Values["SetPageBackgroundColor"];
+            LiveTiles.IsOn = SettingsVariableConverter.setLiveTiles;
+            HideCommandbar.IsOn = SettingsVariableConverter.setHideBottonBar;
+            BackgroundColor.IsOn = SettingsVariableConverter.setPageBackgroundColor;         
         }
 
-        public static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
         public bool preventLoad;
     }
 }

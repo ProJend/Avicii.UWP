@@ -1,4 +1,4 @@
-﻿namespace TrueLove.Lib.Notification.Models
+﻿namespace TrueLove.Lib.Models
 {
     class ProvisionalDatebase
     {

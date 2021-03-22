@@ -5,11 +5,11 @@ using System.Linq;
 using System.Numerics;
 using System.Xml.Serialization;
 using TrueLove.Lib.Helpers;
+using TrueLove.Lib.Models;
 using TrueLove.Lib.Models.Enum;
 using TrueLove.Lib.Notification.ContentDialog;
 using TrueLove.Lib.Notification.Toast;
 using Windows.Foundation.Metadata;
-using Windows.Storage;
 using Windows.System;
 using Windows.UI;
 using Windows.UI.Core;
@@ -42,7 +42,7 @@ namespace TrueLove.UWP.Pages
             #region 兼容低版本号系统
             if (Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile)) // = WP
             {
-                if ((bool)localSettings.Values["SetPageBackgroundColor"]) BackgroundOfBar.Background = new SolidColorBrush(Colors.Black);
+                if (SettingsVariableConverter.setPageBackgroundColor) BackgroundOfBar.Background = new SolidColorBrush(Colors.Black);
                 else BackgroundOfBar.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
                 CommandBar.Background = new SolidColorBrush { Color = Colors.Black, Opacity = 0.7 };
             }
@@ -105,7 +105,7 @@ namespace TrueLove.UWP.Pages
         /// </summary>
         private void The_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
         {   // 判断滑动的距离
-            if (e.Cumulative.Translation.X > 100 && bar.IsTapEnabled) NavView.IsPaneOpen = true; // 打开汉堡菜单            
+            if (e.Cumulative.Translation.X > 100 && BottonBar.IsTapEnabled) NavView.IsPaneOpen = true; // 打开汉堡菜单            
             if (e.Cumulative.Translation.X < -100) NavView.IsPaneOpen = false; // 关闭汉堡菜单
         }
 
@@ -272,8 +272,8 @@ namespace TrueLove.UWP.Pages
             if (sv.VerticalOffset != scrlocation)
             {
                 bool isWide;
-                if (!bar.IsTapEnabled) isWide = false;
-                else if ((bool)localSettings.Values["SetHideCommandBar"]) isWide = true;
+                if (!BottonBar.IsTapEnabled) isWide = false;
+                else if (SettingsVariableConverter.setHideBottonBar) isWide = true;
                 else isWide = false;
                 if (sv.VerticalOffset > scrlocation && isWide)
                 {   // 滚动条当前位置大于存储的变量值时代表往下滑，隐藏底部栏
@@ -319,9 +319,9 @@ namespace TrueLove.UWP.Pages
         /// </summary>
         public void PageBackgroundChange()
         {
-            if (!(bool)localSettings.Values["SetPageBackgroundColor"]) Main.Background = new SolidColorBrush(Colors.Black);
+            if (!SettingsVariableConverter.setPageBackgroundColor) Main.Background = new SolidColorBrush(Colors.Black);
             else Main.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
-            if (Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile) && !(bool)localSettings.Values["SetPageBackgroundColor"]) 
+            if (Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile) && !SettingsVariableConverter.setPageBackgroundColor) 
                 BackgroundOfBar.Background = new SolidColorBrush(Colors.Black);
             else if (Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile)) 
                 BackgroundOfBar.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
@@ -333,13 +333,12 @@ namespace TrueLove.UWP.Pages
         /// 需要重启应用
         /// </summary>
         [XmlIgnore]
-        public string PageBackgroundColor => (bool)localSettings.Values["SetPageBackgroundColor"] ? "Black" : "#FF1F1F1F";
+        public string PageBackgroundColor => SettingsVariableConverter.setPageBackgroundColor ? "Black" : "#FF1F1F1F";
 
         // 滚动条位置变量
         public double scrlocation = 0;
         // 导航栏当前显示状态（这个是为了减少不必要的开销，因为我做的是动画隐藏显示效果如果不用一个变量来记录当前导航栏状态的会重复执行隐藏或显示）
         bool IsShowBar = true;
-        public static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
         public double OpaqueIfEnabled(bool IsEnabled) => IsEnabled ? 1.0 : 0.6;
         public static MainPage Current;
     }

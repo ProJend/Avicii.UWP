@@ -1,6 +1,6 @@
 ﻿using TrueLove.Lib.Models.Enum;
 
-namespace TrueLove.Lib.Notification.Models
+namespace TrueLove.Lib.Models
 {
     public class CandidateInfo
     {

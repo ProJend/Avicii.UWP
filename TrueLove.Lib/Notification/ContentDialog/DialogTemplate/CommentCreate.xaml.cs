@@ -1,5 +1,5 @@
 ﻿using System;
-using TrueLove.Lib.Notification.Models;
+using TrueLove.Lib.Models;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;

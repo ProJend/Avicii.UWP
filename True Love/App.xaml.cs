@@ -1,11 +1,11 @@
 ﻿using Microsoft.QueryStringDotNET;
 using System;
 using TrueLove.Lib.Helpers;
+using TrueLove.Lib.Models;
 using TrueLove.UWP.Pages;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
-using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Notifications;
 using Windows.UI.ViewManagement;
@@ -20,8 +20,6 @@ namespace TrueLove.UWP
     /// </summary>
     sealed partial class App : Application
     {
-        public static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
-
         /// <summary>
         /// 初始化单一实例应用程序对象。这是执行的创作代码的第一行，
         /// 已执行，逻辑上等同于 main() 或 WinMain()。
@@ -71,11 +69,8 @@ namespace TrueLove.UWP
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
 
-                if (localSettings.Values["SetLiveTiles"] == null)
-                {   // 首次打开先过一边设置
-                    localSettings.Values["SetLiveTiles"] = true;
-                    localSettings.Values["SetHideCommandBar"] = false;
-                    localSettings.Values["SetPageBackgroundColor"] = true;
+                if (SettingsVariableConverter.localSettings.Values["SetLiveTiles"] == null)
+                {   // 首次打开先过一边设置                  
                     var a = new SettingsPage();
                     a.AppFirstRun();
                     a = null;
@@ -83,7 +78,7 @@ namespace TrueLove.UWP
                 }
 
                 if (!Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile)) HideTitleBar();
-                else HideStatusBar();
+                else HideStatusBarAsync();
             }
         }
 
@@ -98,10 +93,10 @@ namespace TrueLove.UWP
                     case "Settings":
                         var settings = new Uri("ms-settings:network-status");
                         var success = await Windows.System.Launcher.LaunchUriAsync(settings);
-                        localSettings.Values["IsToastPush"] = true;
-                        break;
+                        goto case "Close";
+
                     case "Close":
-                        localSettings.Values["IsToastPush"] = true;
+                        GenericVariableConverter.isNetworkToastPush = true;
                         break;
                 }
             }
@@ -145,12 +140,35 @@ namespace TrueLove.UWP
         /// <summary>
         /// 沉淀状态栏 for Phone
         /// </summary>
-        private void HideStatusBar()
+        private async void HideStatusBarAsync()
         {
             var applicationView = ApplicationView.GetForCurrentView();
             applicationView.SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
+            //applicationView.TryEnterFullScreenMode();
+
             var statusbar = StatusBar.GetForCurrentView();
-            statusbar.BackgroundColor = Colors.Transparent;
+            await statusbar.ShowAsync();
+            //await statusbar.ProgressIndicator.HideAsync();
+
+             ApplicationView.GetForCurrentView().VisibleBoundsChanged += (s, e) =>
+             {
+                 var currentHeight = s.VisibleBounds.Height;
+              
+                 switch (applicationView.Orientation)
+                 {   // 横向
+                     case ApplicationViewOrientation.Landscape:
+                         MainPage.Current.LayoutRoot.Margin = new Thickness(0);
+                         
+                         break;
+
+                     // 纵向
+                     case ApplicationViewOrientation.Portrait:
+                         if (currentHeight < GenericVariableConverter.oldHeight) MainPage.Current.LayoutRoot.Margin = new Thickness(0, 0, 0, 50);
+                         else if (currentHeight > GenericVariableConverter.oldHeight) MainPage.Current.LayoutRoot.Margin = new Thickness(0);
+                         break;                                     
+                 }
+                 GenericVariableConverter.oldHeight = s.VisibleBounds.Height;
+             };
         }
     }
 }

@@ -64,7 +64,7 @@
                     <TextBlock Text="Options" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
                     <ToggleSwitch x:Name="BackgroundColor" Tag="backgroundColor" Header="Dark Theme" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeader}" OffContent="Night" OnContent="Midnight (AMOLED)"/>
                     <ToggleSwitch x:Name="LiveTiles" Tag="liveTiles" Header="Live Tiles" ToolTipService.ToolTip="Show Avicii on tile" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeaderWithLineBreak}"/>
-                    <ToggleSwitch x:Name="HideCommandbar" Tag="hideCommandbar" Header="Auto Hide CommandBar" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeaderWithLineBreak}"/>
+                    <ToggleSwitch x:Name="HideCommandbar" Tag="hideCommandbar" Header="Hide CommandBar" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeaderWithLineBreak}"/>
                     <!--热键 : ⌨
                             Hot Keys-->
                     <StackPanel x:Name="HotKeys" upOS1709:Visibility="Visible" downOS1709:Visibility="Collapsed">
@@ -133,7 +133,7 @@
                         <Run x:Name="VersionInfo" Foreground="DarkGray"></Run><LineBreak/>
                         <Run Foreground="DarkGray">2021 © ProJend</Run><LineBreak/>
                         <Run Foreground="DarkGray">Tim Bergling Foundation</Run><LineBreak/>
-                        <Run>We will comprehend Tim Bergling more and more and more...</Run>
+                        <!--<Run>We will comprehend Tim Bergling more and more and more...</Run>-->
                     </TextBlock>
                     
                     <!--链接 : 🔗
@@ -238,26 +238,18 @@
             <VisualStateGroup>
                 <VisualState>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="641"/>
+                        <AdaptiveTrigger 
+                            MinWindowWidth="{StaticResource MediumWindowBreakpoint}"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="Header.Visibility" Value="Visible"/>
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="820"/>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="Header.Visibility" Value="Visible"/>
+
                         <Setter Target="Content2.(Grid.Row)" Value="0"/>
                         <Setter Target="Content2.(Grid.Column)" Value="1"/>
                         <Setter Target="Content2.Margin" Value="30,0,0,0"/>
                         <Setter Target="TimInfo.MaxWidth" Value="410"/>
                     </VisualState.Setters>
                 </VisualState>
-                
-               
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
     </Grid>

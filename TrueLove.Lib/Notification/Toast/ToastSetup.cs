@@ -1,5 +1,5 @@
 ﻿using System;
-using TrueLove.Lib.Notification.Models;
+using TrueLove.Lib.Models;
 using Windows.UI.Notifications;
 
 namespace TrueLove.Lib.Notification.Toast
@@ -8,7 +8,7 @@ namespace TrueLove.Lib.Notification.Toast
     {
         public static void SetupToast()
         {
-            if (!VariableConverter.isNetworkToastPush)
+            if (!GenericVariableConverter.isNetworkToastPush)
             {
                 var content = ToastTemplate.Network();
 
