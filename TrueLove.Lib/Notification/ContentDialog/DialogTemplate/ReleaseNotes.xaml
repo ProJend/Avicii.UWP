@@ -16,6 +16,15 @@
             <TextBlock Text="OS 1709 系统版本是分水岭，如果低于该版本会有如下的功能缺失：" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" TextWrapping="Wrap"/>
         
             <TextBlock><LineBreak/><LineBreak/></TextBlock>-->
+            <TextBlock Text="🧹 0.2.21.0 - 2021/02/10" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
+            <TextBlock Style="{ThemeResource BodyTextBlockStyle}">
+                 <Run>🔧 解决物理内存使用翻倍问题</Run><LineBreak/>
+                 <Run>🔧 解决界面处于宽屏下右滑滑出空白汉堡菜单问题</Run><LineBreak/>
+                 <Run>🔧 解决工具栏走位问题</Run><LineBreak/>
+                 <Run>🔧 解决打开应用围绕一圈白线问题</Run><LineBreak/>
+                 <Run>🔧 删除不能正确工作的快捷键</Run><LineBreak/>
+            </TextBlock>
+            
             <TextBlock Text="🚲 0.2.2.0 - 2021/01/26" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
             <TextBlock Style="{ThemeResource BodyTextBlockStyle}">
                 <Run>🛠 提示网络错误</Run><LineBreak/>
@@ -23,6 +32,7 @@
                 <Run>🛠 响应鼠标返回键</Run><LineBreak/>
                 <Run>🔨 New Logo</Run><LineBreak/>
             </TextBlock>
+            
             <TextBlock Text="🚀 0.2.0.0 - 2020/08/27" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
             <TextBlock Style="{ThemeResource BodyTextBlockStyle}">
                 <Run>🔨 增加了底部工具栏，带有刷新网页，回到顶部的功能，并具备出色的动画</Run><LineBreak/>
@@ -30,6 +40,7 @@
                 <Run>🛠 重写了主页、设置 UI</Run><LineBreak/>
                 <Run>🔨 支援 WP</Run><LineBreak/>
             </TextBlock>
+            
             <TextBlock Text="🚀 0.1.0.0 - 2020/05/12" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
             <TextBlock Style="{ThemeResource BodyTextBlockStyle}">
                 <Run>🔨 更换 FontIcon 矢量图标</Run><LineBreak/>

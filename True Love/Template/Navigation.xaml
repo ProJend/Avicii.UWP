@@ -207,10 +207,10 @@
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="0"/>
+                                        <ColumnDefinition Width="0"/>
+                                        <ColumnDefinition Width="0"/>
+                                        <ColumnDefinition Width="0"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid x:Name="TopNavLeftPadding" Grid.Column="1" Width="0"/>
                                     <ContentControl x:Name="PaneHeaderOnTopPane" Grid.Column="2" HorizontalContentAlignment="Stretch" IsTabStop="False" VerticalContentAlignment="Stretch"/>

@@ -39,6 +39,8 @@ namespace TrueLove.UWP.Pages
         private void Main_Loaded(object sender, RoutedEventArgs e)
         {
             this.ManipulationCompleted += The_ManipulationCompleted; // 订阅手势滑动结束后的事件
+            SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
+
             #region 兼容低版本号系统
             if (Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile)) // = WP
             {
@@ -50,6 +52,7 @@ namespace TrueLove.UWP.Pages
             {   // Listen to the window directly so we will respond to hotkeys regardless
                 // of which element has focus.
                 Window.Current.CoreWindow.PointerPressed += this.CoreWindow_PointerPressed;
+                Window.Current.Activated += OnWindowActivated;
                 Window.Current.SetTitleBar(AppTitleBar);
 
                 if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5))// > OS15063
@@ -67,7 +70,6 @@ namespace TrueLove.UWP.Pages
                 }
             }
             #endregion
-            SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
 #if !DEBUG
             ImagesPage.Visibility = Visibility.Collapsed;
             CreatComment.Visibility = Visibility.Collapsed;
@@ -309,8 +311,15 @@ namespace TrueLove.UWP.Pages
         /// <summary>
         /// 新建评论按钮。
         /// </summary>
-        private void CreatComment_Click(object sender, RoutedEventArgs e) => DialogSetup.SetupDialog(GetDialogInfo.CommentCreate);       
+        private void CreatComment_Click(object sender, RoutedEventArgs e) => DialogSetup.SetupDialog(GetDialogInfo.CommentCreate);
         #endregion
+
+
+        private void OnWindowActivated(Object sender, WindowActivatedEventArgs e)
+        {
+            VisualStateManager.GoToState(
+                this, e.WindowActivationState == CoreWindowActivationState.Deactivated ? WindowNotFocused.Name : WindowFocused.Name, false);
+        }
 
         /// <summary>
         /// 更改主题颜色
@@ -339,7 +348,7 @@ namespace TrueLove.UWP.Pages
         public double scrlocation = 0;
         // 导航栏当前显示状态（这个是为了减少不必要的开销，因为我做的是动画隐藏显示效果如果不用一个变量来记录当前导航栏状态的会重复执行隐藏或显示）
         bool IsShowBar = true;
-        public double OpaqueIfEnabled(bool IsEnabled) => IsEnabled ? 1.0 : 0.6;
+        public double OpaqueIfEnabled(bool IsEnabled) => IsEnabled ? 1.0 : 0.7;
         public static MainPage Current;
     }
 }

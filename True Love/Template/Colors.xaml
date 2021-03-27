@@ -11,6 +11,7 @@
             <Color x:Key="SystemAccentColorDark1">#369092</Color>
             <Color x:Key="SystemAccentColorDark2">#18797B</Color>
             <Color x:Key="SystemAccentColorDark3">#136263</Color>
+            
             <muxm:RevealBackgroundBrush x:Key="AccentRevealBackgroundBrush"
                                           FallbackColor="{ThemeResource SystemAccentColor}"
                                           TargetTheme="Dark"
@@ -37,9 +38,6 @@
                                           BackgroundSource="HostBackdrop" 
                                           TintColor="Black"
                                           TintOpacity=".5"/>
-            <Style TargetType="Button" x:Key="SystemAccentColorButton">
-                <Setter Property="Foreground" Value="Black"/>
-            </Style>
         </ResourceDictionary>
         <ResourceDictionary x:Key="HighContrast">
             <Color x:Key="SystemAccentColor">#1AEBFF</Color>

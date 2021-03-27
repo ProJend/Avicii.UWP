@@ -5,7 +5,6 @@ using TrueLove.Lib.Notification.ContentDialog;
 using TrueLove.Lib.Notification.LiveTile;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Email;
-using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Notifications;
 using Windows.UI.Xaml;
@@ -76,12 +75,12 @@ namespace TrueLove.UWP.Pages
                     case "backgroundColor":
                         if (BackgroundColor.IsOn)
                         {
-                            Main.Background = new SolidColorBrush(Colors.Black);
+                            LayoutRoot.Background = new SolidColorBrush(Colors.Black);
                             MainPage.Current.PageBackgroundChange();
                         }
                         else
                         {
-                            Main.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
+                            LayoutRoot.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
                             MainPage.Current.PageBackgroundChange();
                         }
                         SettingsVariableConverter.setPageBackgroundColor = BackgroundColor.IsOn == true ? true : false;

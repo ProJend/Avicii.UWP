@@ -78,7 +78,7 @@ namespace TrueLove.UWP
                 }
 
                 if (!Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile)) HideTitleBar();
-                else HideStatusBarAsync();
+                else HideStatusBar();
             }
         }
 
@@ -131,44 +131,57 @@ namespace TrueLove.UWP
             CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
             var titleBar = ApplicationView.GetForCurrentView().TitleBar;
             titleBar.ButtonBackgroundColor = Colors.Transparent;
+            titleBar.ButtonForegroundColor = Colors.White;
+
             titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+            titleBar.ButtonInactiveForegroundColor = Colors.Gray;
+
             titleBar.ButtonHoverBackgroundColor = Colors.PaleTurquoise;
-            titleBar.ButtonPressedBackgroundColor = Colors.PaleTurquoise;
             titleBar.ButtonHoverForegroundColor = Colors.Black;
+
+            titleBar.ButtonPressedBackgroundColor = Colors.PaleTurquoise;
+            titleBar.ButtonPressedForegroundColor = Colors.White;
         }
 
         /// <summary>
         /// 沉淀状态栏 for Phone
         /// </summary>
-        private async void HideStatusBarAsync()
+        private void HideStatusBar()
         {
             var applicationView = ApplicationView.GetForCurrentView();
             applicationView.SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
             //applicationView.TryEnterFullScreenMode();
 
-            var statusbar = StatusBar.GetForCurrentView();
-            await statusbar.ShowAsync();
+            //var statusbar = StatusBar.GetForCurrentView();
+            //await statusbar.ShowAsync();
             //await statusbar.ProgressIndicator.HideAsync();
 
-             ApplicationView.GetForCurrentView().VisibleBoundsChanged += (s, e) =>
-             {
-                 var currentHeight = s.VisibleBounds.Height;
-              
-                 switch (applicationView.Orientation)
-                 {   // 横向
+            ApplicationView.GetForCurrentView().VisibleBoundsChanged += (s, e) =>
+            {
+                var currentHeight = s.VisibleBounds.Height;
+
+                switch (applicationView.Orientation)
+                {   // 横向
                      case ApplicationViewOrientation.Landscape:
-                         MainPage.Current.LayoutRoot.Margin = new Thickness(0);
-                         
-                         break;
+                        MainPage.Current.LayoutRoot.Margin = new Thickness(0);
+                        if (Window.Current.Bounds.Width < 1002)
+                        {
+                            MainPage.Current.NavViewRoot.Margin = new Thickness(48, 0, 48, 0);
+                            MainPage.Current.CommandBar.Margin = new Thickness(0, 0, 48, 0);
+                        }
+
+                        break;
 
                      // 纵向
                      case ApplicationViewOrientation.Portrait:
-                         if (currentHeight < GenericVariableConverter.oldHeight) MainPage.Current.LayoutRoot.Margin = new Thickness(0, 0, 0, 50);
-                         else if (currentHeight > GenericVariableConverter.oldHeight) MainPage.Current.LayoutRoot.Margin = new Thickness(0);
-                         break;                                     
-                 }
-                 GenericVariableConverter.oldHeight = s.VisibleBounds.Height;
-             };
+                        if (currentHeight < GenericVariableConverter.oldHeight) MainPage.Current.LayoutRoot.Margin = new Thickness(0, 0, 0, 48);
+                        else if (currentHeight > GenericVariableConverter.oldHeight) MainPage.Current.LayoutRoot.Margin = new Thickness(0);
+                        MainPage.Current.NavViewRoot.Margin = new Thickness(0);
+                        MainPage.Current.CommandBar.Margin = new Thickness(0);
+                        break;
+                }
+                GenericVariableConverter.oldHeight = s.VisibleBounds.Height;
+            };
         }
     }
 }

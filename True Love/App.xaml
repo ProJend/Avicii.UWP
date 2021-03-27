@@ -13,7 +13,6 @@
                 <ResourceDictionary Source="Template/Colors.xaml"/>
                 <ResourceDictionary Source="Template/Fonts.xaml"/>
                 <ResourceDictionary Source="Template/Navigation.xaml"/>
-                <!--<ResourceDictionary Source="Template/Reveal.xaml"/>-->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

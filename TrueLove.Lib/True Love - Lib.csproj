@@ -120,6 +120,8 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Datebase\Comment.cs" />
+    <Compile Include="Datebase\Comments.cs" />
     <Compile Include="Helpers\Generic.cs" />
     <Compile Include="Helpers\Register.cs" />
     <Compile Include="Models\Enum\GetDialogInfo.cs" />
@@ -153,7 +155,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Datebase\" />
     <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>

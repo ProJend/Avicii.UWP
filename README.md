@@ -38,3 +38,4 @@ For sideloaded packages, more info [here](https://docs.microsoft.com/en-us/windo
 - [制作汉堡菜单及添加滑动手势](https://blog.csdn.net/github_36704374/article/details/59580697) - C_Li_
 - [Live Tile](https://github.com/LittleFish33/UWPSample) - LittleFish33
 - [唤起应用商城，邮件](https://www.cnblogs.com/MzwCat/p/7667702.html) - 5只猫
+- [占领标题栏](https://blog.csdn.net/cjh623/article/details/100532431) - dino.c

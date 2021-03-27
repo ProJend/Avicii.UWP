@@ -3,8 +3,6 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:upOS1709="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 5)"
-    xmlns:upOS1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d" x:Name="Main" RequestedTheme="Dark" 
@@ -41,65 +39,42 @@
             <Frame x:Name="ContentFrame"/>
         </ScrollViewer>
 
-        <Grid x:Name="BackgroundOfBar" MinHeight="60"
+        <Grid x:Name="BackgroundOfBar" MinHeight="65"
                   VerticalAlignment="Top" HorizontalAlignment="Stretch" 
-                  Background="{ThemeResource NavigationViewTopPaneBackground}"
-                  >
-            <upOS1809:Grid.TranslationTransition>
-                <Vector3Transition/>
-            </upOS1809:Grid.TranslationTransition>
+                  Background="{ThemeResource NavigationViewTopPaneBackground}">
             <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" x:Name="AppTitleBar" Background="Transparent"/>
-            <TextBlock x:Name="NotificationGrid" Height="40" Margin="6 60 0 0" VerticalAlignment="Bottom">
-                <upOS1809:TextBlock.OpacityTransition>
-                    <ScalarTransition/>
-                </upOS1809:TextBlock.OpacityTransition>
-                <Run x:Name="NotificationIcon" FontSize="20"></Run>
-                <Run Text="   "/>
+            <TextBlock x:Name="NotificationGrid" Height="40" Margin="9 60 0 0" VerticalAlignment="Bottom">
+                <Run x:Name="NotificationIcon" FontSize="18"></Run>
+                <Run Text="  "/>
                 <Run x:Name="NotificationHint"></Run>
             </TextBlock>
         </Grid>
 
         <Grid x:Name="BottonBar" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
-            <!--<v1809:Grid.TranslationTransition>
-                <Vector3Transition/>
-            </v1809:Grid.TranslationTransition>-->
-            <upOS1809:Grid.OpacityTransition>
-                <ScalarTransition/>
-            </upOS1809:Grid.OpacityTransition>
             <Grid.Transitions>
                 <TransitionCollection>
                     <PaneThemeTransition/>
                 </TransitionCollection>
             </Grid.Transitions>
 
-            <CommandBar DefaultLabelPosition="Bottom" upOS1709:ToolTipService.ToolTip="Right tag on here to switch CommandBar." 
-                        Background="{ThemeResource NavigationViewTopPaneBackground}"
+            <CommandBar DefaultLabelPosition="Bottom" Background="{ThemeResource NavigationViewTopPaneBackground}" x:FieldModifier="Public"
                         RightTapped="CommandBar_RightTapped" x:Name="CommandBar" FlowDirection="LeftToRight" OverflowButtonVisibility="Auto">
                 <CommandBar.RenderTransform>
                     <TranslateTransform x:Name="Translate"/>
                 </CommandBar.RenderTransform>
 
                 <!--<AppBarButton Icon="Add" Label="分享故事" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="分享你与 Avicii 的故事"/>-->
-                <AppBarButton x:Name="BackTopButton" IsEnabled="False" Icon="Upload" Label="Back To Top" ToolTipService.ToolTip="Back to top" 
+                <AppBarButton x:Name="BackTopButton" IsEnabled="False" Icon="Upload" Label="Back to Top" ToolTipService.ToolTip="Back to top" 
                               Click="BackToTop_Click" Opacity="{x:Bind OpaqueIfEnabled(BackTopButton.IsEnabled), Mode=OneWay}"
-                               upOS1709:Style="{StaticResource AppBarButtonRevealStyle}">
-                    <upOS1809:AppBarButton.OpacityTransition>
-                        <ScalarTransition/>
-                    </upOS1809:AppBarButton.OpacityTransition>
+                              >
                 </AppBarButton>
                 <AppBarButton x:Name="RefreshButton" Icon="Refresh" Label="Refresh" ToolTipService.ToolTip="Refresh dates" 
                               Click="Refresh_Click" Opacity="{x:Bind OpaqueIfEnabled(RefreshButton.IsEnabled), Mode=OneWay}"
-                              IsEnabled="{Binding ElementName=CommentPage,Path=IsSelected}" upOS1709:Style="{StaticResource AppBarButtonRevealStyle}">
-                    <upOS1809:AppBarButton.OpacityTransition>
-                        <ScalarTransition/>
-                    </upOS1809:AppBarButton.OpacityTransition>
+                              IsEnabled="{Binding ElementName=CommentPage,Path=IsSelected}">
                 </AppBarButton>
                 <AppBarButton x:Name="CreatComment" Icon="Comment" Label="New Comment" ToolTipService.ToolTip="Share your menory" 
                               Click="CreatComment_Click" Opacity="{x:Bind OpaqueIfEnabled(CreatComment.IsEnabled), Mode=OneWay}"
-                              upOS1709:Style="{StaticResource AppBarButtonRevealStyle}">
-                    <upOS1809:AppBarButton.OpacityTransition>
-                        <ScalarTransition/>
-                    </upOS1809:AppBarButton.OpacityTransition>
+                              Visibility="Collapsed">
                 </AppBarButton>
                 <!--<CommandBar.SecondaryCommands>
 
@@ -107,34 +82,36 @@
             </CommandBar>
         </Grid>
 
-        <muxc:NavigationView x:Name="NavView"                      
+        <Grid x:Name="NavViewRoot" x:FieldModifier="Public">
+            <muxc:NavigationView x:Name="NavView"                      
                              Loaded="NavView_Loaded"
                              BackRequested="NavView_BackRequested"
                              ItemInvoked="NavView_ItemInvoked"
                              PaneDisplayMode="Auto"
                              IsBackButtonVisible="Auto"
                              IsTitleBarAutoPaddingEnabled="False"
-                             PaneTitle="    I N   L O V I N G   M E M O R Y"
-                             >
-            <muxc:NavigationView.MenuItems>
-                <muxc:NavigationViewItemHeader Content="True" x:Name="MainPagesHeader"/>
-                <muxc:NavigationViewItem Content="Memory" x:Name="HomePage" Icon="Home" Tag="home"/>
-                <muxc:NavigationViewItem Content="Comments" x:Name="CommentPage" Icon="World" Tag="comment"/>
-                <muxc:NavigationViewItem Content="Images" x:Name="ImagesPage" Tag="image" Visibility="Visible">
-                    <muxc:NavigationViewItem.Icon>
-                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEB9F;"/>
-                    </muxc:NavigationViewItem.Icon>
-                </muxc:NavigationViewItem>
-            </muxc:NavigationView.MenuItems>
-            <muxc:NavigationView.FooterMenuItems>
-                <muxc:NavigationViewItemSeparator x:Name="NavSeparator"/>
-                <muxc:NavigationViewItem Tag="settings" x:Name="a">
+                             PaneTitle="    I N   L O V I N G   M E M O R Y">
+
+                <muxc:NavigationView.MenuItems>
+                    <muxc:NavigationViewItemHeader Content="True" x:Name="MainPagesHeader"/>
+                    <muxc:NavigationViewItem Content="Memory" x:Name="HomePage" Icon="Home" Tag="home"      />
+                    <muxc:NavigationViewItem Content="Comments" x:Name="CommentPage" Icon="World" Tag="comment"/>
+                    <muxc:NavigationViewItem Content="Images" x:Name="ImagesPage" Tag="image" Visibility="Collapsed">
+                        <muxc:NavigationViewItem.Icon>
+                            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEB9F;"/>
+                        </muxc:NavigationViewItem.Icon>
+                    </muxc:NavigationViewItem>
+                </muxc:NavigationView.MenuItems>
+                <muxc:NavigationView.FooterMenuItems>
+                    <muxc:NavigationViewItemSeparator x:Name="NavSeparator"/>
+                    <!--<muxc:NavigationViewItem Tag="settings" x:Name="a">
                     <muxc:NavigationViewItem.Icon>
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE721;"/>
                     </muxc:NavigationViewItem.Icon>
-                </muxc:NavigationViewItem>
-            </muxc:NavigationView.FooterMenuItems>
-        </muxc:NavigationView>
+                </muxc:NavigationViewItem>-->
+                </muxc:NavigationView.FooterMenuItems>
+            </muxc:NavigationView>
+        </Grid>
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="NV">
@@ -147,7 +124,6 @@
                         <Setter Target="NavView.PaneDisplayMode" Value="Top"/>
                         <Setter Target="MainPagesHeader.Visibility" Value="Collapsed"/>
 
-                        <Setter Target="NavView.Margin" Value="50 0 50 0"/>
                         <Setter Target="BackgroundOfBar.MinHeight" Value="40"/>
 
                         <Setter Target="BottonBar.IsTapEnabled" Value="false"/>
@@ -159,12 +135,11 @@
                 <VisualState>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger
-                        MinWindowWidth="741"/>
+                        MinWindowWidth="{StaticResource MediumWindowBreakpoint}"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="BottonBar.VerticalAlignment" Value="Top"/>
                         <Setter Target="BottonBar.HorizontalAlignment" Value="Right"/>
-                        <Setter Target="BottonBar.Margin" Value="0 0 50 0"/>
                         <Setter Target="CommandBar.Background" Value="Transparent"/>
                         <Setter Target="CommandBar.Height" Value="40"/>
                     </VisualState.Setters>

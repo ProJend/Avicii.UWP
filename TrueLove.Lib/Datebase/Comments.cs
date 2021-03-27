@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace True_Love.Dates
+namespace TrueLove.Lib.Datebase
 {
     class Comments : DictionaryBase
     {
@@ -12,7 +12,7 @@ namespace True_Love.Dates
             get => (Comment)Dictionary[name];
             set => Dictionary[name] = value;
         }
-        public override string ToString() => $"form {(Dictionary.Values as Comment).name.ToUpper()}\n{(Dictionary.Values as Comment).commentary}"; 
+        public override string ToString() => $"form {(IDictionary.Values as Comment).name.ToUpper()}\n{(Dictionary.Values as Comment).commentary}"; 
         public IEnumerable Name
         {
             get

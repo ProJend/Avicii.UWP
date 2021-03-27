@@ -1,4 +1,4 @@
-﻿namespace True_Love.Dates
+﻿namespace TrueLove.Lib.Datebase
 {
     class Comment 
     {

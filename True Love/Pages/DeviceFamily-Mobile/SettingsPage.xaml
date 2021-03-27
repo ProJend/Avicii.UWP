@@ -20,7 +20,7 @@
         </DataTemplate>
     </Page.Resources>
 
-    <Grid ManipulationMode="System,TranslateX" x:Name="LayoutRoot" Margin="11 60 11 0">
+    <Grid ManipulationMode="System,TranslateX" x:Name="LayoutRoot" Margin="11 65 11 0">
         <upOS1809:Grid.BackgroundTransition>
             <BrushTransition />
         </upOS1809:Grid.BackgroundTransition>
@@ -54,7 +54,7 @@
                 <TextBlock Text="Options" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
                 <ToggleSwitch x:Name="BackgroundColor" Tag="backgroundColor" Header="Dark Theme" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeader}" OffContent="Night" OnContent="Midnight (AMOLED)"/>
                 <ToggleSwitch x:Name="LiveTiles" Tag="liveTiles" Header="Live Tiles" ToolTipService.ToolTip="Show Avicii on tile" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeaderWithLineBreak}"/>
-                <ToggleSwitch x:Name="HideCommandbar" Tag="hideCommandbar" Header="Hide CommandBar" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeaderWithLineBreak}"/>
+                <ToggleSwitch x:Name="HideCommandbar" Tag="hideCommandbar" Header="Hide BottonBar" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeaderWithLineBreak}"/>
                 <!--热键 : ⌨
                             Hot Keys-->
                 <StackPanel x:Name="HotKeys" upOS1709:Visibility="Visible" downOS1709:Visibility="Collapsed">
@@ -66,7 +66,7 @@
                     <TextBlock>
                             <Run Foreground="DarkGray">Refresh</Run><LineBreak/>
                             <Run>F5</Run><LineBreak/><LineBreak/>
-                            <Run Foreground="DarkGray">Back To Top</Run><LineBreak/>
+                            <Run Foreground="DarkGray">Back to Top</Run><LineBreak/>
                             <Run>F6</Run><LineBreak/><LineBreak/>
                             <Run Foreground="DarkGray">Back</Run><LineBreak/>
                             <Run>ESC or Win + Backspace</Run><LineBreak/><LineBreak/>
@@ -81,8 +81,8 @@
 
                 <TextBlock Text="FAQ" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
                 <TextBlock Style="{ThemeResource BodyTextBlockStyle}">
-                        <Run Foreground="DarkGray">Why don't upload at Microsoft Store?</Run><LineBreak/>
-                        <Run>Sorry, Ain't Developer ID right now.</Run>
+                    <Run Foreground="DarkGray">Why don't upload at Microsoft Store?</Run><LineBreak/>
+                    <Run>Sorry, I'm not a Microsoft Developer.</Run>                
                 </TextBlock>
                 <TextBlock x:Name="FAQ_CN" Style="{ThemeResource BodyTextBlockStyle}"> 
                         <LineBreak/><Run Foreground="DarkGray">为什么不能购买 Tim 的商品以及发表评论？</Run><LineBreak/>
@@ -99,11 +99,9 @@
                         <Run x:Name="releasedDate"></Run>
                 </TextBlock>
                 <TextBlock Foreground="DarkGray" Style="{ThemeResource BodyTextBlockStyle}">
-                        <Run>🔧 解决物理内存使用翻倍问题</Run><LineBreak/>
-                        <Run>🔧 解决界面处于宽屏下右滑滑出空白汉堡菜单问题</Run><LineBreak/>
-                        <Run>🔧 解决工具栏走位问题</Run><LineBreak/>
-                        <Run>🔧 解决打开应用围绕一圈白线问题</Run><LineBreak/>
-                        <Run>🔧 删除不能正确工作的快捷键</Run><LineBreak/>
+                        <Run>🛠 移动端沉淀状态栏</Run><LineBreak/>
+                        <Run>🔧 修复移动端闪退问题</Run><LineBreak/>
+                        <Run>🔧 修复系统处于浅色色彩状态下三大金刚键显示不完整问题</Run><LineBreak/>
                 </TextBlock>
                 <HyperlinkButton Content="Learn More" Click="Release_Click"/>
 
@@ -123,7 +121,7 @@
                         <Run x:Name="VersionInfo" Foreground="DarkGray"></Run><LineBreak/>
                         <Run Foreground="DarkGray">2021 © ProJend</Run><LineBreak/>
                         <Run Foreground="DarkGray">Tim Bergling Foundation</Run><LineBreak/>
-                        <!--<Run>We will comprehend Tim Bergling more and more and more...</Run>-->
+                        <Run>Dear my love.</Run>
                 </TextBlock>
 
                 <!--链接 : 🔗
@@ -135,7 +133,7 @@
                         <Run>ProJend</Run>
                 </TextBlock>
                 <TextBlock Text="A new challenge!" Foreground="DarkGray" Style="{ThemeResource BodyTextBlockStyle}"/>
-                <TextBlock Text="Report To Author"/>
+                <TextBlock Text="Report to Author"/>
                 <StackPanel Orientation="Horizontal">
                     <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="GitHub" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="2 0 0 2">
                         <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource  iconfont}" Glyph="&#xe64a;"/>
@@ -147,7 +145,7 @@
                         <FontIcon FontFamily="{ThemeResource  iconfont}" Glyph="&#xe737;"/>
                     </Button>
                 </StackPanel>
-                <TextBlock Text="Brag With Guys"/>
+                <TextBlock Text="Brag with Guys"/>
                 <StackPanel Orientation="Horizontal">
                     <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Telegram" upOS1709:Style="{StaticResource ButtonRevealStyle}">
                         <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource  iconfont}" Glyph="&#xe639;"/>
@@ -160,7 +158,7 @@
                 <TextBlock Text="Tim Bergling" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" ToolTipService.ToolTip="Remembering"/>
                 <TextBlock Text="(8 September 1989 – 20 April 2018), better known by his stage name Avicii, was a Swedish DJ, remixer, record producer, musician, and songwriter who specialized in audio programming, remixing, and record producing."
                                x:Name="TimInfo" Foreground="DarkGray" Style="{ThemeResource BodyTextBlockStyle}"/>
-                <TextBlock Text="Losing In Music"/>
+                <TextBlock Text="Losing in Music"/>
                 <StackPanel Orientation="Horizontal">
                     <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Spotify" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="2 0 0 2">
                         <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource  iconfont}" Glyph="&#xeaae;"/>
@@ -211,7 +209,7 @@
                 <TextBlock Text="Missing You ❤" Foreground="DarkGray"/>
                 <TextBlock/>
                 <TextBlock Text="Fans" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>
-                <TextBlock Text="Made For Love"/>
+                <TextBlock Text="Made for Love"/>
                 <StackPanel Orientation="Horizontal">
                     <Button ToolTipService.ToolTip="#projectOne" Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="One" upOS1709:Style="{StaticResource ButtonRevealStyle}">
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7F6;"/>
@@ -232,12 +230,12 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="Header.Visibility" Value="Visible"/>
-                        <Setter Target="LayoutRoot.Margin" Value="61 40 61 0"/>
+                        <Setter Target="LayoutRoot.Margin" Value="59 40 59 0"/>
 
                         <Setter Target="Content2.(Grid.Row)" Value="0"/>
                         <Setter Target="Content2.(Grid.Column)" Value="1"/>
                         <Setter Target="Content2.Margin" Value="30,0,0,0"/>
-                        <Setter Target="TimInfo.MaxWidth" Value="310"/>
+                        <Setter Target="TimInfo.MaxWidth" Value="320"/>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>

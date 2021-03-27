@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 
-namespace TrueLove.Lib
+namespace TrueLove.Lib.Helpers
 {
     public class Register
     {
