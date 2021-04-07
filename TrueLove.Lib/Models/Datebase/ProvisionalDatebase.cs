@@ -1,4 +1,4 @@
-﻿namespace TrueLove.Lib.Models
+﻿namespace TrueLove.Lib.Models.Datebase
 {
     class ProvisionalDatebase
     {

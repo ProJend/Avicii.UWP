@@ -1,0 +1,40 @@
+﻿<Page
+    x:Class="TrueLove.UWP.Views.ImagesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:date="using:TrueLove.Lib.Models.Datebase"
+    mc:Ignorable="d"
+    Background="Transparent">
+    <Page.Resources>
+        <DataTemplate x:DataType="date:Comment" x:Key="A">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="50">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"  >
+                    <Run Text="from "></Run>
+                                <Run Text="{x:Bind name}"/>
+                                <LineBreak/><LineBreak/>
+                                <Run Text="{x:Bind comment}"/>
+                </TextBlock>
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+    <Grid ManipulationMode="System,TranslateX" x:Name="Main">
+        <StackPanel Margin="0 40 0 0" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Style="{ThemeResource SubheaderTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}" VerticalAlignment="Center" HorizontalAlignment="Center">I M A G E S</TextBlock>
+            <TextBlock Margin="33 0 33 0" Style="{ThemeResource SubtitleTextBlockStyle}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <LineBreak/>
+                <Run Text="S O M E T I M E   A   P I C T U R E   I S   W O R T H   M O R E   T H A N   A   T H O U S A N D   W O R D S ."></Run>
+                <LineBreak/>
+            </TextBlock>
+            <GridView ItemsSource="{x:Bind Comments}" x:Name="MyGridView" ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Disabled"
+                      ItemTemplate="{StaticResource A}">
+                <ItemsPanelTemplate>
+                    <controls:StaggeredPanel DesiredColumnWidth="250"
+                                             HorizontalAlignment="Stretch"/>
+                </ItemsPanelTemplate>
+            </GridView>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -1,8 +1,8 @@
 ﻿using Windows.Storage;
 
-namespace TrueLove.Lib.Models
+namespace TrueLove.Lib.Models.UI
 {
-    public class SettingsVariableConverter
+    public class LocalSettingsVariable
     {
         public static bool setLiveTiles
         {

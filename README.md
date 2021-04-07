@@ -35,7 +35,5 @@ For sideloaded packages, more info [here](https://docs.microsoft.com/en-us/windo
 
 ### Quotation
 - [上滑隐藏导航栏下滑显示](https://www.cnblogs.com/lonelyxmas/p/9919869.html) - NET未来之路
-- [制作汉堡菜单及添加滑动手势](https://blog.csdn.net/github_36704374/article/details/59580697) - C_Li_
-- [Live Tile](https://github.com/LittleFish33/UWPSample) - LittleFish33
-- [唤起应用商城，邮件](https://www.cnblogs.com/MzwCat/p/7667702.html) - 5只猫
+- [Live Tile](https://github.com/LittleFish33/UWPSample) - LittleFish3
 - [占领标题栏](https://blog.csdn.net/cjh623/article/details/100532431) - dino.c

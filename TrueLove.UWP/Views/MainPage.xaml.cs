@@ -5,8 +5,8 @@ using System.Linq;
 using System.Numerics;
 using System.Xml.Serialization;
 using TrueLove.Lib.Helpers;
-using TrueLove.Lib.Models;
 using TrueLove.Lib.Models.Enum;
+using TrueLove.Lib.Models.UI;
 using TrueLove.Lib.Notification.ContentDialog;
 using TrueLove.Lib.Notification.Toast;
 using Windows.Foundation.Metadata;
@@ -23,7 +23,7 @@ using muxc = Microsoft.UI.Xaml.Controls;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
-namespace TrueLove.UWP.Pages
+namespace TrueLove.UWP.Views
 {
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
@@ -44,7 +44,7 @@ namespace TrueLove.UWP.Pages
             #region 兼容低版本号系统
             if (Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile)) // = WP
             {
-                if (SettingsVariableConverter.setPageBackgroundColor) BackgroundOfBar.Background = new SolidColorBrush(Colors.Black);
+                if (LocalSettingsVariable.setPageBackgroundColor) BackgroundOfBar.Background = new SolidColorBrush(Colors.Black);
                 else BackgroundOfBar.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
                 CommandBar.Background = new SolidColorBrush { Color = Colors.Black, Opacity = 0.7 };
             }
@@ -233,9 +233,12 @@ namespace TrueLove.UWP.Pages
                     {
                         NotificationIcon.Text = "⚠";
                         NotificationHint.Text = "There's no network available.";
-
-                        NotificationGrid.Opacity = 1;
-                        if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7)) BackgroundOfBar.Translation = new Vector3(0, 0, 0);
+                      
+                        if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7))
+                        {
+                            NotificationGrid.Opacity = 1;
+                            BackgroundOfBar.Translation = new Vector3(0, 0, 0);
+                        }
                         else NotificationGrid.Visibility = Visibility.Visible;
 
                         ToastSetup.SetupToast();
@@ -251,12 +254,20 @@ namespace TrueLove.UWP.Pages
             }
 
             void NotificationCollapsed()
-            {
-                NotificationGrid.Opacity = 0;
+            {               
                 if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7))
+                {
+                    NotificationGrid.Opacity = 0;
                     BackgroundOfBar.Translation = new Vector3(0, -40, 0);
+                }
                 else NotificationGrid.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void OnWindowActivated(Object sender, WindowActivatedEventArgs e)
+        {
+            VisualStateManager.GoToState(
+                this, e.WindowActivationState == CoreWindowActivationState.Deactivated ? WindowNotFocused.Name : WindowFocused.Name, false);
         }
         #endregion
         #region 底部工具栏
@@ -275,7 +286,7 @@ namespace TrueLove.UWP.Pages
             {
                 bool isWide;
                 if (!BottonBar.IsTapEnabled) isWide = false;
-                else if (SettingsVariableConverter.setHideBottonBar) isWide = true;
+                else if (LocalSettingsVariable.setHideBottonBar) isWide = true;
                 else isWide = false;
                 if (sv.VerticalOffset > scrlocation && isWide)
                 {   // 滚动条当前位置大于存储的变量值时代表往下滑，隐藏底部栏
@@ -314,13 +325,6 @@ namespace TrueLove.UWP.Pages
         private void CreatComment_Click(object sender, RoutedEventArgs e) => DialogSetup.SetupDialog(GetDialogInfo.CommentCreate);
         #endregion
 
-
-        private void OnWindowActivated(Object sender, WindowActivatedEventArgs e)
-        {
-            VisualStateManager.GoToState(
-                this, e.WindowActivationState == CoreWindowActivationState.Deactivated ? WindowNotFocused.Name : WindowFocused.Name, false);
-        }
-
         /// <summary>
         /// 更改主题颜色
         /// 方法
@@ -328,9 +332,9 @@ namespace TrueLove.UWP.Pages
         /// </summary>
         public void PageBackgroundChange()
         {
-            if (!SettingsVariableConverter.setPageBackgroundColor) Main.Background = new SolidColorBrush(Colors.Black);
+            if (!LocalSettingsVariable.setPageBackgroundColor) Main.Background = new SolidColorBrush(Colors.Black);
             else Main.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
-            if (Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile) && !SettingsVariableConverter.setPageBackgroundColor) 
+            if (Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile) && !LocalSettingsVariable.setPageBackgroundColor) 
                 BackgroundOfBar.Background = new SolidColorBrush(Colors.Black);
             else if (Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile)) 
                 BackgroundOfBar.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
@@ -342,7 +346,7 @@ namespace TrueLove.UWP.Pages
         /// 需要重启应用
         /// </summary>
         [XmlIgnore]
-        public string PageBackgroundColor => SettingsVariableConverter.setPageBackgroundColor ? "Black" : "#FF1F1F1F";
+        public string PageBackgroundColor => LocalSettingsVariable.setPageBackgroundColor ? "Black" : "#FF1F1F1F";
 
         // 滚动条位置变量
         public double scrlocation = 0;

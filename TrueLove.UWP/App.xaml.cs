@@ -1,8 +1,8 @@
 ﻿using Microsoft.QueryStringDotNET;
 using System;
 using TrueLove.Lib.Helpers;
-using TrueLove.Lib.Models;
-using TrueLove.UWP.Pages;
+using TrueLove.Lib.Models.UI;
+using TrueLove.UWP.Views;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
@@ -69,7 +69,7 @@ namespace TrueLove.UWP
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
 
-                if (SettingsVariableConverter.localSettings.Values["SetLiveTiles"] == null)
+                if (LocalSettingsVariable.localSettings.Values["SetLiveTiles"] == null)
                 {   // 首次打开先过一边设置                  
                     var a = new SettingsPage();
                     a.AppFirstRun();
@@ -96,7 +96,7 @@ namespace TrueLove.UWP
                         goto case "Close";
 
                     case "Close":
-                        GenericVariableConverter.isNetworkToastPush = true;
+                        OtherVariable.isNetworkToastPush = true;
                         break;
                 }
             }
@@ -174,13 +174,13 @@ namespace TrueLove.UWP
 
                      // 纵向
                      case ApplicationViewOrientation.Portrait:
-                        if (currentHeight < GenericVariableConverter.oldHeight) MainPage.Current.LayoutRoot.Margin = new Thickness(0, 0, 0, 48);
-                        else if (currentHeight > GenericVariableConverter.oldHeight) MainPage.Current.LayoutRoot.Margin = new Thickness(0);
+                        if (currentHeight < OtherVariable.oldHeight) MainPage.Current.LayoutRoot.Margin = new Thickness(0, 0, 0, 48);
+                        else if (currentHeight > OtherVariable.oldHeight) MainPage.Current.LayoutRoot.Margin = new Thickness(0);
                         MainPage.Current.NavViewRoot.Margin = new Thickness(0);
                         MainPage.Current.CommandBar.Margin = new Thickness(0);
                         break;
                 }
-                GenericVariableConverter.oldHeight = s.VisibleBounds.Height;
+                OtherVariable.oldHeight = s.VisibleBounds.Height;
             };
         }
     }

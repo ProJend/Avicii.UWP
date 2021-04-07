@@ -1,6 +1,6 @@
 ﻿using System;
-using TrueLove.Lib.Models;
 using TrueLove.Lib.Models.Enum;
+using TrueLove.Lib.Models.UI;
 using TrueLove.Lib.Notification.ContentDialog;
 using TrueLove.Lib.Notification.LiveTile;
 using Windows.ApplicationModel;
@@ -14,7 +14,7 @@ using static Windows.System.Launcher;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
-namespace TrueLove.UWP.Pages
+namespace TrueLove.UWP.Views
 {
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
@@ -31,9 +31,9 @@ namespace TrueLove.UWP.Pages
             // 判定状态
             if (Language != "zh-Hans-CN") FAQ_CN.Visibility = Visibility.Collapsed;
             preventLoad = false;
-            LiveTiles.IsOn = SettingsVariableConverter.setLiveTiles;
-            HideCommandbar.IsOn = SettingsVariableConverter.setHideBottonBar;
-            BackgroundColor.IsOn = SettingsVariableConverter.setPageBackgroundColor;
+            LiveTiles.IsOn = LocalSettingsVariable.setLiveTiles;
+            HideCommandbar.IsOn = LocalSettingsVariable.setHideBottonBar;
+            BackgroundColor.IsOn = LocalSettingsVariable.setPageBackgroundColor;
             preventLoad = true;
             var version = Package.Current.Id.Version;
             VersionInfo.Text = $"Version : {version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
@@ -65,11 +65,11 @@ namespace TrueLove.UWP.Pages
                         {
                             TileUpdateManager.CreateTileUpdaterForApplication().Clear(); // 清空队列
                         }
-                        SettingsVariableConverter.setLiveTiles = LiveTiles.IsOn == true ? true : false;
+                        LocalSettingsVariable.setLiveTiles = LiveTiles.IsOn == true ? true : false;
                         break;
 
                     case "hideCommandbar":
-                        SettingsVariableConverter.setHideBottonBar = HideCommandbar.IsOn == true ? true : false;
+                        LocalSettingsVariable.setHideBottonBar = HideCommandbar.IsOn == true ? true : false;
                         break;
 
                     case "backgroundColor":
@@ -83,7 +83,7 @@ namespace TrueLove.UWP.Pages
                             LayoutRoot.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
                             MainPage.Current.PageBackgroundChange();
                         }
-                        SettingsVariableConverter.setPageBackgroundColor = BackgroundColor.IsOn == true ? true : false;
+                        LocalSettingsVariable.setPageBackgroundColor = BackgroundColor.IsOn == true ? true : false;
                         break;
                 }
             }          
@@ -163,14 +163,14 @@ namespace TrueLove.UWP.Pages
         /// </summary>
         public void AppFirstRun()
         {
-            SettingsVariableConverter.setLiveTiles = true;
-            SettingsVariableConverter.setHideBottonBar = false;
-            SettingsVariableConverter.setPageBackgroundColor = true;
+            LocalSettingsVariable.setLiveTiles = true;
+            LocalSettingsVariable.setHideBottonBar = false;
+            LocalSettingsVariable.setPageBackgroundColor = true;
 
             preventLoad = true;
-            LiveTiles.IsOn = SettingsVariableConverter.setLiveTiles;
-            HideCommandbar.IsOn = SettingsVariableConverter.setHideBottonBar;
-            BackgroundColor.IsOn = SettingsVariableConverter.setPageBackgroundColor;         
+            LiveTiles.IsOn = LocalSettingsVariable.setLiveTiles;
+            HideCommandbar.IsOn = LocalSettingsVariable.setHideBottonBar;
+            BackgroundColor.IsOn = LocalSettingsVariable.setPageBackgroundColor;         
         }
 
         public bool preventLoad;
