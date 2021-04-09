@@ -120,9 +120,9 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Helpers\Register.cs" />
     <Compile Include="Models\Datebase\Comment.cs" />
     <Compile Include="Helpers\Generic.cs" />
-    <Compile Include="Helpers\Register.cs" />
     <Compile Include="Models\Enum\GetDialogInfo.cs" />
     <Compile Include="Models\UI\OtherVariable.cs" />
     <Compile Include="Models\UI\LocalSettingsVariable.cs" />

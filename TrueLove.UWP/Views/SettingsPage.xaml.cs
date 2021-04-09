@@ -1,9 +1,10 @@
 ﻿using System;
+using TrueLove.Lib.Helpers;
 using TrueLove.Lib.Models.Enum;
 using TrueLove.Lib.Models.UI;
 using TrueLove.Lib.Notification.ContentDialog;
-using TrueLove.Lib.Notification.LiveTile;
 using Windows.ApplicationModel;
+using Windows.ApplicationModel.Background;
 using Windows.ApplicationModel.Email;
 using Windows.UI;
 using Windows.UI.Notifications;
@@ -46,7 +47,7 @@ namespace TrueLove.UWP.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+        private async void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
         {
             if (preventLoad)
             {
@@ -54,16 +55,18 @@ namespace TrueLove.UWP.Views
                 switch (toggleSwitch.Tag as string)
                 {
                     case "liveTiles":
-                        if (LiveTiles.IsOn)
-                        {
-                            TileSetup.SetupTile(); // 添加新磁贴
-
-                            //await Register.RegisterBackgroundTask("BackgroundTask.BackgroundTask", "LiveTile", new TimeTrigger(30, false), null);
-                        }
-
+                        if (LiveTiles.IsOn) await Register.RegisterBackgroundTask("BackgroundTask.BackgroundTask", "LiveTile", new TimeTrigger(30, false), null);
                         else
                         {
                             TileUpdateManager.CreateTileUpdaterForApplication().Clear(); // 清空队列
+
+                            foreach (var task in BackgroundTaskRegistration.AllTasks)
+                            {
+                                if (task.Value.Name == "LiveTile")
+                                {
+                                    task.Value.Unregister(true);
+                                }
+                            }
                         }
                         LocalSettingsVariable.setLiveTiles = LiveTiles.IsOn == true ? true : false;
                         break;
@@ -86,7 +89,7 @@ namespace TrueLove.UWP.Views
                         LocalSettingsVariable.setPageBackgroundColor = BackgroundColor.IsOn == true ? true : false;
                         break;
                 }
-            }          
+            }
         }
 
         /// <summary>
