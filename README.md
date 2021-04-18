@@ -9,8 +9,6 @@ This is a UWP about Tim Bergling , and you can browse the pieces of his informat
 - Under building...
 
 ## Debug Support
-Certificate Passwords : abc123
-
 ### To Running (Version)
 - [Windows10 OS](https://www.microsoft.com/en-us/software-download/windows10) (ARM, x32, x64) : Windows 10 Creators Update (10.0; version 15063) or higher
   - &gt;= Windows 1703

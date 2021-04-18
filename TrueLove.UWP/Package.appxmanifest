@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="Tim" Publisher="CN=True Love, O=Ben, C=CN" Version="0.2.38.0" />
+  <Identity Name="Tim" Publisher="CN=Admin" Version="0.2.38.0" />
   <mp:PhoneIdentity PhoneProductId="cf0148d5-01bb-4b60-b53b-da3346bf8e5e" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>True Love - Tim Bergling Foundtion</DisplayName>

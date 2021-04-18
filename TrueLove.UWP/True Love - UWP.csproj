@@ -19,15 +19,14 @@
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
     <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
-    <PackageCertificateThumbprint>29F6537728765FAF67443D9451DFF697CD2BA4DB</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>F071D6AE0057E791CB819EABB9E6B537BD946615</PackageCertificateThumbprint>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
     <AppInstallerUri>\\c</AppInstallerUri>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
-    <PackageCertificateKeyFile>
-    </PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>TrueLove.UWP_TemporaryKey.pfx</PackageCertificateKeyFile>
     <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
     <AppInstallerUpdateFrequency>0</AppInstallerUpdateFrequency>
     <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
@@ -312,7 +311,8 @@
     <PRIResource Include="String\en\Resources.resw" />
     <PRIResource Include="String\zh-Hans\Resources.resw" />
     <PRIResource Include="String\zh-Hant\Resources.resw" />
-    <None Include="TrueLove.pfx" />
+    <None Include="TrueLove.UWP_TemporaryKey.pfx" />
+    <None Include="TrueLove.UWP_StoreKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
