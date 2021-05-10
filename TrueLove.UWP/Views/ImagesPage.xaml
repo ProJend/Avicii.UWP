@@ -9,32 +9,35 @@
     mc:Ignorable="d"
     Background="Transparent">
     <Page.Resources>
-        <DataTemplate x:DataType="date:Comment" x:Key="A">
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="50">
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"  >
-                    <Run Text="from "></Run>
-                                <Run Text="{x:Bind name}"/>
-                                <LineBreak/><LineBreak/>
-                                <Run Text="{x:Bind comment}"/>
+        <DataTemplate x:DataType="date:CommentType" x:Key="A">
+            <Grid Padding="20" HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="245">
+                <TextBlock TextAlignment="Center" TextWrapping="Wrap"
+                           VerticalAlignment="Center">
+                    <Run FontSize="16" FontStyle="Italic" Text="from "></Run>
+                    <Run FontSize="22" Text="{x:Bind name}"/>
+                    <LineBreak/><LineBreak/>
+                    <Run Text="{x:Bind comment}"/>
                 </TextBlock>
-            </StackPanel>
+            </Grid>
         </DataTemplate>
     </Page.Resources>
     <Grid ManipulationMode="System,TranslateX" x:Name="Main">
-        <StackPanel Margin="0 40 0 0" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock Style="{ThemeResource SubheaderTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}" VerticalAlignment="Center" HorizontalAlignment="Center">I M A G E S</TextBlock>
-            <TextBlock Margin="33 0 33 0" Style="{ThemeResource SubtitleTextBlockStyle}" VerticalAlignment="Center" HorizontalAlignment="Center">
+        <StackPanel Margin="0 50 0 0" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Style="{ThemeResource SubheaderTextBlockStyle}"
+                       Foreground="{ThemeResource SystemAccentColor}" VerticalAlignment="Center" HorizontalAlignment="Center">I M A G E S</TextBlock>
+            <TextBlock Margin="35 0 35 0" Style="{ThemeResource SubtitleTextBlockStyle}" VerticalAlignment="Center" HorizontalAlignment="Center">
                 <LineBreak/>
                 <Run Text="S O M E T I M E   A   P I C T U R E   I S   W O R T H   M O R E   T H A N   A   T H O U S A N D   W O R D S ."></Run>
                 <LineBreak/>
             </TextBlock>
             <GridView ItemsSource="{x:Bind Comments}" x:Name="MyGridView" ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Disabled"
-                      ItemTemplate="{StaticResource A}">
+                      ItemTemplate="{ThemeResource A}" VerticalContentAlignment="Center">
                 <ItemsPanelTemplate>
-                    <controls:StaggeredPanel DesiredColumnWidth="250"
+                    <controls:StaggeredPanel DesiredColumnWidth="273"
                                              HorizontalAlignment="Stretch"/>
                 </ItemsPanelTemplate>
             </GridView>
+            
         </StackPanel>
     </Grid>
 </Page>

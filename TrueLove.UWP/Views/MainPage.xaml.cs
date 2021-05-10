@@ -317,7 +317,7 @@ namespace TrueLove.UWP.Views
         /// <summary>
         /// 刷新按钮。
         /// </summary>
-        private void Refresh_Click(object sender, RoutedEventArgs e) => CommentsPage.Current.webview.Refresh();
+        private void Refresh_Click(object sender, RoutedEventArgs e) { }
 
         /// <summary>
         /// 新建评论按钮。
