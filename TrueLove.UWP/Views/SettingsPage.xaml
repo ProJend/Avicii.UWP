@@ -20,7 +20,7 @@
         </DataTemplate>
     </Page.Resources>
 
-    <Grid ManipulationMode="System,TranslateX" x:Name="LayoutRoot">
+    <Grid ManipulationMode="System,TranslateX" x:Name="LayoutRoot" x:FieldModifier="Public">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="42*"/>
@@ -64,7 +64,7 @@
                     <TextBlock Text="Options" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
                     <ToggleSwitch x:Name="BackgroundColor" Tag="backgroundColor" Header="Dark Theme" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeader}" OffContent="Night" OnContent="Midnight (AMOLED)"/>
                     <ToggleSwitch x:Name="LiveTiles" Tag="liveTiles" Header="Live Tiles" ToolTipService.ToolTip="Show Avicii on tile" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeaderWithLineBreak}"/>
-                    <ToggleSwitch x:Name="HideCommandbar" Tag="hideCommandbar" Header="Hide BottonBar" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeaderWithLineBreak}"/>
+                    <ToggleSwitch x:Name="HideCommandbar" Tag="hideCommandbar" Header="Hide BottomBar" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeaderWithLineBreak}"/>
                     <!--热键 : ⌨
                             Hot Keys-->
                     <StackPanel x:Name="HotKeys" upOS1709:Visibility="Visible" downOS1709:Visibility="Collapsed">
@@ -237,7 +237,7 @@
                 <VisualState>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger 
-                            MinWindowWidth="{StaticResource MediumWindowBreakpoint}"/>
+                            MinWindowWidth="{StaticResource LargeWindowBreakpoint}"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="Header.Visibility" Value="Visible"/>

@@ -10,10 +10,10 @@ namespace TrueLove.Lib.Models.UI
             set => localSettings.Values["SetLiveTiles"] = value;
         }
 
-        public static bool setHideBottonBar
+        public static bool setHideBottomBar
         {
-            get => (bool)localSettings.Values["SetHideBottonBar"];
-            set => localSettings.Values["SetHideBottonBar"] = value;
+            get => (bool)localSettings.Values["SetHideBottomBar"];
+            set => localSettings.Values["SetHideBottomBar"] = value;
         }
 
         public static bool setPageBackgroundColor

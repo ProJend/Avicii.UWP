@@ -24,7 +24,7 @@ namespace TrueLove.UWP.Views
     {
         public SettingsPage()
         {
-            this.InitializeComponent();           
+            this.InitializeComponent();
         }
 
         private void Settings_Loaded(object sender, RoutedEventArgs e)
@@ -33,7 +33,7 @@ namespace TrueLove.UWP.Views
             if (Language != "zh-Hans-CN") FAQ_CN.Visibility = Visibility.Collapsed;
             preventLoad = false;
             LiveTiles.IsOn = LocalSettingsVariable.setLiveTiles;
-            HideCommandbar.IsOn = LocalSettingsVariable.setHideBottonBar;
+            HideCommandbar.IsOn = LocalSettingsVariable.setHideBottomBar;
             BackgroundColor.IsOn = LocalSettingsVariable.setPageBackgroundColor;
             preventLoad = true;
             var version = Package.Current.Id.Version;
@@ -72,7 +72,7 @@ namespace TrueLove.UWP.Views
                         break;
 
                     case "hideCommandbar":
-                        LocalSettingsVariable.setHideBottonBar = HideCommandbar.IsOn == true ? true : false;
+                        LocalSettingsVariable.setHideBottomBar = HideCommandbar.IsOn == true ? true : false;
                         break;
 
                     case "backgroundColor":
@@ -95,10 +95,7 @@ namespace TrueLove.UWP.Views
         /// <summary>
         /// 更新记录
         /// </summary>
-        private void Release_Click(object sender, RoutedEventArgs e)
-        {
-            DialogSetup.SetupDialog(GetDialogInfo.ReleaseNotes);
-        }
+        private void Release_Click(object sender, RoutedEventArgs e) => DialogSetup.SetupDialog(GetDialogInfo.ReleaseNotes);
 
         #region Links
         /// <summary>
@@ -167,13 +164,13 @@ namespace TrueLove.UWP.Views
         public void AppFirstRun()
         {
             LocalSettingsVariable.setLiveTiles = true;
-            LocalSettingsVariable.setHideBottonBar = false;
+            LocalSettingsVariable.setHideBottomBar = false;
             LocalSettingsVariable.setPageBackgroundColor = true;
 
             preventLoad = true;
             LiveTiles.IsOn = LocalSettingsVariable.setLiveTiles;
-            HideCommandbar.IsOn = LocalSettingsVariable.setHideBottonBar;
-            BackgroundColor.IsOn = LocalSettingsVariable.setPageBackgroundColor;         
+            HideCommandbar.IsOn = LocalSettingsVariable.setHideBottomBar;
+            BackgroundColor.IsOn = LocalSettingsVariable.setPageBackgroundColor;
         }
 
         public bool preventLoad;

@@ -13,6 +13,7 @@ using Windows.Foundation.Metadata;
 using Windows.System;
 using Windows.UI;
 using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -39,19 +40,19 @@ namespace TrueLove.UWP.Views
         private void Main_Loaded(object sender, RoutedEventArgs e)
         {
             this.ManipulationCompleted += The_ManipulationCompleted; // 订阅手势滑动结束后的事件
-            SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
+            SystemNavigationManager.GetForCurrentView().BackRequested += System_BackRequested;
 
             #region 兼容低版本号系统
             if (Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile)) // = WP
             {
-                if (LocalSettingsVariable.setPageBackgroundColor) BackgroundOfBar.Background = new SolidColorBrush(Colors.Black);
-                else BackgroundOfBar.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
-                CommandBar.Background = new SolidColorBrush { Color = Colors.Black, Opacity = 0.7 };
+                if (LocalSettingsVariable.setPageBackgroundColor) TopBar.Background = new SolidColorBrush(Colors.Black);
+                else TopBar.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
+                TaskBar.Background = new SolidColorBrush { Color = Colors.Black, Opacity = 0.7 };
             }
             else // = PC
             {   // Listen to the window directly so we will respond to hotkeys regardless
                 // of which element has focus.
-                Window.Current.CoreWindow.PointerPressed += this.CoreWindow_PointerPressed;
+                Window.Current.CoreWindow.PointerPressed += this.Mouse_BackRequested;
                 Window.Current.Activated += OnWindowActivated;
                 Window.Current.SetTitleBar(AppTitleBar);
 
@@ -65,7 +66,7 @@ namespace TrueLove.UWP.Views
 
                     // Add keyboard accelerators for backwards navigation.
                     var goBack = new KeyboardAccelerator { Key = VirtualKey.Escape };
-                    goBack.Invoked += BackInvoked;
+                    goBack.Invoked += Keyboard_BackRequested;
                     this.KeyboardAccelerators.Add(goBack);
                 }
             }
@@ -78,19 +79,9 @@ namespace TrueLove.UWP.Views
         }
 
         #region NavigationView
-        private void ContentFrame_NavigationFailed(object sender, NavigationFailedEventArgs e) => throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
-
-        // List of ValueTuple holding the Navigation Tag and the relative Navigation Page
-        private readonly List<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
-        {
-            ("home", typeof(HomePage)),
-            ("comment", typeof(CommentsPage)),
-            ("image", typeof(ImagesPage)),
-        };
-
         private void NavView_Loaded(object sender, RoutedEventArgs e)
         {   // Add handler for ContentFrame navigation.
-            ContentFrame.Navigated += On_Navigated;
+            ContentFrame.Navigated += ContentFrame_Navigated;
 
             // NavView doesn't load any page by default, so load home page.
             NavView.SelectedItem = NavView.MenuItems[0];
@@ -102,23 +93,80 @@ namespace TrueLove.UWP.Views
             NavView.Loaded -= NavView_Loaded;
         }
 
+        // List of ValueTuple holding the Navigation Tag and the relative Navigation Page
+        private readonly List<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
+        {
+            ("home", typeof(HomePage)),
+            ("comment", typeof(CommentsPage)),
+            ("image", typeof(ImagesPage)),
+        };
+
         /// <summary>
-        /// 手势滑动结束
+        /// 应用内返回页面
         /// </summary>
-        private void The_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
-        {   // 判断滑动的距离
-            if (e.Cumulative.Translation.X > 100 && BottonBar.IsTapEnabled) NavView.IsPaneOpen = true; // 打开汉堡菜单            
-            if (e.Cumulative.Translation.X < -100) NavView.IsPaneOpen = false; // 关闭汉堡菜单
+        private void NavView_BackRequested(muxc.NavigationView sender, muxc.NavigationViewBackRequestedEventArgs args) => TryGoBack();
+
+        /// <summary>
+        /// 键盘外返回页面
+        /// </summary>
+        private void Keyboard_BackRequested(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args) => TryGoBack();
+
+        /// <summary>
+        /// 系统外返回页面
+        /// </summary>
+        private void System_BackRequested(object sender, BackRequestedEventArgs e)
+        {
+            TryGoBack();
+            e.Handled = true;
+        }
+
+        /// <summary>
+        /// 鼠标外返回页面
+        /// Invoked on every mouse click, touch screen tap, or equivalent interaction.
+        /// Used to detect browser-style next and previous mouse button clicks
+        /// to navigate between pages.
+        /// </summary>
+        /// <param name="sender">Instance that triggered the event.</param>
+        /// <param name="e">Event data describing the conditions that led to the event.</param>
+        private void Mouse_BackRequested(CoreWindow sender, PointerEventArgs e)
+        {
+            var properties = e.CurrentPoint.Properties;
+            // Ignore button chords with the left, right, and middle buttons
+            if (properties.IsLeftButtonPressed || properties.IsRightButtonPressed ||
+                properties.IsMiddleButtonPressed) return;
+
+            // If back or forward are pressed (but not both) navigate appropriately
+            bool backPressed = properties.IsXButton1Pressed;
+            bool forwardPressed = properties.IsXButton2Pressed;
+            if (backPressed ^ forwardPressed)
+            {
+                e.Handled = true;
+                if (backPressed) TryGoBack();
+                //if (forwardPressed) this.TryGoForward();
+            }
+        }
+
+        /// <summary>
+        /// 尝试执行返回页面操作
+        /// </summary>
+        private bool TryGoBack()
+        {
+            if (!ContentFrame.CanGoBack) return false;
+
+            // Don't go back if the nav pane is overlayed.
+            if (NavView.IsPaneOpen &&
+                (NavView.DisplayMode == muxc.NavigationViewDisplayMode.Compact ||
+                 NavView.DisplayMode == muxc.NavigationViewDisplayMode.Minimal))
+                return false;
+            ContentFrame.GoBack();
+            return true;
         }
 
         private void NavView_ItemInvoked(muxc.NavigationView sender, muxc.NavigationViewItemInvokedEventArgs args)
         {
-            if (args.IsSettingsInvoked == true) NavView_Navigate("settings", args.RecommendedNavigationTransitionInfo);
-            else if (args.InvokedItemContainer != null)
-            {
-                var navItemTag = args.InvokedItemContainer.Tag.ToString();
-                NavView_Navigate(navItemTag, args.RecommendedNavigationTransitionInfo);
-            }
+            var navItemTag = args.InvokedItemContainer.Tag.ToString();
+            if (args.IsSettingsInvoked) navItemTag = "settings";
+            if (args.InvokedItemContainer != null) NavView_Navigate(navItemTag, args.RecommendedNavigationTransitionInfo);
         }
 
         private void NavView_Navigate(string navItemTag, NavigationTransitionInfo transitionInfo)
@@ -139,61 +187,7 @@ namespace TrueLove.UWP.Views
             if (!(_page is null) && !Equals(preNavPageType, _page)) ContentFrame.Navigate(_page, null, transitionInfo);
         }
 
-        private void NavView_BackRequested(muxc.NavigationView sender, muxc.NavigationViewBackRequestedEventArgs args) => On_BackRequested();
-
-        private void BackInvoked(KeyboardAccelerator sender,KeyboardAcceleratorInvokedEventArgs args)
-        {
-            On_BackRequested();
-            args.Handled = true;     
-        }
-
-        private void MainPage_BackRequested(object sender, BackRequestedEventArgs e)
-        {
-            if (!ContentFrame.CanGoBack) return;
-            ContentFrame.GoBack();
-            e.Handled = true;
-        }
-
-        private bool On_BackRequested()
-        {
-            if (!ContentFrame.CanGoBack) return false;
-
-            // Don't go back if the nav pane is overlayed.
-            if (NavView.IsPaneOpen &&
-                (NavView.DisplayMode == muxc.NavigationViewDisplayMode.Compact ||
-                 NavView.DisplayMode == muxc.NavigationViewDisplayMode.Minimal))
-                return false;
-            ContentFrame.GoBack();
-            return true;
-        }
-
-        /// <summary>
-        /// Invoked on every mouse click, touch screen tap, or equivalent interaction.
-        /// Used to detect browser-style next and previous mouse button clicks
-        /// to navigate between pages.
-        /// </summary>
-        /// <param name="sender">Instance that triggered the event.</param>
-        /// <param name="e">Event data describing the conditions that led to the event.</param>
-        private void CoreWindow_PointerPressed(CoreWindow sender, PointerEventArgs e)
-        {
-            var properties = e.CurrentPoint.Properties;
-            
-            // Ignore button chords with the left, right, and middle buttons
-            if (properties.IsLeftButtonPressed || properties.IsRightButtonPressed ||
-                properties.IsMiddleButtonPressed) return;
-
-            // If back or forward are pressed (but not both) navigate appropriately
-            bool backPressed = properties.IsXButton1Pressed;
-            bool forwardPressed = properties.IsXButton2Pressed;
-            if (backPressed ^ forwardPressed)
-            {
-                e.Handled = true;
-                if (backPressed) this.On_BackRequested();
-                //if (forwardPressed) this.TryGoForward();
-            }
-        }
-
-        private void On_Navigated(object sender, NavigationEventArgs e)
+        private void ContentFrame_Navigated(object sender, NavigationEventArgs e)
         {
             NavView.IsBackEnabled = ContentFrame.CanGoBack;
             if (ContentFrame.SourcePageType == typeof(SettingsPage))
@@ -201,80 +195,74 @@ namespace TrueLove.UWP.Views
                 // SettingsItem is not part of NavView.MenuItems, and doesn't have a Tag.
                 NavView.SelectedItem = (muxc.NavigationViewItem)NavView.SettingsItem;
                 NavView.Header = "SETTINGS";
-                ControlsChanged("settings");
+                StoryboardControl("settings");
             }
             else if (ContentFrame.SourcePageType != null)
             {
                 var item = _pages.FirstOrDefault(p => p.Page == e.SourcePageType);
                 NavView.SelectedItem = NavView.MenuItems.OfType<muxc.NavigationViewItem>().First(n => n.Tag.Equals(item.Tag));
                 NavView.Header = ((muxc.NavigationViewItem)NavView.SelectedItem)?.Content?.ToString().ToUpper();
-                ControlsChanged(item.Tag.ToString());
+                StoryboardControl(item.Tag.ToString());
             }
-            GC.Collect();
         }
 
-        /// <summary>
-        /// 检查控件可用状态
-        /// </summary>
-        /// <param name="tag">NavViewItem.Tag</param>
-        private void ControlsChanged(string tag)
+        void StoryboardControl(string navItemTag)
         {
-            switch (tag)
+            switch (navItemTag)
             {
                 case "home":
 #if !DEBUG
-                    EnterStoryboard.Begin();
+                    BottomBar_Storyboard_Fadeout.Begin();
 #endif
-                    NotificationCollapsed();
-                    break;
+                    goto case "notificationBarCollapsed";
 
                 case "comment":
                     if (!NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
                     {
                         NotificationIcon.Text = "⚠";
                         NotificationHint.Text = "There's no network available.";
-                      
+
                         if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7))
                         {
                             NotificationGrid.Opacity = 1;
-                            BackgroundOfBar.Translation = new Vector3(0, 0, 0);
+                            TopBar.Translation = new Vector3(0, 0, 0);
                         }
                         else NotificationGrid.Visibility = Visibility.Visible;
 
-                        ToastSetup.SetupToast();
+                        ToastSetup.ToastCharge();
                     }
-                    else NotificationCollapsed();
-                    ExitStoryboard.Begin();
+                    else goto default;
+                    break;
+
+                case "notificationBarCollapsed":
+                    if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7))
+                    {
+                        NotificationGrid.Opacity = 0;
+                        TopBar.Translation = new Vector3(0, -40, 0);
+                    }
+                    else NotificationGrid.Visibility = Visibility.Collapsed;
                     break;
 
                 default:
-                    NotificationCollapsed();
-                    ExitStoryboard.Begin();
-                    break;
-            }
-
-            void NotificationCollapsed()
-            {               
-                if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7))
-                {
-                    NotificationGrid.Opacity = 0;
-                    BackgroundOfBar.Translation = new Vector3(0, -40, 0);
-                }
-                else NotificationGrid.Visibility = Visibility.Collapsed;
+                    BottomBar_Storyboard_Fadein.Begin();
+                    goto case "notificationBarCollapsed";
             }
         }
 
-        private void OnWindowActivated(Object sender, WindowActivatedEventArgs e)
-        {
-            VisualStateManager.GoToState(
-                this, e.WindowActivationState == CoreWindowActivationState.Deactivated ? WindowNotFocused.Name : WindowFocused.Name, false);
+        /// <summary>
+        /// 手势滑动结束
+        /// </summary>
+        private void The_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
+        {   // 判断滑动的距离
+            if (e.Cumulative.Translation.X > 150 && BottomBar.IsTapEnabled) NavView.IsPaneOpen = true; // 打开汉堡菜单            
+            if (e.Cumulative.Translation.X < -150) NavView.IsPaneOpen = false; // 关闭汉堡菜单
         }
         #endregion
         #region 底部工具栏
         /// <summary>
         /// 鼠标右击工具栏活动。
         /// </summary>
-        private void CommandBar_RightTapped(object sender, RightTappedRoutedEventArgs e) => CommandBar.IsOpen = !CommandBar.IsOpen == true;
+        private void CommandBar_RightTapped(object sender, RightTappedRoutedEventArgs e) => TaskBar.IsOpen = !TaskBar.IsOpen == true;
 
         /// <summary>
         /// 检查工具栏相关的按钮可用状态。
@@ -285,23 +273,22 @@ namespace TrueLove.UWP.Views
             if (sv.VerticalOffset != scrlocation)
             {
                 bool isWide;
-                if (!BottonBar.IsTapEnabled) isWide = false;
-                else if (LocalSettingsVariable.setHideBottonBar) isWide = true;
-                else isWide = false;
+                if (!BottomBar.IsTapEnabled) isWide = false;
+                else isWide = LocalSettingsVariable.setHideBottomBar;
                 if (sv.VerticalOffset > scrlocation && isWide)
                 {   // 滚动条当前位置大于存储的变量值时代表往下滑，隐藏底部栏
-                    if (IsShowBar)
+                    if (isShowBar)
                     {   // 通过动画来隐藏
                         // bar.Translation = new Vector3(0, 40, 0);
-                        Close.Begin();
-                        IsShowBar = false;
+                        BottomBar_Storyboard_SlideDown.Begin();
+                        isShowBar = false;
                     }
                 }
-                else if(!IsShowBar)
+                else if(!isShowBar)
                 {   // 通过动画来隐藏
                     // bar.Translation = new Vector3(0, 0, 0);
-                    Open.Begin();
-                    IsShowBar = true;
+                    BottomBar_Storyboard_SlideUp.Begin();
+                    isShowBar = true;
                 }
                 if (sv.VerticalOffset > 1) BackTopButton.IsEnabled = true; // 当滚动条高度大于 1 时，返回顶部按钮维持使用状态
                 else if (sv.VerticalOffset < sv.ViewportHeight) BackTopButton.IsEnabled = false; // 反之停用此按钮
@@ -317,13 +304,58 @@ namespace TrueLove.UWP.Views
         /// <summary>
         /// 刷新按钮。
         /// </summary>
-        private void Refresh_Click(object sender, RoutedEventArgs e) { }
+        private void Refresh_Click(object sender, RoutedEventArgs e)
+        {
+        }
 
         /// <summary>
         /// 新建评论按钮。
         /// </summary>
         private void CreatComment_Click(object sender, RoutedEventArgs e) => DialogSetup.SetupDialog(GetDialogInfo.CommentCreate);
         #endregion
+
+        private void OnWindowActivated(object sender, WindowActivatedEventArgs e)
+        {
+            VisualStateManager.GoToState(this,
+                e.WindowActivationState == CoreWindowActivationState.Deactivated ? WindowNotFocused.Name : WindowFocused.Name, false);
+        }
+
+        public void VisibleBounds_Changed(ApplicationView e, object sender)
+        {
+            var applicationView = ApplicationView.GetForCurrentView();
+            applicationView.SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
+
+            var currentHeight = e.VisibleBounds.Height;
+
+            switch (applicationView.Orientation)
+            {   // 横向
+                case ApplicationViewOrientation.Landscape:
+                    // 控制底部导航栏高度
+                    VisualStateManager.GoToState(this, WPNavBarVisible.Name, true);
+                    // 控制 bar 宽度
+                    if (Window.Current.Bounds.Width < 876)
+                    {
+                        MainPage.Current.NavViewRoot.Margin = new Thickness(48, 0, 48, 0);
+                        MainPage.Current.TaskBar.Margin = new Thickness(0, 0, 48, 0);
+                    }
+                    break;
+
+                // 纵向
+                case ApplicationViewOrientation.Portrait:
+                    // 控制底部导航栏高度
+                    if (currentHeight < OtherVariable.oldHeight) 
+                        VisualStateManager.GoToState(this, WPNavBarVisible.Name, true);
+                    else
+                        VisualStateManager.GoToState(this, WPNavBarCollapsed.Name, true);
+
+                    // 控制 bar 宽度
+                    MainPage.Current.NavViewRoot.Margin = new Thickness(0);
+                    MainPage.Current.TaskBar.Margin = new Thickness(0);
+                    break;
+            }
+            OtherVariable.oldHeight = e.VisibleBounds.Height;
+        }
+
 
         /// <summary>
         /// 更改主题颜色
@@ -334,10 +366,10 @@ namespace TrueLove.UWP.Views
         {
             if (!LocalSettingsVariable.setPageBackgroundColor) Main.Background = new SolidColorBrush(Colors.Black);
             else Main.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
-            if (Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile) && !LocalSettingsVariable.setPageBackgroundColor) 
-                BackgroundOfBar.Background = new SolidColorBrush(Colors.Black);
-            else if (Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile)) 
-                BackgroundOfBar.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
+            if (Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile) && !LocalSettingsVariable.setPageBackgroundColor)
+                TopBar.Background = new SolidColorBrush(Colors.Black);
+            else if (Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile))
+                TopBar.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
         }
 
         /// <summary>
@@ -351,8 +383,8 @@ namespace TrueLove.UWP.Views
         // 滚动条位置变量
         public double scrlocation = 0;
         // 导航栏当前显示状态（这个是为了减少不必要的开销，因为我做的是动画隐藏显示效果如果不用一个变量来记录当前导航栏状态的会重复执行隐藏或显示）
-        bool IsShowBar = true;
-        public double OpaqueIfEnabled(bool IsEnabled) => IsEnabled ? 1.0 : 0.7;
+        bool isShowBar = true;
+        public double OpaqueIfEnabled(bool isEnabled) => isEnabled ? 1.0 : 0.7;
         public static MainPage Current;
     }
 }

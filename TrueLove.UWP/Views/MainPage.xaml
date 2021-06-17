@@ -11,58 +11,59 @@
     Background="{x:Bind PageBackgroundColor}"
     Loaded="Main_Loaded">
     <Page.Resources>
-        <Storyboard x:Name="Close">
-            <DoubleAnimation Storyboard.TargetName="Translate" Storyboard.TargetProperty="Y" From="0" To="40" >
+        <Storyboard x:Name="BottomBar_Storyboard_SlideDown">
+            <DoubleAnimation Storyboard.TargetName="BottomBar_TranslateTransform" Storyboard.TargetProperty="Y" From="0" To="40" >
                 <DoubleAnimation.EasingFunction>
                     <ExponentialEase Exponent="7" EasingMode="EaseOut"/>
                 </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
+            </DoubleAnimation>  
         </Storyboard>
-        <Storyboard x:Name="Open">
-            <DoubleAnimation Storyboard.TargetName="Translate" Storyboard.TargetProperty="Y" From="40" To="0" >
+        <Storyboard x:Name="BottomBar_Storyboard_SlideUp">
+            <DoubleAnimation Storyboard.TargetName="BottomBar_TranslateTransform" Storyboard.TargetProperty="Y" From="40" To="0" >
                 <DoubleAnimation.EasingFunction>
                     <ExponentialEase Exponent="7" EasingMode="EaseOut"/>
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
 
-        <Storyboard x:Name="EnterStoryboard">
-            <FadeOutThemeAnimation Storyboard.TargetName="CommandBar" />
+        <Storyboard x:Name="BottomBar_Storyboard_Fadeout">
+            <FadeOutThemeAnimation Storyboard.TargetName="TaskBar" />
         </Storyboard>
-        <Storyboard x:Name="ExitStoryboard">
-            <FadeInThemeAnimation Storyboard.TargetName="CommandBar" />
+        <Storyboard x:Name="BottomBar_Storyboard_Fadein">
+            <FadeInThemeAnimation Storyboard.TargetName="TaskBar" />
         </Storyboard>
-        <SolidColorBrush x:Key="TitleBarForeground"
-                     x:Name="TitleBarForeground"
-                     Color="{ThemeResource SystemBaseHighColor}" />
     </Page.Resources>
 
     <Grid x:Name="LayoutRoot" x:FieldModifier="Public" ManipulationMode="System,TranslateX">
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/Background.jpg" Stretch="UniformToFill" AlignmentX="Left"/>
+        </Grid.Background>
         <ScrollViewer x:Name="sv" ViewChanged="Sv_ViewChanged" 
-                          VerticalScrollBarVisibility="Hidden" HorizontalScrollMode="Disabled" 
+                          VerticalScrollBarVisibility="Hidden" HorizontalScrollMode="Disabled"
                           VerticalScrollMode="Enabled">
             <Frame x:Name="ContentFrame"/>
         </ScrollViewer>
 
-        <Grid x:Name="BackgroundOfBar" MinHeight="40"
+        <Grid x:Name="TopBar" MinHeight="40"
                   VerticalAlignment="Top" HorizontalAlignment="Stretch" 
                   Background="{ThemeResource NavigationViewTopPaneBackground}"
                   >
             <upOS1809:Grid.TranslationTransition>
                 <Vector3Transition/>
             </upOS1809:Grid.TranslationTransition>
-            <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" x:Name="AppTitleBar" Background="Transparent"/>
             <TextBlock x:Name="NotificationGrid" Height="40" Margin="6 40 0 0" VerticalAlignment="Bottom">
                 <upOS1809:TextBlock.OpacityTransition>
                     <ScalarTransition/>
-                </upOS1809:TextBlock.OpacityTransition>
+                </upOS1809:TextBlock.OpacityTransition>                                                
+                
                 <Run x:Name="NotificationIcon" FontSize="20"></Run>
                 <Run Text="   "/>
                 <Run x:Name="NotificationHint"></Run>
             </TextBlock>
+            <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" x:Name="AppTitleBar" Background="Transparent"/>
         </Grid>
 
-        <Grid x:Name="BottonBar" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
+        <Grid x:Name="BottomBar" VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
             <!--<v1809:Grid.TranslationTransition>
                 <Vector3Transition/>
             </v1809:Grid.TranslationTransition>-->
@@ -76,10 +77,10 @@
             </Grid.Transitions>
 
             <CommandBar DefaultLabelPosition="Bottom" upOS1709:ToolTipService.ToolTip="Right tag on here to switch CommandBar." 
-                        Background="{ThemeResource NavigationViewTopPaneBackground}"
-                        RightTapped="CommandBar_RightTapped" x:Name="CommandBar" FlowDirection="LeftToRight" OverflowButtonVisibility="Auto">
+                        Background="{ThemeResource NavigationViewTopPaneBackground}" x:FieldModifier="Public"
+                        RightTapped="CommandBar_RightTapped" x:Name="TaskBar" FlowDirection="LeftToRight" OverflowButtonVisibility="Auto">
                 <CommandBar.RenderTransform>
-                    <TranslateTransform x:Name="Translate"/>
+                    <TranslateTransform x:Name="BottomBar_TranslateTransform"/>
                 </CommandBar.RenderTransform>
 
                 <!--<AppBarButton Icon="Add" Label="分享故事" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="分享你与 Avicii 的故事"/>-->
@@ -110,7 +111,7 @@
             </CommandBar>
         </Grid>
 
-        <Grid x:Name="NavViewRoot">
+        <Grid x:Name="NavViewRoot" x:FieldModifier="Public">
             <upOS1809:Grid.OpacityTransition>
                 <ScalarTransition/>
             </upOS1809:Grid.OpacityTransition>
@@ -145,7 +146,7 @@
         </Grid>
 
         <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="NV">
+            <VisualStateGroup x:Name="NavViewStates">
                 <VisualState>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger
@@ -155,23 +156,23 @@
                         <Setter Target="NavView.PaneDisplayMode" Value="Top"/>
                         <Setter Target="MainPagesHeader.Visibility" Value="Collapsed"/>
 
-                        <Setter Target="BottonBar.IsTapEnabled" Value="false"/>
+                        <Setter Target="BottomBar.IsTapEnabled" Value="false"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
 
-            <VisualStateGroup x:Name="CB">
+            <VisualStateGroup x:Name="BottomBarStates">
                 <VisualState>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger
                             MinWindowWidth="{StaticResource MediumWindowBreakpoint}"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="BottonBar.VerticalAlignment" Value="Top"/>
-                        <Setter Target="BottonBar.HorizontalAlignment" Value="Right"/>
-                        <Setter Target="BottonBar.Margin" Value="0 0 157 0"/>
-                        <Setter Target="CommandBar.Background" Value="Transparent"/>
-                        <Setter Target="CommandBar.Height" Value="40"/>
+                        <Setter Target="BottomBar.VerticalAlignment" Value="Top"/>
+                        <Setter Target="BottomBar.HorizontalAlignment" Value="Right"/>
+                        <Setter Target="BottomBar.Margin" Value="0 0 157 0"/>
+                        <Setter Target="TaskBar.Background" Value="Transparent"/>
+                        <Setter Target="TaskBar.Height" Value="40"/>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>
@@ -180,11 +181,11 @@
                             MinWindowWidth="{StaticResource LargeWindowBreakpoint}"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="BottonBar.VerticalAlignment" Value="Top"/>
-                        <Setter Target="BottonBar.HorizontalAlignment" Value="Center"/>
-                        <Setter Target="CommandBar.Background" Value="Transparent"/>
-                        <Setter Target="CommandBar.Height" Value="40"/>
-                        <Setter Target="CommandBar.DefaultLabelPosition" Value="Right"/>
+                        <Setter Target="BottomBar.VerticalAlignment" Value="Top"/>
+                        <Setter Target="BottomBar.HorizontalAlignment" Value="Center"/>
+                        <Setter Target="TaskBar.Background" Value="Transparent"/>
+                        <Setter Target="TaskBar.Height" Value="40"/>
+                        <Setter Target="TaskBar.DefaultLabelPosition" Value="Right"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -194,7 +195,7 @@
                     <VisualState.Setters>
                         <Setter Target="NavViewRoot.Opacity"
                             Value="1" />
-                        <Setter Target="BottonBar.Opacity"
+                        <Setter Target="BottomBar.Opacity"
                             Value="1" />
                     </VisualState.Setters>
                 </VisualState>
@@ -202,8 +203,32 @@
                     <VisualState.Setters>
                         <Setter Target="NavViewRoot.Opacity"
                             Value="0.5" />
-                        <Setter Target="BottonBar.Opacity"
+                        <Setter Target="BottomBar.Opacity"
                             Value="0.5" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+
+            <VisualStateGroup x:Name="WPStates">
+                <VisualState x:Name="WPNavBarVisible">
+                    <VisualState.Setters>
+                        <Setter Target="LayoutRoot.Margin" Value="0,0,0,48"/>
+
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="WPNavBarCollapsed">
+                    <VisualState.Setters>
+                        <Setter Target="LayoutRoot.Margin" Value="0"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="ContinuumOn">
+                    <VisualState.Setters>
+
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="ContinuumOff">
+                    <VisualState.Setters>
+
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

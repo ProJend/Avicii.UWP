@@ -6,7 +6,7 @@ namespace TrueLove.Lib.Notification.Toast
 {
     public class ToastSetup
     {
-        public static void SetupToast()
+        public static void ToastCharge()
         {
             if (!OtherVariable.isNetworkToastPush)
             {

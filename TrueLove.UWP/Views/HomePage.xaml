@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" RequestedTheme="Dark"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="Transparent">
     <Page.Resources>
         <Style TargetType="StackPanel" x:Key="Left">
             <Setter Property="Grid.RowSpan" Value="2"/>
@@ -25,10 +25,7 @@
         </ItemsPanelTemplate>
     </Page.Resources>
 
-    <FlipView SelectionChanged="FlipView_SelectionChanged" x:Name="flipview" IsTabStop="False">
-        <FlipView.Background>
-            <ImageBrush ImageSource="/Assets/Background.jpg" Stretch="UniformToFill" AlignmentX="Left"/>
-        </FlipView.Background>
+    <FlipView SelectionChanged="FlipView_SelectionChanged" x:Name="flipview" IsTabStop="False" Background="Transparent">
         <FlipViewItem ManipulationMode="System,TranslateX" IsTabStop="False">
             <Grid>
                 <Grid.ColumnDefinitions>
