@@ -39,7 +39,7 @@ namespace TrueLove.UWP.Views
 
         private void Main_Loaded(object sender, RoutedEventArgs e)
         {
-            this.ManipulationCompleted += The_ManipulationCompleted; // 订阅手势滑动结束后的事件
+            ManipulationCompleted += The_ManipulationCompleted; // 订阅手势滑动结束后的事件
             SystemNavigationManager.GetForCurrentView().BackRequested += System_BackRequested;
 
             #region 兼容低版本号系统
@@ -47,7 +47,12 @@ namespace TrueLove.UWP.Views
             {
                 if (LocalSettingsVariable.setPageBackgroundColor) TopBar.Background = new SolidColorBrush(Colors.Black);
                 else TopBar.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
-                TaskBar.Background = new SolidColorBrush { Color = Colors.Black, Opacity = 0.7 };
+                ToolBar.Background = new SolidColorBrush { Color = Colors.Black, Opacity = 0.7 };
+
+                // 调整界面
+                var applicationView = ApplicationView.GetForCurrentView();
+                applicationView.SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
+                VisualStateManager.GoToState(this, WPNavBarVisible.Name, true);
             }
             else // = PC
             {   // Listen to the window directly so we will respond to hotkeys regardless
@@ -116,7 +121,8 @@ namespace TrueLove.UWP.Views
         /// </summary>
         private void System_BackRequested(object sender, BackRequestedEventArgs e)
         {
-            TryGoBack();
+            if (!ContentFrame.CanGoBack) return;
+            ContentFrame.GoBack();
             e.Handled = true;
         }
 
@@ -204,6 +210,7 @@ namespace TrueLove.UWP.Views
                 NavView.Header = ((muxc.NavigationViewItem)NavView.SelectedItem)?.Content?.ToString().ToUpper();
                 StoryboardControl(item.Tag.ToString());
             }
+            GC.Collect();
         }
 
         void StoryboardControl(string navItemTag)
@@ -262,7 +269,7 @@ namespace TrueLove.UWP.Views
         /// <summary>
         /// 鼠标右击工具栏活动。
         /// </summary>
-        private void CommandBar_RightTapped(object sender, RightTappedRoutedEventArgs e) => TaskBar.IsOpen = !TaskBar.IsOpen == true;
+        private void CommandBar_RightTapped(object sender, RightTappedRoutedEventArgs e) => ToolBar.IsOpen = !ToolBar.IsOpen == true;
 
         /// <summary>
         /// 检查工具栏相关的按钮可用状态。
@@ -323,34 +330,23 @@ namespace TrueLove.UWP.Views
         public void VisibleBounds_Changed(ApplicationView e, object sender)
         {
             var applicationView = ApplicationView.GetForCurrentView();
-            applicationView.SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
 
             var currentHeight = e.VisibleBounds.Height;
 
             switch (applicationView.Orientation)
             {   // 横向
                 case ApplicationViewOrientation.Landscape:
-                    // 控制底部导航栏高度
-                    VisualStateManager.GoToState(this, WPNavBarVisible.Name, true);
                     // 控制 bar 宽度
                     if (Window.Current.Bounds.Width < 876)
-                    {
-                        MainPage.Current.NavViewRoot.Margin = new Thickness(48, 0, 48, 0);
-                        MainPage.Current.TaskBar.Margin = new Thickness(0, 0, 48, 0);
-                    }
+                        VisualStateManager.GoToState(this, ContinuumOff.Name, true);
                     break;
 
                 // 纵向
                 case ApplicationViewOrientation.Portrait:
                     // 控制底部导航栏高度
-                    if (currentHeight < OtherVariable.oldHeight) 
+                    if (currentHeight < OtherVariable.oldHeight)
                         VisualStateManager.GoToState(this, WPNavBarVisible.Name, true);
-                    else
-                        VisualStateManager.GoToState(this, WPNavBarCollapsed.Name, true);
-
-                    // 控制 bar 宽度
-                    MainPage.Current.NavViewRoot.Margin = new Thickness(0);
-                    MainPage.Current.TaskBar.Margin = new Thickness(0);
+                    else VisualStateManager.GoToState(this, WPNavBarCollapsed.Name, true);
                     break;
             }
             OtherVariable.oldHeight = e.VisibleBounds.Height;

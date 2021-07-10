@@ -10,30 +10,7 @@
     mc:Ignorable="d" x:Name="Main" RequestedTheme="Dark" 
     Background="{x:Bind PageBackgroundColor}"
     Loaded="Main_Loaded">
-    <Page.Resources>
-        <Storyboard x:Name="BottomBar_Storyboard_SlideDown">
-            <DoubleAnimation Storyboard.TargetName="BottomBar_TranslateTransform" Storyboard.TargetProperty="Y" From="0" To="40" >
-                <DoubleAnimation.EasingFunction>
-                    <ExponentialEase Exponent="7" EasingMode="EaseOut"/>
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>  
-        </Storyboard>
-        <Storyboard x:Name="BottomBar_Storyboard_SlideUp">
-            <DoubleAnimation Storyboard.TargetName="BottomBar_TranslateTransform" Storyboard.TargetProperty="Y" From="40" To="0" >
-                <DoubleAnimation.EasingFunction>
-                    <ExponentialEase Exponent="7" EasingMode="EaseOut"/>
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-        </Storyboard>
-
-        <Storyboard x:Name="BottomBar_Storyboard_Fadeout">
-            <FadeOutThemeAnimation Storyboard.TargetName="TaskBar" />
-        </Storyboard>
-        <Storyboard x:Name="BottomBar_Storyboard_Fadein">
-            <FadeInThemeAnimation Storyboard.TargetName="TaskBar" />
-        </Storyboard>
-    </Page.Resources>
-
+   
     <Grid x:Name="LayoutRoot" x:FieldModifier="Public" ManipulationMode="System,TranslateX">
         <Grid.Background>
             <ImageBrush ImageSource="/Assets/Background.jpg" Stretch="UniformToFill" AlignmentX="Left"/>
@@ -72,35 +49,35 @@
             </upOS1809:Grid.OpacityTransition>
             <Grid.Transitions>
                 <TransitionCollection>
-                    <PaneThemeTransition/>
+                    <EdgeUIThemeTransition   />
                 </TransitionCollection>
             </Grid.Transitions>
 
             <CommandBar DefaultLabelPosition="Bottom" upOS1709:ToolTipService.ToolTip="Right tag on here to switch CommandBar." 
                         Background="{ThemeResource NavigationViewTopPaneBackground}" x:FieldModifier="Public"
-                        RightTapped="CommandBar_RightTapped" x:Name="TaskBar" FlowDirection="LeftToRight" OverflowButtonVisibility="Auto">
+                        RightTapped="CommandBar_RightTapped" x:Name="ToolBar" FlowDirection="LeftToRight" OverflowButtonVisibility="Auto" 
+                        >
                 <CommandBar.RenderTransform>
                     <TranslateTransform x:Name="BottomBar_TranslateTransform"/>
                 </CommandBar.RenderTransform>
 
                 <!--<AppBarButton Icon="Add" Label="分享故事" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="分享你与 Avicii 的故事"/>-->
                 <AppBarButton x:Name="BackTopButton" IsEnabled="False" Icon="Upload" Label="Back to Top" ToolTipService.ToolTip="Back to top" 
-                              Click="BackToTop_Click" Opacity="{x:Bind OpaqueIfEnabled(BackTopButton.IsEnabled), Mode=OneWay}"
-                               upOS1709:Style="{StaticResource AppBarButtonRevealStyle}">
+                              Click="BackToTop_Click" Opacity="{x:Bind OpaqueIfEnabled(BackTopButton.IsEnabled), Mode=OneWay}">
                     <upOS1809:AppBarButton.OpacityTransition>
                         <ScalarTransition/>
                     </upOS1809:AppBarButton.OpacityTransition>
                 </AppBarButton>
                 <AppBarButton x:Name="RefreshButton" Icon="Refresh" Label="Refresh" ToolTipService.ToolTip="Refresh dates" 
                               Click="Refresh_Click" Opacity="{x:Bind OpaqueIfEnabled(RefreshButton.IsEnabled), Mode=OneWay}"
-                              IsEnabled="{Binding ElementName=CommentPage,Path=IsSelected}" upOS1709:Style="{StaticResource AppBarButtonRevealStyle}">
+                              IsEnabled="{Binding ElementName=CommentPage,Path=IsSelected}">
                     <upOS1809:AppBarButton.OpacityTransition>
                         <ScalarTransition/>
                     </upOS1809:AppBarButton.OpacityTransition>
                 </AppBarButton>
                 <AppBarButton x:Name="CreatComment" Icon="Comment" Label="New Comment" ToolTipService.ToolTip="Share your menory" 
                               Click="CreatComment_Click" Opacity="{x:Bind OpaqueIfEnabled(CreatComment.IsEnabled), Mode=OneWay}"
-                              upOS1709:Style="{StaticResource AppBarButtonRevealStyle}" Visibility="Collapsed">
+                              Visibility="Collapsed">
                     <upOS1809:AppBarButton.OpacityTransition>
                         <ScalarTransition/>
                     </upOS1809:AppBarButton.OpacityTransition>
@@ -126,7 +103,7 @@
 
                 <muxc:NavigationView.MenuItems>
                     <muxc:NavigationViewItemHeader Content="True" x:Name="MainPagesHeader"/>
-                    <muxc:NavigationViewItem Content="Memory" x:Name="HomePage" Icon="Home" Tag="home"      />
+                    <muxc:NavigationViewItem Content="Memory" x:Name="HomePage" Icon="Home" Tag="home"/>
                     <muxc:NavigationViewItem Content="Comments" x:Name="CommentPage" Icon="World" Tag="comment"/>
                     <muxc:NavigationViewItem Content="Images" x:Name="ImagesPage" Tag="image" Visibility="Visible">
                         <muxc:NavigationViewItem.Icon>
@@ -170,9 +147,9 @@
                     <VisualState.Setters>
                         <Setter Target="BottomBar.VerticalAlignment" Value="Top"/>
                         <Setter Target="BottomBar.HorizontalAlignment" Value="Right"/>
-                        <Setter Target="BottomBar.Margin" Value="0 0 157 0"/>
-                        <Setter Target="TaskBar.Background" Value="Transparent"/>
-                        <Setter Target="TaskBar.Height" Value="40"/>
+                        <upOS1709:Setter Target="BottomBar.Margin" Value="0 0 157 0"/>
+                        <Setter Target="ToolBar.Background" Value="Transparent"/>
+                        <Setter Target="ToolBar.Height" Value="40"/>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>
@@ -183,9 +160,8 @@
                     <VisualState.Setters>
                         <Setter Target="BottomBar.VerticalAlignment" Value="Top"/>
                         <Setter Target="BottomBar.HorizontalAlignment" Value="Center"/>
-                        <Setter Target="TaskBar.Background" Value="Transparent"/>
-                        <Setter Target="TaskBar.Height" Value="40"/>
-                        <Setter Target="TaskBar.DefaultLabelPosition" Value="Right"/>
+                        <Setter Target="ToolBar.Background" Value="Transparent"/>
+                        <Setter Target="ToolBar.DefaultLabelPosition" Value="Right"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -193,10 +169,8 @@
             <VisualStateGroup x:Name="WindowFocusStates">
                 <VisualState x:Name="WindowFocused">
                     <VisualState.Setters>
-                        <Setter Target="NavViewRoot.Opacity"
-                            Value="1" />
-                        <Setter Target="BottomBar.Opacity"
-                            Value="1" />
+                        <Setter Target="NavViewRoot.Opacity" Value="1" />
+                        <Setter Target="BottomBar.Opacity" Value="1" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="WindowNotFocused">
@@ -212,26 +186,63 @@
             <VisualStateGroup x:Name="WPStates">
                 <VisualState x:Name="WPNavBarVisible">
                     <VisualState.Setters>
-                        <Setter Target="LayoutRoot.Margin" Value="0,0,0,48"/>
-
+                        <Setter Target="LayoutRoot.Padding" Value="0,0,0,48"/>
+                        <Setter Target="TopBar.MinHeight" Value="63"/>
+                        <Setter Target="ContentFrame.Padding" Value="0,23,0,0"/>
+                        <Setter Target="NotificationGrid.Margin" Value="6,63,0,0"/>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="WPNavBarCollapsed">
                     <VisualState.Setters>
-                        <Setter Target="LayoutRoot.Margin" Value="0"/>
+                        <Setter Target="LayoutRoot.Padding" Value="0"/>
+                        <Setter Target="TopBar.MinHeight" Value="63"/>
+                        <Setter Target="ContentFrame.Padding" Value="0,23,0,0"/>
+                        <Setter Target="NotificationGrid.Margin" Value="6,63,0,0"/>
+
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="ContinuumOn">
                     <VisualState.Setters>
-
+                        <Setter Target="NavViewRoot.Padding" Value="0"/>
+                        <Setter Target="ToolBar.Padding" Value="0"/>
+                        <Setter Target="NotificationGrid.Margin" Value="0"/>
+                        <Setter Target="ContentFrame.Padding" Value="0"/>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="ContinuumOff">
                     <VisualState.Setters>
-
+                        <Setter Target="NavViewRoot.Padding" Value="48,0,48,0"/>
+                        <Setter Target="ToolBar.Padding" Value="0,0,48,0"/>
+                        <Setter Target="NotificationGrid.Margin" Value="54,40,54,0"/>
+                        <Setter Target="ContentFrame.Padding" Value="40,0,40,0"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
     </Grid>
+
+    <Page.Resources>
+        <Storyboard x:Name="BottomBar_Storyboard_SlideDown">
+            <DoubleAnimation Storyboard.TargetName="BottomBar_TranslateTransform" Storyboard.TargetProperty="Y" From="0" To="40" >
+                <DoubleAnimation.EasingFunction>
+                    <ExponentialEase Exponent="7" EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+        <Storyboard x:Name="BottomBar_Storyboard_SlideUp">
+            <DoubleAnimation Storyboard.TargetName="BottomBar_TranslateTransform" Storyboard.TargetProperty="Y" From="40" To="0" >
+                <DoubleAnimation.EasingFunction>
+                    <ExponentialEase Exponent="7" EasingMode="EaseOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+        <Storyboard x:Name="BottomBar_Storyboard_Fadeout">
+            <FadeOutThemeAnimation Storyboard.TargetName="ToolBar" />
+        </Storyboard>
+        <Storyboard x:Name="BottomBar_Storyboard_Fadein">
+            <FadeInThemeAnimation Storyboard.TargetName="ToolBar" />
+        </Storyboard>
+    </Page.Resources>
+
 </Page>
