@@ -146,6 +146,11 @@ namespace TrueLove.UWP
         /// <summary>
         /// 沉淀状态栏 for Phone
         /// </summary>
-        private void HideStatusBar() => ApplicationView.GetForCurrentView().VisibleBoundsChanged += MainPage.Current.VisibleBounds_Changed;
+        private void HideStatusBar()
+        {
+            var applicationView = ApplicationView.GetForCurrentView();
+            applicationView.SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
+            applicationView.VisibleBoundsChanged += MainPage.Current.VisibleBounds_Changed;
         }
     }
+}

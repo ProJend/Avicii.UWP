@@ -769,11 +769,11 @@
                         <Button x:Name="PreviousButtonHorizontal" HorizontalAlignment="Left" Height="36" IsTabStop="False" Template="{StaticResource HorizontalPreviousTemplate}" UseSystemFocusVisuals="False" VerticalAlignment="Center" Width="20"/>
                         <Button x:Name="NextButtonHorizontal" HorizontalAlignment="Right" Height="36" IsTabStop="False" Template="{StaticResource HorizontalNextTemplate}" UseSystemFocusVisuals="False" VerticalAlignment="Center" Width="20"/>
                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Right">
-                            <Button x:Name="PreviousButtonVertical" IsTabStop="False" UseSystemFocusVisuals="False" v1809:CornerRadius="2 2 0 0"
+                            <Button x:Name="PreviousButtonVertical" UseSystemFocusVisuals="False" v1809:CornerRadius="2 2 0 0"
                                     v1709:Style="{StaticResource ButtonRevealStyle}" Width="40" Height="40" Background="Transparent">
                                 <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE96D;"/>
                             </Button>
-                            <Button x:Name="NextButtonVertical" IsTabStop="False" UseSystemFocusVisuals="False" v1809:CornerRadius="0 0 2 2"
+                            <Button x:Name="NextButtonVertical" UseSystemFocusVisuals="False" v1809:CornerRadius="0 0 2 2"
                                     v1709:Style="{StaticResource ButtonRevealStyle}" Width="40" Height="40" Background="Transparent">
                                 <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE96E;"/>
                             </Button>

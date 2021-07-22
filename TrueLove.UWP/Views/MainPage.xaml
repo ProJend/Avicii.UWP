@@ -49,7 +49,7 @@
             </upOS1809:Grid.OpacityTransition>
             <Grid.Transitions>
                 <TransitionCollection>
-                    <EdgeUIThemeTransition   />
+                    <EdgeUIThemeTransition/>
                 </TransitionCollection>
             </Grid.Transitions>
 
@@ -142,7 +142,7 @@
                 <VisualState>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger
-                            MinWindowWidth="{StaticResource MediumWindowBreakpoint}"/>
+                            MinWindowWidth="733"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="BottomBar.VerticalAlignment" Value="Top"/>
@@ -155,7 +155,7 @@
                 <VisualState>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger 
-                            MinWindowWidth="{StaticResource LargeWindowBreakpoint}"/>
+                            MinWindowWidth="1078"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="BottomBar.VerticalAlignment" Value="Top"/>
@@ -201,17 +201,18 @@
 
                     </VisualState.Setters>
                 </VisualState>
-                <VisualState x:Name="ContinuumOn">
-                    <VisualState.Setters>
-                        <Setter Target="NavViewRoot.Padding" Value="0"/>
-                        <Setter Target="ToolBar.Padding" Value="0"/>
-                        <Setter Target="NotificationGrid.Margin" Value="0"/>
-                        <Setter Target="ContentFrame.Padding" Value="0"/>
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState x:Name="ContinuumOff">
+                <VisualState x:Name="LargeLandscape"/>
+                <VisualState x:Name="MediumLandscape">
                     <VisualState.Setters>
                         <Setter Target="NavViewRoot.Padding" Value="48,0,48,0"/>
+                        <Setter Target="ToolBar.Padding" Value="0,0,48,0"/>
+                        <Setter Target="NotificationGrid.Margin" Value="54,40,54,0"/>
+                        <Setter Target="ContentFrame.Padding" Value="40,0,40,0"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="MinLandscape">
+                    <VisualState.Setters>
+                        <Setter Target="NavViewRoot.Padding" Value="48,-24,48,0"/>
                         <Setter Target="ToolBar.Padding" Value="0,0,48,0"/>
                         <Setter Target="NotificationGrid.Margin" Value="54,40,54,0"/>
                         <Setter Target="ContentFrame.Padding" Value="40,0,40,0"/>
@@ -244,5 +245,4 @@
             <FadeInThemeAnimation Storyboard.TargetName="ToolBar" />
         </Storyboard>
     </Page.Resources>
-
 </Page>

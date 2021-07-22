@@ -23,18 +23,23 @@ namespace TrueLove.UWP.Views
             this.InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void LinkingPage_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(CommentsPage));
+            FrameworkElement button = sender as FrameworkElement;
+            switch (button.Tag as string)
+            {
+                case "linkingCommentsPage": Frame.Navigate(typeof(CommentsPage)); break;
+                case "linkingImagesPage": Frame.Navigate(typeof(ImagesPage)); break;
+            }
+
         }
 
         private async void GetFiles()
         {
-            string path = Package.Current.InstalledLocation.Path + @"\Assets\Instagram";
-            var storageFolder = await StorageFolder.GetFolderFromPathAsync(path);
+            string localPath = Package.Current.InstalledLocation.Path + @"\Assets\Instagram";
+            var storageFolder = await StorageFolder.GetFolderFromPathAsync(localPath);
             IReadOnlyList<StorageFile> sortedItems = await storageFolder.GetFilesAsync();
-            var images = new List<BitmapImage>();
-            isRunning = true;
+            var photos = new List<BitmapImage>();
             if (sortedItems.Any())
             {
                 foreach (StorageFile file in sortedItems)
@@ -45,27 +50,25 @@ namespace TrueLove.UWP.Views
                         {
                             BitmapImage bitmapImage = new BitmapImage();
                             await bitmapImage.SetSourceAsync(fileStream);
-                            images.Add(bitmapImage);
+                            photos.Add(bitmapImage);
                         }
                     }
                 }
             }
             else
             {
-                var message = new MessageDialog("There are no images in the Instagram's Pictures Library.");
+                var message = new MessageDialog("There are no images in the Instagram Pictures Library.");
                 await message.ShowAsync();
             }
-            ImageGridView.ItemsSource = images;
-            ImageIsLoading.IsActive = false;
-            ImageIsLoading.Height = 0;
-            flipview.SelectionChanged -= FlipView_SelectionChanged;
+            ImageGridView.ItemsSource = photos;
+            LoadingImages.IsActive = false;
+            LoadingImages.Visibility = Visibility.Collapsed;
+            flipview.SelectionChanged -= FlipView_SelectionChanged; // 取消订阅事件，令其 Method 不再执行
         }
 
         private void FlipView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (!isRunning && flipview.SelectedIndex == 3) GetFiles();
+            if (flipview.SelectedIndex == 3) GetFiles();
         }
-
-        bool isRunning = false;
     }
 }

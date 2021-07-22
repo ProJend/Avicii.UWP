@@ -1,52 +1,60 @@
 ﻿<Page
     x:Class="TrueLove.UWP.Views.HomePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:upOS1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" RequestedTheme="Dark"
     Background="Transparent">
     <Page.Resources>
-        <Style TargetType="StackPanel" x:Key="Left">
-            <Setter Property="Grid.RowSpan" Value="2"/>
+        <Style TargetType="StackPanel" x:Key="AlignLeft">
             <Setter Property="Grid.Column" Value="1"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Transitions">
+                <Setter.Value>
+                    <TransitionCollection>
+                        <EdgeUIThemeTransition/>
+                    </TransitionCollection>
+                </Setter.Value>
+            </Setter>
         </Style>
-        <Style TargetType="StackPanel" x:Key="Bottom">
-            <Setter Property="Grid.Row" Value="1"/>
+        <Style TargetType="StackPanel" x:Key="AlignBottom">
             <Setter Property="Grid.ColumnSpan" Value="2"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+            <Setter Property="Margin" Value="0,0,0,110"/>
+            <Setter Property="Transitions">
+                <Setter.Value>
+                    <TransitionCollection>
+                        <EdgeUIThemeTransition/>
+                    </TransitionCollection>
+                </Setter.Value>
+            </Setter>
         </Style>
-        <ItemsPanelTemplate x:Key="Open">
+        <ItemsPanelTemplate x:Key="Loose">
             <ItemsWrapGrid x:Name="MaxItemsWrapGrid" MaximumRowsOrColumns="4"
-                                Orientation="Horizontal" Margin="700 0 700 0"/>
+                                Orientation="Horizontal" Margin="600 0 600 0"/>
         </ItemsPanelTemplate>
-        <ItemsPanelTemplate x:Key="Close">
+        <ItemsPanelTemplate x:Key="Compact">
             <ItemsWrapGrid x:Name="MaxItemsWrapGrid" MaximumRowsOrColumns="3"
                                 Orientation="Horizontal"/>
         </ItemsPanelTemplate>
     </Page.Resources>
 
-    <FlipView SelectionChanged="FlipView_SelectionChanged" x:Name="flipview" IsTabStop="False" Background="Transparent">
+    <FlipView SelectionChanged="FlipView_SelectionChanged" x:Name="flipview" Background="Transparent">
         <FlipViewItem ManipulationMode="System,TranslateX" IsTabStop="False">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
 
-                <StackPanel Style="{StaticResource Bottom}" Name="a" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <StackPanel.Transitions>
-                        <TransitionCollection>
-                            <EdgeUIThemeTransition/>
-                        </TransitionCollection>
-                    </StackPanel.Transitions>
-                    <TextBlock Text="the Avicii UWP" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}"/>
-                    <TextBlock Text="T I M   B E R G L I N G" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}"/>
-                    <TextBlock Text="F O U N D A T I O N" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}"/>
-                    <TextBlock Text="1 9 8 9 . 0 9 . 0 8 - 2 0 1 8 . 0 4 . 2 0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}"/>
+                <StackPanel Name="FloatingLayout_a">
+                    <TextBlock Text="the Avicii UWP" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}"/>
+                    <TextBlock Text="TIM BERGLING" HorizontalAlignment="Center" CharacterSpacing="350" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}"/>
+                    <TextBlock Text="FOUNDATION" HorizontalAlignment="Center" CharacterSpacing="350" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}"/>
+                    <TextBlock Text="1989.09.08 - 2018.04.20" HorizontalAlignment="Center" CharacterSpacing="350" Style="{StaticResource CaptionTextBlockStyle}"/>
                 </StackPanel>
             </Grid>
         </FlipViewItem>
@@ -56,31 +64,26 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
 
-                <StackPanel Style="{StaticResource Bottom}" Name="b" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <StackPanel.Transitions>
-                        <TransitionCollection>
-                            <EdgeUIThemeTransition/>
-                        </TransitionCollection>
-                    </StackPanel.Transitions>
-                    <TextBlock Text="Avicii Memory boaid" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}"/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="16 0 0 0">
-                        <TextBlock Text="C O M M E N T S" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <Button Background="Transparent" Width="40" Height="40" Click="Button_Click" Tag="Shop" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel Name="FloatingLayout_b">
+                    <TextBlock Text="Avicii Memory boaid" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center" Style="{StaticResource SubheaderTextBlockStyle}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Text="COMMENTS" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}" VerticalAlignment="Center" CharacterSpacing="350" Margin="40 0 0 3"/>
+                        <Button Background="Transparent" Width="40" Height="40" Click="LinkingPage_Click" 
+                                Tag="linkingCommentsPage" upOS1809:CornerRadius="20">
                             <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE761;"/>
                         </Button>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="16 0 0 0">
-                        <TextBlock Text="I M A G E S" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <Button Background="Transparent" Width="40" Height="40" Click="Button_Click" Tag="Shop" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Text="IMAGES" Style="{StaticResource FlyoutPickerTitleTextBlockStyle}" CharacterSpacing="350"
+                                   VerticalAlignment="Center" Margin="40 0 0 3"/>
+                        <Button Background="Transparent" Width="40" Height="40" Click="LinkingPage_Click"
+                                Tag="linkingImagesPage" upOS1809:CornerRadius="20">
                             <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE761;"/>
                         </Button>
                     </StackPanel>
-                    <TextBlock Text="I N   L O V I N G   M E M O R Y" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource CaptionTextBlockStyle}"/>
+                    <TextBlock Text="IN LOVING MEMORY" HorizontalAlignment="Center" CharacterSpacing="350"
+                               Style="{StaticResource CaptionTextBlockStyle}"/>
                 </StackPanel>
             </Grid>
         </FlipViewItem>
@@ -90,18 +93,9 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
 
-                <StackPanel Style="{StaticResource Bottom}" Name="c" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <StackPanel.Transitions>
-                        <TransitionCollection>
-                            <EdgeUIThemeTransition/>
-                        </TransitionCollection>
-                    </StackPanel.Transitions>
-                    <TextBlock Text="◢◤" Style="{StaticResource HeaderTextBlockStyle}" HorizontalAlignment="Center"/>
+                <StackPanel Name="FloatingLayout_c">
+                    <TextBlock Text="◢◤" HorizontalAlignment="Center" FontSize="55"/>
                     <TextBlock Text="Remembering Tim Bergling" Style="{StaticResource SubheaderTextBlockStyle}" FontFamily="{StaticResource freeland}" HorizontalAlignment="Center"/>
                     <TextBlock MaxWidth="350" Style="{ThemeResource BodyTextBlockStyle}" TextAlignment="Center">
                            <LineBreak/>
@@ -114,12 +108,10 @@
         </FlipViewItem>
         <FlipViewItem ManipulationMode="System,TranslateX" IsTabStop="False">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                <ProgressRing Name="ImageIsLoading" Foreground="White" IsActive="True" Width="50" Height="50" Margin="0 0 0 30"/>
-                <TextBlock Style="{ThemeResource TitleTextBlockStyle}" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <Run>I N S T A G R A M</Run><LineBreak/>
-                </TextBlock>
+                <ProgressRing Name="LoadingImages" Foreground="White" IsActive="True" Width="50" Height="50" Margin="0 0 0 30"/>
+                <TextBlock Style="{ThemeResource SubheaderTextBlockStyle}" CharacterSpacing="350" HorizontalAlignment="Center" Margin="0 0 0 15" Text="INSTAGRAM"/>
                 <Viewbox>
-                    <GridView x:Name="ImageGridView" ItemsPanel="{StaticResource Close}" ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Disabled">
+                    <GridView x:Name="ImageGridView" ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Disabled" ItemContainerStyle="{StaticResource GridViewItemNoneStyle}">
                         <GridView.ItemTemplate>
                             <DataTemplate>
                                 <Image Stretch="UniformToFill" Source="{Binding}"/>
@@ -131,13 +123,7 @@
         </FlipViewItem>
         <FlipViewItem ManipulationMode="System,TranslateX" IsTabStop="False">
             <Grid Background="Black">
-                <Image Source="/Assets/SplashScreen.png" Height="150" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <Image.Transitions>
-                        <TransitionCollection>
-                            <EdgeUIThemeTransition/>
-                        </TransitionCollection>
-                    </Image.Transitions>
-                </Image>
+                <Image Source="/Assets/SplashScreen.png" Height="150" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Grid>
         </FlipViewItem>
     
@@ -151,14 +137,36 @@
             <VisualStateGroup>
                 <VisualState>
                     <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource MinWindowBreakpoint}"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="FloatingLayout_a.Style" Value="{StaticResource AlignBottom}"/>
+                        <Setter Target="FloatingLayout_b.Style" Value="{StaticResource AlignBottom}"/>
+                        <Setter Target="FloatingLayout_c.Style" Value="{StaticResource AlignBottom}"/>
+                        <Setter Target="ImageGridView.ItemsPanel" Value="{StaticResource Compact}"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource MediumWindowBreakpoint}"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="FloatingLayout_a.Style" Value="{StaticResource AlignBottom}"/>
+                        <Setter Target="FloatingLayout_b.Style" Value="{StaticResource AlignBottom}"/>
+                        <Setter Target="FloatingLayout_c.Style" Value="{StaticResource AlignBottom}"/>
+                        <Setter Target="ImageGridView.ItemsPanel" Value="{StaticResource Loose}"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
                         <AdaptiveTrigger 
                             MinWindowWidth="{StaticResource LargeWindowBreakpoint}"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="a.Style" Value="{StaticResource Left}"/>
-                        <Setter Target="b.Style" Value="{StaticResource Left}"/>
-                        <Setter Target="c.Style" Value="{StaticResource Left}"/>
-                        <Setter Target="ImageGridView.ItemsPanel" Value="{StaticResource Open}"/>
+                        <Setter Target="FloatingLayout_a.Style" Value="{StaticResource AlignLeft}"/>
+                        <Setter Target="FloatingLayout_b.Style" Value="{StaticResource AlignLeft}"/>
+                        <Setter Target="FloatingLayout_c.Style" Value="{StaticResource AlignLeft}"/>
+                        <Setter Target="ImageGridView.ItemsPanel" Value="{StaticResource Loose}"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

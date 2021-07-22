@@ -49,7 +49,7 @@ namespace TrueLove.UWP.Views
                 else TopBar.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
                 ToolBar.Background = new SolidColorBrush { Color = Colors.Black, Opacity = 0.7 };
 
-                // 调整界面
+                // 调整界面，默认抬高底部工具栏以免重叠
                 var applicationView = ApplicationView.GetForCurrentView();
                 applicationView.SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
                 VisualStateManager.GoToState(this, WPNavBarVisible.Name, true);
@@ -261,8 +261,8 @@ namespace TrueLove.UWP.Views
         /// </summary>
         private void The_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
         {   // 判断滑动的距离
-            if (e.Cumulative.Translation.X > 150 && BottomBar.IsTapEnabled) NavView.IsPaneOpen = true; // 打开汉堡菜单            
-            if (e.Cumulative.Translation.X < -150) NavView.IsPaneOpen = false; // 关闭汉堡菜单
+            if (e.Cumulative.Translation.X > 100 && BottomBar.IsTapEnabled) NavView.IsPaneOpen = true; // 打开汉堡菜单            
+            if (e.Cumulative.Translation.X < -100) NavView.IsPaneOpen = false; // 关闭汉堡菜单
         }
         #endregion
         #region 底部工具栏
@@ -337,8 +337,9 @@ namespace TrueLove.UWP.Views
             {   // 横向
                 case ApplicationViewOrientation.Landscape:
                     // 控制 bar 宽度
-                    if (Window.Current.Bounds.Width < 876)
-                        VisualStateManager.GoToState(this, ContinuumOff.Name, true);
+                    if (Window.Current.Bounds.Width < 641)
+                        VisualStateManager.GoToState(this, MinLandscape.Name, true);
+                    else VisualStateManager.GoToState(this, MediumLandscape.Name, true);
                     break;
 
                 // 纵向
