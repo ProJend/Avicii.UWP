@@ -1,4 +1,4 @@
-﻿using TrueLove.Lib.Notification.LiveTile;
+﻿using TrueLove.Lib.Notification;
 using Windows.ApplicationModel.Background;
 
 namespace BackgroundTask
@@ -9,7 +9,7 @@ namespace BackgroundTask
         {
             //Debug.Write("================ debug to show is working  ================");
             var deferral = taskInstance.GetDeferral();
-            TileSetup.SetupTile();
+            Assembly.Tile(); //組裝動態磚
             deferral.Complete();
         }
     }

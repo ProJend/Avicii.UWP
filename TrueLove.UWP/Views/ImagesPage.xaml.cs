@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using TrueLove.Lib.Models.Datebase;
+using TrueLove.Lib.Models.Code;
 using Windows.UI.Xaml.Controls;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
@@ -11,7 +11,7 @@ namespace TrueLove.UWP.Views
     /// </summary>
     public sealed partial class ImagesPage : Page
     {
-        private List<CommentType> Comments;
+        private List<CommentItem> Comments;
         public ImagesPage()
         {
             this.InitializeComponent();

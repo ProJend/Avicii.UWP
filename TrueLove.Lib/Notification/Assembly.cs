@@ -1,23 +1,25 @@
-﻿using System;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
+using System;
 using TrueLove.Lib.Helpers;
 using TrueLove.Lib.Models.Enum;
-using TrueLove.Lib.Notification.ContentDialog.DialogTemplate;
+using TrueLove.Lib.Notification.Template;
 using Windows.UI;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
-namespace TrueLove.Lib.Notification.ContentDialog
+namespace TrueLove.Lib.Notification
 {
-    public static class DialogSetup
+    public class Assembly
     {
-        public static async void SetupDialog(GetDialogInfo name)
+        public static async void Dialog(DialogType name)
         {
-            var dialogCreate = new Windows.UI.Xaml.Controls.ContentDialog();
-            var commentCreate = new CommentCreate();
+            var dialogCreate = new ContentDialog();
+            var commentCreate = new Template.ContentDialog.CommentCreate();
             switch (name)
             {
-                case 0:
+                case DialogType.CommentCreate:
                     dialogCreate.Title = "Write your story of love here:";
                     dialogCreate.CloseButtonText = "Cancel";
                     dialogCreate.PrimaryButtonText = "Send";
@@ -26,7 +28,7 @@ namespace TrueLove.Lib.Notification.ContentDialog
                     //dialogCreate.DefaultButton = ContentDialogButton.Primary;
                     dialogCreate.Content = commentCreate;
                     dialogCreate.Background = new SolidColorBrush(Colors.Black);
-                    if (!Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile))
+                    if (!Generic.DeviceFamilyMatch(DeviceFamilyType.Mobile))
                     {
                         dialogCreate.CloseButtonStyle = (Style)Application.Current.Resources["ButtonRevealStyle"];
                         dialogCreate.SecondaryButtonStyle = (Style)Application.Current.Resources["ButtonRevealStyle"];
@@ -34,19 +36,17 @@ namespace TrueLove.Lib.Notification.ContentDialog
                     }
                     break;
 
-                case (GetDialogInfo)1:
+                case DialogType.ReleaseNotes:
                     dialogCreate.Title = "Release Notes";
                     dialogCreate.CloseButtonText = "Okay";
-                    dialogCreate.Content = new ReleaseNotes();
+                    dialogCreate.Content = new Template.ContentDialog.ReleaseNotes();
                     dialogCreate.Background = new SolidColorBrush(Colors.Black);
-                    //if (!Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile))
+                    //if (!Generic.DeviceFamilyMatch(DeviceFamilyType.Mobile))
                     //{
                     //    dialogCreate.CloseButtonStyle = (Style)Application.Current.Resources["ButtonRevealStyle"];
                     //    dialogCreate.BorderBrush = (Brush)Application.Current.Resources["SystemControlBackgroundListMediumRevealBorderBrush"];
                     //}
-                    break;                  
-
-              
+                    break;
             }
 
             try
@@ -56,5 +56,27 @@ namespace TrueLove.Lib.Notification.ContentDialog
             }
             catch (System.Runtime.InteropServices.COMException) { } // Nothing todo.
         }
-}
+
+        public static void Tile()
+        {
+            TileUpdateManager.CreateTileUpdaterForApplication().Clear(); // 清空队列
+            TileContent content = LiveTile.StaticTemplate(); // 得到磁贴的对象
+            var notification = new TileNotification(content.GetXml());
+            TileUpdateManager.CreateTileUpdaterForApplication().Update(notification); // 添加到磁贴的队列
+        }
+
+        public static void Toast()
+        {
+            var content = Template.Toast.Network();
+             
+            // Create the notification
+            var notif = new ToastNotification(content.GetXml())
+            {
+                ExpirationTime = DateTime.Now.AddMinutes(5)
+            };
+
+            // And show it!
+            ToastNotificationManager.CreateToastNotifier().Show(notif);
+        }
+    }
 }

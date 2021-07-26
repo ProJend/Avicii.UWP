@@ -7,8 +7,7 @@ using System.Xml.Serialization;
 using TrueLove.Lib.Helpers;
 using TrueLove.Lib.Models.Enum;
 using TrueLove.Lib.Models.UI;
-using TrueLove.Lib.Notification.ContentDialog;
-using TrueLove.Lib.Notification.Toast;
+using TrueLove.Lib.Notification;
 using Windows.Foundation.Metadata;
 using Windows.System;
 using Windows.UI;
@@ -43,9 +42,9 @@ namespace TrueLove.UWP.Views
             SystemNavigationManager.GetForCurrentView().BackRequested += System_BackRequested;
 
             #region 兼容低版本号系统
-            if (Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile)) // = WP
+            if (Generic.DeviceFamilyMatch(DeviceFamilyType.Mobile)) // = WP
             {
-                if (LocalSettingsVariable.setPageBackgroundColor) TopBar.Background = new SolidColorBrush(Colors.Black);
+                if (LocalSettings.isPageBackgroundColorSwitched) TopBar.Background = new SolidColorBrush(Colors.Black);
                 else TopBar.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
                 ToolBar.Background = new SolidColorBrush { Color = Colors.Black, Opacity = 0.7 };
 
@@ -236,7 +235,7 @@ namespace TrueLove.UWP.Views
                         }
                         else NotificationGrid.Visibility = Visibility.Visible;
 
-                        ToastSetup.ToastCharge();
+                        Assembly.Toast();
                     }
                     else goto default;
                     break;
@@ -281,7 +280,7 @@ namespace TrueLove.UWP.Views
             {
                 bool isWide;
                 if (!BottomBar.IsTapEnabled) isWide = false;
-                else isWide = LocalSettingsVariable.setHideBottomBar;
+                else isWide = LocalSettings.isBottomBarHidden;
                 if (sv.VerticalOffset > scrlocation && isWide)
                 {   // 滚动条当前位置大于存储的变量值时代表往下滑，隐藏底部栏
                     if (isShowBar)
@@ -318,7 +317,7 @@ namespace TrueLove.UWP.Views
         /// <summary>
         /// 新建评论按钮。
         /// </summary>
-        private void CreatComment_Click(object sender, RoutedEventArgs e) => DialogSetup.SetupDialog(GetDialogInfo.CommentCreate);
+        private void CreatComment_Click(object sender, RoutedEventArgs e) => Assembly.Dialog(DialogType.CommentCreate);
         #endregion
 
         private void OnWindowActivated(object sender, WindowActivatedEventArgs e)
@@ -345,12 +344,12 @@ namespace TrueLove.UWP.Views
                 // 纵向
                 case ApplicationViewOrientation.Portrait:
                     // 控制底部导航栏高度
-                    if (currentHeight < OtherVariable.oldHeight)
+                    if (currentHeight < oldHeight)
                         VisualStateManager.GoToState(this, WPNavBarVisible.Name, true);
                     else VisualStateManager.GoToState(this, WPNavBarCollapsed.Name, true);
                     break;
             }
-            OtherVariable.oldHeight = e.VisibleBounds.Height;
+            oldHeight = e.VisibleBounds.Height;
         }
 
 
@@ -361,11 +360,11 @@ namespace TrueLove.UWP.Views
         /// </summary>
         public void PageBackgroundChange()
         {
-            if (!LocalSettingsVariable.setPageBackgroundColor) Main.Background = new SolidColorBrush(Colors.Black);
+            if (!LocalSettings.isPageBackgroundColorSwitched) Main.Background = new SolidColorBrush(Colors.Black);
             else Main.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
-            if (Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile) && !LocalSettingsVariable.setPageBackgroundColor)
+            if (Generic.DeviceFamilyMatch(DeviceFamilyType.Mobile) && !LocalSettings.isPageBackgroundColorSwitched)
                 TopBar.Background = new SolidColorBrush(Colors.Black);
-            else if (Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile))
+            else if (Generic.DeviceFamilyMatch(DeviceFamilyType.Mobile))
                 TopBar.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
         }
 
@@ -375,13 +374,14 @@ namespace TrueLove.UWP.Views
         /// 需要重启应用
         /// </summary>
         [XmlIgnore]
-        public string PageBackgroundColor => LocalSettingsVariable.setPageBackgroundColor ? "Black" : "#FF1F1F1F";
+        public string PageBackgroundColor => LocalSettings.isPageBackgroundColorSwitched ? "Black" : "#FF1F1F1F";
 
         // 滚动条位置变量
-        public double scrlocation = 0;
+        double scrlocation = 0;
         // 导航栏当前显示状态（这个是为了减少不必要的开销，因为我做的是动画隐藏显示效果如果不用一个变量来记录当前导航栏状态的会重复执行隐藏或显示）
         bool isShowBar = true;
-        public double OpaqueIfEnabled(bool isEnabled) => isEnabled ? 1.0 : 0.7;
+        double OpaqueIfEnabled(bool isEnabled) => isEnabled ? 1.0 : 0.7;
         public static MainPage Current;
+        double oldHeight;
     }
 }

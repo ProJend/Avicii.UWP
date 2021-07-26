@@ -121,24 +121,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Helpers\Register.cs" />
-    <Compile Include="Models\Datebase\CommentType.cs" />
+    <Compile Include="Models\Code\CommentItem.cs" />
     <Compile Include="Helpers\Generic.cs" />
-    <Compile Include="Models\Enum\GetDialogInfo.cs" />
-    <Compile Include="Models\UI\OtherVariable.cs" />
-    <Compile Include="Models\UI\LocalSettingsVariable.cs" />
-    <Compile Include="Notification\ContentDialog\DialogSetup.cs" />
-    <Compile Include="Notification\ContentDialog\DialogTemplate\CommentCreate.xaml.cs">
+    <Compile Include="Models\Enum\DeviceFamilyType.cs" />
+    <Compile Include="Models\Enum\DialogType.cs" />
+    <Compile Include="Models\UI\LocalSettings.cs" />
+    <Compile Include="Notification\Template\ContentDialog\CommentCreate.xaml.cs">
       <DependentUpon>CommentCreate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Notification\ContentDialog\DialogTemplate\ReleaseNotes.xaml.cs">
+    <Compile Include="Notification\Template\ContentDialog\ReleaseNotes.xaml.cs">
       <DependentUpon>ReleaseNotes.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Notification\LiveTile\TileSetup.cs" />
-    <Compile Include="Notification\LiveTile\TileTemplate.cs" />
-    <Compile Include="Models\CandidateInfo.cs" />
-    <Compile Include="Models\Datebase\ProvisionalDatebase.cs" />
-    <Compile Include="Notification\Toast\ToastSetup.cs" />
-    <Compile Include="Notification\Toast\ToastTemplate.cs" />
+    <Compile Include="Notification\Assembly.cs" />
+    <Compile Include="Notification\Template\LiveTile.cs" />
+    <Compile Include="Notification\Template\Toast.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\TrueLove.Lib.rd.xml" />
   </ItemGroup>
@@ -154,15 +150,14 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\Converter\" />
     <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Notification\ContentDialog\DialogTemplate\CommentCreate.xaml">
+    <Page Include="Notification\Template\ContentDialog\CommentCreate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Notification\ContentDialog\DialogTemplate\ReleaseNotes.xaml">
+    <Page Include="Notification\Template\ContentDialog\ReleaseNotes.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

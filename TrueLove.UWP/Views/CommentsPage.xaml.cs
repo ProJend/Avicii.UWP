@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using TrueLove.Lib.Models.Datebase;
+using TrueLove.Lib.Models.Code;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Microsoft.Toolkit.Uwp.UI.Animations;
@@ -13,7 +13,7 @@ namespace TrueLove.UWP.Views
     /// </summary>
     public sealed partial class CommentsPage : Page
     {
-        private List<CommentType> Comments;
+        private List<CommentItem> Comments;
         public CommentsPage()
         {
             this.InitializeComponent();

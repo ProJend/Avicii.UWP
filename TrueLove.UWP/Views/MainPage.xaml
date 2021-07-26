@@ -76,8 +76,7 @@
                     </upOS1809:AppBarButton.OpacityTransition>
                 </AppBarButton>
                 <AppBarButton x:Name="CreatComment" Icon="Comment" Label="New Comment" ToolTipService.ToolTip="Share your menory" 
-                              Click="CreatComment_Click" Opacity="{x:Bind OpaqueIfEnabled(CreatComment.IsEnabled), Mode=OneWay}"
-                              Visibility="Collapsed">
+                              Click="CreatComment_Click" Opacity="{x:Bind OpaqueIfEnabled(CreatComment.IsEnabled), Mode=OneWay}">
                     <upOS1809:AppBarButton.OpacityTransition>
                         <ScalarTransition/>
                     </upOS1809:AppBarButton.OpacityTransition>

@@ -1,4 +1,5 @@
 ﻿using System;
+using TrueLove.Lib.Models.Enum;
 using Windows.ApplicationModel.Resources;
 using Windows.System.Profile;
 
@@ -23,34 +24,23 @@ namespace TrueLove.Lib.Helpers
         /// </summary>
         /// <param name="deviceOS">Desktop, Mobile, Team, IoT, Holographic or Xbox</param>
         /// <returns></returns>
-        public static bool DeviceFamilyMatch(string deviceOS)
+        public static bool DeviceFamilyMatch(DeviceFamilyType deviceOS)
         {
             var deviceFamily = AnalyticsInfo.VersionInfo.DeviceFamily;
-            var currentDevice = deviceOS; // 首字母大写
-            switch (currentDevice)
+            var currentDevice = $"Windows.{deviceOS}";
+            switch (deviceOS)
             {   // 确认设备输入正确
-                case "Windows.Desktop":
-                case "Windows.Mobile":
-                case "Windows.Team":
-                case "Windows.IoT":
-                case "Windows.Holographic":
-                case "Windows.Xbox":
+                case DeviceFamilyType.Desktop:
+                case DeviceFamilyType.Mobile:
+                case DeviceFamilyType.Team:
+                case DeviceFamilyType.IoT:
+                case DeviceFamilyType.Holographic:
+                case DeviceFamilyType.Xbox:
                     if (deviceFamily == currentDevice) return true;
                     else return false;
                 default:
                     throw new ArgumentException($"The parameter is incorrect : {deviceOS}.\nTap Ctrl + F to search and find it out in current project.");
-            }          
+            }
         }
-    }
-
-    public class DeviceFamilyList
-    {
-        public static string Desktop = "Windows.Desktop";
-        public static string Mobile = "Windows.Mobile";
-        public static string Team = "Windows.Team";
-        public static string IoT = "Windows.IoT";
-        public static string Holographic = "Windows.Holographic";
-        public static string Xbox = "Windows.Xbox";
-        public static string UnknowDevice = "UnknowDevice";
     }
 }

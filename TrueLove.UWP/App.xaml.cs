@@ -1,6 +1,7 @@
 ﻿using Microsoft.QueryStringDotNET;
 using System;
 using TrueLove.Lib.Helpers;
+using TrueLove.Lib.Models.Enum;
 using TrueLove.Lib.Models.UI;
 using TrueLove.UWP.Views;
 using Windows.ApplicationModel;
@@ -69,7 +70,7 @@ namespace TrueLove.UWP
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
 
-                if (LocalSettingsVariable.localSettings.Values["SetLiveTiles"] == null)
+                if (LocalSettings.localSettings.Values["isLiveTiles"] == null)
                 {   // 首次打开先过一边设置                  
                     var a = new SettingsPage();
                     a.AppFirstRun();
@@ -77,7 +78,7 @@ namespace TrueLove.UWP
                     GC.Collect();
                 }
 
-                if (!Generic.DeviceFamilyMatch(DeviceFamilyList.Mobile)) HideTitleBar();
+                if (!Generic.DeviceFamilyMatch(DeviceFamilyType.Mobile)) HideTitleBar();
                 else HideStatusBar();
             }
         }
@@ -96,7 +97,6 @@ namespace TrueLove.UWP
                         goto case "Close";
 
                     case "Close":
-                        OtherVariable.isNetworkToastPush = true;
                         break;
                 }
             }

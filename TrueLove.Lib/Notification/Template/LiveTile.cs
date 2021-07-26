@@ -1,8 +1,8 @@
-﻿    using Microsoft.Toolkit.Uwp.Notifications;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
 
-namespace TrueLove.Lib.Notification.LiveTile
+namespace TrueLove.Lib.Notification.Template
 {
-    class TileTemplate
+    class LiveTile
     {
         public static TileContent StaticTemplate() => new TileContent()
         {   // 创建静态磁贴对象并返回
