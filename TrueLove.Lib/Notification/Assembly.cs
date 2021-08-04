@@ -60,7 +60,7 @@ namespace TrueLove.Lib.Notification
         public static void Tile()
         {
             TileUpdateManager.CreateTileUpdaterForApplication().Clear(); // 清空队列
-            TileContent content = LiveTile.StaticTemplate(); // 得到磁贴的对象
+            TileContent content = LiveTile.OfflineTemplate(); // 得到磁贴的对象
             var notification = new TileNotification(content.GetXml());
             TileUpdateManager.CreateTileUpdaterForApplication().Update(notification); // 添加到磁贴的队列
         }

@@ -125,6 +125,8 @@
     <Compile Include="Helpers\Generic.cs" />
     <Compile Include="Models\Enum\DeviceFamilyType.cs" />
     <Compile Include="Models\Enum\DialogType.cs" />
+    <Compile Include="Models\UI\Converter\InverseBooleanConverter.cs" />
+    <Compile Include="Models\UI\Converter\ScrollToTopConverter.cs" />
     <Compile Include="Models\UI\LocalSettings.cs" />
     <Compile Include="Notification\Template\ContentDialog\CommentCreate.xaml.cs">
       <DependentUpon>CommentCreate.xaml</DependentUpon>

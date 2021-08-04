@@ -1,4 +1,5 @@
-﻿using Windows.Storage;
+﻿using System.Xml.Serialization;
+using Windows.Storage;
 
 namespace TrueLove.Lib.Models.UI
 {
@@ -20,6 +21,13 @@ namespace TrueLove.Lib.Models.UI
         {
             get => (bool)localSettings.Values["isPageBackgroundColorSwitched"];
             set => localSettings.Values["isPageBackgroundColorSwitched"] = value;
+        }
+
+        [XmlIgnore]
+        public static string strPageBackgroundColor
+        {
+            get => (string)localSettings.Values["strPageBackgroundColor"];
+            set => localSettings.Values["strPageBackgroundColor"] = value;
         }
 
         public static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;

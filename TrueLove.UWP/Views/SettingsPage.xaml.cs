@@ -31,11 +31,8 @@ namespace TrueLove.UWP.Views
         {
             // 判定状态
             if (Language != "zh-Hans-CN") FAQ_CN.Visibility = Visibility.Collapsed;
-            preventLoad = false;
             LiveTiles.IsOn = LocalSettings.isLiveTiles;
             HideCommandbar.IsOn = LocalSettings.isBottomBarHidden;
-            BackgroundColor.IsOn = LocalSettings.isPageBackgroundColorSwitched;
-            preventLoad = true;
             var version = Package.Current.Id.Version;
             VersionInfo.Text = $"Version : {version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
             releasedDate.Text = $"Installed Date : {Package.Current.InstalledDate.ToLocalTime().DateTime}";
@@ -49,46 +46,30 @@ namespace TrueLove.UWP.Views
         /// <param name="e"></param>
         private async void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
         {
-            if (preventLoad)
+            FrameworkElement toggleSwitch = sender as FrameworkElement;
+            switch (toggleSwitch.Tag as string)
             {
-                FrameworkElement toggleSwitch = sender as FrameworkElement;
-                switch (toggleSwitch.Tag as string)
-                {
-                    case "liveTiles":
-                        if (LiveTiles.IsOn) await Register.RegisterBackgroundTask("BackgroundTask.BackgroundTask", "LiveTile", new TimeTrigger(30, false), null);
-                        else
-                        {
-                            TileUpdateManager.CreateTileUpdaterForApplication().Clear(); // 清空队列
+                case "liveTiles":
+                    if (LiveTiles.IsOn)
+                        await Register.RegisterBackgroundTask("BackgroundTask.BackgroundTask", "LiveTile", new TimeTrigger(30, false), null);
+                    else
+                    {
+                        TileUpdateManager.CreateTileUpdaterForApplication().Clear(); // 清空队列
 
-                            foreach (var task in BackgroundTaskRegistration.AllTasks)
+                        foreach (var task in BackgroundTaskRegistration.AllTasks)
+                        {
+                            if (task.Value.Name == "LiveTile")
                             {
-                                if (task.Value.Name == "LiveTile")
-                                {
-                                    task.Value.Unregister(true);
-                                }
+                                task.Value.Unregister(true);
                             }
                         }
-                        LocalSettings.isLiveTiles = LiveTiles.IsOn == true ? true : false;
-                        break;
+                    }
+                    LocalSettings.isLiveTiles = LiveTiles.IsOn;
+                    break;
 
-                    case "hideCommandbar":
-                        LocalSettings.isBottomBarHidden = HideCommandbar.IsOn == true ? true : false;
-                        break;
-
-                    case "backgroundColor":
-                        if (BackgroundColor.IsOn)
-                        {
-                            LayoutRoot.Background = new SolidColorBrush(Colors.Black);
-                            MainPage.Current.PageBackgroundChange();
-                        }
-                        else
-                        {
-                            LayoutRoot.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
-                            MainPage.Current.PageBackgroundChange();
-                        }
-                        LocalSettings.isPageBackgroundColorSwitched = BackgroundColor.IsOn == true ? true : false;
-                        break;
-                }
+                case "hideCommandbar":
+                    LocalSettings.isBottomBarHidden = HideCommandbar.IsOn;
+                    break;
             }
         }
 
@@ -165,9 +146,6 @@ namespace TrueLove.UWP.Views
         {
             LiveTiles.IsOn = LocalSettings.isLiveTiles = true;
             HideCommandbar.IsOn = LocalSettings.isBottomBarHidden = false;
-            BackgroundColor.IsOn = LocalSettings.isPageBackgroundColorSwitched = true;
         }
-
-        public bool preventLoad;
     }
 }

@@ -62,9 +62,8 @@
                     <!--选项 : ⚙
                             Options-->
                     <TextBlock Text="Options" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
-                    <ToggleSwitch x:Name="BackgroundColor" Tag="backgroundColor" Header="Dark Theme" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeader}" OffContent="Night" OnContent="Midnight (AMOLED)"/>
-                    <ToggleSwitch x:Name="LiveTiles" Tag="liveTiles" Header="Live Tiles" ToolTipService.ToolTip="Show Avicii on tile" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeaderWithLineBreak}"/>
-                    <ToggleSwitch x:Name="HideCommandbar" Tag="hideCommandbar" Header="Hide BottomBar" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeaderWithLineBreak}"/>
+                    <ToggleSwitch x:Name="LiveTiles" Tag="liveTiles" Header="Live Tiles" ToolTipService.ToolTip="Show Avicii on tile" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeader}"/>
+                    <ToggleSwitch x:Name="HideCommandbar" Tag="hideCommandbar" Header="Hide ToolBar" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeaderWithLineBreak}"/>
                     <!--热键 : ⌨
                             Hot Keys-->
                     <StackPanel x:Name="HotKeys" upOS1709:Visibility="Visible" downOS1709:Visibility="Collapsed">

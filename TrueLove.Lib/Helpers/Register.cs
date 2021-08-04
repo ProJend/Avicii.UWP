@@ -29,7 +29,7 @@ namespace TrueLove.Lib.Helpers
             taskBuilder.Name = taskName;
             taskBuilder.TaskEntryPoint = taskEntryPoint;
             taskBuilder.SetTrigger(trigger);
-            if(condition is SystemCondition condition1 )
+            if(condition is SystemCondition condition1)
             taskBuilder.AddCondition(condition1);
 
             var trigger2 = new ApplicationTrigger();
@@ -37,37 +37,6 @@ namespace TrueLove.Lib.Helpers
             taskBuilder.Register();
             await trigger2.RequestAsync();
             return trigger2;
-        }
-
-        //public static async void RegisterBackgroundTask(string taskEntryPoint,
-        //                                                string taskName,
-        //                                                IBackgroundTrigger trigger,
-        //                                                IBackgroundCondition condition)
-        //{
-
-        //    var backgroundAccessStatus = await BackgroundExecutionManager.RequestAccessAsync();
-        //    if (backgroundAccessStatus == BackgroundAccessStatus.AlwaysAllowed ||
-        //        backgroundAccessStatus == BackgroundAccessStatus.AllowedSubjectToSystemPolicy)
-        //    {
-        //        foreach (var task in BackgroundTaskRegistration.AllTasks)
-        //        {
-        //            if (task.Value.Name == taskName)
-        //            {
-        //                task.Value.Unregister(true);
-        //            }
-        //        }
-
-        //        BackgroundTaskBuilder taskBuilder = new BackgroundTaskBuilder();
-        //        taskBuilder.Name = taskName;
-        //        taskBuilder.TaskEntryPoint = taskEntryPoint;
-        //        taskBuilder.SetTrigger(new TimeTrigger(15, false));
-        //        taskBuilder.AddCondition(new SystemCondition(SystemConditionType.InternetNotAvailable));
-
-        //        var trigger2 = new ApplicationTrigger();
-        //        taskBuilder.SetTrigger(trigger2);
-        //        taskBuilder.Register();
-        //        await trigger2.RequestAsync();
-        //    }
-        //}       
+        }      
     }
 }
