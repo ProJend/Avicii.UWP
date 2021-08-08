@@ -30,8 +30,6 @@ namespace TrueLove.UWP
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-            //TileUpdateManager.CreateTileUpdaterForApplication().Clear(); // 清空队列
-            TileUpdateManager.CreateTileUpdaterForApplication().EnableNotificationQueue(true); // 实现通知循环
         }
 
         /// <summary>
@@ -76,11 +74,12 @@ namespace TrueLove.UWP
                     var a = new SettingsPage();
                     a.AppFirstRun();
                     a = null;
-                    GC.Collect();
                 }
 
-                if (!Generic.DeviceFamilyMatch(DeviceFamilyType.Mobile)) HideTitleBar();
-                else HideStatusBar();
+                if (Generic.DeviceFamilyMatch(DeviceFamilyType.Mobile))
+                    HideStatusBar();
+                else
+                    HideTitleBar();
             }
         }
 

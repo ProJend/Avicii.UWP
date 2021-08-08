@@ -12,9 +12,9 @@
     Background="{ThemeResource PageBackgroundColor}"
     Loaded="Main_Loaded">
    
-    <Grid x:Name="LayoutRoot" x:FieldModifier="Public" ManipulationMode="System,TranslateX">
+    <Grid x:Name="LayoutRoot" ManipulationMode="System,TranslateX">
         <Grid.Background>
-            <ImageBrush ImageSource="/Assets/Background.jpg" Stretch="UniformToFill" AlignmentX="Left"/>
+            <ImageBrush ImageSource="/Assets/Background.jpg" Stretch="UniformToFill" AlignmentX="Left" AlignmentY="Bottom"/>
         </Grid.Background>
         <ScrollViewer x:Name="sv" ViewChanged="Sv_ViewChanged" 
                           VerticalScrollBarVisibility="Hidden" HorizontalScrollMode="Disabled"
@@ -69,7 +69,7 @@
                 </AppBarButton>
                 <AppBarButton x:Name="CreatComment" Icon="Comment" Label="New Comment" ToolTipService.ToolTip="Share your menory (F7)" 
                               Click="CreatComment_Click" Opacity="{x:Bind OpaqueIfEnabled(CreatComment.IsEnabled), Mode=OneWay}"
-                              IsEnabled="True" AccessKey="F6">
+                              IsEnabled="True" AccessKey="F7">
                     <AppBarButton.KeyboardAccelerators>
                         
                     </AppBarButton.KeyboardAccelerators>
@@ -124,6 +124,7 @@
                     <VisualState.Setters>
                         <Setter Target="NavView.PaneDisplayMode" Value="Top"/>
                         <Setter Target="MainPagesHeader.Visibility" Value="Collapsed"/>
+                        <Setter Target="NavViewRoot.IsTapEnabled" Value="false"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -132,7 +133,7 @@
                 <VisualState>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger
-                            MinWindowWidth="888"/>
+                            MinWindowWidth="{StaticResource LargeWindowBreakpoint}"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="BottomBar.VerticalAlignment" Value="Top"/>
@@ -146,7 +147,7 @@
                 <VisualState>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger 
-                            MinWindowWidth="1078"/>
+                            MinWindowWidth="1201"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="BottomBar.VerticalAlignment" Value="Top"/>

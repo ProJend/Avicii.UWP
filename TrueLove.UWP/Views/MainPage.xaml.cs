@@ -43,8 +43,7 @@ namespace TrueLove.UWP.Views
 
             if (Generic.DeviceFamilyMatch(DeviceFamilyType.Mobile)) // = WP
             {
-                if (LocalSettings.isPageBackgroundColorSwitched) TopBar.Background = new SolidColorBrush(Colors.Black);
-                else TopBar.Background = new SolidColorBrush((Color)Resources["SystemChromeMediumColor"]);
+                TopBar.Background = new SolidColorBrush(Colors.Black);
                 ToolBar.Background = new SolidColorBrush { Color = Colors.Black, Opacity = 0.7 };
 
                 // 调整界面，默认抬高底部工具栏以免重叠
@@ -52,7 +51,7 @@ namespace TrueLove.UWP.Views
                 applicationView.SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
                 VisualStateManager.GoToState(this, WPNavBarVisible.Name, true);
             }
-            else if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5))// > OS15063
+            else if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5)) // > OS15063
             {
                 // Add keyboard accelerators for backwards navigation.
                 var goBack = new KeyboardAccelerator { Key = VirtualKey.Escape };
@@ -194,7 +193,7 @@ namespace TrueLove.UWP.Views
         /// </summary>
         private void The_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
         {   // 判断滑动的距离
-            if (e.Cumulative.Translation.X > 100 && BottomBar.IsTapEnabled) NavView.IsPaneOpen = true; // 打开汉堡菜单            
+            if (e.Cumulative.Translation.X > 100 && NavViewRoot.IsTapEnabled) NavView.IsPaneOpen = true; // 打开汉堡菜单            
             else if (e.Cumulative.Translation.X < -100) NavView.IsPaneOpen = false; // 关闭汉堡菜单
         }
         #endregion

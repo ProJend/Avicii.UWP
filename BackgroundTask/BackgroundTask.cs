@@ -1,5 +1,6 @@
 ﻿using TrueLove.Lib.Notification;
 using Windows.ApplicationModel.Background;
+using Windows.UI.Notifications;
 
 namespace BackgroundTask
 {
@@ -9,8 +10,9 @@ namespace BackgroundTask
         {
             //Debug.Write("================ debug to show is working  ================");
             var deferral = taskInstance.GetDeferral();
-            Assembly.Tile(); //組裝動態磚
-            deferral.Complete();
+            Assembly.Tile(); // 組裝動態磚
+            TileUpdateManager.CreateTileUpdaterForApplication().EnableNotificationQueue(true);
+            deferral.Complete(); // 实现通知循环
         }
     }
 }

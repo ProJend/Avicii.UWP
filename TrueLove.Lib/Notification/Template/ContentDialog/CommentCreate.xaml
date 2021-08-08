@@ -21,7 +21,7 @@
             </Windows10version1809:TextBlock.OpacityTransition>
             <Run x:Name="textLength"></Run><LineBreak/>
             </TextBlock>
-            <TextBox x:Name="nickName" MaxHeight="80" PlaceholderText="Your name" x:FieldModifier="Public"
+            <TextBox x:Name="nickName" MaxHeight="80" PlaceholderText="Your name"
                  Padding="10 5 10 5" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"/>
             <TextBlock>
             <LineBreak/><Run Foreground="DarkGray">Your images must be .jpg, .gif, or .png and max 3MB</Run><LineBreak/>

@@ -4,5 +4,5 @@
 
     <x:Double x:Key="MinWindowBreakpoint">0</x:Double>
     <x:Double x:Key="MediumWindowBreakpoint">641</x:Double>
-    <x:Double x:Key="LargeWindowBreakpoint">900</x:Double>
+    <x:Double x:Key="LargeWindowBreakpoint">831</x:Double>
 </ResourceDictionary>

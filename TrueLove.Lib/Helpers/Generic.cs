@@ -15,8 +15,9 @@ namespace TrueLove.Lib.Helpers
         public static string GetResourceString(string UID)
         {
             var resourceLoader = ResourceLoader.GetForCurrentView().GetString(UID);
-            if (!string.IsNullOrEmpty(resourceLoader)) return resourceLoader;
-            else throw new ArgumentException($"There're blank output on this uid : {UID}.\nTap Ctrl + F to search and find it out in current project.");
+            return !string.IsNullOrEmpty(resourceLoader)
+                ? resourceLoader
+                : throw new ArgumentException($"There're blank output on this uid : {UID}.\nTap Ctrl + F to search and find it out in current project.");
         }
 
         /// <summary>
@@ -36,10 +37,9 @@ namespace TrueLove.Lib.Helpers
                 case DeviceFamilyType.IoT:
                 case DeviceFamilyType.Holographic:
                 case DeviceFamilyType.Xbox:
-                    if (deviceFamily == currentDevice) return true;
-                    else return false;
+                    return deviceFamily == currentDevice;
                 default:
-                    throw new ArgumentException($"The parameter is incorrect : {deviceOS}.\nTap Ctrl + F to search and find it out in current project.");
+                    return false;
             }
         }
     }

@@ -1,5 +1,4 @@
-﻿using System.Xml.Serialization;
-using Windows.Storage;
+﻿using Windows.Storage;
 
 namespace TrueLove.Lib.Models.UI
 {
@@ -15,19 +14,6 @@ namespace TrueLove.Lib.Models.UI
         {
             get => (bool)localSettings.Values["isBottomBarHidden"];
             set => localSettings.Values["isBottomBarHidden"] = value;
-        }
-
-        public static bool isPageBackgroundColorSwitched
-        {
-            get => (bool)localSettings.Values["isPageBackgroundColorSwitched"];
-            set => localSettings.Values["isPageBackgroundColorSwitched"] = value;
-        }
-
-        [XmlIgnore]
-        public static string strPageBackgroundColor
-        {
-            get => (string)localSettings.Values["strPageBackgroundColor"];
-            set => localSettings.Values["strPageBackgroundColor"] = value;
         }
 
         public static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;

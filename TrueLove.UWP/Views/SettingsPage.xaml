@@ -3,12 +3,13 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:downOS1709="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractNotPresent(Windows.Foundation.UniversalApiContract, 5)"
     xmlns:upOS1709="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 5)"
     xmlns:upOS1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:localSettings="using:TrueLove.Lib.Models.UI"
+    d:DataContext="{d:DesignInstance Type=localSettings:LocalSettings}"
     mc:Ignorable="d" RequestedTheme="Dark" x:Name="Settings"
-    Background="Transparent" Loaded="Settings_Loaded">
+    Background="Transparent">
     <Page.Resources>
         <DataTemplate x:Key="ToggleSwitchHeaderWithLineBreak">
             <TextBlock Foreground="DarkGray">
@@ -18,9 +19,17 @@
         <DataTemplate x:Key="ToggleSwitchHeader">
             <TextBlock Text="{Binding}" Foreground="DarkGray"/>
         </DataTemplate>
+        <Style TargetType="Button" BasedOn="{StaticResource ButtonRevealStyle}" x:Key="GhostBotton">
+            <Style.Setters>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Width" Value="42"/>
+                <Setter Property="Height" Value="42"/>
+                <Setter Property="CornerRadius" Value="0"/>
+            </Style.Setters>
+        </Style>
     </Page.Resources>
 
-    <Grid ManipulationMode="System,TranslateX" x:Name="LayoutRoot" x:FieldModifier="Public">
+    <Grid ManipulationMode="System,TranslateX" x:Name="LayoutRoot">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="42*"/>
@@ -29,210 +38,209 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <upOS1809:Grid.BackgroundTransition>
-            <BrushTransition />
-        </upOS1809:Grid.BackgroundTransition>
+        
+        <!--标头 Header-->
+        <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Margin="2,0,0,12" x:Name="Header" Grid.Row="1" Grid.Column="1" Visibility="Collapsed">
+                Settings
+        </TextBlock>
 
-        <Grid VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="1">
+        <!--内容 Content-->
+        <Grid Grid.Row="2" Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
-            <!--标头 :
-                Header-->
-            <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Margin="1,5,0,20" x:Name="Header" Grid.Row="0" Visibility="Collapsed">
-                <Run>Settings</Run>
-            </TextBlock>
-
-            <!--内容 :
-                Content-->
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-
-                <StackPanel Name="Content1" Grid.Row="0" Grid.Column="0">
-                    <!--选项 : ⚙
-                            Options-->
-                    <TextBlock Text="Options" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
-                    <ToggleSwitch x:Name="LiveTiles" Tag="liveTiles" Header="Live Tiles" ToolTipService.ToolTip="Show Avicii on tile" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeader}"/>
-                    <ToggleSwitch x:Name="HideCommandbar" Tag="hideCommandbar" Header="Hide ToolBar" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeaderWithLineBreak}"/>
-                    <!--热键 : ⌨
-                            Hot Keys-->
-                    <StackPanel x:Name="HotKeys" upOS1709:Visibility="Visible" downOS1709:Visibility="Collapsed">
-                        <TextBlock><LineBreak/><LineBreak/></TextBlock>
-                        <TextBlock Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}">
-                            <Run>Hot Keys</Run>
-                        </TextBlock>
-                        <!--<TextBlock Text="Keyboard Shortcuts" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>-->
-                        <TextBlock>
-                            <Run Foreground="DarkGray">Refresh</Run><LineBreak/>
-                            <Run>F5</Run><LineBreak/><LineBreak/>
-                            <Run Foreground="DarkGray">Back to Top</Run><LineBreak/>
-                            <Run>F6</Run><LineBreak/><LineBreak/>
-                            <Run Foreground="DarkGray">Back</Run><LineBreak/>
-                            <Run>ESC or Win + Backspace</Run><LineBreak/><LineBreak/>
-                            <Run Foreground="DarkGray">Fullscreen</Run><LineBreak/>
-                            <Run>Shift + Win + Enter</Run>
-                        </TextBlock>
-                    </StackPanel>
-
-                    <!--疑难解答 : ❓
-                            FAQ-->
-                    <TextBlock><LineBreak/><LineBreak/></TextBlock>
-
-                    <TextBlock Text="FAQ" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
-                    <TextBlock Style="{ThemeResource BodyTextBlockStyle}">
-                        <Run Foreground="DarkGray">Why don't upload at Microsoft Store?</Run><LineBreak/>
-                        <Run>Sorry, I'm not a Microsoft Developer.</Run>
+            <StackPanel x:Name="AlignLeft">
+                
+                <!--选项 ⚙ Options-->
+                
+                <TextBlock Text="Options" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
+                <ToggleSwitch x:Name="EnableLiveTileSwitch" Tag="enableLiveTileSwitch" Header="Live Tiles" ToolTipService.ToolTip="Show Avicii on tile" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeader}" IsOn="{x:Bind localSettings:LocalSettings.isLiveTiles}"/>
+                <ToggleSwitch x:Name="HideToolBarSwitch" Tag="hideToolBarSwitch" Header="Hide ToolBar" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeaderWithLineBreak}" IsOn="{x:Bind localSettings:LocalSettings.isBottomBarHidden}"/>
+                
+                <!--热键 ⌨ Hot Keys-->
+                <TextBlock><LineBreak/><LineBreak/></TextBlock>
+                
+                <StackPanel x:Name="HotKeys">
+                    <TextBlock Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}">
+                            Hot Keys
                     </TextBlock>
-                    <TextBlock x:Name="FAQ_CN" Style="{ThemeResource BodyTextBlockStyle}"> 
-                        <LineBreak/><Run Foreground="DarkGray">为什么不能购买 Tim 的商品以及发表评论？</Run><LineBreak/>
-                        <Hyperlink NavigateUri="https://www.google.com">Google</Hyperlink><Run Text=" 一下，你就知道。"/>
+                    <TextBlock>
+                         <Run Foreground="DarkGray">Refresh</Run><LineBreak/>
+                         <Run>F5</Run><LineBreak/><LineBreak/>
+                         <Run Foreground="DarkGray">Back to Top</Run><LineBreak/>
+                         <Run>F6</Run><LineBreak/><LineBreak/>
+                         <Run Foreground="DarkGray">Create Comment</Run><LineBreak/>
+                         <Run>F6</Run><LineBreak/><LineBreak/>
+                         <Run Foreground="DarkGray">Back</Run><LineBreak/>
+                         <Run>ESC or Win + Backspace</Run><LineBreak/><LineBreak/>
+                         <Run Foreground="DarkGray">Fullscreen</Run><LineBreak/>
+                         <Run>Shift + Win + Enter</Run>
                     </TextBlock>
-                    <!--<HyperlinkButton Content="GitHub Wiki"/>-->
+                </StackPanel>
 
-                    <!--最近更新 : 🚀
-                            What's New-->
-                    <TextBlock><LineBreak/><LineBreak/></TextBlock>
+                <!--疑难解答 ❓ FAQ-->
+                <TextBlock><LineBreak/><LineBreak/></TextBlock>
 
-                    <TextBlock Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" TextWrapping="Wrap">
+                <TextBlock Text="FAQ" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}"> 
+                        <Run Foreground="DarkGray">为什么不能购买 Tim 的商品以及发表评论？</Run><LineBreak/>
+                        <Hyperlink NavigateUri="https://www.google.com">Google</Hyperlink><Run Text=" 一下，你就知道。"/><LineBreak/>
+                </TextBlock>
+                <HyperlinkButton NavigateUri="https://github.com/ProJend/Avicii.UWP/wiki">Learn More</HyperlinkButton>
+
+                <!--最近更新 🚀 What's New-->
+                <TextBlock><LineBreak/><LineBreak/></TextBlock>
+
+                <TextBlock Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" TextWrapping="Wrap">
                         <Run Foreground="{ThemeResource SystemAccentColor}">What's New</Run><LineBreak/>
-                        <Run x:Name="releasedDate"></Run>
-                    </TextBlock>
-                    <TextBlock Foreground="DarkGray" Style="{ThemeResource BodyTextBlockStyle}">
+                        <Run>Installed Date : </Run>
+                    <Run Text="{x:Bind installedDate}"/>
+                </TextBlock>
+                <TextBlock Foreground="DarkGray" Style="{ThemeResource BodyTextBlockStyle}">
                         <Run>🛠 移动端沉淀状态栏</Run><LineBreak/>
                         <Run>🔧 修复移动端闪退问题</Run><LineBreak/>
                         <Run>🔧 修复系统处于浅色色彩状态下三大金刚键显示不完整问题</Run><LineBreak/>
-                    </TextBlock>
-                    <HyperlinkButton Content="Learn More" Click="Release_Click"/>
+                </TextBlock>
+                <HyperlinkButton Content="Learn More" Click="Release_Click"/>
 
-                    <TextBlock><LineBreak/><LineBreak/></TextBlock>
-                </StackPanel>
+                <TextBlock><LineBreak/><LineBreak/></TextBlock>
+            </StackPanel>
 
-                <StackPanel x:Name="Content2" Grid.Row="1" Grid.Column="0">
+            <StackPanel x:Name="AlignRight" Grid.Row="1" Grid.Column="0">
 
-                    <!--关于此应用 : ℹ
-                        About This App-->
+                <!--关于此应用 ℹ About This App-->
 
-                    <TextBlock Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}">
+                <TextBlock Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}">
                         <Run Foreground="{ThemeResource SystemAccentColor}">About This App</Run><LineBreak/>
                         <Run>TRUE LOVE</Run>
-                    </TextBlock>
-                    <TextBlock Style="{ThemeResource BodyTextBlockStyle}">                       
-                        <Run x:Name="VersionInfo" Foreground="DarkGray"></Run><LineBreak/>
+                </TextBlock>
+                <TextBlock Style="{ThemeResource BodyTextBlockStyle}">                       
+                        <Run x:Name="VersionInfo" Foreground="DarkGray">Version : </Run>
+                    <Run Foreground="DarkGray" Text="{x:Bind versionInfo}"/><LineBreak/>
                         <Run Foreground="DarkGray">2021 © ProJend</Run><LineBreak/>
                         <Run Foreground="DarkGray">Tim Bergling Foundation</Run><LineBreak/>
                         <Run>Dear my love.</Run>
-                    </TextBlock>
-                    
-                    <!--链接 : 🔗
-                        Links-->
-                    <TextBlock><LineBreak/><LineBreak/></TextBlock>
+                </TextBlock>
 
-                    <TextBlock Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}">
+                <!--链接 🔗 Links-->
+                <TextBlock><LineBreak/><LineBreak/></TextBlock>
+
+                <TextBlock Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}">
                         <Run Foreground="{ThemeResource SystemAccentColor}">Links</Run><LineBreak/>
                         <Run>ProJend</Run>
-                    </TextBlock>
-                    <TextBlock Text="A new challenge!" Foreground="DarkGray" Style="{ThemeResource BodyTextBlockStyle}"/>
-                    <TextBlock Text="Report to Author"/>
-                    <StackPanel Orientation="Horizontal">
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="GitHub" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="2 0 0 2">
-                            <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource  iconfont}" Glyph="&#xe64a;"/>
-                        </Button>
-                        <Button Background="Transparent" Width="42" Height="42" Click="Mail_Click" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="0">
-                            <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE715;"/>
-                        </Button>
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Weibo" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="0 2 2 0">
-                            <FontIcon FontFamily="{ThemeResource  iconfont}" Glyph="&#xe737;"/>
-                        </Button>
-                    </StackPanel>
-                    <TextBlock Text="Brag with Guys"/>
-                    <StackPanel Orientation="Horizontal">
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Telegram" upOS1709:Style="{StaticResource ButtonRevealStyle}">
-                            <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource  iconfont}" Glyph="&#xe639;"/>
-                        </Button>
-                        <!--<Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Skype" upOS1709:Style="{StaticResource ButtonRevealStyle}">
-                            <FontIcon FontFamily="{ThemeResource  iconfont}" Glyph="&#xe773;"/>
-                        </Button>-->
-                    </StackPanel>
-                    <TextBlock/>
-                    <TextBlock Text="Tim Bergling" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" ToolTipService.ToolTip="Remembering"/>
-                    <TextBlock Text="(8 September 1989 – 20 April 2018), better known by his stage name Avicii, was a Swedish DJ, remixer, record producer, musician, and songwriter who specialized in audio programming, remixing, and record producing."
-                               x:Name="TimInfo" Foreground="DarkGray" Style="{ThemeResource BodyTextBlockStyle}"/>
-                    <TextBlock Text="Losing in Music"/>
-                    <StackPanel Orientation="Horizontal">
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Spotify" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="2 0 0 2">
-                            <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource  iconfont}" Glyph="&#xeaae;"/>
-                        </Button>
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="YouTube" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="0">
-                            <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource  iconfont}" Glyph="&#xe660;"/>
-                        </Button>
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Apple" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="0">
-                            <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource  iconfont}" Glyph="&#xe61a;"/>
-                        </Button>
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Netease" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="0">
-                            <FontIcon FontFamily="{ThemeResource  iconfont}" Glyph="&#xe628;"/>
-                        </Button>
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="QQ" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="0">
-                            <FontIcon FontFamily="{ThemeResource  iconfont}" Glyph="&#xe6c6;"/>
-                        </Button>
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Kugou" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="0 2 2 0">
-                            <FontIcon FontFamily="{ThemeResource  iconfont}" Glyph="&#xe62d;"/>
-                        </Button>
-                    </StackPanel>
-                    <TextBlock Text="All My Life"/>
-                    <StackPanel Orientation="Horizontal">
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Instagram" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="2 0 0 2">
-                            <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource  iconfont}" Glyph="&#xe62e;"/>
-                        </Button>
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Facebook" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="0">
-                            <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource  iconfont}" Glyph="&#xe665;"/>
-                        </Button>
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Twitter" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="0 2 2 0">
-                            <FontIcon FontFamily="{ThemeResource  iconfont}" Glyph="&#xe600;"/>
-                        </Button>
-                    </StackPanel>
-                    <TextBlock Text="True Stories"/>
-                    <StackPanel Orientation="Horizontal">
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Shop" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="2 0 0 2">
-                            <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE719;"/>
-                        </Button>
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Foundation" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="0">
-                            <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE95E;"/>
-                        </Button>
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Memory" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="0">
-                            <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE909;"/>
-                        </Button>
-                        <Button Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="Quora" upOS1709:Style="{StaticResource ButtonRevealStyle}" upOS1809:CornerRadius="0 2 2 0">
-                            <FontIcon FontFamily="{ThemeResource iconfont}" Glyph="&#xe6df;"/>
-                        </Button>
-                    </StackPanel>
-                    <TextBlock Text="Missing You ❤" Foreground="DarkGray"/>
-                    <TextBlock/>
-                    <TextBlock Text="Fans" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>
-                    <TextBlock Text="Made for Love"/>
-                    <StackPanel Orientation="Horizontal">
-                        <Button ToolTipService.ToolTip="#projectOne" Background="Transparent" Width="42" Height="42" Click="Links_Click" Tag="One" upOS1709:Style="{StaticResource ButtonRevealStyle}">
-                            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7F6;"/>
-                            <!--Headphone = xE7F6 ; Music = xEC4F-->
-                        </Button>
-                    </StackPanel>
-
-                    <TextBlock><LineBreak/><LineBreak/></TextBlock>
+                </TextBlock>
+                <TextBlock Text="A new challenge!" Foreground="DarkGray" Style="{ThemeResource BodyTextBlockStyle}"/>
+                <TextBlock Text="Report to Author"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="gitHub" upOS1809:CornerRadius="4 0 0 4">
+                        <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource iconfont}" Glyph="&#xe64a;"/>
+                    </Button>
+                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="mail">
+                        <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE715;"/>
+                    </Button>
+                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="weibo" upOS1809:CornerRadius="0 4 4 0">
+                        <FontIcon FontFamily="{ThemeResource iconfont}" Glyph="&#xe737;"/>
+                    </Button>
                 </StackPanel>
-            </Grid>
+                <TextBlock Text="Brag with Guys"/>
+                <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="telegram"
+                           upOS1809:CornerRadius="4">
+                    <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource iconfont}" Glyph="&#xe639;" FontSize="17"/>
+                </Button>
+                <TextBlock/>
+                <TextBlock Text="Tim Bergling" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" ToolTipService.ToolTip="Remembering"/>
+                <TextBlock Text="(8 September 1989 – 20 April 2018), better known by his stage name Avicii, was a Swedish DJ, remixer, record producer, musician, and songwriter who specialized in audio programming, remixing, and record producing."
+                               x:Name="TimInfo" Foreground="DarkGray" Style="{ThemeResource BodyTextBlockStyle}"/>
+                <TextBlock Text="Losing in Music"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="spotify" upOS1809:CornerRadius="4 0 0 4">
+                        <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource iconfont}" Glyph="&#xeaae;"/>
+                    </Button>
+                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="youTube">
+                        <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource iconfont}" Glyph="&#xe660;"/>
+                    </Button>
+                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="apple">
+                        <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource iconfont}" Glyph="&#xe61a;"/>
+                    </Button>
+                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="netease">
+                        <FontIcon FontFamily="{ThemeResource iconfont}" Glyph="&#xe628;"/>
+                    </Button>
+                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="QQ">
+                        <FontIcon FontFamily="{ThemeResource iconfont}" Glyph="&#xe6c6;"/>
+                    </Button>
+                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="kugou" upOS1809:CornerRadius="0 4 4 0">
+                        <FontIcon FontFamily="{ThemeResource iconfont}" Glyph="&#xe62d;"/>
+                    </Button>
+                </StackPanel>
+                <TextBlock Text="All My Life"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="instagram" upOS1809:CornerRadius="4 0 0 4">
+                        <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource iconfont}" Glyph="&#xe62e;"/>
+                    </Button>
+                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="facebook" >
+                        <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource iconfont}" Glyph="&#xe665;"/>
+                    </Button>
+                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="twitter" upOS1809:CornerRadius="0 4 4 0">
+                        <FontIcon FontFamily="{ThemeResource iconfont}" Glyph="&#xe600;"/>
+                    </Button>
+                </StackPanel>
+                <TextBlock Text="True Stories"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="shop" upOS1809:CornerRadius="4 0 0 4">
+                        <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE719;"/>
+                    </Button>
+                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="foundation"  Foreground="{ThemeResource SystemAccentColor}">
+                        <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE95E;"/>
+
+                    </Button>
+                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="memory" >
+                        <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE909;"/>
+                    </Button>
+                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="quora" upOS1809:CornerRadius="0 4 4 0">
+                        <FontIcon FontFamily="{ThemeResource iconfont}" Glyph="&#xe6df;"/>
+                    </Button>
+                </StackPanel>
+                <TextBlock Text="Missing You ❤" Foreground="DarkGray"/>
+                <TextBlock/>
+                <TextBlock Text="Fans" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>
+                <TextBlock Text="Made for Love"/>
+                <Button ToolTipService.ToolTip="#projectOne" Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="projectOne" upOS1809:CornerRadius="4">
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7F6;"/>
+                    <!--Headphone = xE7F6 ; Music = xEC4F-->
+                </Button>
+
+                <TextBlock><LineBreak/><LineBreak/></TextBlock>
+            </StackPanel>
         </Grid>
 
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger 
+                            MinWindowWidth="{StaticResource MinWindowBreakpoint}"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Header.Visibility" Value="Collapsed"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger 
+                            MinWindowWidth="{StaticResource MediumWindowBreakpoint}"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="Header.Visibility" Value="Visible"/>
+                    </VisualState.Setters>
+                </VisualState>
                 <VisualState>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger 
@@ -241,9 +249,9 @@
                     <VisualState.Setters>
                         <Setter Target="Header.Visibility" Value="Visible"/>
 
-                        <Setter Target="Content2.(Grid.Row)" Value="0"/>
-                        <Setter Target="Content2.(Grid.Column)" Value="1"/>
-                        <Setter Target="Content2.Margin" Value="30,0,0,0"/>
+                        <Setter Target="AlignLeft.(Grid.Row)" Value="1"/>
+                        <Setter Target="AlignRight.(Grid.Column)" Value="1"/>
+                        <Setter Target="AlignRight.Margin" Value="30,0,0,0"/>
                         <Setter Target="TimInfo.MaxWidth" Value="410"/>
                     </VisualState.Setters>
                 </VisualState>
