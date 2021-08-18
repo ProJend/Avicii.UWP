@@ -1,6 +1,5 @@
 ﻿using Microsoft.QueryStringDotNET;
 using System;
-using System.Xml.Serialization;
 using TrueLove.Lib.Helpers;
 using TrueLove.Lib.Models.Enum;
 using TrueLove.Lib.Models.UI;
@@ -9,7 +8,6 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
 using Windows.UI;
-using Windows.UI.Notifications;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -70,7 +68,7 @@ namespace TrueLove.UWP
                 Window.Current.Activate();
 
                 if (LocalSettings.localSettings.Values["isLiveTiles"] == null)
-                {   // 首次打开先过一边设置                  
+                {   // 首次打开先过一遍设置                  
                     var a = new SettingsPage();
                     a.AppFirstRun();
                     a = null;

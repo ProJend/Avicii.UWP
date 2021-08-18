@@ -2,7 +2,7 @@
 
 namespace TrueLove.Lib.Notification.Template
 {
-    class LiveTile
+    internal class LiveTile
     {
         public static TileContent OfflineTemplate() => new TileContent()
         {   // 创建静态磁贴对象并返回
@@ -17,14 +17,14 @@ namespace TrueLove.Lib.Notification.Template
                         {
                             new AdaptiveText()
                             {
-                                Text = "Something want to talk with Tim Bergling?",
+                                Text = "Share your memories of Avicii.",
                                 HintAlign = AdaptiveTextAlign.Center,
                                 HintWrap = true,
                             },
                         },
                         PeekImage = new TilePeekImage()
                         {
-                            Source = "Assets/Wide310x150Logo.png",
+                            Source = "Assets/Wide310x310Logo.png",
                         }
                     }
                 },
@@ -36,15 +36,9 @@ namespace TrueLove.Lib.Notification.Template
                         {
                             new AdaptiveText()
                             {
-                                Text = "Tim Bergling",
+                                Text = "Tim Bergling\nFoundation",
                                 HintStyle = AdaptiveTextStyle.Body,
                                 HintAlign = AdaptiveTextAlign.Right,
-                            },
-                            new AdaptiveText()
-                            {
-                                Text = "Foundation",
-                                HintStyle = AdaptiveTextStyle.Body,
-                                HintAlign = AdaptiveTextAlign.Right
                             }
                         },
                         BackgroundImage = new TileBackgroundImage()

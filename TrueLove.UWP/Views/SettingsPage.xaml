@@ -3,8 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:upOS1709="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 5)"
-    xmlns:upOS1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
+    xmlns:Over17763="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:localSettings="using:TrueLove.Lib.Models.UI"
     d:DataContext="{d:DesignInstance Type=localSettings:LocalSettings}"
@@ -19,14 +18,14 @@
         <DataTemplate x:Key="ToggleSwitchHeader">
             <TextBlock Text="{Binding}" Foreground="DarkGray"/>
         </DataTemplate>
-        <Style TargetType="Button" BasedOn="{StaticResource ButtonRevealStyle}" x:Key="GhostBotton">
+        <Over17763:Style TargetType="Button" BasedOn="{StaticResource ButtonRevealStyle}" x:Key="GhostBotton">
             <Style.Setters>
                 <Setter Property="Background" Value="Transparent"/>
                 <Setter Property="Width" Value="42"/>
                 <Setter Property="Height" Value="42"/>
                 <Setter Property="CornerRadius" Value="0"/>
             </Style.Setters>
-        </Style>
+        </Over17763:Style>
     </Page.Resources>
 
     <Grid ManipulationMode="System,TranslateX" x:Name="LayoutRoot">
@@ -140,19 +139,19 @@
                 <TextBlock Text="A new challenge!" Foreground="DarkGray" Style="{ThemeResource BodyTextBlockStyle}"/>
                 <TextBlock Text="Report to Author"/>
                 <StackPanel Orientation="Horizontal">
-                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="gitHub" upOS1809:CornerRadius="4 0 0 4">
+                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="gitHub" Over17763:CornerRadius="4 0 0 4">
                         <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource iconfont}" Glyph="&#xe64a;"/>
                     </Button>
                     <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="mail">
                         <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE715;"/>
                     </Button>
-                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="weibo" upOS1809:CornerRadius="0 4 4 0">
+                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="weibo" Over17763:CornerRadius="0 4 4 0">
                         <FontIcon FontFamily="{ThemeResource iconfont}" Glyph="&#xe737;"/>
                     </Button>
                 </StackPanel>
                 <TextBlock Text="Brag with Guys"/>
                 <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="telegram"
-                           upOS1809:CornerRadius="4">
+                           Over17763:CornerRadius="4">
                     <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource iconfont}" Glyph="&#xe639;" FontSize="17"/>
                 </Button>
                 <TextBlock/>
@@ -161,7 +160,7 @@
                                x:Name="TimInfo" Foreground="DarkGray" Style="{ThemeResource BodyTextBlockStyle}"/>
                 <TextBlock Text="Losing in Music"/>
                 <StackPanel Orientation="Horizontal">
-                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="spotify" upOS1809:CornerRadius="4 0 0 4">
+                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="spotify" Over17763:CornerRadius="4 0 0 4">
                         <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource iconfont}" Glyph="&#xeaae;"/>
                     </Button>
                     <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="youTube">
@@ -176,25 +175,25 @@
                     <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="QQ">
                         <FontIcon FontFamily="{ThemeResource iconfont}" Glyph="&#xe6c6;"/>
                     </Button>
-                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="kugou" upOS1809:CornerRadius="0 4 4 0">
+                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="kugou" Over17763:CornerRadius="0 4 4 0">
                         <FontIcon FontFamily="{ThemeResource iconfont}" Glyph="&#xe62d;"/>
                     </Button>
                 </StackPanel>
                 <TextBlock Text="All My Life"/>
                 <StackPanel Orientation="Horizontal">
-                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="instagram" upOS1809:CornerRadius="4 0 0 4">
+                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="instagram" Over17763:CornerRadius="4 0 0 4">
                         <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource iconfont}" Glyph="&#xe62e;"/>
                     </Button>
                     <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="facebook" >
                         <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="{ThemeResource iconfont}" Glyph="&#xe665;"/>
                     </Button>
-                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="twitter" upOS1809:CornerRadius="0 4 4 0">
+                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="twitter" Over17763:CornerRadius="0 4 4 0">
                         <FontIcon FontFamily="{ThemeResource iconfont}" Glyph="&#xe600;"/>
                     </Button>
                 </StackPanel>
                 <TextBlock Text="True Stories"/>
                 <StackPanel Orientation="Horizontal">
-                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="shop" upOS1809:CornerRadius="4 0 0 4">
+                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="shop" Over17763:CornerRadius="4 0 0 4">
                         <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE719;"/>
                     </Button>
                     <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="foundation"  Foreground="{ThemeResource SystemAccentColor}">
@@ -204,7 +203,7 @@
                     <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="memory" >
                         <FontIcon Foreground="{ThemeResource SystemAccentColor}" FontFamily="Segoe MDL2 Assets" Glyph="&#xE909;"/>
                     </Button>
-                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="quora" upOS1809:CornerRadius="0 4 4 0">
+                    <Button Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="quora" Over17763:CornerRadius="0 4 4 0">
                         <FontIcon FontFamily="{ThemeResource iconfont}" Glyph="&#xe6df;"/>
                     </Button>
                 </StackPanel>
@@ -212,7 +211,7 @@
                 <TextBlock/>
                 <TextBlock Text="Fans" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}"/>
                 <TextBlock Text="Made for Love"/>
-                <Button ToolTipService.ToolTip="#projectOne" Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="projectOne" upOS1809:CornerRadius="4">
+                <Button ToolTipService.ToolTip="#projectOne" Style="{StaticResource GhostBotton}" Click="Links_Click" Tag="projectOne" Over17763:CornerRadius="4">
                     <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7F6;"/>
                     <!--Headphone = xE7F6 ; Music = xEC4F-->
                 </Button>

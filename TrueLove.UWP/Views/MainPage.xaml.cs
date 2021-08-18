@@ -40,6 +40,7 @@ namespace TrueLove.UWP.Views
             Window.Current.CoreWindow.PointerPressed += Mouse_BackRequested; // 订阅鼠标返回事件
             Window.Current.Activated += OnWindowActivated; // 订阅窗口活动事件
             Window.Current.SetTitleBar(AppTitleBar); // 设置新的标题栏
+            Window.Current.SizeChanged += Current_SizeChanged;
 
             if (Generic.DeviceFamilyMatch(DeviceFamilyType.Mobile)) // = WP
             {
@@ -247,6 +248,17 @@ namespace TrueLove.UWP.Views
 
         // 导航栏当前显示状态（这个是为了减少不必要的开销，因为我做的是动画隐藏显示效果如果不用一个变量来记录当前导航栏状态的会重复执行隐藏或显示）
         bool isShowBar = true;
+
+        /// <summary>
+        /// 宽屏时锁死工具栏位置
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Current_SizeChanged(object sender, WindowSizeChangedEventArgs e)
+        {
+            if (!BottomBar.IsTapEnabled)
+                BottomBar_Storyboard_SlideDown.Stop();
+        }
 
         /// <summary>
         /// 返回顶部按钮。

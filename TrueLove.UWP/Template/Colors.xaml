@@ -35,6 +35,7 @@
             <muxm:AcrylicBrush x:Key="NavigationViewTopPaneBackground"
                                           BackgroundSource="Backdrop"
                                           TintColor="#00000001"
+                                          TintOpacity=".6"
                                           FallbackColor="Black"/>
             <muxm:AcrylicBrush x:Key="NavigationViewExpandedPaneBackground" 
                                           BackgroundSource="HostBackdrop" 
@@ -51,7 +52,7 @@
             <muxm:AcrylicBrush x:Key="NavigationViewTopPaneBackground"
                                           BackgroundSource="Backdrop"
                                           TintColor="#00000001"
-                                          TintOpacity=".7"
+                                          TintOpacity=".6"
                                           FallbackColor="Black"/>
             <muxm:AcrylicBrush x:Key="NavigationViewExpandedPaneBackground" 
                                           BackgroundSource="HostBackdrop" 

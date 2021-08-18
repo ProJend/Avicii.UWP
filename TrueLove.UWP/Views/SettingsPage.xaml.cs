@@ -72,7 +72,6 @@ namespace TrueLove.UWP.Views
                 case "mail": await LaunchUriAsync(new Uri(@"mailto:projend@outlook.com")); break;
                 case "weibo": await LaunchUriAsync(new Uri("https://weibo.com/6081786829")); break;
 
-
                 // 社群
                 case "telegram": await LaunchUriAsync(new Uri("https://t.me/TrueAvicii")); break;
 

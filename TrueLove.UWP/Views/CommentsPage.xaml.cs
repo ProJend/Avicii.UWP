@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using TrueLove.Lib.Models.Code;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
-using Microsoft.Toolkit.Uwp.UI.Animations;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 

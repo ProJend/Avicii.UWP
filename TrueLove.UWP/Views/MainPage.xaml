@@ -3,11 +3,10 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:upOS1709="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 5)"
-    xmlns:upOS1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
+    xmlns:Over15063="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 5)"
+    xmlns:Over17763="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
-    xmlns:date="using:TrueLove.Lib.Models.UI"
     mc:Ignorable="d" x:Name="Main" RequestedTheme="Dark" 
     Background="{ThemeResource PageBackgroundColor}"
     Loaded="Main_Loaded">
@@ -24,11 +23,7 @@
 
         <Grid x:Name="TopBar" MinHeight="40"
                   VerticalAlignment="Top" HorizontalAlignment="Stretch" 
-                  Background="{ThemeResource NavigationViewTopPaneBackground}"
-                  >
-            <!--<FontIcon VerticalAlignment="Stretch" HorizontalAlignment="Right" Margin="0 0 156 8"
-                      FontFamily="Segoe MDL2 Assets" Glyph="&#xF384;" FontSize="10"
-                      x:Name="NetworkOffline" Visibility="{x:Bind isInternetAvailable}"/>-->
+                  Background="{ThemeResource NavigationViewTopPaneBackground}">
             <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" x:Name="AppTitleBar" Background="Transparent"/>
         </Grid>
 
@@ -39,9 +34,9 @@
                 </TransitionCollection>
             </Grid.Transitions>
 
-            <CommandBar DefaultLabelPosition="Bottom" upOS1709:ToolTipService.ToolTip="Right tag on here to switch CommandBar." 
+            <CommandBar DefaultLabelPosition="Bottom" Over15063:ToolTipService.ToolTip="Right tag on here to switch CommandBar." 
                         Background="{ThemeResource NavigationViewTopPaneBackground}"
-                        RightTapped="CommandBar_RightTapped" x:Name="ToolBar" FlowDirection="LeftToRight"  OverflowButtonVisibility="Auto" 
+                        RightTapped="CommandBar_RightTapped" x:Name="ToolBar" FlowDirection="LeftToRight" OverflowButtonVisibility="Auto" 
                         VerticalAlignment="Bottom" HorizontalAlignment="Stretch">
                 <CommandBar.RenderTransform>
                     <TranslateTransform x:Name="BottomBar_TranslateTransform"/>
@@ -51,31 +46,31 @@
                         <EdgeUIThemeTransition/>
                     </TransitionCollection>
                 </CommandBar.Transitions>
-                <!--<AppBarButton Icon="Add" Label="分享故事" Style="{StaticResource AppBarButtonRevealStyle}" ToolTipService.ToolTip="分享你与 Avicii 的故事"/>-->
-                <AppBarButton x:Name="RefreshButton" Icon="Refresh" Label="Refresh" ToolTipService.ToolTip="Refresh dates (F5)" 
-                              Click="Refresh_Click" Opacity="{x:Bind OpaqueIfEnabled(RefreshButton.IsEnabled), Mode=OneWay}"
-                              IsEnabled="{Binding ElementName=CommentPage,Path=IsSelected}" AccessKey="F5">
-                    <upOS1809:AppBarButton.OpacityTransition>
+                <AppBarButton x:Name="RefreshButton" Icon="Refresh" Label="Refresh" ToolTipService.ToolTip="Refresh dates (F5)" Click="Refresh_Click" 
+                              Opacity="{x:Bind OpaqueIfEnabled(RefreshButton.IsEnabled), Mode=OneWay}"
+                              IsEnabled="{Binding ElementName=CommentPage,Path=IsSelected}" 
+                              AccessKey="F5" >
+                    <Over17763:AppBarButton.OpacityTransition>
                         <ScalarTransition/>
-                    </upOS1809:AppBarButton.OpacityTransition>
+                    </Over17763:AppBarButton.OpacityTransition>
                 </AppBarButton>
                 <AppBarButton x:Name="BackTopButton" Icon="Upload" Label="Back to Top" 
-                              ToolTipService.ToolTip="Back to top (F6)" AccessKey="F6" 
-                              Click="BackToTop_Click" Opacity="{x:Bind OpaqueIfEnabled(BackTopButton.IsEnabled), Mode=OneWay}" 
+                              ToolTipService.ToolTip="Back to top (F6)"
+                              Click="BackToTop_Click"
+                              Opacity="{x:Bind OpaqueIfEnabled(BackTopButton.IsEnabled), Mode=OneWay}" 
                               IsEnabled="{Binding ElementName=sv,Path=VerticalOffset,Converter={StaticResource ScrollToTopConverter}}">
-                    <upOS1809:AppBarButton.OpacityTransition>
+                    <Over17763:AppBarButton.OpacityTransition>
                         <ScalarTransition/>
-                    </upOS1809:AppBarButton.OpacityTransition>
+                    </Over17763:AppBarButton.OpacityTransition>
+                    <Over17763:AppBarButton.KeyboardAccelerators>
+                        <KeyboardAccelerator Key="F6"/>
+                    </Over17763:AppBarButton.KeyboardAccelerators>
                 </AppBarButton>
-                <AppBarButton x:Name="CreatComment" Icon="Comment" Label="New Comment" ToolTipService.ToolTip="Share your menory (F7)" 
-                              Click="CreatComment_Click" Opacity="{x:Bind OpaqueIfEnabled(CreatComment.IsEnabled), Mode=OneWay}"
-                              IsEnabled="True" AccessKey="F7">
-                    <AppBarButton.KeyboardAccelerators>
-                        
-                    </AppBarButton.KeyboardAccelerators>
-                    <upOS1809:AppBarButton.OpacityTransition>
+                <AppBarButton x:Name="CreatComment" Icon="Attach" Label="New Comment" ToolTipService.ToolTip="Share your menory (F7)" 
+                              Click="CreatComment_Click" Opacity="{x:Bind OpaqueIfEnabled(CreatComment.IsEnabled), Mode=OneWay}" AccessKey="F7">
+                    <Over17763:AppBarButton.OpacityTransition>
                         <ScalarTransition/>
-                    </upOS1809:AppBarButton.OpacityTransition>
+                    </Over17763:AppBarButton.OpacityTransition>
                 </AppBarButton>
                 <!--<CommandBar.SecondaryCommands>
 
@@ -85,18 +80,18 @@
 
         <Grid x:Name="NavViewRoot">
             <muxc:NavigationView x:Name="NavView"                      
-                             Loaded="NavView_Loaded"
-                             BackRequested="NavView_BackRequested"
-                             ItemInvoked="NavView_ItemInvoked"
-                             PaneDisplayMode="Auto"
-                             IsBackButtonVisible="Auto"
-                             IsTitleBarAutoPaddingEnabled="False"
-                             PaneTitle="    I N   L O V I N G   M E M O R Y">
+                                 Loaded="NavView_Loaded"
+                                 BackRequested="NavView_BackRequested"
+                                 ItemInvoked="NavView_ItemInvoked"
+                                 PaneDisplayMode="Auto"
+                                 IsBackButtonVisible="Auto"
+                                 IsTitleBarAutoPaddingEnabled="False"
+                                 PaneTitle="    I N   L O V I N G   M E M O R Y">
 
                 <muxc:NavigationView.MenuItems>
                     <muxc:NavigationViewItemHeader Content="True" x:Name="MainPagesHeader"/>
-                    <muxc:NavigationViewItem Content="Memory" x:Name="HomePage" Icon="Home" Tag="home"/>
-                    <muxc:NavigationViewItem Content="Comments" x:Name="CommentPage" Icon="World" Tag="comment"/>
+                    <muxc:NavigationViewItem Content="Home" x:Name="HomePage" Icon="Home" Tag="home"/>
+                    <muxc:NavigationViewItem Content="Comments" x:Name="CommentPage" Icon="Comment" Tag="comment"/>
                     <muxc:NavigationViewItem Content="Images" x:Name="ImagesPage" Tag="image">
                         <muxc:NavigationViewItem.Icon>
                             <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEB9F;"/>
@@ -105,11 +100,6 @@
                 </muxc:NavigationView.MenuItems>
                 <muxc:NavigationView.FooterMenuItems>
                     <muxc:NavigationViewItemSeparator x:Name="NavSeparator"/>
-                    <!--<muxc:NavigationViewItem Tag="settings" x:Name="a">
-                    <muxc:NavigationViewItem.Icon>
-                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE721;"/>
-                    </muxc:NavigationViewItem.Icon>
-                </muxc:NavigationViewItem>-->
                 </muxc:NavigationView.FooterMenuItems>
             </muxc:NavigationView>
         </Grid>
@@ -138,7 +128,7 @@
                     <VisualState.Setters>
                         <Setter Target="BottomBar.VerticalAlignment" Value="Top"/>
                         <Setter Target="BottomBar.HorizontalAlignment" Value="Right"/>
-                        <upOS1709:Setter Target="BottomBar.Margin" Value="0 0 188 0"/>
+                        <Over15063:Setter Target="BottomBar.Margin" Value="0 0 188 0"/>
                         <Setter Target="ToolBar.Background" Value="Transparent"/>
                         <Setter Target="ToolBar.Height" Value="40"/>
                         <Setter Target="BottomBar.IsTapEnabled" Value="false"/>
@@ -233,6 +223,10 @@
                     <ExponentialEase Exponent="7" EasingMode="EaseOut"/>
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
+            <DoubleAnimation 
+                Storyboard.TargetName="BottomBar"
+                Storyboard.TargetProperty="(Grid.Opacity)" 
+                From="1" To="0" Duration="0:0:0.5"/>
         </Storyboard>
         <Storyboard x:Name="BottomBar_Storyboard_SlideUp">
             <DoubleAnimation Storyboard.TargetName="BottomBar_TranslateTransform" Storyboard.TargetProperty="Y" From="40" To="0" >
@@ -240,6 +234,10 @@
                     <ExponentialEase Exponent="7" EasingMode="EaseOut"/>
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
+            <DoubleAnimation 
+                Storyboard.TargetName="BottomBar"
+                Storyboard.TargetProperty="(Grid.Opacity)" 
+                From="0" To="1" Duration="0:0:0.5"/>
         </Storyboard>
     </Page.Resources>
 </Page>
