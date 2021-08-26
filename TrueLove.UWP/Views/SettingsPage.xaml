@@ -44,7 +44,7 @@
         <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Margin="2,0,0,12" x:Name="Header" Grid.Row="1" Grid.Column="1" Visibility="Collapsed">
                 Settings
         </TextBlock>
-
+        
         <!--内容 Content-->
         <Grid Grid.Row="2" Grid.Column="1">
             <Grid.RowDefinitions>
@@ -62,6 +62,7 @@
                 
                 <TextBlock Text="Options" Style="{ThemeResource FlyoutPickerTitleTextBlockStyle}" Foreground="{ThemeResource SystemAccentColor}"/>
                 <ToggleSwitch x:Name="EnableLiveTileSwitch" Tag="enableLiveTileSwitch" Header="Live Tiles" ToolTipService.ToolTip="Show Avicii on tile" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeader}" IsOn="{x:Bind localSettings:LocalSettings.isLiveTiles}"/>
+                <!--<ToggleSwitch x:Name="MidnightThemeSwitch" Tag="midnightThemeSwitch" Header="Midnight Theme" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeaderWithLineBreak}" IsOn="{x:Bind localSettings:LocalSettings.isMidnightTheme}"/>-->
                 <ToggleSwitch x:Name="HideToolBarSwitch" Tag="hideToolBarSwitch" Header="Hide ToolBar" Toggled="ToggleSwitch_Toggled" HeaderTemplate="{StaticResource ToggleSwitchHeaderWithLineBreak}" IsOn="{x:Bind localSettings:LocalSettings.isBottomBarHidden}"/>
                 
                 <!--热键 ⌨ Hot Keys-->
@@ -72,12 +73,12 @@
                             Hot Keys
                     </TextBlock>
                     <TextBlock>
-                         <Run Foreground="DarkGray">Refresh</Run><LineBreak/>
-                         <Run>F5</Run><LineBreak/><LineBreak/>
+                         <!--<Run Foreground="DarkGray">Refresh</Run><LineBreak/>
+                         <Run>F5</Run><LineBreak/><LineBreak/>-->
                          <Run Foreground="DarkGray">Back to Top</Run><LineBreak/>
                          <Run>F6</Run><LineBreak/><LineBreak/>
-                         <Run Foreground="DarkGray">Create Comment</Run><LineBreak/>
-                         <Run>F6</Run><LineBreak/><LineBreak/>
+                         <!--<Run Foreground="DarkGray">Create Comment</Run><LineBreak/>
+                         <Run>F7</Run><LineBreak/><LineBreak/>-->
                          <Run Foreground="DarkGray">Back</Run><LineBreak/>
                          <Run>ESC or Win + Backspace</Run><LineBreak/><LineBreak/>
                          <Run Foreground="DarkGray">Fullscreen</Run><LineBreak/>

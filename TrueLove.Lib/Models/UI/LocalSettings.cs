@@ -15,6 +15,11 @@ namespace TrueLove.Lib.Models.UI
             get => (bool)localSettings.Values["isBottomBarHidden"];
             set => localSettings.Values["isBottomBarHidden"] = value;
         }
+        public static bool isMidnightTheme
+        {
+            get => (bool)localSettings.Values["isMidnightTheme"];
+            set => localSettings.Values["isMidnightTheme"] = value;
+        }
 
         public static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
     }

@@ -326,8 +326,8 @@
     <Style x:Name="BasicGhostBotton" TargetType="Button" x:Key="GhostBotton">
         <Style.Setters>
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Width" Value="42"/>
-            <Setter Property="Height" Value="42"/>
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="40"/>
         </Style.Setters>
     </Style>
 </ResourceDictionary>

@@ -50,6 +50,9 @@ namespace TrueLove.UWP.Views
                 case "hideToolBarSwitch":
                     LocalSettings.isBottomBarHidden = HideToolBarSwitch.IsOn;
                     break;
+                //case "midnightThemeSwitch":
+                //    LocalSettings.isMidnightTheme = MidnightThemeSwitch.IsOn;
+                //    break;
             }
         }
 
@@ -106,6 +109,7 @@ namespace TrueLove.UWP.Views
         {
             EnableLiveTileSwitch.IsOn = LocalSettings.isLiveTiles = true;
             HideToolBarSwitch.IsOn = LocalSettings.isBottomBarHidden = false;
+            //MidnightThemeSwitch.IsOn = LocalSettings.isMidnightTheme = true;
         }
 
         string versionInfo

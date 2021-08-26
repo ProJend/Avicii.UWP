@@ -10,14 +10,11 @@
     mc:Ignorable="d" x:Name="Main" RequestedTheme="Dark" 
     Background="{ThemeResource PageBackgroundColor}"
     Loaded="Main_Loaded">
-   
+
     <Grid x:Name="LayoutRoot" ManipulationMode="System,TranslateX">
-        <Grid.Background>
-            <ImageBrush ImageSource="/Assets/Background.jpg" Stretch="UniformToFill" AlignmentX="Left" AlignmentY="Bottom"/>
-        </Grid.Background>
         <ScrollViewer x:Name="sv" ViewChanged="Sv_ViewChanged" 
                           VerticalScrollBarVisibility="Hidden" HorizontalScrollMode="Disabled"
-                          VerticalScrollMode="Enabled">
+                          VerticalScrollMode="Auto">
             <Frame x:Name="ContentFrame"/>
         </ScrollViewer>
 
@@ -43,7 +40,7 @@
                 </CommandBar.RenderTransform>
                 <CommandBar.Transitions>
                     <TransitionCollection>
-                        <EdgeUIThemeTransition/>
+                        <PopupThemeTransition/>
                     </TransitionCollection>
                 </CommandBar.Transitions>
                 <AppBarButton x:Name="RefreshButton" Icon="Refresh" Label="Refresh" ToolTipService.ToolTip="Refresh dates (F5)" Click="Refresh_Click" 
@@ -156,40 +153,7 @@
                         <Setter Target="NavView.Foreground" Value="Gray"/>
                     </VisualState.Setters>
                 </VisualState>
-            </VisualStateGroup>
-
-            <VisualStateGroup x:Name="WPStates">
-                <VisualState x:Name="WPNavBarVisible">
-                    <VisualState.Setters>
-                        <Setter Target="LayoutRoot.Padding" Value="0,0,0,48"/>
-                        <Setter Target="TopBar.MinHeight" Value="63"/>
-                        <Setter Target="ContentFrame.Padding" Value="0,23,0,0"/>
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState x:Name="WPNavBarCollapsed">
-                    <VisualState.Setters>
-                        <Setter Target="LayoutRoot.Padding" Value="0"/>
-                        <Setter Target="TopBar.MinHeight" Value="63"/>
-                        <Setter Target="ContentFrame.Padding" Value="0,23,0,0"/>
-
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState x:Name="LargeLandscape"/>
-                <VisualState x:Name="MediumLandscape">
-                    <VisualState.Setters>
-                        <Setter Target="NavViewRoot.Padding" Value="48,0,48,0"/>
-                        <Setter Target="ToolBar.Padding" Value="0,0,48,0"/>
-                        <Setter Target="ContentFrame.Padding" Value="40,0,40,0"/>
-                    </VisualState.Setters>
-                </VisualState>
-                <VisualState x:Name="MinLandscape">
-                    <VisualState.Setters>
-                        <Setter Target="NavViewRoot.Padding" Value="48,-24,48,0"/>
-                        <Setter Target="ToolBar.Padding" Value="0,0,48,0"/>
-                        <Setter Target="ContentFrame.Padding" Value="40,0,40,0"/>
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
+            </VisualStateGroup> 
             
             <VisualStateGroup x:Name="NavViewItemStates">
                 <VisualState x:Name="HomePageSelected">
@@ -211,6 +175,9 @@
                             <FadeOutThemeAnimation Storyboard.TargetName="ToolBar" />
                         </Storyboard>
                     </VisualState.Storyboard>
+                    <VisualState.Setters>
+                        <Setter Target="sv.VerticalScrollMode" Value="Disabled"/>
+                    </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>

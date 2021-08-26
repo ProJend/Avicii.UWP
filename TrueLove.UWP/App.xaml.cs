@@ -8,6 +8,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
 using Windows.UI;
+using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -74,10 +75,10 @@ namespace TrueLove.UWP
                     a = null;
                 }
 
-                if (Generic.DeviceFamilyMatch(DeviceFamilyType.Mobile))
-                    HideStatusBar();
-                else
+                if (Generic.DeviceFamilyMatch(DeviceFamilyType.Desktop))
                     HideTitleBar();
+                //else
+                //    HideStatusBar();
             }
         }
 
@@ -148,7 +149,12 @@ namespace TrueLove.UWP
         {
             var applicationView = ApplicationView.GetForCurrentView();
             applicationView.SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
-            applicationView.VisibleBoundsChanged += MainPage.Current.VisibleBounds_Changed;
+            var s = StatusBar.GetForCurrentView();
+            
+            applicationView.VisibleBoundsChanged += (e,o) =>
+            {
+
+            };
         }
     }
 }

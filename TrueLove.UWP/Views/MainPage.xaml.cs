@@ -9,7 +9,7 @@ using Windows.Foundation.Metadata;
 using Windows.System;
 using Windows.UI;
 using Windows.UI.Core;
-using Windows.UI.ViewManagement;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -45,12 +45,7 @@ namespace TrueLove.UWP.Views
             if (Generic.DeviceFamilyMatch(DeviceFamilyType.Mobile)) // = WP
             {
                 TopBar.Background = new SolidColorBrush(Colors.Black);
-                ToolBar.Background = new SolidColorBrush { Color = Colors.Black, Opacity = 0.7 };
-
-                // 调整界面，默认抬高底部工具栏以免重叠
-                var applicationView = ApplicationView.GetForCurrentView();
-                applicationView.SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
-                VisualStateManager.GoToState(this, WPNavBarVisible.Name, true);
+                ToolBar.Background = new SolidColorBrush { Color = Colors.Black, Opacity = 0.7 };              
             }
             else if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5)) // > OS15063
             {
@@ -226,19 +221,12 @@ namespace TrueLove.UWP.Views
                 if (sv.VerticalOffset < scrlocation)
                     canSlideDown = false;
 
-                if (canSlideDown && isShowBar)
-                {   // 通过动画来隐藏
-                    // bar.Translation = new Vector3(0, 40, 0);
+                if (canSlideDown && canHideBottomBar) // 通过动画来隐藏                
                     BottomBar_Storyboard_SlideDown.Begin();
-                    isShowBar = false;
-
-                }
-                else if (!canSlideDown && !isShowBar)
-                {   // 通过动画来显示
-                    // bar.Translation = new Vector3(0, 0, 0);
+                else if (!canSlideDown && !canHideBottomBar) // 通过动画来显示
                     BottomBar_Storyboard_SlideUp.Begin();
-                    isShowBar = true;
-                }
+
+                canHideBottomBar = !canSlideDown;
                 scrlocation = sv.VerticalOffset;
             }
         }
@@ -247,7 +235,7 @@ namespace TrueLove.UWP.Views
         double scrlocation = 0;
 
         // 导航栏当前显示状态（这个是为了减少不必要的开销，因为我做的是动画隐藏显示效果如果不用一个变量来记录当前导航栏状态的会重复执行隐藏或显示）
-        bool isShowBar = true;
+        bool canHideBottomBar = true;
 
         /// <summary>
         /// 宽屏时锁死工具栏位置
@@ -268,8 +256,24 @@ namespace TrueLove.UWP.Views
         /// <summary>
         /// 刷新按钮。
         /// </summary>
-        private void Refresh_Click(object sender, RoutedEventArgs e)
+        private async void Refresh_Click(object sender, RoutedEventArgs e)
         {
+            var messageDialog = new MessageDialog("No internet connection has been found.");
+
+            // Add commands and set their callbacks; both buttons use the same callback function instead of inline event handlers
+            messageDialog.Commands.Add(new UICommand(
+                "Try again"));
+            messageDialog.Commands.Add(new UICommand(
+                "Close"));
+
+            // Set the command that will be invoked by default
+            messageDialog.DefaultCommandIndex = 0;
+
+            // Set the command to be invoked when escape is pressed
+            messageDialog.CancelCommandIndex = 1;
+
+            // Show the message dialog
+            await messageDialog.ShowAsync();
         }
 
         /// <summary>
@@ -280,33 +284,6 @@ namespace TrueLove.UWP.Views
         #region UI
         private void OnWindowActivated(object sender, WindowActivatedEventArgs e) => VisualStateManager.GoToState(this,
                 e.WindowActivationState == CoreWindowActivationState.Deactivated ? WindowNotFocused.Name : WindowFocused.Name, false);
-
-        public void VisibleBounds_Changed(ApplicationView e, object sender)
-        {
-            var applicationView = ApplicationView.GetForCurrentView();
-
-            var currentHeight = e.VisibleBounds.Height;
-
-            switch (applicationView.Orientation)
-            {   // 横向
-                case ApplicationViewOrientation.Landscape:
-                    // 控制 bar 宽度
-                    if (Window.Current.Bounds.Width < 641)
-                        VisualStateManager.GoToState(this, MinLandscape.Name, true);
-                    else VisualStateManager.GoToState(this, MediumLandscape.Name, true);
-                    break;
-
-                // 纵向
-                case ApplicationViewOrientation.Portrait:
-                    // 控制底部导航栏高度
-                    if (currentHeight < oldHeight)
-                        VisualStateManager.GoToState(this, WPNavBarVisible.Name, true);
-                    else VisualStateManager.GoToState(this, WPNavBarCollapsed.Name, true);
-                    break;
-            }
-            oldHeight = e.VisibleBounds.Height;
-        }
-        double oldHeight;
 
         double OpaqueIfEnabled(bool isEnabled) => isEnabled ? 1.0 : 0.7;
         #endregion
