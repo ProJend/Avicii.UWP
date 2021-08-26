@@ -60,7 +60,8 @@ namespace TrueLove.Lib.Notification
         public static void Tile()
         {
             TileUpdateManager.CreateTileUpdaterForApplication().Clear(); // 清空队列
-            TileContent content = LiveTile.OfflineTemplate(); // 得到磁贴的对象
+
+            TileContent content = LiveTile.OfflineTemplate(null); // 得到磁贴的对象
             var notification = new TileNotification(content.GetXml());
             TileUpdateManager.CreateTileUpdaterForApplication().Update(notification); // 添加到磁贴的队列
         }
@@ -72,7 +73,7 @@ namespace TrueLove.Lib.Notification
             // Create the notification
             var notif = new ToastNotification(content.GetXml())
             {
-                ExpirationTime = DateTime.Now.AddMinutes(5)
+                ExpirationTime = DateTime.Now.AddMinutes(2)
             };
 
             // And show it!
