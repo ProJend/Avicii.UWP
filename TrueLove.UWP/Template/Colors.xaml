@@ -1,11 +1,11 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:media="using:MicaForUWP.Media"
     xmlns:muxm="using:Microsoft.UI.Xaml.Media">
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Dark">
             <Color x:Key="PageBackgroundColor">Black</Color>
-
             <Color x:Key="SystemAccentColor">PaleTurquoise</Color>
             <Color x:Key="SystemAccentColorLight1">#91D7D7</Color>
             <Color x:Key="SystemAccentColorLight2">#73BFC0</Color>
@@ -13,27 +13,30 @@
             <Color x:Key="SystemAccentColorDark1">#369092</Color>
             <Color x:Key="SystemAccentColorDark2">#18797B</Color>
             <Color x:Key="SystemAccentColorDark3">#136263</Color>
-            
-            <muxm:AcrylicBrush x:Key="NavigationViewDefaultPaneBackground"
-                                          BackgroundSource="Backdrop"
-                                          TintColor="Black"
-                                          TintOpacity=".5"
-                                          FallbackColor="#FF1F1F1F"/>
-            <muxm:AcrylicBrush x:Key="NavigationViewTopPaneBackground"
-                                          BackgroundSource="Backdrop"
-                                          TintColor="#00000001"
-                                          TintOpacity=".6"
-                                          FallbackColor="Black"/>
-            <muxm:AcrylicBrush x:Key="NavigationViewExpandedPaneBackground" 
-                                          BackgroundSource="HostBackdrop" 
-                                          TintColor="Black"
-                                          TintOpacity=".5"/>
+            <muxm:AcrylicBrush
+                x:Key="NavigationViewDefaultPaneBackground"
+                BackgroundSource="Backdrop"
+                FallbackColor="#FF1F1F1F"
+                TintColor="Black"
+                TintOpacity=".5" />
+            <media:BackdropBlurBrush
+                x:Key="NavigationViewTopPaneBackground"
+                Amount="20"
+                BackgroundSource="Backdrop"
+                FallbackColor="Black"
+                TintColor="Black"
+                TintOpacity=".7" />
+            <muxm:AcrylicBrush
+                x:Key="NavigationViewExpandedPaneBackground"
+                BackgroundSource="HostBackdrop"
+                TintColor="Black"
+                TintOpacity=".5" />
         </ResourceDictionary>
         <ResourceDictionary x:Key="HighContrast">
             <Color x:Key="SystemAccentColor">#1AEBFF</Color>
-            <SolidColorBrush Color="Black" x:Key="NavigationViewDefaultPaneBackground"/>
-            <SolidColorBrush Color="Black" x:Key="NavigationViewTopPaneBackground"/>
-            <SolidColorBrush Color="Black" x:Key="NavigationViewExpandedPaneBackground"/>
+            <SolidColorBrush x:Key="NavigationViewDefaultPaneBackground" Color="Black" />
+            <SolidColorBrush x:Key="NavigationViewTopPaneBackground" Color="Black" />
+            <SolidColorBrush x:Key="NavigationViewExpandedPaneBackground" Color="Black" />
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
 </ResourceDictionary>
