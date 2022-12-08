@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Windows.ApplicationModel;
-using Windows.Storage;
-using Windows.Storage.Streams;
-using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media.Imaging;
-
+using static Windows.System.Launcher;
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
 namespace TrueLove.UWP.Views
@@ -23,52 +16,20 @@ namespace TrueLove.UWP.Views
             this.InitializeComponent();
         }
 
-        private void LinkingPage_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// 链接按钮
+        /// 应用于从外部浏览器打开各种网址
+        /// </summary>
+        private async void Links_Click(object sender, RoutedEventArgs e)
         {
             FrameworkElement button = sender as FrameworkElement;
             switch (button.Tag as string)
             {
-                case "linkingCommentsPage": Frame.Navigate(typeof(CommentsPage)); break;
-                case "linkingImagesPage": Frame.Navigate(typeof(ImagesPage)); break;
+                // Avicii 的音乐
+                case "spotify": await LaunchUriAsync(new Uri("spotify:artist:1vCWHaC5f2uS3yhpwWbIA6")); break;
+                case "youTube": await LaunchUriAsync(new Uri("https://www.youtube.com/user/AviciiOfficialVEVO")); break;
+                case "apple": await LaunchUriAsync(new Uri("https://itunes.apple.com/ca/artist/avicii/298496035")); break;
             }
-
-        }
-
-        private async void GetFiles()
-        {
-            string localPath = Package.Current.InstalledLocation.Path + @"\Assets\Instagram";
-            var storageFolder = await StorageFolder.GetFolderFromPathAsync(localPath);
-            IReadOnlyList<StorageFile> sortedItems = await storageFolder.GetFilesAsync();
-            var photos = new List<BitmapImage>();
-            if (sortedItems.Any())
-            {
-                foreach (StorageFile file in sortedItems)
-                {
-                    if (file.FileType.ToUpper() == ".JPG")
-                    {
-                        using (IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.Read))
-                        {
-                            BitmapImage bitmapImage = new BitmapImage();
-                            await bitmapImage.SetSourceAsync(fileStream);
-                            photos.Add(bitmapImage);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                var message = new MessageDialog("There are no images in the Instagram Pictures Library.");
-                await message.ShowAsync();
-            }
-            ImageGridView.ItemsSource = photos;
-            LoadingImages.IsActive = false;
-            LoadingImages.Visibility = Visibility.Collapsed;
-            flipview.SelectionChanged -= FlipView_SelectionChanged; // 取消订阅事件，令其 Method 不再执行
-        }
-
-        private void FlipView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (flipview.SelectedIndex == 3) GetFiles();
         }
     }
 }

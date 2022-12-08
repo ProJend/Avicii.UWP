@@ -1,19 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TrueLove.Lib.Helpers;
-using TrueLove.Lib.Models.Enum;
-using TrueLove.Lib.Models.UI;
-using TrueLove.Lib.Notification;
 using Windows.Foundation.Metadata;
 using Windows.System;
-using Windows.UI;
 using Windows.UI.Core;
-using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using muxc = Microsoft.UI.Xaml.Controls;
@@ -40,14 +33,7 @@ namespace TrueLove.UWP.Views
             Window.Current.CoreWindow.PointerPressed += Mouse_BackRequested; // 订阅鼠标返回事件
             Window.Current.Activated += OnWindowActivated; // 订阅窗口活动事件
             Window.Current.SetTitleBar(AppTitleBar); // 设置新的标题栏
-            Window.Current.SizeChanged += Current_SizeChanged;
-
-            if (Generic.DeviceFamilyMatch(DeviceFamilyType.Mobile)) // = WP
-            {
-                TopBar.Background = new SolidColorBrush(Colors.Black);
-                ToolBar.Background = new SolidColorBrush { Color = Colors.Black, Opacity = 0.7 };              
-            }
-            else if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5)) // > OS15063
+            if (ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5)) // > OS15063
             {
                 // Add keyboard accelerators for backwards navigation.
                 var goBack = new KeyboardAccelerator { Key = VirtualKey.Escape };
@@ -173,7 +159,7 @@ namespace TrueLove.UWP.Views
             if (ContentFrame.SourcePageType == typeof(SettingsPage))
             {
                 // SettingsItem is not part of NavView.MenuItems, and doesn't have a Tag.
-                NavView.SelectedItem = (muxc.NavigationViewItem)NavView.SettingsItem;
+                //NavView.SelectedItem = (muxc.NavigationViewItem)NavView.SettingsItem;
                 NavView.Header = "SETTINGS";
             }
             else if (ContentFrame.SourcePageType != null)
@@ -189,104 +175,12 @@ namespace TrueLove.UWP.Views
         /// </summary>
         private void The_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
         {   // 判断滑动的距离
-            if (e.Cumulative.Translation.X > 100 && NavViewRoot.IsTapEnabled) NavView.IsPaneOpen = true; // 打开汉堡菜单            
+            if (e.Cumulative.Translation.X > 100 && NavView.PaneDisplayMode != muxc.NavigationViewPaneDisplayMode.Top) NavView.IsPaneOpen = true; // 打开汉堡菜单            
             else if (e.Cumulative.Translation.X < -100) NavView.IsPaneOpen = false; // 关闭汉堡菜单
         }
-        #endregion
-        #region 底部工具栏
-        /// <summary>
-        /// 鼠标右击工具栏活动。
-        /// </summary>
-        private void CommandBar_RightTapped(object sender, RightTappedRoutedEventArgs e) => ToolBar.IsOpen = !ToolBar.IsOpen;
-
-        /// <summary>
-        /// 检查工具栏相关的按钮可用状态。
-        /// 下滑隐藏工具栏 https://www.cnblogs.com/lonelyxmas/p/9919869.html
-        /// </summary>
-        private void Sv_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
-        {   // 只有当设置特定选项为 True 方可隐藏显示 ToolBar，True 值等同于下滑值
-            if (LocalSettings.isBottomBarHidden is bool canSlideDown)
-            {   // 情况一：滑动数据无变化时直接退出函数
-                // 情况二：ToolBar 置顶时直接退出函数
-                if (sv.VerticalOffset == scrlocation)
-                    return;
-                if (!BottomBar.IsTapEnabled)
-                {
-                    BottomBar_Storyboard_SlideDown.Stop();
-                    return;
-                }
-
-                // 滑动方向
-                // 滚动条当前位置小于存储的变量值时代表往上滑，即不可以下滑隐藏
-                if (sv.VerticalOffset < scrlocation)
-                    canSlideDown = false;
-
-                if (canSlideDown && canHideBottomBar) // 通过动画来隐藏                
-                    BottomBar_Storyboard_SlideDown.Begin();
-                else if (!canSlideDown && !canHideBottomBar) // 通过动画来显示
-                    BottomBar_Storyboard_SlideUp.Begin();
-
-                canHideBottomBar = !canSlideDown;
-                scrlocation = sv.VerticalOffset;
-            }
-        }
-
-        // 滚动条位置变量
-        double scrlocation = 0;
-
-        // 导航栏当前显示状态（这个是为了减少不必要的开销，因为我做的是动画隐藏显示效果如果不用一个变量来记录当前导航栏状态的会重复执行隐藏或显示）
-        bool canHideBottomBar = true;
-
-        /// <summary>
-        /// 宽屏时锁死工具栏位置
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Current_SizeChanged(object sender, WindowSizeChangedEventArgs e)
-        {
-            if (!BottomBar.IsTapEnabled)
-                BottomBar_Storyboard_SlideDown.Stop();
-        }
-
-        /// <summary>
-        /// 返回顶部按钮。
-        /// </summary>
-        private void BackToTop_Click(object sender, RoutedEventArgs e) => sv.ChangeView(null, 0, null);
-
-        /// <summary>
-        /// 刷新按钮。
-        /// </summary>
-        private async void Refresh_Click(object sender, RoutedEventArgs e)
-        {
-            var messageDialog = new MessageDialog("No internet connection has been found.");
-
-            // Add commands and set their callbacks; both buttons use the same callback function instead of inline event handlers
-            messageDialog.Commands.Add(new UICommand(
-                "Try again"));
-            messageDialog.Commands.Add(new UICommand(
-                "Close"));
-
-            // Set the command that will be invoked by default
-            messageDialog.DefaultCommandIndex = 0;
-
-            // Set the command to be invoked when escape is pressed
-            messageDialog.CancelCommandIndex = 1;
-
-            // Show the message dialog
-            await messageDialog.ShowAsync();
-        }
-
-        /// <summary>
-        /// 新建评论按钮。
-        /// </summary>
-        private void CreatComment_Click(object sender, RoutedEventArgs e) => Assembly.Dialog(DialogType.CommentCreate);
-        #endregion
-        #region UI
+        #endregion       
         private void OnWindowActivated(object sender, WindowActivatedEventArgs e) => VisualStateManager.GoToState(this,
                 e.WindowActivationState == CoreWindowActivationState.Deactivated ? WindowNotFocused.Name : WindowFocused.Name, false);
-
-        double OpaqueIfEnabled(bool isEnabled) => isEnabled ? 1.0 : 0.7;
-        #endregion
 
         public static MainPage Current;
     }
