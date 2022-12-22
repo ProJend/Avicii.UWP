@@ -19,18 +19,19 @@
                 FallbackColor="#FF1F1F1F"
                 TintColor="Black"
                 TintOpacity=".5" />
-            <media:BackdropBlurBrush
-                x:Key="NavigationViewTopPaneBackground"
-                Amount="20"
-                BackgroundSource="Backdrop"
-                FallbackColor="Black"
-                TintColor="Black"
-                TintOpacity=".6" />
+            <Color x:Key="NavigationViewTopPaneBackground">Transparent</Color>
             <muxm:AcrylicBrush
                 x:Key="NavigationViewExpandedPaneBackground"
                 BackgroundSource="HostBackdrop"
                 TintColor="Black"
                 TintOpacity=".5" />
+            <media:BackdropBlurBrush
+                x:Key="SolidBlackBlurBrush"
+                Amount="20"
+                BackgroundSource="Backdrop"
+                FallbackColor="Black"
+                TintColor="Black"
+                TintOpacity=".6" />
         </ResourceDictionary>
         <ResourceDictionary x:Key="HighContrast">
             <Color x:Key="SystemAccentColor">#1AEBFF</Color>

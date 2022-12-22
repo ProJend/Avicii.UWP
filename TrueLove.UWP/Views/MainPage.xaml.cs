@@ -159,14 +159,14 @@ namespace TrueLove.UWP.Views
             if (ContentFrame.SourcePageType == typeof(SettingsPage))
             {
                 // SettingsItem is not part of NavView.MenuItems, and doesn't have a Tag.
-                //NavView.SelectedItem = (muxc.NavigationViewItem)NavView.SettingsItem;
-                NavView.Header = "SETTINGS";
+                NavView.SelectedItem = (muxc.NavigationViewItem)NavView.SettingsItem;
+                //NavView.Header = "SETTINGS";
             }
             else if (ContentFrame.SourcePageType != null)
             {
                 var item = _pages.FirstOrDefault(p => p.Page == e.SourcePageType);
                 NavView.SelectedItem = NavView.MenuItems.OfType<muxc.NavigationViewItem>().First(n => n.Tag.Equals(item.Tag));
-                NavView.Header = ((muxc.NavigationViewItem)NavView.SelectedItem)?.Content?.ToString().ToUpper();
+                //NavView.Header = ((muxc.NavigationViewItem)NavView.SelectedItem)?.Content?.ToString().ToUpper();
             }
         }
 

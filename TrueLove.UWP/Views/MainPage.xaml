@@ -50,7 +50,6 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="AppTitleBar.Margin" Value="80 0 0 0" />
-                        <Setter Target="ContentFrame.Margin" Value="0 40 0 0" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>
@@ -59,7 +58,7 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="NavView.PaneDisplayMode" Value="Top" />
-                        <Setter Target="AppTitleBar.Margin" Value="440 0 40 0" />
+                        <Setter Target="AppTitleBar.Margin" Value="440 0 0 0" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -67,7 +66,7 @@
                 <VisualState x:Name="WindowFocused" />
                 <VisualState x:Name="WindowNotFocused">
                     <VisualState.Setters>
-                        <Setter Target="NavView.Foreground" Value="Gray" />
+                        <Setter Target="NavView.IsEnabled" Value="False" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

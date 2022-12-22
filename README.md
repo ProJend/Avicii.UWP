@@ -1,6 +1,6 @@
-# True Love - Tim Bergling Foundation
+# True Love
 ### About This APP
-A UWP client full of memories of Avicii.
+A UWP covering for Avicii website.
 
 ### About Avicii
 Tim Bergling (8 September 1989 – 20 April 2018), better known by his stage name Avicii, was a Swedish DJ, remixer, record producer, musician, and songwriter who specialized in audio programming, remixing, and record producing.

@@ -19,7 +19,7 @@
             <TextBlock Foreground="DarkGray" Text="{Binding}" />
         </DataTemplate>
         <Over17763:Style
-            x:Key="GhostBotton"
+            x:Key="TransparentButton"
             BasedOn="{StaticResource ButtonRevealStyle}"
             TargetType="Button">
             <Style.Setters>
@@ -176,7 +176,7 @@
                     <Button
                         Over17763:CornerRadius="4 0 0 4"
                         Click="Links_Click"
-                        Style="{StaticResource GhostBotton}"
+                        Style="{StaticResource TransparentButton}"
                         Tag="gitHub">
                         <FontIcon
                             FontFamily="{ThemeResource iconfont}"
@@ -185,7 +185,7 @@
                     </Button>
                     <Button
                         Click="Links_Click"
-                        Style="{StaticResource GhostBotton}"
+                        Style="{StaticResource TransparentButton}"
                         Tag="mail">
                         <FontIcon
                             FontFamily="Segoe MDL2 Assets"
@@ -195,7 +195,7 @@
                     <Button
                         Over17763:CornerRadius="0 4 4 0"
                         Click="Links_Click"
-                        Style="{StaticResource GhostBotton}"
+                        Style="{StaticResource TransparentButton}"
                         Tag="weibo">
                         <FontIcon FontFamily="{ThemeResource iconfont}" Glyph="&#xe737;" />
                     </Button>
@@ -204,7 +204,7 @@
                 <Button
                     Over17763:CornerRadius="4"
                     Click="Links_Click"
-                    Style="{StaticResource GhostBotton}"
+                    Style="{StaticResource TransparentButton}"
                     Tag="telegram">
                     <FontIcon
                         FontFamily="{ThemeResource iconfont}"
@@ -227,7 +227,7 @@
                     <Button
                         Over17763:CornerRadius="4 0 0 4"
                         Click="Links_Click"
-                        Style="{StaticResource GhostBotton}"
+                        Style="{StaticResource TransparentButton}"
                         Tag="spotify">
                         <FontIcon
                             FontFamily="{ThemeResource iconfont}"
@@ -236,7 +236,7 @@
                     </Button>
                     <Button
                         Click="Links_Click"
-                        Style="{StaticResource GhostBotton}"
+                        Style="{StaticResource TransparentButton}"
                         Tag="youTube">
                         <FontIcon
                             FontFamily="{ThemeResource iconfont}"
@@ -245,7 +245,7 @@
                     </Button>
                     <Button
                         Click="Links_Click"
-                        Style="{StaticResource GhostBotton}"
+                        Style="{StaticResource TransparentButton}"
                         Tag="apple">
                         <FontIcon
                             FontFamily="{ThemeResource iconfont}"
@@ -254,20 +254,20 @@
                     </Button>
                     <Button
                         Click="Links_Click"
-                        Style="{StaticResource GhostBotton}"
+                        Style="{StaticResource TransparentButton}"
                         Tag="netease">
                         <FontIcon FontFamily="{ThemeResource iconfont}" Glyph="&#xe628;" />
                     </Button>
                     <Button
                         Click="Links_Click"
-                        Style="{StaticResource GhostBotton}"
+                        Style="{StaticResource TransparentButton}"
                         Tag="QQ">
                         <FontIcon FontFamily="{ThemeResource iconfont}" Glyph="&#xe6c6;" />
                     </Button>
                     <Button
                         Over17763:CornerRadius="0 4 4 0"
                         Click="Links_Click"
-                        Style="{StaticResource GhostBotton}"
+                        Style="{StaticResource TransparentButton}"
                         Tag="kugou">
                         <FontIcon FontFamily="{ThemeResource iconfont}" Glyph="&#xe62d;" />
                     </Button>
@@ -277,7 +277,7 @@
                     <Button
                         Over17763:CornerRadius="4 0 0 4"
                         Click="Links_Click"
-                        Style="{StaticResource GhostBotton}"
+                        Style="{StaticResource TransparentButton}"
                         Tag="instagram">
                         <FontIcon
                             FontFamily="{ThemeResource iconfont}"
@@ -286,7 +286,7 @@
                     </Button>
                     <Button
                         Click="Links_Click"
-                        Style="{StaticResource GhostBotton}"
+                        Style="{StaticResource TransparentButton}"
                         Tag="facebook">
                         <FontIcon
                             FontFamily="{ThemeResource iconfont}"
@@ -296,7 +296,7 @@
                     <Button
                         Over17763:CornerRadius="0 4 4 0"
                         Click="Links_Click"
-                        Style="{StaticResource GhostBotton}"
+                        Style="{StaticResource TransparentButton}"
                         Tag="twitter">
                         <FontIcon FontFamily="{ThemeResource iconfont}" Glyph="&#xe600;" />
                     </Button>
@@ -306,7 +306,7 @@
                     <Button
                         Over17763:CornerRadius="4 0 0 4"
                         Click="Links_Click"
-                        Style="{StaticResource GhostBotton}"
+                        Style="{StaticResource TransparentButton}"
                         Tag="shop">
                         <FontIcon
                             FontFamily="Segoe MDL2 Assets"
@@ -316,7 +316,7 @@
                     <Button
                         Click="Links_Click"
                         Foreground="{ThemeResource SystemAccentColor}"
-                        Style="{StaticResource GhostBotton}"
+                        Style="{StaticResource TransparentButton}"
                         Tag="foundation">
                         <FontIcon
                             FontFamily="Segoe MDL2 Assets"
@@ -326,7 +326,7 @@
                     </Button>
                     <Button
                         Click="Links_Click"
-                        Style="{StaticResource GhostBotton}"
+                        Style="{StaticResource TransparentButton}"
                         Tag="memory">
                         <FontIcon
                             FontFamily="Segoe MDL2 Assets"
@@ -336,7 +336,7 @@
                     <Button
                         Over17763:CornerRadius="0 4 4 0"
                         Click="Links_Click"
-                        Style="{StaticResource GhostBotton}"
+                        Style="{StaticResource TransparentButton}"
                         Tag="quora">
                         <FontIcon FontFamily="{ThemeResource iconfont}" Glyph="&#xe6df;" />
                     </Button>
@@ -348,7 +348,7 @@
                 <Button
                     Over17763:CornerRadius="4"
                     Click="Links_Click"
-                    Style="{StaticResource GhostBotton}"
+                    Style="{StaticResource TransparentButton}"
                     Tag="projectOne"
                     ToolTipService.ToolTip="#projectOne">
                     <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7F6;" />

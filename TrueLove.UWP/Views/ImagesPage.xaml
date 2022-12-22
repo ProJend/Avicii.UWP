@@ -1,43 +1,96 @@
 ﻿<Page
     x:Class="TrueLove.UWP.Views.ImagesPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
-    xmlns:date="using:TrueLove.Lib.Models.Code"
-    mc:Ignorable="d"
-    Background="Transparent">
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="Transparent"
+    mc:Ignorable="d">
     <Page.Resources>
-        <DataTemplate x:DataType="date:CommentItem" x:Key="A">
-            <Grid Padding="20" HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="245">
-                <TextBlock TextAlignment="Center" TextWrapping="Wrap"
-                           VerticalAlignment="Center">
-                    <Run FontSize="16" FontStyle="Italic" Text="from "></Run>
-                    <Run FontSize="22" Text="{x:Bind name}"/>
-                    <LineBreak/><LineBreak/>
-                    <Run Text="{x:Bind comment}"/>
-                </TextBlock>
-            </Grid>
-        </DataTemplate>
+        <Style TargetType="ScrollBar">
+            <Setter Property="Margin" Value="0,85,0,0" />
+        </Style>
     </Page.Resources>
-    <Grid ManipulationMode="System,TranslateX" x:Name="Main">
-        <StackPanel Margin="0 50 0 0" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock Style="{ThemeResource SubheaderTextBlockStyle}"
-                       Foreground="{ThemeResource SystemAccentColor}" VerticalAlignment="Center" HorizontalAlignment="Center">I M A G E S</TextBlock>
-            <TextBlock Margin="35 0 35 0" Style="{ThemeResource SubtitleTextBlockStyle}" VerticalAlignment="Center" HorizontalAlignment="Center">
-                <LineBreak/>
-                <Run Text="S O M E T I M E   A   P I C T U R E   I S   W O R T H   M O R E   T H A N   A   T H O U S A N D   W O R D S ."></Run>
-                <LineBreak/>
+    <Grid ManipulationMode="System,TranslateX">
+        <ScrollViewer x:Name="Show_ScrollViewer" Grid.Row="1">
+            <StackPanel Padding="0,85,0,0">
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    MaxWidth="700"
+                    Margin="35"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    CharacterSpacing="350"
+                    Style="{ThemeResource SubtitleTextBlockStyle}"
+                    TextAlignment="Center">
+                    SOMETIME A PICTURE IS WORTH MORE THAN A THOUSAND WORDS.
+                </TextBlock>
+                <GridView x:Name="ImageView" animations:ReorderGridAnimation.Duration="250">
+                    <GridView.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding}" Stretch="Uniform" />
+                        </DataTemplate>
+                    </GridView.ItemTemplate>
+                    <GridView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <controls:StaggeredPanel HorizontalAlignment="Stretch" DesiredColumnWidth="250" />
+                        </ItemsPanelTemplate>
+                    </GridView.ItemsPanel>
+                </GridView>
+            </StackPanel>
+        </ScrollViewer>
+        <Grid
+            Height="85"
+            Padding="0,40,0,0"
+            VerticalAlignment="Top"
+            Background="{ThemeResource SolidBlackBlurBrush}">
+            <TextBlock
+                x:Name="Title"
+                Margin="12,-2,0,0"
+                Style="{ThemeResource TitleTextBlockStyle}">
+                Images
             </TextBlock>
-            <GridView ItemsSource="{x:Bind Comments}" x:Name="MyGridView" ScrollViewer.HorizontalScrollMode="Disabled" ScrollViewer.VerticalScrollMode="Disabled"
-                      ItemTemplate="{ThemeResource A}" VerticalContentAlignment="Center">
-                <ItemsPanelTemplate>
-                    <controls:StaggeredPanel DesiredColumnWidth="273"
-                                             HorizontalAlignment="Stretch"/>
-                </ItemsPanelTemplate>
-            </GridView>
-            
-        </StackPanel>
+            <Button
+                x:Name="TitleButton"
+                Margin="0,0,19,13"
+                HorizontalAlignment="Right"
+                Style="{StaticResource GhostButton}">
+                Leave a Memory
+            </Button>
+        </Grid>
+        <Grid Margin="0,0,0,20" VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button
+                Grid.Column="0"
+                HorizontalAlignment="Center"
+                Click="BackToTop_Click"
+                Style="{ThemeResource TranslucentCircleButton}">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE898;" />
+            </Button>
+            <Button
+                Grid.Column="1"
+                HorizontalAlignment="Center"
+                Style="{ThemeResource TranslucentCircleButton}">
+                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE72C;" />
+            </Button>
+            <Border CornerRadius="20" />
+        </Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="WindowFocusStates">
+                <VisualState x:Name="WindowFocused" />
+                <VisualState x:Name="WindowNotFocused">
+                    <VisualState.Setters>
+                        <Setter Target="Title.Foreground" Value="{ThemeResource ButtonForegroundDisabled}" />
+                        <Setter Target="TitleButton.IsEnabled" Value="False" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
 </Page>
