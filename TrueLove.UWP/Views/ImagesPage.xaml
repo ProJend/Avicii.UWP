@@ -12,9 +12,46 @@
         <Style TargetType="ScrollBar">
             <Setter Property="Margin" Value="0,85,0,0" />
         </Style>
+        <Storyboard x:Name="ToolBarSlideDownStoryboard">
+            <DoubleAnimation
+                Storyboard.TargetName="ToolBar_TranslateTransform"
+                Storyboard.TargetProperty="Y"
+                From="0"
+                To="60">
+                <DoubleAnimation.EasingFunction>
+                    <ExponentialEase EasingMode="EaseOut" Exponent="7" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation
+                Storyboard.TargetName="ToolBar"
+                Storyboard.TargetProperty="(Grid.Opacity)"
+                From="1"
+                To="0"
+                Duration="0:0:0.5" />
+        </Storyboard>
+        <Storyboard x:Name="ToolBarSlideUpStoryboard">
+            <DoubleAnimation
+                Storyboard.TargetName="ToolBar_TranslateTransform"
+                Storyboard.TargetProperty="Y"
+                From="60"
+                To="0">
+                <DoubleAnimation.EasingFunction>
+                    <ExponentialEase EasingMode="EaseOut" Exponent="7" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+            <DoubleAnimation
+                Storyboard.TargetName="ToolBar"
+                Storyboard.TargetProperty="(Grid.Opacity)"
+                From="0"
+                To="1"
+                Duration="0:0:0.5" />
+        </Storyboard>
     </Page.Resources>
     <Grid ManipulationMode="System,TranslateX">
-        <ScrollViewer x:Name="Show_ScrollViewer" Grid.Row="1">
+        <ScrollViewer
+            x:Name="hapticScrollViewer"
+            Grid.Row="1"
+            ViewChanged="hapticScrollViewer_ViewChanged">
             <StackPanel Padding="0,85,0,0">
                 <TextBlock
                     Grid.Row="0"
@@ -28,6 +65,7 @@
                     TextAlignment="Center">
                     SOMETIME A PICTURE IS WORTH MORE THAN A THOUSAND WORDS.
                 </TextBlock>
+                <Image Source="/Assets/Instagram/4.jpg" />
                 <GridView x:Name="ImageView" animations:ReorderGridAnimation.Duration="250">
                     <GridView.ItemTemplate>
                         <DataTemplate>
@@ -61,7 +99,11 @@
                 Leave a Memory
             </Button>
         </Grid>
-        <Grid Margin="0,0,0,20" VerticalAlignment="Bottom">
+        <Grid
+            Name="ToolBar"
+            MaxWidth="600"
+            Margin="0,0,0,20"
+            VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
@@ -79,7 +121,14 @@
                 Style="{ThemeResource TranslucentCircleButton}">
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE72C;" />
             </Button>
-            <Border CornerRadius="20" />
+            <Grid.RenderTransform>
+                <TranslateTransform x:Name="ToolBar_TranslateTransform" />
+            </Grid.RenderTransform>
+            <Grid.Transitions>
+                <TransitionCollection>
+                    <PopupThemeTransition />
+                </TransitionCollection>
+            </Grid.Transitions>
         </Grid>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WindowFocusStates">
