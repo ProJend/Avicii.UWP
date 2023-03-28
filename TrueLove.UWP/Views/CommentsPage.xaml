@@ -62,6 +62,8 @@
                     TextAlignment="Center">
                     SOMETIME A PICTURE IS WORTH MORE THAN A THOUSAND WORDS.
                 </TextBlock>
+                <TextBlock x:Name="aa"/>
+
             </StackPanel>
         </ScrollViewer>
         <Grid

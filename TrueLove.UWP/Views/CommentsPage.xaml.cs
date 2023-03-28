@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Net.Http;
 using TrueLove.Lib.Models.Code;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using TrueLove.UWP.Spider;
+using Windows.ApplicationModel;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -19,9 +23,11 @@ namespace TrueLove.UWP.Views
             this.InitializeComponent();
             Comments = CommentManager.GetComment();
             Window.Current.Activated += OnWindowActivated; // 订阅窗口活动事件
+            var readHTML = new URLRefining();
 
+            readHTML.ReadHTML(Package.Current.InstalledPath + "/Spider/TestCode.txt");
+            aa.Text = readHTML.StrHTML;
         }
-
         /// <summary>
         /// 返回顶部按钮。
         /// </summary>
