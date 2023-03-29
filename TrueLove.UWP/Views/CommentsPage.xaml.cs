@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using TrueLove.Lib.Models.Code;
+using TrueLove.UWP.Spider;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using TrueLove.UWP.Spider;
-using Windows.ApplicationModel;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -25,7 +22,8 @@ namespace TrueLove.UWP.Views
             Window.Current.Activated += OnWindowActivated; // 订阅窗口活动事件
             var readHTML = new URLRefining();
 
-            readHTML.ReadHTML(Package.Current.InstalledPath + "/Spider/TestCode.txt");
+            //readHTML.ReadHTML(Package.Current.InstalledPath + "/Spider/TestCode.txt");
+            readHTML.ReadHTML("https://bing.com", false);
             aa.Text = readHTML.StrHTML;
         }
         /// <summary>

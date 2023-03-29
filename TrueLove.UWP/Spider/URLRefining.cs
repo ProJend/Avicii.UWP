@@ -1,8 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Net.Http;
-using Windows.Storage.Search;
-using Windows.UI.Xaml.Controls;
 
 namespace TrueLove.UWP.Spider
 {
@@ -18,7 +16,7 @@ namespace TrueLove.UWP.Spider
         /// </summary>
         /// <param name="path">Use URL address</param>
         /// <param name="isLoadedDown">switch to use website address or local document address</param>
-        public async void ReadHTML(string path, bool isLoadedDown = true)
+        public void ReadHTML(string path, bool isLoadedDown = true)
         {
             if (isLoadedDown)
             {
@@ -27,16 +25,9 @@ namespace TrueLove.UWP.Spider
             else
             {
                 var httpClient = new HttpClient();
-                httpClient.DefaultRequestHeaders.ConnectionClose = true;
-                strHTML = await httpClient.GetStringAsync(new Uri(path));
+                strHTML = httpClient.GetStringAsync(new Uri(path)).Result;
             }
         }
-
-        void RefineDate()
-        {
-
-        }
-
         private string strHTML;
         internal string StrHTML { get => strHTML; }
     }
