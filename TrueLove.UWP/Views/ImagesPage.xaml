@@ -65,7 +65,6 @@
                     TextAlignment="Center">
                     SOMETIME A PICTURE IS WORTH MORE THAN A THOUSAND WORDS.
                 </TextBlock>
-                <Image Source="/Assets/Instagram/4.jpg" />
                 <GridView x:Name="ImageView" animations:ReorderGridAnimation.Duration="250">
                     <GridView.ItemTemplate>
                         <DataTemplate>

@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<img src="https://avicii.com/wp-content/themes/aviciiboard/assets/img/black.jpg" style="opacity: 0;width: 0px;height: 0px;position: absolute;z-index: 0;top: 0;left: 0;">
+<html lang="en-US" class="no-js no-svg">
+<head>
+<link rel="icon" 
+      type="image/png" 
+      href="https://avicii.com/wp-content/themes/aviciiboard/assets/icon.png">
+<meta property="og:url" content="http://avicii.com" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Avicii – Official site" />
+<meta property="og:description" content="Tim created music that brought people together with timeless memories from all over the world." />
+<meta property="og:image" content="http://avicii.com/wp-content/themes/aviciiboard/assets/img/og_v2.jpg" />
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="shortcut icon" href="https://avicii.com/wp-content/themes/aviciiboard/assets/img/symbol.png" type="image/x-icon" />
+<script src="https://avicii.com/wp-content/themes/aviciiboard/assets/js/jquery-3.2.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://avicii.com/wp-content/themes/aviciiboard/assets/css/font-awesome.min.css">
+
+<link href="https://fonts.googleapis.com/css?family=Lato:400,400i,700,900,900i" rel="stylesheet">
+<script src="https://avicii.com/wp-content/themes/aviciiboard/assets/js/colcade.js"></script>
+<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+<title>Avicii &#8211; Official site</title>
+<meta name='robots' content='max-image-preview:large' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link href='https://fonts.gstatic.com' crossorigin rel='preconnect' />
+<link rel="alternate" type="application/rss+xml" title="Avicii &raquo; Feed" href="https://avicii.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Avicii &raquo; Comments Feed" href="https://avicii.com/comments/feed/" />
+		<script>
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/avicii.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.8.6"}};
+			!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style>
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='wp-block-library-css'  href='https://avicii.com/wp-includes/css/dist/block-library/style.min.css?ver=5.8.6' media='all' />
+<style id='wp-block-library-theme-inline-css'>
+#start-resizable-editor-section{display:none}.wp-block-audio figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-audio figcaption{color:hsla(0,0%,100%,.65)}.wp-block-code{font-family:Menlo,Consolas,monaco,monospace;color:#1e1e1e;padding:.8em 1em;border:1px solid #ddd;border-radius:4px}.wp-block-embed figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-embed figcaption{color:hsla(0,0%,100%,.65)}.blocks-gallery-caption{color:#555;font-size:13px;text-align:center}.is-dark-theme .blocks-gallery-caption{color:hsla(0,0%,100%,.65)}.wp-block-image figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-image figcaption{color:hsla(0,0%,100%,.65)}.wp-block-pullquote{border-top:4px solid;border-bottom:4px solid;margin-bottom:1.75em;color:currentColor}.wp-block-pullquote__citation,.wp-block-pullquote cite,.wp-block-pullquote footer{color:currentColor;text-transform:uppercase;font-size:.8125em;font-style:normal}.wp-block-quote{border-left:.25em solid;margin:0 0 1.75em;padding-left:1em}.wp-block-quote cite,.wp-block-quote footer{color:currentColor;font-size:.8125em;position:relative;font-style:normal}.wp-block-quote.has-text-align-right{border-left:none;border-right:.25em solid;padding-left:0;padding-right:1em}.wp-block-quote.has-text-align-center{border:none;padding-left:0}.wp-block-quote.is-large,.wp-block-quote.is-style-large{border:none}.wp-block-search .wp-block-search__label{font-weight:700}.wp-block-group.has-background{padding:1.25em 2.375em;margin-top:0;margin-bottom:0}.wp-block-separator{border:none;border-bottom:2px solid;margin-left:auto;margin-right:auto;opacity:.4}.wp-block-separator:not(.is-style-wide):not(.is-style-dots){width:100px}.wp-block-separator.has-background:not(.is-style-dots){border-bottom:none;height:1px}.wp-block-separator.has-background:not(.is-style-wide):not(.is-style-dots){height:2px}.wp-block-table thead{border-bottom:3px solid}.wp-block-table tfoot{border-top:3px solid}.wp-block-table td,.wp-block-table th{padding:.5em;border:1px solid;word-break:normal}.wp-block-table figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-table figcaption{color:hsla(0,0%,100%,.65)}.wp-block-video figcaption{color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-video figcaption{color:hsla(0,0%,100%,.65)}.wp-block-template-part.has-background{padding:1.25em 2.375em;margin-top:0;margin-bottom:0}#end-resizable-editor-section{display:none}
+</style>
+<link rel='stylesheet' id='parent-style-css'  href='https://avicii.com/wp-content/themes/twentyseventeen/style.css?ver=5.8.6' media='all' />
+<link rel='stylesheet' id='twentyseventeen-fonts-css'  href='https://fonts.googleapis.com/css?family=Libre+Franklin%3A300%2C300i%2C400%2C400i%2C600%2C600i%2C800%2C800i&#038;subset=latin%2Clatin-ext&#038;display=fallback' media='all' />
+<link rel='stylesheet' id='twentyseventeen-style-css'  href='https://avicii.com/wp-content/themes/aviciiboard/style.css?ver=20201208' media='all' />
+<link rel='stylesheet' id='twentyseventeen-block-style-css'  href='https://avicii.com/wp-content/themes/twentyseventeen/assets/css/blocks.css?ver=20190105' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentyseventeen-ie8-css'  href='https://avicii.com/wp-content/themes/twentyseventeen/assets/css/ie8.css?ver=20161202' media='all' />
+<![endif]-->
+<!--[if lt IE 9]>
+<script src='https://avicii.com/wp-content/themes/twentyseventeen/assets/js/html5.js?ver=20161020' id='html5-js'></script>
+<![endif]-->
+<script src='https://avicii.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script src='https://avicii.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<link rel="https://api.w.org/" href="https://avicii.com/wp-json/" /><link rel="alternate" type="application/json" href="https://avicii.com/wp-json/wp/v2/pages/5" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://avicii.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://avicii.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.6" />
+<link rel="canonical" href="https://avicii.com/" />
+<link rel='shortlink' href='https://avicii.com/' />
+<link rel="alternate" type="application/json+oembed" href="https://avicii.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Favicii.com%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://avicii.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Favicii.com%2F&#038;format=xml" />
+<style>.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style><link rel="icon" href="https://avicii.com/wp-content/uploads/2022/11/favicon-100x100.png" sizes="32x32" />
+<link rel="icon" href="https://avicii.com/wp-content/uploads/2022/11/favicon.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="https://avicii.com/wp-content/uploads/2022/11/favicon.png" />
+<meta name="msapplication-TileImage" content="https://avicii.com/wp-content/uploads/2022/11/favicon.png" />
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-T8CMRRG');</script>
+<!-- End Google Tag Manager -->
+
+</head>
+
+<body class="home page-template-default page page-id-5 wp-embed-responsive twentyseventeen-front-page has-header-image page-two-column colors-light">
+
+<ul class="social">
+<li><a href="https://open.spotify.com/artist/1vCWHaC5f2uS3yhpwWbIA6?si=IYzh3XGLTo2t_CzCMTro0g" target="_blank"><i class="fa fa-spotify"></i></a></li>
+<li><a href="https://www.youtube.com/user/AviciiOfficialVEVO" target="_blank"><i class="fa fa-youtube"></i></a></li>
+<li><a href="https://itunes.apple.com/ca/artist/avicii/298496035" target="_blank"><i class="fa fa-apple"></i></a></li>
+<li style="display: none;"><a href="https://shop.avicii.com/" target="_blank"><i class="fa fa-shopping-cart"></i></a></li>
+</ul>
+
+<section id="index" class="full">
+<img class="desktopIntroBG" src="https://avicii.com/wp-content/themes/aviciiboard/assets/img/Tim Studio2264_e.jpg">
+
+	<img class="symbol" src="https://avicii.com/wp-content/themes/aviciiboard/assets/img/symbol.svg" alt="The Stories">
+
+	<div class="AlignVert">
+		<div class="tableCell">
+			 <h1><img src="https://avicii.com/wp-content/themes/aviciiboard/assets/img/the_aviciimemoryboard.svg" alt="The Stories"></h1>
+			 <h3>In loving memory</h3>
+       <p>1989.09.08 - 2018.04.20</p>
+		</div>
+	</div>
+
+	<img class="logo" src="https://avicii.com/wp-content/themes/aviciiboard/assets/img/logo.svg" alt="The Stories">
+
+</section>
+
+<section id="about">
+		<div class="AlignVert">
+		<div class="tableCell">
+	<h2><img src="https://avicii.com/wp-content/themes/aviciiboard/assets/img/Remember.svg" alt="Remebering Tim Bergling..."></h2>
+
+    <p>Tim created music that brought people together with timeless memories from all over the world.</p>
+
+    <p>We created this space so you could share your memories with all of us and let the world know what Avicii meant to you.</p>
+
+    <p>His music and your memories are forever.</p>
+			</div>
+	</div>
+</section>
+
+
+<div class="interactWrap slowTrans">
+<section id="interact">
+<div class="interact_btn pulseI"><span>Share your memories of Avicii</span><span>Close</span></div>
+</section>
+
+<section id="write" class="slowTrans">
+<div class="post">
+<noscript class="ninja-forms-noscript-message">
+    Notice: JavaScript is required for this content.</noscript><div id="nf-form-3-cont" class="nf-form-cont" aria-live="polite" aria-labelledby="nf-form-title-3" aria-describedby="nf-form-errors-3" role="form">
+
+    <div class="nf-loading-spinner"></div>
+
+</div>
+        <!-- TODO: Move to Template File. -->
+        <script>var formDisplay=1;var nfForms=nfForms||[];var form=[];form.id='3';form.settings={"objectType":"Form Setting","editActive":true,"title":"File Upload","show_title":0,"clear_complete":1,"hide_complete":1,"default_label_pos":"above","wrapper_class":"","element_class":"","key":"","add_submit":1,"currency":"","unique_field_error":"A form with this value has already been submitted.","logged_in":false,"not_logged_in_msg":"","sub_limit_msg":"The form has reached its submission limit.","calculations":[],"formContentData":["date_1530799225117","write_your_story_of_love_here_1530832060657","name_1530541274689","your_images_must_be_jpg_gif_or_png_and_max_3mb_1530544422546","recaptcha_1530612608720","html_1530832195520","submit_1524664233742"],"created_at":"2018-06-29 14:08:05","changeEmailErrorMsg":"Please enter a valid email address!","changeDateErrorMsg":"Please enter a valid date!","confirmFieldErrorMsg":"These fields must match!","fieldNumberNumMinError":"Number Min Error","fieldNumberNumMaxError":"Number Max Error","fieldNumberIncrementBy":"Please increment by ","formErrorsCorrectErrors":"Please correct errors before submitting this form.","validateRequiredField":"This is a required field.","honeypotHoneypotError":"Honeypot Error","fieldsMarkedRequired":"Fields marked with an <span class=\"ninja-forms-req-symbol\">*<\/span> are required","drawerDisabled":false,"allow_public_link":0,"embed_form":"","repeatable_fieldsets":"","ninjaForms":"Ninja Forms","fieldTextareaRTEInsertLink":"Insert Link","fieldTextareaRTEInsertMedia":"Insert Media","fieldTextareaRTESelectAFile":"Select a file","formHoneypot":"If you are a human seeing this field, please leave it empty.","fileUploadOldCodeFileUploadInProgress":"File Upload in Progress.","fileUploadOldCodeFileUpload":"FILE UPLOAD","currencySymbol":"&#107;&#114;","thousands_sep":",","decimal_point":".","siteLocale":"en_US","dateFormat":"m\/d\/Y","startOfWeek":"1","of":"of","previousMonth":"Previous Month","nextMonth":"Next Month","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthsShort":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"weekdaysShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"weekdaysMin":["Su","Mo","Tu","We","Th","Fr","Sa"],"recaptchaConsentMissing":"reCapctha validation couldn&#039;t load.","recaptchaMissingCookie":"reCaptcha v3 validation couldn&#039;t load the cookie needed to submit the form.","recaptchaConsentEvent":"Accept reCaptcha cookies before sending the form.","currency_symbol":"","beforeForm":"","beforeFields":"","afterFields":"","afterForm":""};form.fields=[{"objectType":"Field","objectDomain":"fields","editActive":false,"order":1,"idAttribute":"id","type":"date","label":"Date","key":"date_1530799225117","label_pos":"hidden","required":false,"placeholder":"","container_class":"","element_class":"","manual_key":false,"admin_label":"","help_text":"","date_default":1,"date_format":"YYYY-MM-DD","year_range_start":"","year_range_end":"","drawerDisabled":false,"date_mode":"date_only","hours_24":0,"minute_increment":5,"value":"","id":12,"beforeField":"","afterField":"","parentType":"date","element_templates":["date","textbox","input"],"old_classname":"","wrap_template":"wrap"},{"objectType":"Field","objectDomain":"fields","editActive":false,"order":2,"idAttribute":"id","label":"Write your story of love here:","type":"textarea","key":"write_your_story_of_love_here_1530832060657","label_pos":"above","required":false,"default":"","placeholder":"","container_class":"","element_class":"","input_limit":500,"input_limit_type":"characters","input_limit_msg":"Character(s) left","manual_key":false,"admin_label":"","help_text":"","textarea_rte":"","disable_rte_mobile":"","textarea_media":"","drawerDisabled":false,"created_at":"2018-06-29 14:08:05","value":"","id":5,"beforeField":"","afterField":"","parentType":"textarea","element_templates":["textarea","input"],"old_classname":"","wrap_template":"wrap"},{"objectType":"Field","objectDomain":"fields","editActive":false,"order":3,"idAttribute":"id","label":"Name","type":"firstname","key":"name_1530541274689","label_pos":"hidden","required":false,"default":"","placeholder":"Your name","container_class":"","element_class":"","admin_label":"","help_text":"","custom_name_attribute":"fname","created_at":"2018-06-29 14:08:05","personally_identifiable":1,"drawerDisabled":false,"value":"","id":1,"beforeField":"","afterField":"","parentType":"firstname","element_templates":["firstname","input"],"old_classname":"","wrap_template":"wrap"},{"objectType":"Field","objectDomain":"fields","editActive":false,"order":4,"idAttribute":"id","type":"file_upload","label":"Your images must be .jpg, .gif, or .png and max 3MB","key":"your_images_must_be_jpg_gif_or_png_and_max_3mb_1530544422546","label_pos":"above","required":0,"container_class":"","element_class":"","manual_key":false,"help_text":"","save_to_server":1,"upload_rename":"%date%_%filename%","media_library":"false","upload_multi_count":1,"max_file_size":3145728,"upload_types":".jpg,.gif,.png,.jpeg","select_files_text":"Select Files","drawerDisabled":false,"id":9,"beforeField":"","afterField":"","value":"","parentType":"textbox","element_templates":["file-upload","input"],"old_classname":"","wrap_template":"wrap","max_file_size_mb":"3","uploadNonce":"88870269a6"},{"objectType":"Field","objectDomain":"fields","editActive":false,"order":5,"idAttribute":"id","type":"recaptcha","label":"Recaptcha","container_class":"","element_class":"","size":"visible","key":"recaptcha_1530612608720","drawerDisabled":false,"id":11,"beforeField":"","afterField":"","value":"","label_pos":"above","parentType":"textbox","element_templates":["recaptcha","input"],"old_classname":"","wrap_template":"wrap","site_key":"6LeDoFoUAAAAALwX-hIcsuinGzbEqfFvUV4eVjc-","theme":"dark","lang":false},{"objectType":"Field","objectDomain":"fields","editActive":false,"order":6,"idAttribute":"id","type":"html","label":"HTML","default":"<p class=\"privacy\">By posting a comment you agree to our <a href=\"\/privacy-policy\" target=\"_blank\">privacy policy<\/a>.<\/p>","container_class":"","element_class":"","key":"html_1530832195520","drawerDisabled":false,"id":13,"beforeField":"","afterField":"","value":"<p class=\"privacy\">By posting a comment you agree to our <a href=\"\/privacy-policy\" target=\"_blank\">privacy policy<\/a>.<\/p>","label_pos":"above","parentType":"html","element_templates":["html","input"],"old_classname":"","wrap_template":"wrap"},{"objectType":"Field","objectDomain":"fields","editActive":false,"order":7,"idAttribute":"id","type":"submit","label":"Submit","processing_label":"Processing","container_class":"","element_class":"","key":"submit_1524664233742","created_at":"2018-06-29 14:08:05","id":8,"beforeField":"","afterField":"","value":"","label_pos":"above","parentType":"textbox","element_templates":["submit","button","input"],"old_classname":"","wrap_template":"wrap-no-label"}];nfForms.push(form);</script>
+        </div>
+</section>
+</div>
+
+
+<div class="switch_menu" id="navigation">
+	<ul>
+		<li class="active"><a class="content-open" href="#commentlist">Comments</a></li>
+		<li class="sepe">&#8226;</li>
+		<li><a class="content-open" href="/images/#navigation">Images</a></li>
+	</ul>
+</div>
+
+<section id="commentlist" class="content_switch">
+
+<div class="imagesintro">
+<h2>Take a few minutes and read the Avicii stories and memories people have shared from all over the world.</h2>
+</div>
+
+
+
+
+		<ul class="kommentarerna grid" data-colcade="columns: .grid-col, items: .grid-item">
+  <div class="grid-col grid-col--1"></div>
+  <div class="grid-col grid-col--2"></div>
+  <div class="grid-col grid-col--3"></div>
+  <div class="grid-col grid-col--4"></div>
+
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Jonathan</span>
+		</p>
+		<p class="p_com">Forever the king of EDM. Tack för allt Tim ❤️</p>
+    <p class="p_date">2023-03-30</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>S</span>
+		</p>
+		<p class="p_com">Inspirational music never ever will die. Can't imagine that the creator changed the lives of others and encouraged them to do better while he himself could not go on! I am a posthumous fan of AVICII's but as a teen I am going to continue being his fan.
+Love from India!!</p>
+    <p class="p_date">2023-03-30</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span></span>
+		</p>
+		<p class="p_com">We need you.
+Please forgive my selfishness</p>
+    <p class="p_date">2023-03-30</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Your fans</span>
+		</p>
+		<p class="p_com">When will you come back</p>
+    <p class="p_date">2023-03-30</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>John Li</span>
+		</p>
+		<p class="p_com">The first time know Avicii is the song “dear boy” 2016， Tim's song always gave me strength when I was down. 
+Somewhere in Stockholm Miss you Tim
+
+</p>
+    <p class="p_date">2023-03-30</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Your Average Singaporean</span>
+		</p>
+		<p class="p_com">I only found out about you early 2022. At that time, I was suffering from depression and didn't have anyone to talk to. Until i came across your song "The nights" which I feel in love with. This song really tells me to live life to its fullest. Soon, I started listening to other of your songs. "Without you" "Hey Brother" "Waiting for love" are just some of the songs I fell in love with. You were one of the best DJs in the century and it will stay that way. Forever.
+
+Rest in Peace. Tim Bergling.
+</p>
+    <p class="p_date">2023-03-30</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Joel winter</span>
+		</p>
+		<p class="p_com">Avicii was a loved singer and DJ  I have been watching him since I was 2 cause I was born 2013  RIP Avicii</p>
+    <p class="p_date">2023-03-30</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Americo</span>
+		</p>
+		<p class="p_com">Your music continues to inspire me everyday. </p>
+    <p class="p_date">2023-03-29</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Avicii</span>
+		</p>
+		<p class="p_com">I am still here</p>
+    <p class="p_date">2023-03-29</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Skyler 7 years old</span>
+		</p>
+		<p class="p_com">I miss you avicii I hope you come back😭😭😭</p>
+    <p class="p_date">2023-03-29</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Mwango </span>
+		</p>
+		<p class="p_com">Sad that he is no longer with us anymore he would have gone on to be one of the greatest artists to have ever lived but am glad we had him for the short time he was here with us
+He changed music as a whole and and his music will live forever rip Tim Bergling and we miss very much</p>
+    <p class="p_date">2023-03-29</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>matsxio</span>
+		</p>
+		<p class="p_com">Dear Avicii, you will always be among us.</p>
+    <p class="p_date">2023-03-29</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Rey</span>
+		</p>
+		<p class="p_com">Hope wins forever.</p>
+    <p class="p_date">2023-03-29</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>A</span>
+		</p>
+		<p class="p_com">You inspired me in ways I can’t describe. I miss you. Fly high. </p>
+    <p class="p_date">2023-03-29</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Fredrik</span>
+		</p>
+		<p class="p_com">Love u man!</p>
+    <p class="p_date">2023-03-29</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Руслан</span>
+		</p>
+		<p class="p_com">Не хватает тебя! Покойся с миром! ❤️❤️❤️</p>
+    <p class="p_date">2023-03-29</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Emma</span>
+		</p>
+		<p class="p_com">Thank you Tim for everything you gave to the music industry and to my life 🤍 Flying high forever</p>
+    <p class="p_date">2023-03-28</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Nath</span>
+		</p>
+		<p class="p_com">Avicii tu me manques tellement 🌹♥️❤️</p>
+    <p class="p_date">2023-03-28</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Maria</span>
+		</p>
+		<p class="p_com">Your music is like the meaning of life. Thank you for your creativity and music. I am sad that you are not with us and that we have lost a person with the purest soul. I will always love you avicii❤️</p>
+    <p class="p_date">2023-03-28</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Imanuel </span>
+		</p>
+		<p class="p_com">Kami di Indonesia mengenal musikmu lewat PS, itu sangat berkesan bagi kami.
+cinta dari kami ❤</p>
+    <p class="p_date">2023-03-29</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>ㅇㅇ</span>
+		</p>
+		<p class="p_com">삼가고인의명복을빕니다😞</p>
+    <p class="p_date">2023-03-28</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>v2o5</span>
+		</p>
+		<p class="p_com">miss u</p>
+    <p class="p_date">2023-03-28</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Rin</span>
+		</p>
+		<p class="p_com">You make me not give up again and again and go my way with my head held high. I almost left in 2017 because of psychological problems and now whenever it's hard for me and I want to give up, I listen to your songs. Most of all I want to shake your hand and say thank you. I hope we'll meet someday and I'll tell you how much you mean to me.</p>
+    <p class="p_date">2023-03-28</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Kevin</span>
+		</p>
+		<p class="p_com">Me ever morning I love to play his music in full sound. My favorite song : waiting for love ❤❤</p>
+    <p class="p_date">2023-03-28</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Rose Patterson </span>
+		</p>
+		<p class="p_com">I am hearing your voice for the first time and sad you are now in the spirit world.  My prayers and love to your family as they walk on until you meet again.  Your music is beautiful, thank you. </p>
+    <p class="p_date">2023-03-28</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Dukso</span>
+		</p>
+		<p class="p_com">bratuced ja rokam wake me up u momentov .. pozdrav kaj i da si od severna</p>
+    <p class="p_date">2023-03-28</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Ibrahim</span>
+		</p>
+		<p class="p_com">I really like your song it's very encouraging for my life why are you doing this do you have no enthusiasm for life I remember your song called the night it made me have a passion for life I heard in that song don't mind your life this is an adventure that is far away you are my idol you keep encouraging others until you can't cheer yourself up RIP.avicii
+
+
+
+                        Im from indonesia 
+                         Avicii tank yuo for your song</p>
+    <p class="p_date">2023-03-28</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Ibrahim </span>
+		</p>
+		<p class="p_com">I really like your song it's very encouraging for my life why are you doing this do you have no enthusiasm for life I remember your song called the night it made me have a passion for life I heard in that song don't mind your life this is an adventure that is far away you are my idol you keep encouraging others until you can't cheer yourself up RIP.avicii
+
+                            Im from indonesia</p>
+    <p class="p_date">2023-03-28</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Viktor </span>
+		</p>
+		<p class="p_com">I just love u, from Russia)</p>
+    <p class="p_date">2023-03-28</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Zainab</span>
+		</p>
+		<p class="p_com">Basically, I was training for a film role to SOS, and I missed the chair by an inch, otherwise I would have smashed my mouth..but I had to throw myself into it so no option to say um, let me move to the side. Job centre really impressed. I have an actress profile now. </p>
+    <p class="p_date">2023-03-28</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Hope </span>
+		</p>
+		<p class="p_com">Hi avicii your the best ever dj that I ever had </p>
+    <p class="p_date">2023-03-28</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Hope</span>
+		</p>
+		<p class="p_com">I love avicii so much I love your songs by your friend Martin Garrix love hope 🙏🙏🙏💕
+</p>
+    <p class="p_date">2023-03-28</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Vinny </span>
+		</p>
+		<p class="p_com">avicci was very outgoing and shared a whole burst of such positivity, miss you Tim ❤️❤️</p>
+    <p class="p_date">2023-03-27</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>A S H L E Y </span>
+		</p>
+		<p class="p_com">Recuerdo la primera canción que escuche de Avicii, fue la de Wake me Up, en ese momento no sabía como se llamaba &amp; quería averiguar cual era, hasta que finalmente lo encontré, desde entonces, allá por el 2013/2014, nunca dejé de escuchar sus canciones, ahora tengo 22 años &amp; sus canciones me hacen sentir muy bien &amp; me hacen sentir que la vida no es tan mala. 
+Extraño su música</p>
+    <p class="p_date">2023-03-27</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Admir</span>
+		</p>
+		<p class="p_com">HIS SONG INSPIRED ME TO CONTINUE ON MY WORK THANKS.</p>
+    <p class="p_date">2023-03-27</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Jeni</span>
+		</p>
+		<p class="p_com">It's such heartwarming to see others haven't forgotten you either.
+Miss you &lt;3</p>
+    <p class="p_date">2023-03-27</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Ashleigh</span>
+		</p>
+		<p class="p_com">I see you in my dreams sometimes when I wake up I'm instantly said but I smile because I know ill see you again. Let's be lonely together ....</p>
+    <p class="p_date">2023-03-27</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>saori.S</span>
+		</p>
+		<p class="p_com">I remember you forever! The Osaka-Japan performance was the best in my life. You made music makes world peaceful. Thank you for encounter your music.</p>
+    <p class="p_date">2023-03-28</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Nuria (España)</span>
+		</p>
+		<p class="p_com">Mi querido Tim . Extraño tu mirada, tu sonrisa, tu gran corazón, tu ilusión, tu creatividad, tu música, tus ganas de comerte el mundo...... Sigue iluminando nuestros corazones con tu bondad mi ángel. Siempre a tu lado.❤❤</p>
+    <p class="p_date">2023-03-27</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Martin, KR</span>
+		</p>
+		<p class="p_com">Avicii, my young life.</p>
+    <p class="p_date">2023-03-27</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>marco</span>
+		</p>
+		<p class="p_com">per sempre nel mio cuore, ovunque tu sia, eterno tim</p>
+    <p class="p_date">2023-03-27</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Alwin Anthony </span>
+		</p>
+		<p class="p_com">Missing you 😢😚😚 why god taken him?  I'm missing his music </p>
+    <p class="p_date">2023-03-27</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Charlie</span>
+		</p>
+		<p class="p_com">I never heard Avicii song not before. I'm truly sorry about Avicii been passed away in 5 years ago. We'll missed you. Rest In Peace Avicii. </p>
+    <p class="p_date">2023-03-27</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>강민</span>
+		</p>
+		<p class="p_com">Avicii is still on our mind</p>
+    <p class="p_date">2023-03-27</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>никита</span>
+		</p>
+		<p class="p_com">всегда любил авичи, еще с самого детства, надеюсь с ним все хорошо, мы помним его.</p>
+    <p class="p_date">2023-03-27</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Kaila Stephen</span>
+		</p>
+		<p class="p_com">I'm glad my younger self found his music. I don't think I would ever make it through the toughest moments without listening to his songs. My future kids will know about him and why his music brought happiness to other people. </p>
+    <p class="p_date">2023-03-26</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Survice Masterly</span>
+		</p>
+		<p class="p_com">Nobody introduced me to your music, I fell in love with it from the internet, and did not know you were no-more, until today. my condolences as I watch your tributes and performances. your music is a gift to us all. forever lives you in these songs.  </p>
+    <p class="p_date">2023-03-26</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Davide Castellazzi</span>
+		</p>
+		<p class="p_com">First time listening right now your promotional mix of 2013 on SoundCloud. It's wonderful, also the unreleased songs. For people who love Tim and his music, this full of meaning art will never die.</p>
+    <p class="p_date">2023-03-26</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>SHARMÉL REYES </span>
+		</p>
+		<p class="p_com">i just love you so much and miss you a lot of every day ❤️‍🩹</p>
+    <p class="p_date">2023-03-27</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Qu4n</span>
+		</p>
+		<p class="p_com">He will lives forever in our hearts</p>
+    <p class="p_date">2023-03-26</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>JALI</span>
+		</p>
+		<p class="p_com">By now I recognize all your songs in the disco at the pub. We will miss you Avicii.</p>
+    <p class="p_date">2023-03-26</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>TT from Taiwan</span>
+		</p>
+		<p class="p_com">You took me into the world of EDM. You only live once, but your masterpiece gonna last forever. R.I.P legend</p>
+    <p class="p_date">2023-03-26</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>yifan bao</span>
+		</p>
+		<p class="p_com">420会发专辑吗？
+Will Avicii release an album on April the 4th？</p>
+    <p class="p_date">2023-03-26</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Brian K#5</span>
+		</p>
+		<p class="p_com">One of the best, gifted and talented DJ with a unique style. He shared life experiences through his music which made every song have a different feel and emotion to it.
+FOREVER #1 DJ🫶!!! 
+"One day you'll leave this world behind, so live a life you'll remember" ~Tim Bergling~
+</p>
+    <p class="p_date">2023-03-25</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Killian</span>
+		</p>
+		<p class="p_com">Nobody will ever compare to the impact on our music we will never forget the Legend that is  .... Tim Bergling</p>
+    <p class="p_date">2023-03-26</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>David Punda</span>
+		</p>
+		<p class="p_com">Ahoj Toto věnování je pro umělce Avicii.
+Aviciiho sem nikdy osobně nepotkal.
+Ale jedno je jisté.
+Jeho veliký odkaz, jeho touha dokázat něco co spojí lidi a udrží je pohromadě.
+Hudba kterou připravil spojením se s dalšími lidmi,
+ta dokonalost a dlouhá cesta za jeho snem.
+Tento Aviciiho odkaz, který s radostí prezentoval před hromadou lidí,
+bude celý život s námi.
+Pro mně jsi nezemřel příteli.
+A ukázal si mi že když se člověk snaží,
+najde to co hledá.
+At¨ je ti země lehká a děkuji ti že jsi žil.
+ </p>
+    <p class="p_date">2023-03-26</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>hy</span>
+		</p>
+		<p class="p_com">I hope that you will came back in the future,because your songs encourage me a lot </p>
+    <p class="p_date">2023-03-26</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>OL'</span>
+		</p>
+		<p class="p_com">Where there's a will, there's a way, kind of beautiful.</p>
+    <p class="p_date">2023-03-25</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Marie Andersson </span>
+		</p>
+		<p class="p_com">Today Iisting on Bromance my favorite from Alicia Tribute Consert I was there A lovely memory</p>
+    <p class="p_date">2023-03-25</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Bebê da Tale </span>
+		</p>
+		<p class="p_com">Avicii era um anjo que ele as vezes tinha asas de cor branco quando ele estava do lado da luz e as vezes tinhas asas de cor preto quando ele entrava para as trevas ele fazia fogo com as mãos e energia e ele tinha o poder de voar no céu ele tinha o poder de remover as asas e poder de da asas a seus amigos ele soltava raios e fogo e tornados sobre a terra e ele sempre era o líder de alguns anjos !</p>
+    <p class="p_date">2023-03-25</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Svaro</span>
+		</p>
+		<p class="p_com">Скучаю.....как жалко ,обидно,что тебя нет брат...ты ушел и ушла любовь к электронной музыки....</p>
+    <p class="p_date">2023-03-25</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Izabela </span>
+		</p>
+		<p class="p_com">❤️❤️❤️</p>
+    <p class="p_date">2023-03-25</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>simon</span>
+		</p>
+		<p class="p_com">he was such a brilliant artist, i still love him</p>
+    <p class="p_date">2023-03-25</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Błażej</span>
+		</p>
+		<p class="p_com">Martin Garrix remind me how much I missed you :(
+R.I.P. Avicii</p>
+    <p class="p_date">2023-03-25</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>ScottGavin</span>
+		</p>
+		<p class="p_com">An amazing human being. Your music was and still is loved the world over. Thank you for your extraordinary contribution to music and for the fond memories I still hold today and for the rest of time listening to your masterful artwork.
+</p>
+    <p class="p_date">2023-03-24</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Amelia</span>
+		</p>
+		<p class="p_com">I love you and we still love you, forever </p>
+    <p class="p_date">2023-03-24</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>NOLZIE</span>
+		</p>
+		<p class="p_com">Avicii's "Lonely Together" is the song that pushed me to question how music is actually created and inspired me to produce music of my own. Tim will forever have a special place in my heart &lt;3.</p>
+    <p class="p_date">2023-03-24</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Mario</span>
+		</p>
+		<p class="p_com">Que saudades, você foi um dos maiores músicos da história. Só lembro de coisas ouvindo suas músicas...</p>
+    <p class="p_date">2023-03-24</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Zétény</span>
+		</p>
+		<p class="p_com">I First found out about Avicii when i was 5 and my parents we're listening to The famous Wake me up and i really loved it back then so much i only listened to that one song but then i found other songs and i was listening to alot of songs from levels to stories. Im now back listening to all of the songs Non-stop and it makes me still sad he passed away. Back then in 2019 if i found out about the Cubes placed in bis cities i would have spent all my money to go and listen to the album TIM.</p>
+    <p class="p_date">2023-03-24</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Goth mommy lexx</span>
+		</p>
+		<p class="p_com">Miss you. Wake me up was such a great song. I love you. </p>
+    <p class="p_date">2023-03-24</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>jyz</span>
+		</p>
+		<p class="p_com">good night hjq🥰</p>
+    <p class="p_date">2023-03-23</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>hjqqq</span>
+		</p>
+		<p class="p_com">good night to jyz 
+good night to avicii</p>
+    <p class="p_date">2023-03-24</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>brian</span>
+		</p>
+		<p class="p_com">i have enjoyed listening to his music- childhood songs and nostalgia.</p>
+    <p class="p_date">2023-03-24</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>erik</span>
+		</p>
+		<p class="p_com">hi avicii, i was a fan since 2014, i loved your songs and i wish you a good time in heaven.. shell we say R.I.P, we miss you avicii and we all give you hearts:D</p>
+    <p class="p_date">2023-03-23</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Tefson</span>
+		</p>
+		<p class="p_com">he was the only person who presented the edm song in emotional way...</p>
+    <p class="p_date">2023-03-23</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Céline </span>
+		</p>
+		<p class="p_com">Tu nous manques tellement Tim ❤️ Bientôt 5 ans déjà… 🥲
+Tu nous a laisser ton héritage: ta musique 
+Je les écoutes toujours autant en boucle 
+Tu étais tellement talentueux et créatif… un artiste simple et généreux. 
+On ne t’oublie pas 🥰 j’espère que tu es bien là haut 😇
+</p>
+    <p class="p_date">2023-03-23</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Zhang zepeng</span>
+		</p>
+		<p class="p_com">Forever Avicii</p>
+    <p class="p_date">2023-03-24</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Gianmarco</span>
+		</p>
+		<p class="p_com">La tua musica sarà per sempre, sei stato fonte d'ispirazione. Grazie </p>
+    <p class="p_date">2023-03-23</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Lucia</span>
+		</p>
+		<p class="p_com">What an artist ♥️</p>
+    <p class="p_date">2023-03-23</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>🍔</span>
+		</p>
+		<p class="p_com">Für Fortnite</p>
+    <p class="p_date">2023-03-23</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Ty </span>
+		</p>
+		<p class="p_com">i never knew who he was when i was a kid but when i rediscovered him i broke down in tears his songs were all wase so inspiring to me. </p>
+    <p class="p_date">2023-03-22</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Charles</span>
+		</p>
+		<p class="p_com">Sono cresciuto con la tua musica e ogni volta che ascolto un tuo brano sento i brividi come la fosse la prima volta... non esiste nessuno come te .. nessuno  riesce a farmi sognare come fa la tua musica.  Grazie ancora Tim. </p>
+    <p class="p_date">2023-03-22</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>J</span>
+		</p>
+		<p class="p_com">I miss you. And I still love you so much. Got a tattoo of your lyrics, so that you can always be with me in some way. My forever favourite 🦋❤️</p>
+    <p class="p_date">2023-03-22</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Raven</span>
+		</p>
+		<p class="p_com">when i found out that he died i was heartbroken he was my favorite singer.  RIP </p>
+    <p class="p_date">2023-03-22</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Steve Gillett(england)</span>
+		</p>
+		<p class="p_com">Tim , legend of EDM, so sad but so brave to share, without knowing you have inspired millions not just in music but in mental health awareness, you will live on through us , the nights make me well up every time it comes on my playlist not having a dad i  want my son to hear these lyrics and be my inspiration to him when I'm old and grey, looking at getting your symbol as tattoo (like many), also learning to be a coach for men in mental health so your one of my drives, take care up there x</p>
+    <p class="p_date">2023-03-22</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Maicon Jason dos Santos</span>
+		</p>
+		<p class="p_com">Eu o ouço desde de os 12 anos com a música wake me UP, as músicas desde então foram inspiração para cont;nuar desde a morte fiz o símbolo AV para sempre lembrar de continuar e toda vez que ouço Wake me UP é um alivio.</p>
+    <p class="p_date">2023-03-22</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span> JamesRiddle</span>
+		</p>
+		<p class="p_com">love u forever TIM</p>
+    <p class="p_date">2023-03-22</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>benno</span>
+		</p>
+		<p class="p_com">aviccicci is the best </p>
+    <p class="p_date">2023-03-22</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>◢◤</span>
+		</p>
+		<p class="p_com">R.I.P. Legend</p>
+    <p class="p_date">2023-03-22</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Shen Xianqian</span>
+		</p>
+		<p class="p_com">想你的又一天Tim....</p>
+    <p class="p_date">2023-03-22</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Арт </span>
+		</p>
+		<p class="p_com">Музыка Авичи за всё время стала по истине легендарной, до смерти самого диджея его музыка была лучшей в своëм роде, даже после смерти она набирает популярность. Очень грустно что из жизни ушёл талантливый, хороший, диджей, очень жаль что больше не выйдет шедевров от этого человека, люблю, помню, скорблю. </p>
+    <p class="p_date">2023-03-22</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>The future of music</span>
+		</p>
+		<p class="p_com">ever since I was a kid i listened to Avicii and his music has inspired me every day from 2013 to 2023. I miss him. I've never met him personally but to think about him gone makes me feel like i lost someone special. We all lost someone special. Your memory will last forever in me and the others who are because you inspired us. 
+Truly, Thank you Tim.</p>
+    <p class="p_date">2023-03-21</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>anal</span>
+		</p>
+		<p class="p_com">anal</p>
+    <p class="p_date">2023-03-21</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>♡Sel♡</span>
+		</p>
+		<p class="p_com">always loved, never forgotten, forever missed ❤️</p>
+    <p class="p_date">2023-03-21</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>V</span>
+		</p>
+		<p class="p_com">Segundo informações, Avicii estava tentando expor o circo pedófilo em seu vídeo “For a Better Day”.</p>
+    <p class="p_date">2023-03-21</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>V</span>
+		</p>
+		<p class="p_com">Avicii morreu em abril de 2018 (28 anos), foi encontrado morto em Muscat, Omã. A polícia de Omã disse que “não havia suspeita criminal” ou evidência de jogo sujo. A TMZ informou que a causa da morte foi suicídio devido a ferimentos autoinfligidos com uma garrafa de vinho quebrada. Avicii foi atormentado por inúmeros problemas de saúde, incluindo pancreatite aguda, em parte devido ao consumo excessivo de álcool; em 2014, ele fez uma cirurgia para remover a vesícula biliar e o apêndice. Segundo in</p>
+    <p class="p_date">2023-03-21</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Shoebaloo</span>
+		</p>
+		<p class="p_com">RIP ❤️</p>
+    <p class="p_date">2023-03-21</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>shiraelsye</span>
+		</p>
+		<p class="p_com">your music lighten up my days, I love you, Tim! rest well in Heaven🤍🤍</p>
+    <p class="p_date">2023-03-21</p>
+	</li>
+
+  <li class="grid-item">
+		<p class="p_from">from
+			<span>Alekr</span>
+		</p>
+		<p class="p_com">From a fellow music artist, Rest in peace. Avicii, along with others, made iconic and beautiful tracks that make up the childhoods of millions, including me. even to this day, his style, and others, make up my style, House from the 2010s, like Alan Walker, Tobu, Jim Yosef, Elektronomia, and best, Avicii. These artists bring me great nostalgia, over the times that have passed. in fact, my artist's name is a combination of these artists names. R.I.P Avicii.</p>
+    <p class="p_date">2023-03-21</p>
+	</li>
+
+
+
+
+
+<div class="paginav">
+  <span aria-current="page" class="page-numbers current">1</span>
+<a class="page-numbers" href="https://avicii.com/page/2/#navigation">2</a>
+<a class="page-numbers" href="https://avicii.com/page/3/#navigation">3</a>
+<span class="page-numbers dots">&hellip;</span>
+<a class="page-numbers" href="https://avicii.com/page/606/#navigation">606</a>
+<a class="next page-numbers" href="https://avicii.com/page/2/#navigation"><i class="fa fa-arrow-right"></i></a>  </div>
+
+</ul>
+
+
+
+</section>
+
+<h2 class="instagramheader">Instagram</h2>
+<ul id="instafeed">
+
+
+<li><a href="https://www.instagram.com/p/BhKTiI3lx7d/" target="_new" class="ip" style="background-image:url('https://avicii.com/wp-content/themes/aviciiboard/assets/img/instagram/29417762_176803692965041_6453659533037273088_n.jpg');"></a></li>
+<li><a href="https://www.instagram.com/p/Bg9O97oFF4p/" target="_new" class="ip" style="background-image:url('https://avicii.com/wp-content/themes/aviciiboard/assets/img/instagram/29417750_194015201205195_7463775324967272448_n.jpg');"></a></li>
+<li><a href="https://www.instagram.com/p/BgzUHn5l_Wi/" target="_new" class="ip" style="background-image:url('https://avicii.com/wp-content/themes/aviciiboard/assets/img/instagram/29415842_179459952862208_1013374903308517376_n.jpg');"></a></li>
+<li><a href="https://www.instagram.com/p/BgkXn81lDcO/" target="_new" class="ip" style="background-image:url('https://avicii.com/wp-content/themes/aviciiboard/assets/img/instagram/29403829_610041836008627_7841899134696030208_n.jpg');"></a></li>
+
+<li><a href="https://www.instagram.com/p/BgjU_tUlAKT/" target="_new" class="ip" style="background-image:url('https://avicii.com/wp-content/themes/aviciiboard/assets/img/instagram/29095391_230009037546378_6187796646483460096_n.jpg');"></a></li>
+<li><a href="https://www.instagram.com/p/BgMd6jNFb5n/" target="_new" class="ip" style="background-image:url('https://avicii.com/wp-content/themes/aviciiboard/assets/img/instagram/28753184_175241989779508_7536401495365779456_n.jpg');"></a></li>
+<li><a href="https://www.instagram.com/p/BgESn23lSU2/" target="_new" class="ip" style="background-image:url('https://avicii.com/wp-content/themes/aviciiboard/assets/img/instagram/28764179_204413546978632_8638943737965182976_n.jpg');"></a></li>
+<li><a href="https://www.instagram.com/p/BgAtvJGFWEI/" target="_new" class="ip" style="background-image:url('https://avicii.com/wp-content/themes/aviciiboard/assets/img/instagram/28158307_2536633123228880_352239794182422528_n.jpg');"></a></li>
+
+</ul>
+
+
+<script src="https://avicii.com/wp-content/themes/aviciiboard/assets/js/main.js"></script>
+
+
+
+
+<link rel='stylesheet' id='nf-fu-jquery-fileupload-css'  href='https://avicii.com/wp-content/plugins/ninja-forms-uploads/assets/css/file-upload.css?ver=3.0.19' media='all' />
+<link rel='stylesheet' id='dashicons-css'  href='https://avicii.com/wp-includes/css/dashicons.min.css?ver=5.8.6' media='all' />
+<link rel='stylesheet' id='nf-display-css'  href='https://avicii.com/wp-content/plugins/ninja-forms/assets/css/display-structure.css?ver=5.8.6' media='all' />
+<link rel='stylesheet' id='nf-flatpickr-css'  href='https://avicii.com/wp-content/plugins/ninja-forms/assets/css/flatpickr.css?ver=5.8.6' media='all' />
+<script id='twentyseventeen-skip-link-focus-fix-js-extra'>
+var twentyseventeenScreenReaderText = {"quote":"<svg class=\"icon icon-quote-right\" aria-hidden=\"true\" role=\"img\"> <use href=\"#icon-quote-right\" xlink:href=\"#icon-quote-right\"><\/use> <\/svg>"};
+</script>
+<script src='https://avicii.com/wp-content/themes/twentyseventeen/assets/js/skip-link-focus-fix.js?ver=20161114' id='twentyseventeen-skip-link-focus-fix-js'></script>
+<script src='https://avicii.com/wp-content/themes/twentyseventeen/assets/js/global.js?ver=20190121' id='twentyseventeen-global-js'></script>
+<script src='https://avicii.com/wp-content/themes/twentyseventeen/assets/js/jquery.scrollTo.js?ver=2.1.2' id='jquery-scrollto-js'></script>
+<script src='https://avicii.com/wp-includes/js/wp-embed.min.js?ver=5.8.6' id='wp-embed-js'></script>
+<script src='https://avicii.com/wp-content/plugins/ninja-forms-uploads/assets/js/lib/jquery.iframe-transport.js?ver=3.0.19' id='nf-fu-jquery-iframe-transport-js'></script>
+<script src='https://avicii.com/wp-includes/js/jquery/ui/core.min.js?ver=1.12.1' id='jquery-ui-core-js'></script>
+<script src='https://avicii.com/wp-content/plugins/ninja-forms-uploads/assets/js/lib/jquery.fileupload.js?ver=3.0.19' id='nf-fu-jquery-fileupload-js'></script>
+<script src='https://avicii.com/wp-content/plugins/ninja-forms-uploads/assets/js/lib/jquery.fileupload-process.js?ver=3.0.19' id='nf-fu-jquery-fileupload-process-js'></script>
+<script src='https://avicii.com/wp-content/plugins/ninja-forms-uploads/assets/js/lib/jquery.fileupload-validate.js?ver=3.0.19' id='nf-fu-jquery-fileupload-validate-js'></script>
+<script src='https://avicii.com/wp-includes/js/underscore.min.js?ver=1.13.1' id='underscore-js'></script>
+<script src='https://avicii.com/wp-includes/js/backbone.min.js?ver=1.4.0' id='backbone-js'></script>
+<script src='https://avicii.com/wp-content/plugins/ninja-forms/assets/js/min/front-end-deps.js?ver=3.6.11' id='nf-front-end-deps-js'></script>
+<script id='nf-front-end-js-extra'>
+var nfi18n = {"ninjaForms":"Ninja Forms","changeEmailErrorMsg":"Please enter a valid email address!","changeDateErrorMsg":"Please enter a valid date!","confirmFieldErrorMsg":"These fields must match!","fieldNumberNumMinError":"Number Min Error","fieldNumberNumMaxError":"Number Max Error","fieldNumberIncrementBy":"Please increment by ","fieldTextareaRTEInsertLink":"Insert Link","fieldTextareaRTEInsertMedia":"Insert Media","fieldTextareaRTESelectAFile":"Select a file","formErrorsCorrectErrors":"Please correct errors before submitting this form.","formHoneypot":"If you are a human seeing this field, please leave it empty.","validateRequiredField":"This is a required field.","honeypotHoneypotError":"Honeypot Error","fileUploadOldCodeFileUploadInProgress":"File Upload in Progress.","fileUploadOldCodeFileUpload":"FILE UPLOAD","currencySymbol":"kr","fieldsMarkedRequired":"Fields marked with an <span class=\"ninja-forms-req-symbol\">*<\/span> are required","thousands_sep":",","decimal_point":".","siteLocale":"en_US","dateFormat":"m\/d\/Y","startOfWeek":"1","of":"of","previousMonth":"Previous Month","nextMonth":"Next Month","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthsShort":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"weekdaysShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"weekdaysMin":["Su","Mo","Tu","We","Th","Fr","Sa"],"recaptchaConsentMissing":"reCapctha validation couldn't load.","recaptchaMissingCookie":"reCaptcha v3 validation couldn't load the cookie needed to submit the form.","recaptchaConsentEvent":"Accept reCaptcha cookies before sending the form."};
+var nfFrontEnd = {"adminAjax":"https:\/\/avicii.com\/wp-admin\/admin-ajax.php","ajaxNonce":"0179bc5bb0","requireBaseUrl":"https:\/\/avicii.com\/wp-content\/plugins\/ninja-forms\/assets\/js\/","use_merge_tags":{"user":{"address":"address","textbox":"textbox","button":"button","checkbox":"checkbox","city":"city","confirm":"confirm","date":"date","email":"email","firstname":"firstname","html":"html","hidden":"hidden","lastname":"lastname","listcheckbox":"listcheckbox","listcountry":"listcountry","listimage":"listimage","listmultiselect":"listmultiselect","listradio":"listradio","listselect":"listselect","liststate":"liststate","note":"note","number":"number","password":"password","passwordconfirm":"passwordconfirm","product":"product","quantity":"quantity","recaptcha":"recaptcha","recaptcha_v3":"recaptcha_v3","repeater":"repeater","shipping":"shipping","spam":"spam","starrating":"starrating","submit":"submit","terms":"terms","textarea":"textarea","total":"total","unknown":"unknown","zip":"zip","hr":"hr","file_upload":"file_upload"},"post":{"address":"address","textbox":"textbox","button":"button","checkbox":"checkbox","city":"city","confirm":"confirm","date":"date","email":"email","firstname":"firstname","html":"html","hidden":"hidden","lastname":"lastname","listcheckbox":"listcheckbox","listcountry":"listcountry","listimage":"listimage","listmultiselect":"listmultiselect","listradio":"listradio","listselect":"listselect","liststate":"liststate","note":"note","number":"number","password":"password","passwordconfirm":"passwordconfirm","product":"product","quantity":"quantity","recaptcha":"recaptcha","recaptcha_v3":"recaptcha_v3","repeater":"repeater","shipping":"shipping","spam":"spam","starrating":"starrating","submit":"submit","terms":"terms","textarea":"textarea","total":"total","unknown":"unknown","zip":"zip","hr":"hr","file_upload":"file_upload"},"system":{"address":"address","textbox":"textbox","button":"button","checkbox":"checkbox","city":"city","confirm":"confirm","date":"date","email":"email","firstname":"firstname","html":"html","hidden":"hidden","lastname":"lastname","listcheckbox":"listcheckbox","listcountry":"listcountry","listimage":"listimage","listmultiselect":"listmultiselect","listradio":"listradio","listselect":"listselect","liststate":"liststate","note":"note","number":"number","password":"password","passwordconfirm":"passwordconfirm","product":"product","quantity":"quantity","recaptcha":"recaptcha","recaptcha_v3":"recaptcha_v3","repeater":"repeater","shipping":"shipping","spam":"spam","starrating":"starrating","submit":"submit","terms":"terms","textarea":"textarea","total":"total","unknown":"unknown","zip":"zip","hr":"hr","file_upload":"file_upload"},"fields":{"address":"address","textbox":"textbox","button":"button","checkbox":"checkbox","city":"city","confirm":"confirm","date":"date","email":"email","firstname":"firstname","html":"html","hidden":"hidden","lastname":"lastname","listcheckbox":"listcheckbox","listcountry":"listcountry","listimage":"listimage","listmultiselect":"listmultiselect","listradio":"listradio","listselect":"listselect","liststate":"liststate","note":"note","number":"number","password":"password","passwordconfirm":"passwordconfirm","product":"product","quantity":"quantity","recaptcha":"recaptcha","recaptcha_v3":"recaptcha_v3","repeater":"repeater","shipping":"shipping","spam":"spam","starrating":"starrating","submit":"submit","terms":"terms","textarea":"textarea","total":"total","unknown":"unknown","zip":"zip","hr":"hr","file_upload":"file_upload"},"calculations":{"html":"html","hidden":"hidden","note":"note","unknown":"unknown"}},"opinionated_styles":"","nf_consent_status_response":[]};
+var nfRepeater = {"add_repeater_child_field_text":"Add "};
+</script>
+<script src='https://avicii.com/wp-content/plugins/ninja-forms/assets/js/min/front-end.js?ver=3.6.11' id='nf-front-end-js'></script>
+<script id='nf-fu-file-upload-js-extra'>
+var nf_upload = {"strings":{"file_limit":"Max %n files are allowed","upload_error":"Nonce error, upload failed","unknown_upload_error":"Upload error, upload failed","max_file_size_error":"File exceeds maximum file size. File must be under %nMB.","delete_file":"Delete"}};
+</script>
+<script src='https://avicii.com/wp-content/plugins/ninja-forms-uploads/assets/js/front-end/controllers/fieldFile.js?ver=3.0.19' id='nf-fu-file-upload-js'></script>
+<script src='https://www.google.com/recaptcha/api.js?hl&#038;onload=nfRenderRecaptcha&#038;render=explicit&#038;ver=3.6.11' id='nf-google-recaptcha-js'></script>
+<script src='https://avicii.com/wp-content/plugins/ninja-forms/assets/js/min/front-end--datepicker.min.js?ver=3.6.11' id='nf-front-end--datepicker-js'></script>
+<script id="tmpl-nf-layout" type="text/template">
+	<span id="nf-form-title-{{{ data.id }}}" class="nf-form-title">
+		{{{ ( 1 == data.settings.show_title ) ? '<h3>' + data.settings.title + '</h3>' : '' }}}
+	</span>
+	<div class="nf-form-wrap ninja-forms-form-wrap">
+		<div class="nf-response-msg"></div>
+		<div class="nf-debug-msg"></div>
+		<div class="nf-before-form"></div>
+		<div class="nf-form-layout"></div>
+		<div class="nf-after-form"></div>
+	</div>
+</script>
+
+<script id="tmpl-nf-empty" type="text/template">
+
+</script>
+<script id="tmpl-nf-before-form" type="text/template">
+	{{{ data.beforeForm }}}
+</script><script id="tmpl-nf-after-form" type="text/template">
+	{{{ data.afterForm }}}
+</script><script id="tmpl-nf-before-fields" type="text/template">
+    <div class="nf-form-fields-required">{{{ data.renderFieldsMarkedRequired() }}}</div>
+    {{{ data.beforeFields }}}
+</script><script id="tmpl-nf-after-fields" type="text/template">
+    {{{ data.afterFields }}}
+    <div id="nf-form-errors-{{{ data.id }}}" class="nf-form-errors" role="alert"></div>
+    <div class="nf-form-hp"></div>
+</script>
+<script id="tmpl-nf-before-field" type="text/template">
+    {{{ data.beforeField }}}
+</script><script id="tmpl-nf-after-field" type="text/template">
+    {{{ data.afterField }}}
+</script><script id="tmpl-nf-form-layout" type="text/template">
+	<form>
+		<div>
+			<div class="nf-before-form-content"></div>
+			<div class="nf-form-content {{{ data.element_class }}}"></div>
+			<div class="nf-after-form-content"></div>
+		</div>
+	</form>
+</script><script id="tmpl-nf-form-hp" type="text/template">
+	<label for="nf-field-hp-{{{ data.id }}}" aria-hidden="true">
+		{{{ nfi18n.formHoneypot }}}
+		<input id="nf-field-hp-{{{ data.id }}}" name="nf-field-hp" class="nf-element nf-field-hp" type="text" value=""/>
+	</label>
+</script>
+<script id="tmpl-nf-field-layout" type="text/template">
+    <div id="nf-field-{{{ data.id }}}-container" class="nf-field-container {{{ data.type }}}-container {{{ data.renderContainerClass() }}}">
+        <div class="nf-before-field"></div>
+        <div class="nf-field"></div>
+        <div class="nf-after-field"></div>
+    </div>
+</script>
+<script id="tmpl-nf-field-before" type="text/template">
+    {{{ data.beforeField }}}
+</script><script id="tmpl-nf-field-after" type="text/template">
+    <#
+    /*
+     * Render our input limit section if that setting exists.
+     */
+    #>
+    <div class="nf-input-limit"></div>
+    <#
+    /*
+     * Render our error section if we have an error.
+     */
+    #>
+    <div id="nf-error-{{{ data.id }}}" class="nf-error-wrap nf-error" role="alert"></div>
+    <#
+    /*
+     * Render any custom HTML after our field.
+     */
+    #>
+    {{{ data.afterField }}}
+</script>
+<script id="tmpl-nf-field-wrap" type="text/template">
+	<div id="nf-field-{{{ data.id }}}-wrap" class="{{{ data.renderWrapClass() }}}" data-field-id="{{{ data.id }}}">
+		<#
+		/*
+		 * This is our main field template. It's called for every field type.
+		 * Note that must have ONE top-level, wrapping element. i.e. a div/span/etc that wraps all of the template.
+		 */
+        #>
+		<#
+		/*
+		 * Render our label.
+		 */
+        #>
+		{{{ data.renderLabel() }}}
+		<#
+		/*
+		 * Render our field element. Uses the template for the field being rendered.
+		 */
+        #>
+		<div class="nf-field-element">{{{ data.renderElement() }}}</div>
+		<#
+		/*
+		 * Render our Description Text.
+		 */
+        #>
+		{{{ data.renderDescText() }}}
+	</div>
+</script>
+<script id="tmpl-nf-field-wrap-no-label" type="text/template">
+    <div id="nf-field-{{{ data.id }}}-wrap" class="{{{ data.renderWrapClass() }}}" data-field-id="{{{ data.id }}}">
+        <div class="nf-field-label"></div>
+        <div class="nf-field-element">{{{ data.renderElement() }}}</div>
+        <div class="nf-error-wrap"></div>
+    </div>
+</script>
+<script id="tmpl-nf-field-wrap-no-container" type="text/template">
+
+        {{{ data.renderElement() }}}
+
+        <div class="nf-error-wrap"></div>
+</script>
+<script id="tmpl-nf-field-label" type="text/template">
+	<div class="nf-field-label"><label for="nf-field-{{{ data.id }}}"
+	                                   id="nf-label-field-{{{ data.id }}}"
+	                                   class="{{{ data.renderLabelClasses() }}}">{{{ _.escape( data.label ) }}} {{{ ( 'undefined' != typeof data.required && 1 == data.required ) ? '<span class="ninja-forms-req-symbol">*</span>' : '' }}} {{{ data.maybeRenderHelp() }}}</label></div>
+</script>
+<script id="tmpl-nf-field-error" type="text/template">
+	<div class="nf-error-msg nf-error-{{{ data.id }}}">{{{ data.msg }}}</div>
+</script><script id="tmpl-nf-form-error" type="text/template">
+	<div class="nf-error-msg nf-error-{{{ data.id }}}">{{{ data.msg }}}</div>
+</script><script id="tmpl-nf-field-input-limit" type="text/template">
+    {{{ data.currentCount() }}} {{{ nfi18n.of }}} {{{ data.input_limit }}} {{{ data.input_limit_msg }}}
+</script><script id="tmpl-nf-field-null" type="text/template">
+</script><script id="tmpl-nf-field-date" type="text/template">
+	<div class="pikaday__container"><!-- Pikaday mentions were added for backwards compatibility -->
+		<input id="nf-field-{{{ data.id }}}" name="nf-field-{{{ data.id }}}" aria-invalid="false" aria-describedby="nf-error-{{{ data.id }}}" class="{{{ data.renderClasses() }}} nf-element datepicker pikaday__display pikaday__display--pikaday"
+			aria-labelledby="nf-label-field-{{{ data.id }}}"
+				{{{ data.maybeRequired() }}}
+			type="date" value="{{{ _.escape( data.value ) }}}" {{{ data.renderPlaceholder() }}} >
+	</div>
+
+	<# if ( data.maybeRenderTime() ) { #>
+		<div style="float:left;">
+			<select class="hour extra">
+				{{{ data.renderHourOptions() }}}
+			</select>
+		</div>
+		<div style="float:left;">
+			<select class="minute extra">
+				{{{ data.renderMinuteOptions() }}}
+			</select>
+		</div>
+		{{{ data.maybeRenderAMPM() }}}
+	<# } #>
+</script><script id="tmpl-nf-field-textbox" type="text/template">
+	<input
+			type="text"
+			value="{{{ _.escape( data.value ) }}}"
+			class="{{{ data.renderClasses() }}} nf-element"
+			{{{ data.renderPlaceholder() }}}
+			{{{ data.maybeDisabled() }}}
+			{{{ data.maybeInputLimit() }}}
+
+			id="nf-field-{{{ data.id }}}"
+			<# if( ! data.disable_browser_autocomplete && -1 < [ 'city', 'zip' ].indexOf( data.type ) ){ #>
+				name="{{ data.custom_name_attribute || 'nf-field-' + data.id + '-' + data.type }}"
+				autocomplete="on"
+			<# } else { #>
+				name="{{ data.custom_name_attribute || 'nf-field-' + data.id }}"
+				{{{ data.maybeDisableAutocomplete() }}}
+			<# } #>
+
+			aria-invalid="false"
+			aria-describedby="nf-error-{{{ data.id }}}"
+			aria-labelledby="nf-label-field-{{{ data.id }}}"
+
+			{{{ data.maybeRequired() }}}
+	>
+</script>
+<script id='tmpl-nf-field-input' type='text/template'>
+    <input id="nf-field-{{{ data.id }}}" name="nf-field-{{{ data.id }}}" aria-invalid="false" aria-describedby="nf-error-{{{ data.id }}}" class="{{{ data.renderClasses() }}} nf-element" type="text" value="{{{ _.escape( data.value ) }}}" {{{ data.renderPlaceholder() }}} {{{ data.maybeDisabled() }}}
+           aria-labelledby="nf-label-field-{{{ data.id }}}"
+
+            {{{ data.maybeRequired() }}}
+    >
+</script>
+<script id="tmpl-nf-field-textarea" type="text/template">
+    <textarea id="nf-field-{{{ data.id }}}" name="nf-field-{{{ data.id }}}" aria-invalid="false" aria-describedby="nf-error-{{{ data.id }}}" class="{{{ data.renderClasses() }}} nf-element" {{{ data.renderPlaceholder() }}} {{{ data.maybeDisabled() }}} {{{ data.maybeDisableAutocomplete() }}} {{{ data.maybeInputLimit() }}}
+        aria-labelledby="nf-label-field-{{{ data.id }}}"
+
+        {{{ data.maybeRequired() }}}
+    >{{{ _.escape( data.value ) }}}</textarea>
+</script>
+
+<!-- Rich Text Editor Templates -->
+
+<script id="tmpl-nf-rte-media-button" type="text/template">
+    <span class="dashicons dashicons-admin-media"></span>
+</script>
+
+<script id="tmpl-nf-rte-link-button" type="text/template">
+    <span class="dashicons dashicons-admin-links"></span>
+</script>
+
+<script id="tmpl-nf-rte-unlink-button" type="text/template">
+    <span class="dashicons dashicons-editor-unlink"></span>
+</script>
+
+<script id="tmpl-nf-rte-link-dropdown" type="text/template">
+    <div class="summernote-link">
+        URL
+        <input type="url" class="widefat code link-url"> <br />
+        Text
+        <input type="url" class="widefat code link-text"> <br />
+        <label>
+            <input type="checkbox" class="link-new-window"> {{{ nfi18n.fieldsTextareaOpenNewWindow }}}
+        </label>
+        <input type="button" class="cancel-link extra" value="Cancel">
+        <input type="button" class="insert-link extra" value="Insert">
+    </div>
+</script>
+<script id="tmpl-nf-field-firstname" type="text/template">
+    <input
+            type="text"
+            value="{{{ _.escape( data.value ) }}}"
+            class="{{{ data.renderClasses() }}} nf-element"
+
+            id="nf-field-{{{ data.id }}}"
+            <# if( ! data.disable_browser_autocompletes ){ #>
+            name="{{ data.custom_name_attribute || 'nf-field-' + data.id + '-' + data.type }}"
+            autocomplete="given-name"
+            <# } else { #>
+            name="{{ data.custom_name_attribute || 'nf-field-' + data.id }}"
+            {{{ data.maybeDisableAutocomplete() }}}
+            <# } #>
+            {{{ data.renderPlaceholder() }}}
+
+            aria-invalid="false"
+            aria-describedby="nf-error-{{{ data.id }}}"
+            aria-labelledby="nf-label-field-{{{ data.id }}}"
+
+            {{{ data.maybeRequired() }}}
+    >
+</script>
+<script id="tmpl-nf-field-file-upload" type="text/template">
+	<button class="btn btn-success nf-fu-fileinput-button" type="button">
+        <span>{{{ data.select_files_text }}}</span>
+    </button>
+	<input class="nf-element" style="display: block; visibility: hidden; width: 0; height: 0;" type="file" <# data.uploadMulti ? print( 'name="files[]" multiple' ) : print ( 'name="files"' ) #> <# data.upload_types ? print( 'accept=" ' + data.upload_types + '"' ) : '' #>>
+	<input type="hidden" class="nf-upload-nonce" value="{{{ data.uploadNonce }}}">
+	<div class="nf-fu-progress">
+		<div class="nf-fu-progress-bar nf-fu-progress-bar-success animate"></div>
+	</div>
+	<div class="files_uploaded"></div>
+</script>
+
+<script id="tmpl-nf-field-file-row" type="text/template">
+	<p>
+		{{{ data.name }}}
+		<a href="#" class="delete">{{{ nf_upload.strings.delete_file }}}</a>
+	</p>
+</script><script id="tmpl-nf-field-recaptcha" type="text/template">
+	<input id="nf-field-{{{ data.id }}}" name="nf-field-{{{ data.id }}}" class="{{{ data.renderClasses() }}} nf-element" type="hidden" value="{{{ data.value }}}" />
+
+	<div class="g-recaptcha" data-callback="nf_recaptcha_response_{{{ data.id }}}" data-theme="{{{ data.theme }}}" data-sitekey="{{{ data.site_key }}}" data-fieldid="{{{ data.id }}}" {{{ ( "invisible" == data.size ) ? 'data-size="invisible"' : '' }}}></div>
+</script><script id="tmpl-nf-field-html" type="text/template">
+    {{{ data.value }}}
+</script>
+
+
+<script id="tmpl-nf-field-submit" type="text/template">
+	<input id="nf-field-{{{ data.id }}}" class="{{{ data.renderClasses() }}} nf-element " type="button" value="{{{ _.escape( data.label ) }}}" {{{ ( data.disabled ) ? 'disabled' : '' }}}>
+</script><script id='tmpl-nf-field-button' type='text/template'>
+    <button id="nf-field-{{{ data.id }}}" name="nf-field-{{{ data.id }}}" class="{{{ data.classes }}} nf-element">
+        {{{ _.escape( data.label ) }}}
+    </button>
+</script></body>
+</html>

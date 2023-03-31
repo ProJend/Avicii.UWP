@@ -1,4 +1,6 @@
-﻿using Windows.UI.Core;
+﻿using TrueLove.UWP.Spider;
+using Windows.ApplicationModel;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -15,6 +17,11 @@ namespace TrueLove.UWP.Views
         {
             this.InitializeComponent();
             Window.Current.Activated += OnWindowActivated; // 订阅窗口活动事件
+
+            //var readHTML = new ReviewHTML("https://avicii.com", false, false);
+            var readHTML = new ReviewHTML(Package.Current.InstalledPath + "/Spider/ImageCodeSample.txt");
+            var refineData = new RefineData();
+            ImageView.ItemsSource = refineData.RefineImage(readHTML.StrHTML);
         }
 
         /// <summary>

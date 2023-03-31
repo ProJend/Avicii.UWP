@@ -20,11 +20,6 @@ namespace TrueLove.UWP.Views
             this.InitializeComponent();
             Comments = CommentManager.GetComment();
             Window.Current.Activated += OnWindowActivated; // 订阅窗口活动事件
-            var readHTML = new URLRefining();
-
-            //readHTML.ReadHTML(Package.Current.InstalledPath + "/Spider/TestCode.txt");
-            readHTML.ReadHTML("https://bing.com", false);
-            aa.Text = readHTML.StrHTML;
         }
         /// <summary>
         /// 返回顶部按钮。
