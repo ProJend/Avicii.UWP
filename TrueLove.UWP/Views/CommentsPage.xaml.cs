@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using TrueLove.Lib.Models.Code;
 using TrueLove.UWP.Spider;
+using Windows.ApplicationModel;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -18,8 +19,12 @@ namespace TrueLove.UWP.Views
         public CommentsPage()
         {
             this.InitializeComponent();
-            Comments = CommentManager.GetComment();
             Window.Current.Activated += OnWindowActivated; // 订阅窗口活动事件
+
+            var readHTML = new ReviewHTML(Package.Current.InstalledPath + "/Spider/CommentCodeSample.txt");
+            var refineData = new RefineData();
+            Comments = refineData.RefineComment(readHTML.StrHTML);
+
         }
         /// <summary>
         /// 返回顶部按钮。
