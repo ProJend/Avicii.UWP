@@ -65,7 +65,6 @@
                     <Run Text="{x:Bind date}" />
                 </TextBlock>
             </Grid>
-
         </DataTemplate>
         <Style TargetType="TextBlock">
             <Setter Property="TextAlignment" Value="Center" />
@@ -73,6 +72,39 @@
         </Style>
     </Page.Resources>
     <Grid ManipulationMode="System,TranslateX">
+        <Grid Padding="0,40,0,0" VerticalAlignment="Top">
+            <Grid.Background>
+                <ImageBrush
+                    ImageSource="/Assets/Instagram/4.jpg"
+                    Opacity="0.4"
+                    Stretch="UniformToFill" />
+            </Grid.Background>
+            <TextBlock
+                x:Name="Title"
+                Margin="12,-2,0,0"
+                Style="{ThemeResource TitleTextBlockStyle}">
+                Comments
+            </TextBlock>
+            <Button
+                x:Name="TitleButton"
+                Margin="0,0,19,13"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Style="{StaticResource GhostButton}">
+                Leave a Memory
+            </Button>
+            <!--  占位符  -->
+            <TextBlock
+                x:Name="backgroundSubTitle"
+                MaxWidth="700"
+                Padding="35,80,35,35"
+                CharacterSpacing="350"
+                Opacity="0"
+                Style="{ThemeResource SubtitleTextBlockStyle}"
+                TextAlignment="Center">
+                TAKE A FEW MINUTES AND READ THE AVICII STORIES AND MEMORIES PEOPLE HAVE SHARED FROM ALL OVER THE WORLD.
+            </TextBlock>
+        </Grid>
         <ScrollViewer
             x:Name="hapticScrollViewer"
             Grid.Row="1"
@@ -108,30 +140,6 @@
                 </GridView>
             </StackPanel>
         </ScrollViewer>
-        <Grid
-            Height="85"
-            Padding="0,40,0,0"
-            VerticalAlignment="Top">
-            <Grid.Background>
-                <ImageBrush
-                    ImageSource="/Assets/Instagram/4.jpg"
-                    Opacity="0.5"
-                    Stretch="UniformToFill" />
-            </Grid.Background>
-            <TextBlock
-                x:Name="Title"
-                Margin="12,-2,0,0"
-                Style="{ThemeResource TitleTextBlockStyle}">
-                Comments
-            </TextBlock>
-            <Button
-                x:Name="TitleButton"
-                Margin="0,0,19,13"
-                HorizontalAlignment="Right"
-                Style="{StaticResource GhostButton}">
-                Leave a Memory
-            </Button>
-        </Grid>
         <Grid
             Name="ToolBar"
             MaxWidth="600"

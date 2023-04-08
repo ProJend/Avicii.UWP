@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TrueLove.Lib.Models.Code;
 using TrueLove.UWP.Spider;
 using Windows.ApplicationModel;
@@ -24,7 +25,6 @@ namespace TrueLove.UWP.Views
             var readHTML = new ReviewHTML(Package.Current.InstalledPath + "/Spider/CommentCodeSample.txt");
             var refineData = new RefineData();
             Comments = refineData.RefineComment(readHTML.StrHTML);
-
         }
         /// <summary>
         /// 返回顶部按钮。
@@ -44,27 +44,40 @@ namespace TrueLove.UWP.Views
             // 增加额外距离以防误触
             if (hapticScrollViewer.VerticalOffset > scrlocation + 1 && canMinimize)
             {
-                ToolBarSlideDownStoryboard.Begin();
+                toolBarSlideDownStoryboard.Begin();
                 canMinimize = false;
             }
             else if (hapticScrollViewer.VerticalOffset < scrlocation - 18 && !canMinimize)
             {
-                ToolBarSlideUpStoryboard.Begin();
+                toolBarSlideUpStoryboard.Begin();
                 canMinimize = true;
             }
             else if (hapticScrollViewer.VerticalOffset == 0 && !canMinimize)
             {
-                ToolBarSlideUpStoryboard.Begin();
+                toolBarSlideUpStoryboard.Begin();
                 canMinimize = true;
-
             }
+
             scrlocation = hapticScrollViewer.VerticalOffset;
+
+            if (backgroundImageFixedHeight == 0)
+                backgroundImageFixedHeight = backgroundSubTitle.ActualHeight;
+            try
+            {
+                backgroundSubTitle.Height = backgroundImageFixedHeight - scrlocation;
+            }
+            catch (ArgumentException)
+            {
+                // 快速滑动引起的参数修正
+                backgroundSubTitle.Height = 0;
+            }
         }
 
         // 滚动条位置变量
         double scrlocation = 0;
-
         // 导航栏当前显示状态（这个是为了减少不必要的开销，因为我做的是动画隐藏显示效果如果不用一个变量来记录当前导航栏状态的会重复执行隐藏或显示）
         bool canMinimize = true;
+
+        double backgroundImageFixedHeight;
     }
 }
