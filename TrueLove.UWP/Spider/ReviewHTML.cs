@@ -13,7 +13,7 @@ namespace TrueLove.UWP.Spider
         /// </summary>
         /// <param name="path">Use URL address</param>
         /// <param name="isLoadedDown">switch to use website address or local document address</param>
-        public ReviewHTML(string path, [Optional] bool type, bool isLoadedDown = true)
+        public ReviewHTML(string path, bool isLoadedDown = true)
         {
             try
             {

@@ -42,17 +42,17 @@ namespace TrueLove.UWP.Views
             // 增加额外距离以防误触
             if (hapticScrollViewer.VerticalOffset > scrlocation + 1 && canMinimize)
             {
-                ToolBarSlideDownStoryboard.Begin();
+                toolBarSlideDownStoryboard.Begin();
                 canMinimize = false;
             }
             else if (hapticScrollViewer.VerticalOffset < scrlocation - 18 && !canMinimize)
             {
-                ToolBarSlideUpStoryboard.Begin();
+                toolBarSlideUpStoryboard.Begin();
                 canMinimize = true;
             }
             else if (hapticScrollViewer.VerticalOffset == 0 && !canMinimize)
             {
-                ToolBarSlideUpStoryboard.Begin();
+                toolBarSlideUpStoryboard.Begin();
                 canMinimize = true;
 
             }

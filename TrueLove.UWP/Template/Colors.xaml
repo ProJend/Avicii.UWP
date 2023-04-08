@@ -32,6 +32,13 @@
                 FallbackColor="Black"
                 TintColor="Black"
                 TintOpacity=".6" />
+            <media:BackdropBlurBrush
+                x:Key="TranslucentBlurBrush"
+                Amount="20"
+                BackgroundSource="Backdrop"
+                FallbackColor="DarkGray"
+                TintColor="Gray"
+                TintOpacity=".3" />
         </ResourceDictionary>
         <ResourceDictionary x:Key="HighContrast">
             <Color x:Key="SystemAccentColor">#1AEBFF</Color>
