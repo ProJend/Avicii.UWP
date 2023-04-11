@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using TrueLove.Lib.Models.Code;
 using TrueLove.UWP.Spider;
-using Windows.ApplicationModel;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -16,15 +14,15 @@ namespace TrueLove.UWP.Views
     /// </summary>
     public sealed partial class CommentsPage : Page
     {
-        private List<CommentItem> Comments;
+        private ObservableCollection<CommentItem> Comments;
         public CommentsPage()
         {
             this.InitializeComponent();
             Window.Current.Activated += OnWindowActivated; // 订阅窗口活动事件
 
-            var readHTML = new ReviewHTML(Package.Current.InstalledPath + "/Spider/CommentCodeSample.txt");
+            var reviewHTML = new ReviewHTML("https://avicii.com", false);
             var refineData = new RefineData();
-            Comments = refineData.RefineComment(readHTML.StrHTML);
+            Comments = refineData.UpdateComment(reviewHTML.StrHTML);
         }
         /// <summary>
         /// 返回顶部按钮。
@@ -62,14 +60,13 @@ namespace TrueLove.UWP.Views
 
             if (backgroundImageFixedHeight == 0)
                 backgroundImageFixedHeight = backgroundSubTitle.ActualHeight;
-            try
+            if (backgroundImageFixedHeight - scrlocation <= 0)
+            {
+                backgroundSubTitle.Height = 0;
+            }
+            else
             {
                 backgroundSubTitle.Height = backgroundImageFixedHeight - scrlocation;
-            }
-            catch (ArgumentException)
-            {
-                // 快速滑动引起的参数修正
-                backgroundSubTitle.Height = 0;
             }
         }
 
