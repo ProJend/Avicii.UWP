@@ -41,10 +41,12 @@
                 TintOpacity=".3" />
         </ResourceDictionary>
         <ResourceDictionary x:Key="HighContrast">
-            <Color x:Key="SystemAccentColor">#1AEBFF</Color>
+            <Color x:Key="PageBackgroundColor">Black</Color>
             <SolidColorBrush x:Key="NavigationViewDefaultPaneBackground" Color="Black" />
-            <SolidColorBrush x:Key="NavigationViewTopPaneBackground" Color="Black" />
+            <SolidColorBrush x:Key="NavigationViewTopPaneBackground" Color="Transparent" />
             <SolidColorBrush x:Key="NavigationViewExpandedPaneBackground" Color="Black" />
+            <SolidColorBrush x:Key="SolidBlackBlurBrush" Color="Black" />
+            <SolidColorBrush x:Key="TranslucentBlurBrush" Color="DarkGray" />
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
 </ResourceDictionary>
