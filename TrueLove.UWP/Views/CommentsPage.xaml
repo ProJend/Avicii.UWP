@@ -91,9 +91,8 @@
             <TextBlock
                 x:Name="backgroundSubTitle"
                 MaxWidth="700"
-                Padding="35,80,35,35"
+                Padding="0,80,0,35"
                 CharacterSpacing="350"
-                Opacity="0"
                 Style="{ThemeResource SubtitleTextBlockStyle}"
                 TextAlignment="Center">
                 TAKE A FEW MINUTES AND READ THE AVICII STORIES AND MEMORIES PEOPLE HAVE SHARED FROM ALL OVER THE WORLD.
@@ -105,9 +104,11 @@
             ViewChanged="hapticScrollViewer_ViewChanged">
             <StackPanel>
                 <TextBlock
+                    x:Name="subTitle"
                     MaxWidth="700"
                     Margin="35"
                     CharacterSpacing="350"
+                    Opacity="0"
                     Style="{ThemeResource SubtitleTextBlockStyle}"
                     TextAlignment="Center">
                     TAKE A FEW MINUTES AND READ THE AVICII STORIES AND MEMORIES PEOPLE HAVE SHARED FROM ALL OVER THE WORLD.

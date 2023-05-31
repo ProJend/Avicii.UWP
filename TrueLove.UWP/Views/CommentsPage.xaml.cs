@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using TrueLove.Lib.Models.Code;
 using TrueLove.UWP.Spider;
+using Windows.ApplicationModel;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -20,7 +21,7 @@ namespace TrueLove.UWP.Views
             this.InitializeComponent();
             Window.Current.Activated += OnWindowActivated; // 订阅窗口活动事件
 
-            var reviewHTML = new ReviewHTML("https://avicii.com", false);
+            var reviewHTML = new ReviewHTML(Package.Current.InstalledPath + "/Spider/CommentCodeSample.txt");
             var refineData = new RefineData();
             Comments = refineData.UpdateComment(reviewHTML.StrHTML);
         }
@@ -59,14 +60,21 @@ namespace TrueLove.UWP.Views
             scrlocation = hapticScrollViewer.VerticalOffset;
 
             if (backgroundImageFixedHeight == 0)
-                backgroundImageFixedHeight = backgroundSubTitle.ActualHeight;
-            if (backgroundImageFixedHeight - scrlocation <= 0)
             {
-                backgroundSubTitle.Height = 0;
+                backgroundImageFixedHeight = backgroundSubTitle.ActualHeight;
             }
+            if (backgroundImageFixedHeight - scrlocation <= 0)
+                backgroundSubTitle.Height = 0;
             else
             {
+                subTitle.Opacity = 1;
+                backgroundSubTitle.Opacity = 0;
                 backgroundSubTitle.Height = backgroundImageFixedHeight - scrlocation;
+            }
+            if (hapticScrollViewer.VerticalOffset == 0)
+            {
+                subTitle.Opacity = 0;
+                backgroundSubTitle.Opacity = 1;
             }
         }
 
