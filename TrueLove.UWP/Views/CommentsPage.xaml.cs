@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using TrueLove.Lib.Models.Code;
 using TrueLove.UWP.Spider;
-using Windows.ApplicationModel;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -20,10 +19,7 @@ namespace TrueLove.UWP.Views
         {
             this.InitializeComponent();
             Window.Current.Activated += OnWindowActivated; // 订阅窗口活动事件
-
-            var reviewHTML = new ReviewHTML(Package.Current.InstalledPath + "/Spider/CommentCodeSample.txt");
-            var refineData = new RefineData();
-            Comments = refineData.UpdateComment(reviewHTML.StrHTML);
+            DataLoad();
         }
         /// <summary>
         /// 返回顶部按钮。
@@ -84,5 +80,15 @@ namespace TrueLove.UWP.Views
         bool canMinimize = true;
 
         double backgroundImageFixedHeight;
+
+
+        private async void DataLoad()
+        {
+            var reviewHTML = new ReviewHttp();
+            var src = await reviewHTML.GetSource("https://avicii.com", false);
+            var refineData = new RefineData();
+            Comments = refineData.UpdateComment(src);
+            CommentView.ItemsSource = Comments;
+        }
     }
 }

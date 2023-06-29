@@ -1,19 +1,19 @@
 ﻿using System;
 using System.IO;
 using System.Net.Http;
-using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using TrueLove.Lib.Notification;
 
 namespace TrueLove.UWP.Spider
 {
-    public class ReviewHTML
+    public class ReviewHttp
     {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="path">Use URL address</param>
         /// <param name="isLoadedDown">switch to use website address or local document address</param>
-        public ReviewHTML(string path, bool isLoadedDown = true)
+        public async Task<string> GetSource(string path, bool isLoadedDown = true)
         {
             try
             {
@@ -24,14 +24,15 @@ namespace TrueLove.UWP.Spider
                 else
                 {
                     var httpClient = new HttpClient();
-                    strHTML = httpClient.GetStringAsync(new Uri(path)).Result;
+                    strHTML = await httpClient.GetStringAsync(new Uri(path));
                 }
             }
-            catch (AggregateException)
+            catch (Exception exceptiion) when (exceptiion is AggregateException || exceptiion is HttpRequestException)
             {
                 Assembly.Toast();
                 isNetkWorkAvilable = false;
             }
+            return strHTML;
         }
         private string strHTML;
         internal string StrHTML => strHTML;

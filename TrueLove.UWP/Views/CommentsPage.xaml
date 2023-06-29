@@ -114,6 +114,7 @@
                     TAKE A FEW MINUTES AND READ THE AVICII STORIES AND MEMORIES PEOPLE HAVE SHARED FROM ALL OVER THE WORLD.
                 </TextBlock>
                 <GridView
+                    x:Name="CommentView"
                     Margin="0,35,0,0"
                     animations:ReorderGridAnimation.Duration="250"
                     ItemContainerStyle="{StaticResource GridViewItemNoneStyle}"

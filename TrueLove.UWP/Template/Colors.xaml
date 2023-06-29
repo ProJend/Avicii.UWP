@@ -36,9 +36,9 @@
                 x:Key="TranslucentBlurBrush"
                 Amount="20"
                 BackgroundSource="Backdrop"
-                FallbackColor="DarkGray"
-                TintColor="Gray"
-                TintOpacity=".3" />
+                FallbackColor="DimGray"
+                TintColor="DimGray"
+                TintOpacity=".5" />
         </ResourceDictionary>
         <ResourceDictionary x:Key="HighContrast">
             <Color x:Key="PageBackgroundColor">Black</Color>

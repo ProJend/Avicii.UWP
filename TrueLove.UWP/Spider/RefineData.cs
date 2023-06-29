@@ -1,7 +1,9 @@
 ﻿using HtmlAgilityPack;
 using System;
 using System.Collections.ObjectModel;
+using System.Net.Http;
 using TrueLove.Lib.Models.Code;
+using TrueLove.Lib.Notification;
 using Windows.UI.Xaml.Media.Imaging;
 
 namespace TrueLove.UWP.Spider
@@ -38,7 +40,7 @@ namespace TrueLove.UWP.Spider
                 }
                 return currentList;
             }
-            catch (NullReferenceException)
+            catch (Exception)
             {
                 return currentList;
             }
