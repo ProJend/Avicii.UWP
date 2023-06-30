@@ -38,7 +38,7 @@
                 BackgroundSource="Backdrop"
                 FallbackColor="DimGray"
                 TintColor="DimGray"
-                TintOpacity=".5" />
+                TintOpacity=".4" />
         </ResourceDictionary>
         <ResourceDictionary x:Key="HighContrast">
             <Color x:Key="PageBackgroundColor">Black</Color>

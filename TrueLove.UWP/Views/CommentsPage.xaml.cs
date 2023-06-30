@@ -89,6 +89,11 @@ namespace TrueLove.UWP.Views
             var refineData = new RefineData();
             Comments = refineData.UpdateComment(src);
             CommentView.ItemsSource = Comments;
+            progressRing.IsActive = false;
+            if (!reviewHTML.isNetkWorkAvilable)
+            {
+                NetworkStatus.Visibility = Visibility.Visible;
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using Microsoft.UI.Xaml.Controls;
+using System.Xml.Linq;
 using TrueLove.UWP.Spider;
 using Windows.ApplicationModel;
 using Windows.UI.Core;
@@ -68,6 +69,11 @@ namespace TrueLove.UWP.Views
             var src = await reviewHTML.GetSource("https://avicii.com/images", false);
             var refineData = new RefineData();
             ImageView.ItemsSource = refineData.UpdateImage(src);
+            progressRing.IsActive = false;
+            if (!reviewHTML.isNetkWorkAvilable)
+            {
+                NetworkStatus.Visibility = Visibility.Visible;
+            }
         }
     }
 }

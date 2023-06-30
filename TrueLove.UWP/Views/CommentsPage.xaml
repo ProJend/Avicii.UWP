@@ -129,15 +129,32 @@
                 </GridView>
             </StackPanel>
         </ScrollViewer>
+        <ProgressRing
+            x:Name="progressRing"
+            Width="50"
+            Height="50"
+            IsActive="True" />
         <Grid
             Name="toolBar"
-            MaxWidth="600"
+            MaxWidth="650"
             Margin="0,20"
             VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
+            <StackPanel
+                x:Name="NetworkStatus"
+                Grid.ColumnSpan="2"
+                HorizontalAlignment="Center"
+                Visibility="Collapsed">
+                <FontIcon
+                    Margin="0,15"
+                    FontFamily="Segoe MDL2 Assets"
+                    FontSize="40"
+                    Glyph="&#xF384;" />
+                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}">Offline</TextBlock>
+            </StackPanel>
             <Button
                 Grid.Column="0"
                 HorizontalAlignment="Center"

@@ -36,6 +36,6 @@ namespace TrueLove.UWP.Spider
         }
         private string strHTML;
         internal string StrHTML => strHTML;
-        bool isNetkWorkAvilable;
+        public bool isNetkWorkAvilable;
     }
 }
