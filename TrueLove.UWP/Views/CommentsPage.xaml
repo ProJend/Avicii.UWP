@@ -45,7 +45,7 @@
                 To="1"
                 Duration="0:0:0.5" />
         </Storyboard>
-        <DataTemplate x:Key="CommentItem" x:DataType="date:CommentItem">
+        <DataTemplate x:Key="CommentItem" x:DataType="date:CommentData">
             <Grid Padding="30">
                 <TextBlock TextAlignment="Center" TextWrapping="Wrap">
                     <Run
@@ -144,7 +144,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <StackPanel
-                x:Name="NetworkStatus"
+                x:Name="NetworkState"
                 Grid.ColumnSpan="2"
                 HorizontalAlignment="Center"
                 Visibility="Collapsed">

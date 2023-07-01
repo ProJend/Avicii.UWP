@@ -1,7 +1,4 @@
-﻿using Microsoft.UI.Xaml.Controls;
-using System.Xml.Linq;
-using TrueLove.UWP.Spider;
-using Windows.ApplicationModel;
+﻿using TrueLove.Lib.Spider;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -72,7 +69,7 @@ namespace TrueLove.UWP.Views
             progressRing.IsActive = false;
             if (!reviewHTML.isNetkWorkAvilable)
             {
-                NetworkStatus.Visibility = Visibility.Visible;
+                NetworkState.Visibility = Visibility.Visible;
             }
         }
     }

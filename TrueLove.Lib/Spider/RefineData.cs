@@ -1,18 +1,16 @@
 ﻿using HtmlAgilityPack;
 using System;
 using System.Collections.ObjectModel;
-using System.Net.Http;
 using TrueLove.Lib.Models.Code;
-using TrueLove.Lib.Notification;
 using Windows.UI.Xaml.Media.Imaging;
 
-namespace TrueLove.UWP.Spider
+namespace TrueLove.Lib.Spider
 {
     public class RefineData
     {
-        public ObservableCollection<CommentItem> UpdateComment(string src)
+        public ObservableCollection<CommentData> UpdateComment(string src)
         {
-            var currentList = new ObservableCollection<CommentItem>();
+            var currentList = new ObservableCollection<CommentData>();
             try
             {
                 var htmlDocument = new HtmlDocument();
@@ -30,7 +28,7 @@ namespace TrueLove.UWP.Spider
 
                     if (new[] { nameText, comText, dateText } != null)
                     {
-                        currentList.Add(new CommentItem
+                        currentList.Add(new CommentData
                         {
                             name = nameText,
                             comment = comText,

@@ -108,7 +108,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <StackPanel
-                x:Name="NetworkStatus"
+                x:Name="NetworkState"
                 Grid.ColumnSpan="2"
                 HorizontalAlignment="Center"
                 Visibility="Collapsed">

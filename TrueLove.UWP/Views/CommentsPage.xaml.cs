@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using TrueLove.Lib.Models.Code;
-using TrueLove.UWP.Spider;
+using TrueLove.Lib.Spider;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -14,7 +14,7 @@ namespace TrueLove.UWP.Views
     /// </summary>
     public sealed partial class CommentsPage : Page
     {
-        private ObservableCollection<CommentItem> Comments;
+        private ObservableCollection<CommentData> Comments;
         public CommentsPage()
         {
             this.InitializeComponent();
@@ -92,7 +92,7 @@ namespace TrueLove.UWP.Views
             progressRing.IsActive = false;
             if (!reviewHTML.isNetkWorkAvilable)
             {
-                NetworkStatus.Visibility = Visibility.Visible;
+                NetworkState.Visibility = Visibility.Visible;
             }
         }
     }

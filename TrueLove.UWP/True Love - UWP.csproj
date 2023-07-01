@@ -138,8 +138,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Spider\RefineData.cs" />
-    <Compile Include="Spider\ReviewHttp.cs" />
     <Compile Include="Views\CommentsPage.xaml.cs">
       <DependentUpon>CommentsPage.xaml</DependentUpon>
     </Compile>
@@ -273,9 +271,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="HtmlAgilityPack">
-      <Version>1.11.46</Version>
-    </PackageReference>
     <PackageReference Include="MicaForUWP">
       <Version>0.1.9</Version>
     </PackageReference>

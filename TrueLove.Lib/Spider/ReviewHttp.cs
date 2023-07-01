@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using TrueLove.Lib.Notification;
 
-namespace TrueLove.UWP.Spider
+namespace TrueLove.Lib.Spider
 {
     public class ReviewHttp
     {

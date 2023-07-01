@@ -2,7 +2,7 @@
 
 namespace TrueLove.Lib.Models.Code
 {
-    public class CommentItem : ObservableCollection<string>
+    public class CommentData : ObservableCollection<string>
     {
         public string name { get; set; }
         public string comment { get; set; }
