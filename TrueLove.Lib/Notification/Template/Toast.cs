@@ -1,28 +1,20 @@
-﻿using Microsoft.QueryStringDotNET;
-using Microsoft.Toolkit.Uwp.Notifications;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
 
 namespace TrueLove.Lib.Notification.Template
 {
     class Toast
     {
-        public static ToastContent Network(int conversationId = 384928) => new ToastContentBuilder()
-       .AddToastActivationInfo(new QueryString()
-       {
-            { "action", "checkNetwork" },
-            { "conversationId", conversationId.ToString() }
-       }.ToString(), ToastActivationType.Foreground)
-       .AddText("Time Out")
-       .AddText("There's no network available.")
-       .AddButton("Settings", ToastActivationType.Foreground, new QueryString()
-       {
-            { "action", "Settings" },
-            { "conversationId", conversationId.ToString() }
-       }.ToString())
-       .AddButton("Close", ToastActivationType.Foreground, new QueryString()
-       {
-            { "action", "Close" },
-            { "conversationId", conversationId.ToString() }
-       }.ToString())
-       .GetToastContent();
+        public static ToastContent CheckNetwork() => new ToastContentBuilder()
+            .AddArgument("conversationId", 98143)
+            .AddText("Time Out")
+            .AddText("There's no network available.")
+            .AddButton(new ToastButton()
+                .SetContent("Settings")
+                .AddArgument("action", "settings")
+                .SetBackgroundActivation())
+            .AddButton(new ToastButton()
+                .SetContent("Close")
+                .SetDismissActivation())
+            .GetToastContent();
     }
 }

@@ -2,12 +2,12 @@
 using System;
 using TrueLove.Lib.Helpers;
 using TrueLove.Lib.Models.Enum;
-using TrueLove.Lib.Models.UI;
 using TrueLove.UWP.Views;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
 using Windows.UI;
+using Windows.UI.Notifications;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -35,7 +35,7 @@ namespace TrueLove.UWP
         /// 将在启动应用程序以打开特定文件等情况下使用。
         /// </summary>
         /// <param name="e">有关启动请求和过程的详细信息。</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
             // 不要在窗口已包含内容时重复应用程序初始化，
             // 只需确保窗口处于活动状态
@@ -67,13 +67,6 @@ namespace TrueLove.UWP
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
 
-                if (LocalSettings.localSettings.Values["isLiveTiles"] == null)
-                {   // 首次打开先过一遍设置                  
-                    var a = new SettingsPage();
-                    a.AppFirstRun();
-                    a = null;
-                }
-
                 if (Generic.DeviceFamilyMatch(DeviceFamilyType.Desktop))
                     HideTitleBar();
                 //else
@@ -81,23 +74,57 @@ namespace TrueLove.UWP
             }
         }
 
-        protected override async void OnActivated(IActivatedEventArgs e)
+        protected override void OnActivated(IActivatedEventArgs e)
         {
-            // Handle notification activation
-            if (e is ToastNotificationActivatedEventArgs toastActivationArgs)
-            {
-                QueryString args = QueryString.Parse(toastActivationArgs.Argument);
-                switch (args["action"])
-                {
-                    case "Settings":
-                        var settings = new Uri("ms-settings:network-status");
-                        var success = await Windows.System.Launcher.LaunchUriAsync(settings);
-                        goto case "Close";
+            //IEnumerable<AppListEntry> appListEntries = await Package.Current.GetAppListEntriesAsync();
+            //await appListEntries.First().LaunchAsync();
 
-                    case "Close":
-                        break;
+            // 判断激活类型
+            // 确认是由Toast通知激活应用
+            if (e.Kind == ActivationKind.ToastNotification)
+            {
+                // 获取页面引用
+                var root = Window.Current.Content as Frame;
+                if (root == null)
+                {
+                    root = new Frame();
+                    Window.Current.Content = root;
+                }
+                if (root.Content == null)
+                {
+                    root.Navigate(typeof(MainPage));
                 }
             }
+            Window.Current.Activate();
+
+            if (Generic.DeviceFamilyMatch(DeviceFamilyType.Desktop))
+                HideTitleBar();
+            //else
+            //    HideStatusBar();
+        }
+
+        protected override async void OnBackgroundActivated(BackgroundActivatedEventArgs args)
+        {
+            var deferral = args.TaskInstance.GetDeferral();
+
+            switch (args.TaskInstance.Task.Name)
+            {
+                case "ToastBackgroudTask":
+                    var details = args.TaskInstance.TriggerDetails as ToastNotificationActionTriggerDetail;
+                    if (details != null)
+                    {
+                        QueryString arg = QueryString.Parse(details.Argument);
+                        switch (arg["action"])
+                        {
+                            case "settings":
+                                var settings = new Uri("ms-settings:network-status");
+                                await Windows.System.Launcher.LaunchUriAsync(settings);
+                                break;
+                        }
+                    }
+                    break;
+            }
+            deferral.Complete();
         }
 
         /// <summary>
@@ -149,8 +176,8 @@ namespace TrueLove.UWP
             var applicationView = ApplicationView.GetForCurrentView();
             applicationView.SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
             var s = StatusBar.GetForCurrentView();
-            
-            applicationView.VisibleBoundsChanged += (e,o) =>
+
+            applicationView.VisibleBoundsChanged += (e, o) =>
             {
 
             };

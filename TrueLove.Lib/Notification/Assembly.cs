@@ -41,26 +41,19 @@ namespace TrueLove.Lib.Notification
                     dialogCreate.CloseButtonText = "Okay";
                     dialogCreate.Content = new Template.ContentDialog.ReleaseNotes();
                     dialogCreate.Background = new SolidColorBrush(Colors.Black);
-                    //if (!Generic.DeviceFamilyMatch(DeviceFamilyType.Mobile))
-                    //{
-                    //    dialogCreate.CloseButtonStyle = (Style)Application.Current.Resources["ButtonRevealStyle"];
-                    //    dialogCreate.BorderBrush = (Brush)Application.Current.Resources["SystemControlBackgroundListMediumRevealBorderBrush"];
-                    //}
                     break;
             }
-
             try
             {
                 var loaded = await dialogCreate.ShowAsync();
                 if (loaded == ContentDialogResult.Secondary) commentCreate.SavingDate();
             }
-            catch (System.Runtime.InteropServices.COMException) { } // Nothing todo.
+            catch (Exception) { } // Nothing todo.
         }
 
         public static void Tile()
         {
             TileUpdateManager.CreateTileUpdaterForApplication().Clear(); // 清空队列
-
             TileContent content = LiveTile.OfflineTemplate(null); // 得到磁贴的对象
             var notification = new TileNotification(content.GetXml());
             TileUpdateManager.CreateTileUpdaterForApplication().Update(notification); // 添加到磁贴的队列
@@ -68,12 +61,13 @@ namespace TrueLove.Lib.Notification
 
         public static void Toast()
         {
-            var content = Template.Toast.Network();
-             
+            Register.RegisterBackgroundTask("ToastBackgroudTask");
+            var content = Template.Toast.CheckNetwork();
+
             // Create the notification
             var notif = new ToastNotification(content.GetXml())
             {
-                ExpirationTime = DateTime.Now.AddMinutes(2)
+                ExpirationTime = DateTime.Now.AddMinutes(1)
             };
 
             // And show it!

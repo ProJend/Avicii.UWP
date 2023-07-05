@@ -1,5 +1,4 @@
 ﻿using System;
-using TrueLove.Lib.Helpers;
 using TrueLove.Lib.Models.Enum;
 using TrueLove.Lib.Models.UI;
 using TrueLove.Lib.Notification;
@@ -26,14 +25,14 @@ namespace TrueLove.UWP.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+        private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
         {
             FrameworkElement toggleSwitch = sender as FrameworkElement;
             switch (toggleSwitch.Tag as string)
             {
                 case "enableLiveTileSwitch":
                     if (EnableLiveTileSwitch.IsOn)
-                        await Register.RegisterBackgroundTask("BackgroundTask.BackgroundTask", "LiveTile", new TimeTrigger(30, false), null);
+                        Register.RegisterBackgroundTask("BackgroundTask.BackgroundTask");
                     else
                     {
                         TileUpdateManager.CreateTileUpdaterForApplication().Clear(); // 清空队列
@@ -50,9 +49,9 @@ namespace TrueLove.UWP.Views
                 case "hideToolBarSwitch":
                     LocalSettings.isBottomBarHidden = HideToolBarSwitch.IsOn;
                     break;
-                //case "midnightThemeSwitch":
-                //    LocalSettings.isMidnightTheme = MidnightThemeSwitch.IsOn;
-                //    break;
+                    //case "midnightThemeSwitch":
+                    //    LocalSettings.isMidnightTheme = MidnightThemeSwitch.IsOn;
+                    //    break;
             }
         }
 

@@ -36,11 +36,10 @@
         <Extension Category="windows.backgroundTasks" EntryPoint="BackgroundTask.BackgroundTask">
           <BackgroundTasks>
             <Task Type="timer"/>
+            <Task Type="pushNotification"/>
           </BackgroundTasks>
         </Extension>
       </Extensions>
     </Application>
   </Applications>
-  <Capabilities>
-    <Capability Name="internetClient"/></Capabilities>
 </Package>

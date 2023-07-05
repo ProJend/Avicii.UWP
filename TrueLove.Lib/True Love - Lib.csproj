@@ -120,7 +120,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Helpers\Register.cs" />
+    <Compile Include="Notification\Register.cs" />
     <Compile Include="Models\Code\CommentData.cs" />
     <Compile Include="Helpers\Generic.cs" />
     <Compile Include="Models\Enum\DeviceFamilyType.cs" />

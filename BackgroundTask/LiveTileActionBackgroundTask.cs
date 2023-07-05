@@ -4,13 +4,13 @@ using Windows.UI.Notifications;
 
 namespace BackgroundTask
 {
-    public sealed class BackgroundTask : IBackgroundTask
+    public sealed class LiveTileActionBackgroundTask : IBackgroundTask
     {
         public void Run(IBackgroundTaskInstance taskInstance)
         {
             //Debug.Write("================ debug to show is working  ================");
             var deferral = taskInstance.GetDeferral();
-            Assembly.Tile(); // 組裝動態磚
+            Assembly.Tile(); // 组装动态磁贴
             TileUpdateManager.CreateTileUpdaterForApplication().EnableNotificationQueue(true);
             deferral.Complete(); // 实现通知循环
         }
