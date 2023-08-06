@@ -2,6 +2,7 @@
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <LangVersion>latest</LangVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProjectGuid>{862426EE-D4C7-44F6-B3F9-EE0E7AB1CD41}</ProjectGuid>
@@ -315,9 +316,9 @@
       <Project>{32288edb-3f7f-479a-8303-7bb6705e0636}</Project>
       <Name>BackgroundTask</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TrueLove.Lib\True Love - Lib.csproj">
+    <ProjectReference Include="..\TrueLove.Lib\TrueLove.Lib.csproj">
       <Project>{be71c6bf-09b2-48d7-9290-e97be9b8d622}</Project>
-      <Name>True Love - Lib</Name>
+      <Name>TrueLove.Lib</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
