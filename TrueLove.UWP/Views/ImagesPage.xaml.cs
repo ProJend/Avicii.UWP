@@ -22,7 +22,7 @@ namespace TrueLove.UWP.Views
         /// <summary>
         /// 返回顶部按钮。
         /// </summary>
-        private void BackToTop_Click(object sender, RoutedEventArgs e) => hapticScrollViewer.ChangeView(null, 0, null);
+        private void BackToTop_Click(object sender, RoutedEventArgs e) => Scroller.ChangeView(null, 0, null);
 
         private void OnWindowActivated(object sender, WindowActivatedEventArgs e) => VisualStateManager.GoToState(this,
                 e.WindowActivationState == CoreWindowActivationState.Deactivated ? WindowNotFocused.Name : WindowFocused.Name, false);
@@ -31,27 +31,27 @@ namespace TrueLove.UWP.Views
         /// 检查工具栏相关的按钮可用状态。
         /// 下滑隐藏工具栏 https://www.cnblogs.com/lonelyxmas/p/9919869.html
         /// </summary>
-        private void hapticScrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        private void Scroller_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
         {
             // 滚动条当前位置小于存储的变量值时代表往上滑，即不可以下滑隐藏
             // 增加额外距离以防误触
-            if (hapticScrollViewer.VerticalOffset > scrlocation + 1 && canMinimize)
+            if (Scroller.VerticalOffset > scrlocation + 1 && canMinimize)
             {
-                toolBarSlideDownStoryboard.Begin();
+                ToolBarSlideDownStoryboard.Begin();
                 canMinimize = false;
             }
-            else if (hapticScrollViewer.VerticalOffset < scrlocation - 18 && !canMinimize)
+            else if (Scroller.VerticalOffset < scrlocation - 18 && !canMinimize)
             {
-                toolBarSlideUpStoryboard.Begin();
+                ToolBarSlideUpStoryboard.Begin();
                 canMinimize = true;
             }
-            else if (hapticScrollViewer.VerticalOffset == 0 && !canMinimize)
+            else if (Scroller.VerticalOffset == 0 && !canMinimize)
             {
-                toolBarSlideUpStoryboard.Begin();
+                ToolBarSlideUpStoryboard.Begin();
                 canMinimize = true;
 
             }
-            scrlocation = hapticScrollViewer.VerticalOffset;
+            scrlocation = Scroller.VerticalOffset;
         }
 
         // 滚动条位置变量
@@ -62,12 +62,12 @@ namespace TrueLove.UWP.Views
 
         private async void DataLoad()
         {
-            var reviewHTML = new ReviewHttp();
-            var src = await reviewHTML.GetSource("https://avicii.com/images", false);
+            var reviewWeb = new ReviewWeb();
+            var src = await reviewWeb.GetSourceCode("https://avicii.com/images", false);
             var refineData = new RefineData();
             ImageView.ItemsSource = refineData.UpdateImage(src);
             progressRing.IsActive = false;
-            if (!reviewHTML.isNetkWorkAvilable)
+            if (reviewWeb.isNetkWorkAvilable)
             {
                 NetworkState.Visibility = Visibility.Visible;
             }

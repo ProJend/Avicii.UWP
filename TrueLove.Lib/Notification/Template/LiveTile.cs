@@ -5,7 +5,7 @@ namespace TrueLove.Lib.Notification.Template
 {
     internal class LiveTile
     {
-        public static TileContent OfflineTemplate(TileBindingContentPhotos photosContent) => new TileContent()
+        public static TileContent TitleTemplate(TileBindingContentPhotos photosContent) => new TileContent()
         {   // 创建静态磁贴对象并返回
             Visual = new TileVisual()
             {
@@ -37,7 +37,7 @@ namespace TrueLove.Lib.Notification.Template
                         {
                             new AdaptiveText()
                             {
-                                Text = "Tim Bergling\nFoundation",
+                                Text = "Tim Bergling\nMemories",
                                 HintStyle = AdaptiveTextStyle.Body,
                                 HintAlign = AdaptiveTextAlign.Right,
                             }

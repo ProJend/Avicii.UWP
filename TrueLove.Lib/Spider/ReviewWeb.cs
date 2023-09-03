@@ -6,14 +6,14 @@ using TrueLove.Lib.Notification;
 
 namespace TrueLove.Lib.Spider
 {
-    public class ReviewHttp
+    public class ReviewWeb
     {
         /// <summary>
         /// 
         /// </summary>
         /// <param name="path">Use URL address</param>
         /// <param name="isLoadedDown">switch to use website address or local document address</param>
-        public async Task<string> GetSource(string path, bool isLoadedDown = true)
+        public async Task<string> GetSourceCode(string path, bool isLoadedDown = true)
         {
             try
             {
@@ -36,6 +36,7 @@ namespace TrueLove.Lib.Spider
         }
         private string strHTML;
         internal string StrHTML => strHTML;
+
         public bool isNetkWorkAvilable;
     }
 }

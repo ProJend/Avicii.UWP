@@ -68,17 +68,14 @@ namespace TrueLove.UWP
                 Window.Current.Activate();
 
                 if (Generic.DeviceFamilyMatch(DeviceFamilyType.Desktop))
-                    HideTitleBar();
-                //else
-                //    HideStatusBar();
+                    CollapseTitleBar();
+                //else if(Generic.DeviceFamilyMatch(DeviceFamilyType.Mobile))
+                //    CollapseStatusBar();
             }
         }
 
         protected override void OnActivated(IActivatedEventArgs e)
         {
-            //IEnumerable<AppListEntry> appListEntries = await Package.Current.GetAppListEntriesAsync();
-            //await appListEntries.First().LaunchAsync();
-
             // 判断激活类型
             // 确认是由Toast通知激活应用
             if (e.Kind == ActivationKind.ToastNotification)
@@ -98,9 +95,9 @@ namespace TrueLove.UWP
             Window.Current.Activate();
 
             if (Generic.DeviceFamilyMatch(DeviceFamilyType.Desktop))
-                HideTitleBar();
+                CollapseTitleBar();
             //else
-            //    HideStatusBar();
+            //    CollapseStatusBar();
         }
 
         protected override async void OnBackgroundActivated(BackgroundActivatedEventArgs args)
@@ -151,7 +148,7 @@ namespace TrueLove.UWP
         /// <summary>
         /// 沉淀状态栏 for PC
         /// </summary>
-        private void HideTitleBar()
+        private void CollapseTitleBar()
         {
             CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
             var titleBar = ApplicationView.GetForCurrentView().TitleBar;
@@ -171,7 +168,7 @@ namespace TrueLove.UWP
         /// <summary>
         /// 沉淀状态栏 for Phone
         /// </summary>
-        private void HideStatusBar()
+        private void CollapseStatusBar()
         {
             var applicationView = ApplicationView.GetForCurrentView();
             applicationView.SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);

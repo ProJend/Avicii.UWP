@@ -1,12 +1,14 @@
 ﻿<Page
     x:Class="TrueLove.Lib.Notification.Template.ContentDialog.CommentCreate"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:Windows10version1809="http://schemas.microsoft.com/winfx/2006/xaml/presentation?IsApiContractPresent(Windows.Foundation.UniversalApiContract, 7)"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" RequestedTheme="Dark" Loaded="Page_Loaded"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Loaded="Page_Loaded"
+    RequestedTheme="Dark"
+    mc:Ignorable="d">
 
     <ScrollViewer>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top">
@@ -14,24 +16,44 @@
             <TextBlock>
             <LineBreak/>
             </TextBlock>-->
-            <TextBox x:Name="comment" TextChanged="Comment_TextChanged" PlaceholderText="Comment" MaxLength="500" TextWrapping="Wrap" MinWidth="400" MaxWidth="700" MaxHeight="600" Padding="10" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"/>
-            <TextBlock Opacity="0" x:Name="text">
-            <Windows10version1809:TextBlock.OpacityTransition>
-                <ScalarTransition/>
-            </Windows10version1809:TextBlock.OpacityTransition>
-            <Run x:Name="textLength"></Run><LineBreak/>
+            <TextBox
+                x:Name="CommentInput"
+                MinWidth="400"
+                MaxWidth="700"
+                MaxHeight="600"
+                Padding="10"
+                BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"
+                MaxLength="500"
+                PlaceholderText="Comment"
+                TextChanged="CommentInput_TextChanged"
+                TextWrapping="Wrap" />
+            <TextBlock x:Name="text" Opacity="0">
+                <Windows10version1809:TextBlock.OpacityTransition>
+                    <ScalarTransition />
+                </Windows10version1809:TextBlock.OpacityTransition>
+                <Run x:Name="LengthOverShow" /><LineBreak />
             </TextBlock>
-            <TextBox x:Name="nickName" MaxHeight="80" PlaceholderText="Your name"
-                 Padding="10 5 10 5" BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"/>
+            <TextBox
+                x:Name="NicknameInput"
+                MaxHeight="80"
+                Padding="10,5,10,5"
+                BorderBrush="{ThemeResource SystemControlBackgroundListMediumRevealBorderBrush}"
+                PlaceholderText="Your name" />
             <TextBlock>
-            <LineBreak/><Run Foreground="DarkGray">Your images must be .jpg, .gif, or .png and max 3MB</Run><LineBreak/>
+                <LineBreak /><Run Foreground="DarkGray">Your images must be .jpg, .gif, or .png and max 3MB</Run><LineBreak />
             </TextBlock>
-            <Button x:Name="SelectFiles" Content="Select Files" Click="SelectFiles_Click" Height="32" HorizontalAlignment="Stretch" Style="{ThemeResource ButtonRevealStyle}"/>
-            <TextBlock Opacity="0" x:Name="imageInfo">
-            <Windows10version1809:TextBlock.OpacityTransition>
-                <ScalarTransition/>
-            </Windows10version1809:TextBlock.OpacityTransition>
-            <Run ></Run>
+            <Button
+                x:Name="SelectFile"
+                Height="32"
+                HorizontalAlignment="Stretch"
+                Click="SelectFile_Click"
+                Content="Select Files"
+                Style="{ThemeResource ButtonRevealStyle}" />
+            <TextBlock x:Name="imageInfo" Opacity="0">
+                <Windows10version1809:TextBlock.OpacityTransition>
+                    <ScalarTransition />
+                </Windows10version1809:TextBlock.OpacityTransition>
+                <Run />
             </TextBlock>
             <!--<Image x:Name="image"/>-->
         </StackPanel>

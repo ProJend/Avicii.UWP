@@ -179,7 +179,7 @@
                         Style="{StaticResource TransparentButton}"
                         Tag="gitHub">
                         <FontIcon
-                            FontFamily="{ThemeResource iconfont}"
+                            FontFamily="{ThemeResource ExtraIconfont}"
                             Foreground="{ThemeResource SystemAccentColor}"
                             Glyph="&#xe64a;" />
                     </Button>
@@ -197,7 +197,7 @@
                         Click="Links_Click"
                         Style="{StaticResource TransparentButton}"
                         Tag="weibo">
-                        <FontIcon FontFamily="{ThemeResource iconfont}" Glyph="&#xe737;" />
+                        <FontIcon FontFamily="{ThemeResource ExtraIconfont}" Glyph="&#xe737;" />
                     </Button>
                 </StackPanel>
                 <TextBlock Text="Brag with Guys" />
@@ -207,7 +207,7 @@
                     Style="{StaticResource TransparentButton}"
                     Tag="telegram">
                     <FontIcon
-                        FontFamily="{ThemeResource iconfont}"
+                        FontFamily="{ThemeResource ExtraIconfont}"
                         FontSize="17"
                         Foreground="{ThemeResource SystemAccentColor}"
                         Glyph="&#xe639;" />
@@ -230,7 +230,7 @@
                         Style="{StaticResource TransparentButton}"
                         Tag="spotify">
                         <FontIcon
-                            FontFamily="{ThemeResource iconfont}"
+                            FontFamily="{ThemeResource ExtraIconfont}"
                             Foreground="{ThemeResource SystemAccentColor}"
                             Glyph="&#xeaae;" />
                     </Button>
@@ -239,7 +239,7 @@
                         Style="{StaticResource TransparentButton}"
                         Tag="youTube">
                         <FontIcon
-                            FontFamily="{ThemeResource iconfont}"
+                            FontFamily="{ThemeResource ExtraIconfont}"
                             Foreground="{ThemeResource SystemAccentColor}"
                             Glyph="&#xe660;" />
                     </Button>
@@ -248,7 +248,7 @@
                         Style="{StaticResource TransparentButton}"
                         Tag="apple">
                         <FontIcon
-                            FontFamily="{ThemeResource iconfont}"
+                            FontFamily="{ThemeResource ExtraIconfont}"
                             Foreground="{ThemeResource SystemAccentColor}"
                             Glyph="&#xe61a;" />
                     </Button>
@@ -256,20 +256,20 @@
                         Click="Links_Click"
                         Style="{StaticResource TransparentButton}"
                         Tag="netease">
-                        <FontIcon FontFamily="{ThemeResource iconfont}" Glyph="&#xe628;" />
+                        <FontIcon FontFamily="{ThemeResource ExtraIconfont}" Glyph="&#xe628;" />
                     </Button>
                     <Button
                         Click="Links_Click"
                         Style="{StaticResource TransparentButton}"
                         Tag="QQ">
-                        <FontIcon FontFamily="{ThemeResource iconfont}" Glyph="&#xe6c6;" />
+                        <FontIcon FontFamily="{ThemeResource ExtraIconfont}" Glyph="&#xe6c6;" />
                     </Button>
                     <Button
                         Over17763:CornerRadius="0 4 4 0"
                         Click="Links_Click"
                         Style="{StaticResource TransparentButton}"
                         Tag="kugou">
-                        <FontIcon FontFamily="{ThemeResource iconfont}" Glyph="&#xe62d;" />
+                        <FontIcon FontFamily="{ThemeResource ExtraIconfont}" Glyph="&#xe62d;" />
                     </Button>
                 </StackPanel>
                 <TextBlock Text="All My Life" />
@@ -280,7 +280,7 @@
                         Style="{StaticResource TransparentButton}"
                         Tag="instagram">
                         <FontIcon
-                            FontFamily="{ThemeResource iconfont}"
+                            FontFamily="{ThemeResource ExtraIconfont}"
                             Foreground="{ThemeResource SystemAccentColor}"
                             Glyph="&#xe62e;" />
                     </Button>
@@ -289,7 +289,7 @@
                         Style="{StaticResource TransparentButton}"
                         Tag="facebook">
                         <FontIcon
-                            FontFamily="{ThemeResource iconfont}"
+                            FontFamily="{ThemeResource ExtraIconfont}"
                             Foreground="{ThemeResource SystemAccentColor}"
                             Glyph="&#xe665;" />
                     </Button>
@@ -298,7 +298,7 @@
                         Click="Links_Click"
                         Style="{StaticResource TransparentButton}"
                         Tag="twitter">
-                        <FontIcon FontFamily="{ThemeResource iconfont}" Glyph="&#xe600;" />
+                        <FontIcon FontFamily="{ThemeResource ExtraIconfont}" Glyph="&#xe600;" />
                     </Button>
                 </StackPanel>
                 <TextBlock Text="True Stories" />
@@ -338,7 +338,7 @@
                         Click="Links_Click"
                         Style="{StaticResource TransparentButton}"
                         Tag="quora">
-                        <FontIcon FontFamily="{ThemeResource iconfont}" Glyph="&#xe6df;" />
+                        <FontIcon FontFamily="{ThemeResource ExtraIconfont}" Glyph="&#xe6df;" />
                     </Button>
                 </StackPanel>
                 <TextBlock Foreground="DarkGray" Text="Missing You ❤" />

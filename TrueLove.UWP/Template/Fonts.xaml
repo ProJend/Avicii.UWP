@@ -1,12 +1,12 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <FontFamily x:Key="freeland">
+    <FontFamily x:Key="FreelandFont">
         /Assets/Fonts/Freeland.ttf#Freeland
     </FontFamily>
-    <FontFamily x:Key="avicii">
+    <FontFamily x:Key="AviciiFont">
         /Assets/Fonts/Avicii.ttf#Avicii
     </FontFamily>
-    <FontFamily x:Key="iconfont">
+    <FontFamily x:Key="ExtraIconfont">
         /Assets/Fonts/IconFont.ttf#iconfont
     </FontFamily>
     <!--  关键字 # 加字体名，不是字体文件名。字体名打开字体文件可得  -->

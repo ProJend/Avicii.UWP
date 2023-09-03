@@ -11,9 +11,9 @@
     RequestedTheme="Dark"
     mc:Ignorable="d">
     <Page.Resources>
-        <Storyboard x:Name="toolBarSlideDownStoryboard">
+        <Storyboard x:Name="ToolBarSlideDownStoryboard">
             <DoubleAnimation
-                Storyboard.TargetName="toolBar_TranslateTransform"
+                Storyboard.TargetName="ToolBar_TranslateTransform"
                 Storyboard.TargetProperty="Y"
                 From="0"
                 To="60">
@@ -22,15 +22,15 @@
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
             <DoubleAnimation
-                Storyboard.TargetName="toolBar"
+                Storyboard.TargetName="ToolBar"
                 Storyboard.TargetProperty="(Grid.Opacity)"
                 From="1"
                 To="0"
                 Duration="0:0:0.5" />
         </Storyboard>
-        <Storyboard x:Name="toolBarSlideUpStoryboard">
+        <Storyboard x:Name="ToolBarSlideUpStoryboard">
             <DoubleAnimation
-                Storyboard.TargetName="toolBar_TranslateTransform"
+                Storyboard.TargetName="ToolBar_TranslateTransform"
                 Storyboard.TargetProperty="Y"
                 From="60"
                 To="0">
@@ -39,7 +39,7 @@
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
             <DoubleAnimation
-                Storyboard.TargetName="toolBar"
+                Storyboard.TargetName="ToolBar"
                 Storyboard.TargetProperty="(Grid.Opacity)"
                 From="0"
                 To="1"
@@ -52,11 +52,11 @@
                         FontSize="16"
                         FontStyle="Italic"
                         Text="from " />
-                    <Run FontSize="24" Text="{x:Bind name}" />
+                    <Run FontSize="24" Text="{x:Bind Name}" />
                     <LineBreak /><LineBreak />
-                    <Run Text="{x:Bind comment}" />
+                    <Run Text="{x:Bind Comment}" />
                     <LineBreak /><LineBreak />
-                    <Run Text="{x:Bind date}" />
+                    <Run Text="{x:Bind Date}" />
                 </TextBlock>
             </Grid>
         </DataTemplate>
@@ -89,7 +89,7 @@
             </Button>
             <!--  占位符  -->
             <TextBlock
-                x:Name="backgroundSubTitle"
+                x:Name="BackSubTitle"
                 MaxWidth="700"
                 Padding="0,80,0,35"
                 CharacterSpacing="350"
@@ -99,12 +99,12 @@
             </TextBlock>
         </Grid>
         <ScrollViewer
-            x:Name="hapticScrollViewer"
+            x:Name="Scroller"
             Margin="0,85,0,0"
-            ViewChanged="hapticScrollViewer_ViewChanged">
+            ViewChanged="Scroller_ViewChanged">
             <StackPanel>
                 <TextBlock
-                    x:Name="subTitle"
+                    x:Name="SubTitle"
                     MaxWidth="700"
                     Margin="35"
                     CharacterSpacing="350"
@@ -135,7 +135,7 @@
             Height="50"
             IsActive="True" />
         <Grid
-            Name="toolBar"
+            Name="ToolBar"
             MaxWidth="650"
             Margin="0,20"
             VerticalAlignment="Bottom">
@@ -169,7 +169,7 @@
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE72C;" />
             </Button>
             <Grid.RenderTransform>
-                <TranslateTransform x:Name="toolBar_TranslateTransform" />
+                <TranslateTransform x:Name="ToolBar_TranslateTransform" />
             </Grid.RenderTransform>
             <Grid.Transitions>
                 <TransitionCollection>

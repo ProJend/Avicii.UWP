@@ -4,5 +4,4 @@
     xmlns:converter="using:TrueLove.Lib.Models.UI.Converter">
 
     <converter:InverseBooleanConverter x:Key="InverseBooleanConverter" />
-    <converter:ScrollToTopConverter x:Key="ScrollToTopConverter" />
 </ResourceDictionary>

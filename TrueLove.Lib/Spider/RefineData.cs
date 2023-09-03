@@ -30,9 +30,9 @@ namespace TrueLove.Lib.Spider
                     {
                         currentList.Add(new CommentData
                         {
-                            name = nameText,
-                            comment = comText,
-                            date = parsedDate.ToString("d"),
+                            Name = nameText,
+                            Comment = comText,
+                            Date = parsedDate.ToString("d"),
                         });
                     }
                 }

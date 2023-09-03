@@ -1,4 +1,5 @@
 ﻿using System;
+using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -17,7 +18,7 @@ namespace TrueLove.Lib.Notification.Template.ContentDialog
             this.InitializeComponent();
         }
 
-        private async void SelectFiles_Click(object sender, RoutedEventArgs e)
+        private async void SelectFile_Click(object sender, RoutedEventArgs e)
         {
             var picker = new FileOpenPicker
             {
@@ -28,7 +29,7 @@ namespace TrueLove.Lib.Notification.Template.ContentDialog
             picker.FileTypeFilter.Add(".jpeg");
             picker.FileTypeFilter.Add(".png");
 
-            Windows.Storage.StorageFile file = await picker.PickSingleFileAsync();
+            StorageFile file = await picker.PickSingleFileAsync();
             if (file != null)
             {
                 // Application now has read/write access to the picked file
@@ -42,31 +43,31 @@ namespace TrueLove.Lib.Notification.Template.ContentDialog
             }
         }
 
-        private void Comment_TextChanged(object sender, TextChangedEventArgs e)
+        private void CommentInput_TextChanged(object sender, TextChangedEventArgs e)
         {
-            int i = 500 - comment.Text.Length;
-            textLength.Text = i + " of 500 Character(s) left";
+            int i = 500 - CommentInput.Text.Length;
+            LengthOverShow.Text = i + " of 500 Character(s) left";
             text.Opacity = 1;
         }
 
         public void LoadingDate()
         {
-            comment.Text = strComment;
-            nickName.Text = strNickname;
+            CommentInput.Text = _Comment;
+            NicknameInput.Text = _Nickname;
         }
 
         public void SavingDate()
         {
-            strComment = comment.Text;
-            strNickname = nickName.Text;
+            _Comment = CommentInput.Text;
+            _Nickname = NicknameInput.Text;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(strComment) || !string.IsNullOrEmpty(strNickname)) LoadingDate();
+            if (!string.IsNullOrEmpty(_Comment) || !string.IsNullOrEmpty(_Nickname)) LoadingDate();
         }
 
-        string strComment;
-        string strNickname;
+        string _Comment;
+        string _Nickname;
     }
 }

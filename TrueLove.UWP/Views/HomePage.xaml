@@ -37,7 +37,7 @@
                     <StackPanel Name="FloatingLayout_a">
                         <TextBlock
                             HorizontalAlignment="Center"
-                            FontFamily="{StaticResource freeland}"
+                            FontFamily="{StaticResource FreelandFont}"
                             Style="{StaticResource SubheaderTextBlockStyle}"
                             Text="the Avicii UWP" />
                         <TextBlock
@@ -62,7 +62,7 @@
                     <StackPanel Name="FloatingLayout_b">
                         <TextBlock
                             HorizontalAlignment="Center"
-                            FontFamily="{StaticResource freeland}"
+                            FontFamily="{StaticResource FreelandFont}"
                             Style="{StaticResource SubheaderTextBlockStyle}"
                             Text="Avicii Memory Boaid" />
                         <TextBlock
@@ -80,7 +80,7 @@
                                 Style="{StaticResource TransparentButton}"
                                 Tag="spotify">
                                 <FontIcon
-                                    FontFamily="{ThemeResource iconfont}"
+                                    FontFamily="{ThemeResource ExtraIconfont}"
                                     Foreground="{ThemeResource SystemAccentColor}"
                                     Glyph="&#xeaae;" />
                             </Button>
@@ -89,7 +89,7 @@
                                 Style="{StaticResource TransparentButton}"
                                 Tag="youTube">
                                 <FontIcon
-                                    FontFamily="{ThemeResource iconfont}"
+                                    FontFamily="{ThemeResource ExtraIconfont}"
                                     Foreground="{ThemeResource SystemAccentColor}"
                                     Glyph="&#xe660;" />
                             </Button>
@@ -98,7 +98,7 @@
                                 Style="{StaticResource TransparentButton}"
                                 Tag="apple">
                                 <FontIcon
-                                    FontFamily="{ThemeResource iconfont}"
+                                    FontFamily="{ThemeResource ExtraIconfont}"
                                     Foreground="{ThemeResource SystemAccentColor}"
                                     Glyph="&#xe61a;" />
                             </Button>
@@ -120,7 +120,7 @@
                             Text="◢◤" />
                         <TextBlock
                             HorizontalAlignment="Center"
-                            FontFamily="{StaticResource freeland}"
+                            FontFamily="{StaticResource FreelandFont}"
                             Style="{StaticResource SubheaderTextBlockStyle}"
                             Text="Remembering Tim Bergling" />
                         <TextBlock
