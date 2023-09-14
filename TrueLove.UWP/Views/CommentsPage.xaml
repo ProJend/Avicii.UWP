@@ -11,9 +11,9 @@
     RequestedTheme="Dark"
     mc:Ignorable="d">
     <Page.Resources>
-        <Storyboard x:Name="ToolBarSlideDownStoryboard">
+        <Storyboard x:Name="BottomPartSlideDownStoryboard">
             <DoubleAnimation
-                Storyboard.TargetName="ToolBar_TranslateTransform"
+                Storyboard.TargetName="BottomPart_TranslateTransform"
                 Storyboard.TargetProperty="Y"
                 From="0"
                 To="60">
@@ -22,15 +22,15 @@
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
             <DoubleAnimation
-                Storyboard.TargetName="ToolBar"
+                Storyboard.TargetName="BottomPart"
                 Storyboard.TargetProperty="(Grid.Opacity)"
                 From="1"
                 To="0"
                 Duration="0:0:0.5" />
         </Storyboard>
-        <Storyboard x:Name="ToolBarSlideUpStoryboard">
+        <Storyboard x:Name="BottomPartSlideUpStoryboard">
             <DoubleAnimation
-                Storyboard.TargetName="ToolBar_TranslateTransform"
+                Storyboard.TargetName="BottomPart_TranslateTransform"
                 Storyboard.TargetProperty="Y"
                 From="60"
                 To="0">
@@ -39,13 +39,13 @@
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
             <DoubleAnimation
-                Storyboard.TargetName="ToolBar"
+                Storyboard.TargetName="BottomPart"
                 Storyboard.TargetProperty="(Grid.Opacity)"
                 From="0"
                 To="1"
                 Duration="0:0:0.5" />
         </Storyboard>
-        <DataTemplate x:Key="CommentItem" x:DataType="date:CommentData">
+        <DataTemplate x:Key="CommentItem" x:DataType="date:CommentDataType">
             <Grid Padding="30">
                 <TextBlock TextAlignment="Center" TextWrapping="Wrap">
                     <Run
@@ -66,7 +66,10 @@
         </Style>
     </Page.Resources>
     <Grid ManipulationMode="System,TranslateX">
-        <Grid Padding="0,40,0,0" VerticalAlignment="Top">
+        <Grid
+            x:Name="TopPart"
+            Padding="0,40,0,0"
+            VerticalAlignment="Top">
             <Grid.Background>
                 <ImageBrush
                     ImageSource="/Assets/Instagram/4.jpg"
@@ -91,7 +94,6 @@
             <TextBlock
                 x:Name="BackSubTitle"
                 MaxWidth="700"
-                Padding="0,80,0,35"
                 CharacterSpacing="350"
                 Style="{ThemeResource SubtitleTextBlockStyle}"
                 TextAlignment="Center">
@@ -106,7 +108,6 @@
                 <TextBlock
                     x:Name="SubTitle"
                     MaxWidth="700"
-                    Margin="35"
                     CharacterSpacing="350"
                     Opacity="0"
                     Style="{ThemeResource SubtitleTextBlockStyle}"
@@ -115,27 +116,21 @@
                 </TextBlock>
                 <GridView
                     x:Name="CommentView"
-                    Margin="0,35,0,0"
+                    Margin="0,60,0,0"
                     animations:ReorderGridAnimation.Duration="250"
                     ItemContainerStyle="{StaticResource GridViewItemNoneStyle}"
                     ItemTemplate="{StaticResource CommentItem}"
-                    ItemsSource="{x:Bind Comments}"
-                    ScrollViewer.IsVerticalRailEnabled="False">
+                    ItemsSource="{x:Bind commentDataCollection}">
                     <GridView.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <controls:StaggeredPanel DesiredColumnWidth="300" />
+                            <controls:StaggeredPanel DesiredColumnWidth="350" />
                         </ItemsPanelTemplate>
                     </GridView.ItemsPanel>
                 </GridView>
             </StackPanel>
         </ScrollViewer>
-        <ProgressRing
-            x:Name="progressRing"
-            Width="50"
-            Height="50"
-            IsActive="True" />
         <Grid
-            Name="ToolBar"
+            Name="BottomPart"
             MaxWidth="650"
             Margin="0,20"
             VerticalAlignment="Bottom">
@@ -155,6 +150,12 @@
                     Glyph="&#xF384;" />
                 <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}">Offline</TextBlock>
             </StackPanel>
+            <ProgressRing
+                x:Name="progressRing"
+                Grid.ColumnSpan="2"
+                Width="50"
+                Height="50"
+                IsActive="True" />
             <Button
                 Grid.Column="0"
                 HorizontalAlignment="Center"
@@ -163,13 +164,15 @@
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE898;" />
             </Button>
             <Button
+                x:Name="RefreshButton"
                 Grid.Column="1"
                 HorizontalAlignment="Center"
+                Click="Refresh_Click"
                 Style="{ThemeResource TranslucentCircleButton}">
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE72C;" />
             </Button>
             <Grid.RenderTransform>
-                <TranslateTransform x:Name="ToolBar_TranslateTransform" />
+                <TranslateTransform x:Name="BottomPart_TranslateTransform" />
             </Grid.RenderTransform>
             <Grid.Transitions>
                 <TransitionCollection>
@@ -184,6 +187,27 @@
                     <VisualState.Setters>
                         <Setter Target="Title.Foreground" Value="{ThemeResource ButtonForegroundDisabled}" />
                         <Setter Target="TitleButton.IsEnabled" Value="False" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+
+            <VisualStateGroup x:Name="WindowBreakpoint">
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource MinWindowBreakpoint}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SubTitle.Margin" Value="15,0" />
+                        <Setter Target="BackSubTitle.Margin" Value="15,45" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="{StaticResource MediumWindowBreakpoint}" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="SubTitle.Margin" Value="15,0" />
+                        <Setter Target="BackSubTitle.Margin" Value="15,45" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

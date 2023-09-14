@@ -13,7 +13,7 @@ namespace TrueLove.Lib.Spider
         /// </summary>
         /// <param name="path">Use URL address</param>
         /// <param name="isLoadedDown">switch to use website address or local document address</param>
-        public async Task<string> GetSourceCode(string path, bool isLoadedDown = true)
+        public async Task<string> GetSourceCodeAsync(string path, bool isLoadedDown = true)
         {
             try
             {

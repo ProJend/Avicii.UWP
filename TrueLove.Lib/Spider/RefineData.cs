@@ -8,41 +8,33 @@ namespace TrueLove.Lib.Spider
 {
     public class RefineData
     {
-        public ObservableCollection<CommentData> UpdateComment(string src)
+        public void UpdateComment(string src, ObservableCollection<CommentDataType> currentList)
         {
-            var currentList = new ObservableCollection<CommentData>();
-            try
+            var htmlDocument = new HtmlDocument();
+            htmlDocument.LoadHtml(src);
+            for (int i = 1; i <= 101; i++)
             {
-                var htmlDocument = new HtmlDocument();
-                htmlDocument.LoadHtml(src);
-                for (int i = 1; i <= 96; i++)
+                string namePath = $"//*[@id=\"commentlist\"]/ul/li[{i}]/p[1]/span";
+                string comPath = $"//*[@id=\"commentlist\"]/ul/li[{i}]/p[2]";
+                string datePath = $"//*[@id=\"commentlist\"]/ul/li[{i}]/p[3]";
+
+                var nameText = htmlDocument.DocumentNode.SelectSingleNode(namePath).InnerText;
+                var comText = htmlDocument.DocumentNode.SelectSingleNode(comPath).InnerText;
+                var dateText = htmlDocument.DocumentNode.SelectSingleNode(datePath).InnerText;
+                var parsedDate = DateTime.Parse(dateText);
+
+                if (new[] { nameText, comText, dateText } != null)
                 {
-                    string namePath = $"//*[@id=\"commentlist\"]/ul/li[{i}]/p[1]/span";
-                    string comPath = $"//*[@id=\"commentlist\"]/ul/li[{i}]/p[2]";
-                    string datePath = $"//*[@id=\"commentlist\"]/ul/li[{i}]/p[3]";
-
-                    var nameText = htmlDocument.DocumentNode.SelectSingleNode(namePath).InnerText;
-                    var comText = htmlDocument.DocumentNode.SelectSingleNode(comPath).InnerText;
-                    var dateText = htmlDocument.DocumentNode.SelectSingleNode(datePath).InnerText;
-                    var parsedDate = DateTime.Parse(dateText);
-
-                    if (new[] { nameText, comText, dateText } != null)
+                    currentList.Add(new CommentDataType
                     {
-                        currentList.Add(new CommentData
-                        {
-                            Name = nameText,
-                            Comment = comText,
-                            Date = parsedDate.ToString("d"),
-                        });
-                    }
+                        Name = nameText,
+                        Comment = comText,
+                        Date = parsedDate.ToString("d"),
+                    });
                 }
-                return currentList;
-            }
-            catch (Exception)
-            {
-                return currentList;
             }
         }
+
         public ObservableCollection<BitmapImage> UpdateImage(string src)
         {
             var currentList = new ObservableCollection<BitmapImage>();

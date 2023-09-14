@@ -37,17 +37,17 @@ namespace TrueLove.UWP.Views
             // 增加额外距离以防误触
             if (Scroller.VerticalOffset > scrlocation + 1 && canMinimize)
             {
-                ToolBarSlideDownStoryboard.Begin();
+                BottomPartSlideDownStoryboard.Begin();
                 canMinimize = false;
             }
             else if (Scroller.VerticalOffset < scrlocation - 18 && !canMinimize)
             {
-                ToolBarSlideUpStoryboard.Begin();
+                BottomPartSlideUpStoryboard.Begin();
                 canMinimize = true;
             }
             else if (Scroller.VerticalOffset == 0 && !canMinimize)
             {
-                ToolBarSlideUpStoryboard.Begin();
+                BottomPartSlideUpStoryboard.Begin();
                 canMinimize = true;
 
             }
@@ -63,7 +63,7 @@ namespace TrueLove.UWP.Views
         private async void DataLoad()
         {
             var reviewWeb = new ReviewWeb();
-            var src = await reviewWeb.GetSourceCode("https://avicii.com/images", false);
+            var src = await reviewWeb.GetSourceCodeAsync("https://avicii.com/images", false);
             var refineData = new RefineData();
             ImageView.ItemsSource = refineData.UpdateImage(src);
             progressRing.IsActive = false;

@@ -121,8 +121,8 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Models\Code\CommentDataCollection.cs" />
     <Compile Include="Notification\Register.cs" />
-    <Compile Include="Models\Code\CommentData.cs" />
     <Compile Include="Helpers\Generic.cs" />
     <Compile Include="Models\Enum\DeviceFamilyType.cs" />
     <Compile Include="Models\Enum\DialogType.cs" />
@@ -157,10 +157,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Spider\Sample\CommentData.txt" />
-    <Content Include="Spider\Sample\ImageData.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Page Include="Notification\Template\ContentDialog\CommentCreate.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -170,7 +166,10 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Spider\Sample\CommentData.txt" />
+    <Content Include="Spider\Sample\ImageData.txt" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
