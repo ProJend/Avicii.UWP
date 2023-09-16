@@ -1,5 +1,6 @@
 ﻿using TrueLove.Lib.Models.Code;
 using TrueLove.Lib.Spider;
+using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -23,9 +24,8 @@ namespace TrueLove.UWP.Views
         async void GetSourceCode()
         {
             RefreshButton.IsEnabled = false;
-            _pageNumber = 1;
             var reviewWeb = new ReviewWeb();
-            _src = await reviewWeb.GetSourceCodeAsync($"https://avicii.com/page/{_pageNumber}", false);
+            _src = await reviewWeb.GetSourceCodeAsync(ApplicationData.Current.LocalFolder.Path + $"/OfflineData.txt");
             DataLoad();
         }
 
@@ -89,7 +89,7 @@ namespace TrueLove.UWP.Views
                 BackSubTitle.Opacity = 1;
             }
 
-            if (Scroller.ScrollableHeight <= 1200)
+            if (Scroller.ExtentHeight - scrlocation <= 1200)
             {
                 DataLoad();
             }
@@ -98,19 +98,15 @@ namespace TrueLove.UWP.Views
         private async void DataLoad()
         {
             progressRing.IsActive = true;
-            try
-            {
-                var refineData = new RefineData();
-                refineData.UpdateComment(_src, commentDataCollection);
-            }
-            catch
-            {
-                progressRing.IsActive = false;
-                _pageNumber++;
-                var reviewWeb = new ReviewWeb();
-                _src = await reviewWeb.GetSourceCodeAsync($"https://avicii.com/page/{_pageNumber}", false);
-                RefreshButton.IsEnabled = true;
-            }
+            var refineData = new RefineData();
+            refineData.UpdateComment(_src, commentDataCollection);
+
+            progressRing.IsActive = false;
+            _pageNumber++;
+            var reviewWeb = new ReviewWeb();
+            _src = await reviewWeb.GetSourceCodeAsync($"https://avicii.com/page/{_pageNumber}", false);
+
+            RefreshButton.IsEnabled = true;
         }
 
         CommentDataCollection commentDataCollection = new CommentDataCollection();

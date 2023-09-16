@@ -2,10 +2,12 @@
 using System;
 using TrueLove.Lib.Helpers;
 using TrueLove.Lib.Models.Enum;
+using TrueLove.Lib.Spider;
 using TrueLove.UWP.Views;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Core;
+using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Notifications;
 using Windows.UI.ViewManagement;
@@ -35,7 +37,7 @@ namespace TrueLove.UWP
         /// 将在启动应用程序以打开特定文件等情况下使用。
         /// </summary>
         /// <param name="e">有关启动请求和过程的详细信息。</param>
-        protected override async void OnLaunched(LaunchActivatedEventArgs e)
+        protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
             // 不要在窗口已包含内容时重复应用程序初始化，
             // 只需确保窗口处于活动状态
@@ -71,6 +73,8 @@ namespace TrueLove.UWP
                     CollapseTitleBar();
                 //else if(Generic.DeviceFamilyMatch(DeviceFamilyType.Mobile))
                 //    CollapseStatusBar();
+
+                InitialCommentData();
             }
         }
 
@@ -98,6 +102,8 @@ namespace TrueLove.UWP
                 CollapseTitleBar();
             //else
             //    CollapseStatusBar();
+
+            InitialCommentData();
         }
 
         protected override async void OnBackgroundActivated(BackgroundActivatedEventArgs args)
@@ -178,6 +184,15 @@ namespace TrueLove.UWP
             {
 
             };
+        }
+
+        private async void InitialCommentData()
+        {
+            var localFolder = ApplicationData.Current.LocalFolder;
+            var file = await localFolder.CreateFileAsync("OfflineData.txt",
+                CreationCollisionOption.ReplaceExisting);
+            var _src = await new ReviewWeb().GetSourceCodeAsync($"https://avicii.com/page/11", false);
+            await FileIO.AppendTextAsync(file, _src);
         }
     }
 }

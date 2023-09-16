@@ -15,7 +15,6 @@ namespace TrueLove.Lib.Models.Code
         public string Name { get; set; }
         public string Comment { get; set; }
         public string Date { get; set; }
-
     }
 
     public class CommentDataCollection : ObservableCollection<CommentDataType>, ISupportIncrementalLoading

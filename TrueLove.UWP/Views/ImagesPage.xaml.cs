@@ -67,10 +67,6 @@ namespace TrueLove.UWP.Views
             var refineData = new RefineData();
             ImageView.ItemsSource = refineData.UpdateImage(src);
             progressRing.IsActive = false;
-            if (reviewWeb.isNetkWorkAvilable)
-            {
-                NetworkState.Visibility = Visibility.Visible;
-            }
         }
     }
 }
