@@ -109,7 +109,7 @@
                     x:Name="SubTitle"
                     MaxWidth="700"
                     CharacterSpacing="350"
-                    Opacity="0"
+                    Opacity="{Binding ElementName=BackSubTitle, Path=Opacity, Converter={StaticResource InverseOpacityConverter}}"
                     Style="{ThemeResource SubtitleTextBlockStyle}"
                     TextAlignment="Center">
                     TAKE A FEW MINUTES AND READ THE AVICII STORIES AND MEMORIES PEOPLE HAVE SHARED FROM ALL OVER THE WORLD.
@@ -206,8 +206,8 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource MediumWindowBreakpoint}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="SubTitle.Margin" Value="15,0" />
-                        <Setter Target="BackSubTitle.Margin" Value="15,45" />
+                        <Setter Target="SubTitle.Margin" Value="15,25" />
+                        <Setter Target="BackSubTitle.Margin" Value="15,70" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

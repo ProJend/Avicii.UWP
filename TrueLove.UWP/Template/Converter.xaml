@@ -4,4 +4,5 @@
     xmlns:converter="using:TrueLove.Lib.Models.UI.Converter">
 
     <converter:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+    <converter:InverseOpacityConverter x:Key="InverseOpacityConverter" />
 </ResourceDictionary>

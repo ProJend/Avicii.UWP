@@ -1,6 +1,6 @@
 ﻿using TrueLove.Lib.Models.Code;
 using TrueLove.Lib.Spider;
-using Windows.Storage;
+using Windows.ApplicationModel;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -25,7 +25,7 @@ namespace TrueLove.UWP.Views
         {
             RefreshButton.IsEnabled = false;
             var reviewWeb = new ReviewWeb();
-            _src = await reviewWeb.GetSourceCodeAsync(ApplicationData.Current.LocalFolder.Path + $"/OfflineData.txt");
+            _src = await reviewWeb.GetSourceCodeAsync(Package.Current.InstalledPath + "/TrueLove.Lib/Spider/Sample/CommentData.txt");
             DataLoad();
         }
 
@@ -79,13 +79,11 @@ namespace TrueLove.UWP.Views
                 TopPart.Height = 85;
             else
             {
-                SubTitle.Opacity = 1;
                 BackSubTitle.Opacity = 0;
                 TopPart.Height = TopPartExtendHeight - scrlocation;
             }
             if (Scroller.VerticalOffset == 0)
             {
-                SubTitle.Opacity = 0;
                 BackSubTitle.Opacity = 1;
             }
 
