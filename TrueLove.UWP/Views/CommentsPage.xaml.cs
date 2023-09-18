@@ -1,6 +1,6 @@
 ﻿using TrueLove.Lib.Models.Code;
 using TrueLove.Lib.Spider;
-using Windows.ApplicationModel;
+using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -25,7 +25,7 @@ namespace TrueLove.UWP.Views
         {
             RefreshButton.IsEnabled = false;
             var reviewWeb = new ReviewWeb();
-            _src = await reviewWeb.GetSourceCodeAsync(Package.Current.InstalledPath + "/TrueLove.Lib/Spider/Sample/CommentData.txt");
+            _src = await reviewWeb.GetSourceCodeAsync(ApplicationData.Current.LocalFolder.Path + $"/OfflineData.txt");
             DataLoad();
         }
 

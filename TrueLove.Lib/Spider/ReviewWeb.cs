@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TrueLove.Lib.Notification;
-using Windows.Storage;
 
 namespace TrueLove.Lib.Spider
 {
@@ -21,11 +20,10 @@ namespace TrueLove.Lib.Spider
             {
                 if (isLoadedDown)
                 {
+                    // 延迟等待数据异步加载完毕
                     if (string.IsNullOrEmpty(File.ReadAllText(path)))
                     {
-                        var _src = await new ReviewWeb().GetSourceCodeAsync($"https://avicii.com/page/12", false);
-                        StorageFile file = await StorageFile.GetFileFromPathAsync(ApplicationData.Current.LocalFolder.Path + $"/OfflineData.txt");
-                        await FileIO.AppendTextAsync(file, _src);
+                        await Task.Delay(3000);
                     }
                     SourceCode = File.ReadAllText(path);
                     TimeToNow();
