@@ -1,4 +1,5 @@
 ﻿using Microsoft.QueryStringDotNET;
+using Microsoft.Toolkit.Uwp.Connectivity;
 using System;
 using TrueLove.Lib.Helpers;
 using TrueLove.Lib.Models.Enum;
@@ -188,11 +189,14 @@ namespace TrueLove.UWP
 
         private async void InitialCommentData()
         {
-            var localFolder = ApplicationData.Current.LocalFolder;
-            var file = await localFolder.CreateFileAsync("OfflineData.txt",
-                CreationCollisionOption.ReplaceExisting);
-            var _src = await new ReviewWeb().GetSourceCodeAsync($"https://avicii.com/page/11", false);
-            await FileIO.AppendTextAsync(file, _src);
+            if (NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
+            {
+                var localFolder = ApplicationData.Current.LocalFolder;
+                var file = await localFolder.CreateFileAsync("OfflineData.txt",
+                    CreationCollisionOption.ReplaceExisting);
+                var _src = await new ReviewWeb().GetSourceCodeAsync($"https://avicii.com/page/11", false);
+                await FileIO.AppendTextAsync(file, _src);
+            }
         }
     }
 }

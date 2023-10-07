@@ -116,8 +116,7 @@
                 x:Name="progressRing"
                 Grid.ColumnSpan="2"
                 Width="50"
-                Height="50"
-                IsActive="True" />
+                Height="50" />
             <Button
                 Grid.Column="0"
                 HorizontalAlignment="Center"

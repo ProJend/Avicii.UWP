@@ -148,7 +148,7 @@
                     FontFamily="Segoe MDL2 Assets"
                     FontSize="40"
                     Glyph="&#xF384;" />
-                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}">Offline</TextBlock>
+                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}">Offline Data</TextBlock>
             </StackPanel>
             <ProgressRing
                 x:Name="progressRing"

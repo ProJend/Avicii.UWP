@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using Microsoft.Toolkit.Uwp.Connectivity;
+using System.Collections.ObjectModel;
 using TrueLove.Lib.Spider;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -76,11 +77,14 @@ namespace TrueLove.UWP.Views
             progressRing.IsActive = true;
             RefreshButton.IsEnabled = false;
 
-            _pageNumber++;
-            var reviewWeb = new ReviewWeb();
-            var src = await reviewWeb.GetSourceCodeAsync($"https://avicii.com/images/page/{_pageNumber}", false);
-            var refineData = new RefineData();
-            refineData.UpdateImage(src, imageCollection);
+            if (NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
+            {
+                _pageNumber++;
+                var reviewWeb = new ReviewWeb();
+                var src = await reviewWeb.GetSourceCodeAsync($"https://avicii.com/images/page/{_pageNumber}", false);
+                var refineData = new RefineData();
+                refineData.UpdateImage(src, imageCollection);
+            }
 
             progressRing.IsActive = false;
             RefreshButton.IsEnabled = true;

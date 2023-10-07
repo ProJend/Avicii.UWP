@@ -1,4 +1,5 @@
-﻿using TrueLove.Lib.Models.Code;
+﻿using Microsoft.Toolkit.Uwp.Connectivity;
+using TrueLove.Lib.Models.Code;
 using TrueLove.Lib.Spider;
 using Windows.Storage;
 using Windows.UI.Core;
@@ -19,6 +20,7 @@ namespace TrueLove.UWP.Views
             this.InitializeComponent();
             Window.Current.Activated += OnWindowActivated; // 订阅窗口活动事件
             GetSourceCode();
+
         }
 
         async void GetSourceCode()
@@ -36,6 +38,7 @@ namespace TrueLove.UWP.Views
 
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
+            _pageNumber = 0;
             RefreshButton.IsEnabled = false;
             commentDataCollection.Clear();
             Scroller.ChangeView(null, 0, null);
@@ -95,20 +98,29 @@ namespace TrueLove.UWP.Views
 
         private async void DataLoad()
         {
-            progressRing.IsActive = true;
-            var refineData = new RefineData();
-            refineData.UpdateComment(_src, commentDataCollection);
-
-            progressRing.IsActive = false;
-            _pageNumber++;
-            var reviewWeb = new ReviewWeb();
-            _src = await reviewWeb.GetSourceCodeAsync($"https://avicii.com/page/{_pageNumber}", false);
-
+            if (_pageNumber != null)
+            {
+                progressRing.IsActive = true;
+                var refineData = new RefineData();
+                refineData.UpdateComment(_src, commentDataCollection);
+                progressRing.IsActive = false;
+            }
+            if (NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
+            {
+                _pageNumber++;
+                var reviewWeb = new ReviewWeb();
+                _src = await reviewWeb.GetSourceCodeAsync($"https://avicii.com/page/{_pageNumber}", false);
+            }
+            else
+            {
+                _pageNumber = null;
+                NetworkState.Visibility = Visibility.Visible;
+            }
             RefreshButton.IsEnabled = true;
         }
 
         CommentDataCollection commentDataCollection = new CommentDataCollection();
-        double _pageNumber;
+        double? _pageNumber = 0;
         string _src;
 
         // 滚动条位置变量
