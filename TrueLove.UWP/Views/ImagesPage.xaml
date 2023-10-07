@@ -58,7 +58,10 @@
                     TextAlignment="Center">
                     SOMETIME A PICTURE IS WORTH MORE THAN A THOUSAND WORDS.
                 </TextBlock>
-                <GridView x:Name="ImageView" animations:ReorderGridAnimation.Duration="250">
+                <GridView
+                    x:Name="ImageView"
+                    animations:ReorderGridAnimation.Duration="250"
+                    ItemsSource="{x:Bind imageCollection}">
                     <GridView.ItemTemplate>
                         <DataTemplate>
                             <Image Source="{Binding}" Stretch="Uniform" />

@@ -20,7 +20,6 @@ namespace TrueLove.UWP.Views
         {
             this.InitializeComponent();
             Window.Current.Activated += OnWindowActivated; // 订阅窗口活动事件
-            ImageView.ItemsSource = imageCollection;
             DataLoad();
         }
 
@@ -36,6 +35,7 @@ namespace TrueLove.UWP.Views
 
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
+            NetworkState.Visibility = Visibility.Collapsed;
             RefreshButton.IsEnabled = false;
             imageCollection.Clear();
             Scroller.ChangeView(null, 0, null);
@@ -91,6 +91,7 @@ namespace TrueLove.UWP.Views
                 var refineData = new RefineData();
                 refineData.UpdateImage(src, imageCollection);
             }
+            else { NetworkState.Visibility = Visibility.Visible; }
 
             progressRing.IsActive = false;
             RefreshButton.IsEnabled = true;

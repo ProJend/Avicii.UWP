@@ -45,6 +45,7 @@ namespace TrueLove.UWP.Views
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
             _pageNumber = 0;
+            NetworkState.Visibility = Visibility.Collapsed;
             RefreshButton.IsEnabled = false;
             commentDataCollection.Clear();
             Scroller.ChangeView(null, 0, null);
