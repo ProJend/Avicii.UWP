@@ -6,8 +6,13 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace TrueLove.Lib.Spider
 {
-    public class RefineData
+    public class RefineData : IDisposable
     {
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
         public void UpdateComment(string src, ObservableCollection<CommentDataType> currentList)
         {
             try
@@ -38,14 +43,12 @@ namespace TrueLove.Lib.Spider
             catch { }
         }
 
-        public ObservableCollection<BitmapImage> UpdateImage(string src)
+        public void UpdateImage(string src, ObservableCollection<BitmapImage> currentList)
         {
-            var currentList = new ObservableCollection<BitmapImage>();
             try
             {
                 var htmlDocument = new HtmlDocument();
                 htmlDocument.LoadHtml(src);
-
                 for (int i = 1; i <= 50; i++)
                 {
                     string imagePath = $"//*[@id=\"instagramhashtag\"]/ul/li[{i}]/img";
@@ -56,12 +59,8 @@ namespace TrueLove.Lib.Spider
                         currentList.Add(new BitmapImage(new Uri("https://avicii.com" + imageNode.Attributes["src"].Value)));
                     }
                 }
-                return currentList;
             }
-            catch
-            {
-                return currentList;
-            }
+            catch { }
         }
     }
 }

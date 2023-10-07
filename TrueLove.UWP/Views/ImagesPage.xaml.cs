@@ -1,7 +1,9 @@
-﻿using TrueLove.Lib.Spider;
+﻿using System.Collections.ObjectModel;
+using TrueLove.Lib.Spider;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Imaging;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -16,6 +18,7 @@ namespace TrueLove.UWP.Views
         {
             this.InitializeComponent();
             Window.Current.Activated += OnWindowActivated; // 订阅窗口活动事件
+            ImageView.ItemsSource = imageCollection;
             DataLoad();
         }
 
@@ -23,6 +26,14 @@ namespace TrueLove.UWP.Views
         /// 返回顶部按钮。
         /// </summary>
         private void BackToTop_Click(object sender, RoutedEventArgs e) => Scroller.ChangeView(null, 0, null);
+
+        private void Refresh_Click(object sender, RoutedEventArgs e)
+        {
+            RefreshButton.IsEnabled = false;
+            imageCollection.Clear();
+            Scroller.ChangeView(null, 0, null);
+            DataLoad();
+        }
 
         private void OnWindowActivated(object sender, WindowActivatedEventArgs e) => VisualStateManager.GoToState(this,
                 e.WindowActivationState == CoreWindowActivationState.Deactivated ? WindowNotFocused.Name : WindowFocused.Name, false);
@@ -51,7 +62,28 @@ namespace TrueLove.UWP.Views
                 canMinimize = true;
 
             }
+
             scrlocation = Scroller.VerticalOffset;
+
+            if (Scroller.ExtentHeight - scrlocation <= 1100)
+            {
+                DataLoad();
+            }
+        }
+
+        private async void DataLoad()
+        {
+            progressRing.IsActive = true;
+            RefreshButton.IsEnabled = false;
+
+            _pageNumber++;
+            var reviewWeb = new ReviewWeb();
+            var src = await reviewWeb.GetSourceCodeAsync($"https://avicii.com/images/page/{_pageNumber}", false);
+            var refineData = new RefineData();
+            refineData.UpdateImage(src, imageCollection);
+
+            progressRing.IsActive = false;
+            RefreshButton.IsEnabled = true;
         }
 
         // 滚动条位置变量
@@ -60,13 +92,7 @@ namespace TrueLove.UWP.Views
         // 导航栏当前显示状态（这个是为了减少不必要的开销，因为我做的是动画隐藏显示效果如果不用一个变量来记录当前导航栏状态的会重复执行隐藏或显示）
         bool canMinimize = true;
 
-        private async void DataLoad()
-        {
-            var reviewWeb = new ReviewWeb();
-            var src = await reviewWeb.GetSourceCodeAsync("https://avicii.com/images", false);
-            var refineData = new RefineData();
-            ImageView.ItemsSource = refineData.UpdateImage(src);
-            progressRing.IsActive = false;
-        }
+        private double _pageNumber;
+        ObservableCollection<BitmapImage> imageCollection = new ObservableCollection<BitmapImage>();
     }
 }

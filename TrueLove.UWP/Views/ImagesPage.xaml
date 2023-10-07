@@ -48,9 +48,7 @@
         </Storyboard>
     </Page.Resources>
     <Grid ManipulationMode="System,TranslateX">
-        <ScrollViewer
-            x:Name="Scroller"
-            ViewChanged="Scroller_ViewChanged">
+        <ScrollViewer x:Name="Scroller" ViewChanged="Scroller_ViewChanged">
             <StackPanel Padding="0,85,0,0">
                 <TextBlock
                     MaxWidth="700"
@@ -74,11 +72,6 @@
                 </GridView>
             </StackPanel>
         </ScrollViewer>
-        <ProgressRing
-            x:Name="progressRing"
-            Width="50"
-            Height="50"
-            IsActive="True" />
         <Grid
             Height="85"
             Padding="0,40,0,0"
@@ -100,8 +93,8 @@
         </Grid>
         <Grid
             Name="BottomPart"
-            MaxWidth="600"
-            Margin="0 20"
+            MaxWidth="650"
+            Margin="0,20"
             VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -117,8 +110,14 @@
                     FontFamily="Segoe MDL2 Assets"
                     FontSize="40"
                     Glyph="&#xF384;" />
-                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}">Offline</TextBlock>
+                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}">Offline Data</TextBlock>
             </StackPanel>
+            <ProgressRing
+                x:Name="progressRing"
+                Grid.ColumnSpan="2"
+                Width="50"
+                Height="50"
+                IsActive="True" />
             <Button
                 Grid.Column="0"
                 HorizontalAlignment="Center"
@@ -127,8 +126,10 @@
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE898;" />
             </Button>
             <Button
+                x:Name="RefreshButton"
                 Grid.Column="1"
                 HorizontalAlignment="Center"
+                Click="Refresh_Click"
                 Style="{ThemeResource TranslucentCircleButton}">
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE72C;" />
             </Button>
