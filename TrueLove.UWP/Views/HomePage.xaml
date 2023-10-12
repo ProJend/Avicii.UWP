@@ -20,7 +20,7 @@
         </Style>
     </Page.Resources>
     <Grid Name="Root">
-        <FlipView>
+        <FlipView FocusVisualPrimaryThickness="0">
             <FlipView.Background>
                 <ImageBrush
                     AlignmentX="Left"
