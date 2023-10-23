@@ -8,6 +8,7 @@ Information from [WIKIPEDIA](https://en.wikipedia.org/wiki/Avicii).
 
 ## Debug Support
 The building of the project was in progress...
+Since I don't have lumia device, the issue of APP crashing can not be fixed on windows phone.
 
 ### Version Requirement
 - [Windows10 OS](https://www.microsoft.com/en-us/software-download/windows10) (ARM, x32, x64) : Windows 10 Creators Update (10.0; version 15063) or higher
