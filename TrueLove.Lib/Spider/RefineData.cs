@@ -6,26 +6,22 @@ using Windows.UI.Xaml.Media.Imaging;
 
 namespace TrueLove.Lib.Spider
 {
-    public class RefineData : IDisposable
+    public class RefineData
     {
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
-
         public void UpdateComment(string src, ObservableCollection<CommentDataType> currentList)
         {
             try
             {
                 var htmlDocument = new HtmlDocument();
                 htmlDocument.LoadHtml(src);
-                for (int i = 1; i <= 100; i++)
+                for (int i = 1; i <= 99; i++)
                 {
-                    string namePath = $"//*[@id=\"commentlist\"]/ul/li[{i}]/p[1]/span";
-                    string comPath = $"//*[@id=\"commentlist\"]/ul/li[{i}]/p[2]";
-                    string datePath = $"//*[@id=\"commentlist\"]/ul/li[{i}]/p[3]";
+                    string namePath = $"//*[@id=\"comments\"]/ul[2]/li[{i}]/div/strong";
+                    string comPath = $"//*[@id=\"comments\"]/ul[2]/li[{i}]/div/p";
+                    string datePath = $"//*[@id=\"comments\"]/ul[2]/li[{i}]/div/time";
 
                     var nameText = htmlDocument.DocumentNode.SelectSingleNode(namePath).InnerText;
+                    nameText = nameText.Substring(5);
                     var comText = htmlDocument.DocumentNode.SelectSingleNode(comPath).InnerText;
                     var dateText = htmlDocument.DocumentNode.SelectSingleNode(datePath).InnerText;
                     var parsedDate = DateTime.Parse(dateText);
@@ -49,9 +45,9 @@ namespace TrueLove.Lib.Spider
             {
                 var htmlDocument = new HtmlDocument();
                 htmlDocument.LoadHtml(src);
-                for (int i = 1; i <= 50; i++)
+                for (int i = 1; i <= 99; i++)
                 {
-                    string imagePath = $"//*[@id=\"instagramhashtag\"]/ul/li[{i}]/img";
+                    string imagePath = $"//*[@id=\"images\"]/ul[2]/li[{i}]/img";
 
                     var imageNode = htmlDocument.DocumentNode.SelectSingleNode(imagePath);
                     if (imageNode != null)
