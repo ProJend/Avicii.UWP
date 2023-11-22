@@ -1,9 +1,9 @@
 ﻿using Microsoft.QueryStringDotNET;
-using Microsoft.Toolkit.Uwp.Connectivity;
 using System;
+using System.IO;
+using System.Threading.Tasks;
 using TrueLove.Lib.Helpers;
 using TrueLove.Lib.Models.Enum;
-using TrueLove.Lib.Spider;
 using TrueLove.UWP.Views;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -38,7 +38,7 @@ namespace TrueLove.UWP
         /// 将在启动应用程序以打开特定文件等情况下使用。
         /// </summary>
         /// <param name="e">有关启动请求和过程的详细信息。</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
             // 不要在窗口已包含内容时重复应用程序初始化，
             // 只需确保窗口处于活动状态
@@ -65,17 +65,27 @@ namespace TrueLove.UWP
                     // 当导航堆栈尚未还原时，导航到第一页，
                     // 并通过将所需信息作为导航参数传入来配置
                     // 参数
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    var path = ApplicationData.Current.LocalFolder.Path + @"/OfflineData.txt";
+                    if (File.Exists(path))
+                    {
+                        rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                        if (Generic.DeviceFamilyMatch(DeviceFamilyType.Desktop))
+                            CollapseTitleBar();
+                        //else if(Generic.DeviceFamilyMatch(DeviceFamilyType.Mobile))
+                        //    CollapseStatusBar();
+                    }
+                    else
+                    {
+                        bool loadState = e.PreviousExecutionState == ApplicationExecutionState.Terminated;
+                        ExtendedSplash extendedSplash = new ExtendedSplash(e.SplashScreen, loadState);
+                        rootFrame.Content = extendedSplash;
+                        Window.Current.Content = rootFrame;
+                        await Task.Delay(50); // 防止初始屏幕闪烁
+                    }
+
                 }
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
-
-                if (Generic.DeviceFamilyMatch(DeviceFamilyType.Desktop))
-                    CollapseTitleBar();
-                //else if(Generic.DeviceFamilyMatch(DeviceFamilyType.Mobile))
-                //    CollapseStatusBar();
-
-                InitialCommentData();
             }
         }
 
@@ -103,8 +113,6 @@ namespace TrueLove.UWP
                 CollapseTitleBar();
             //else
             //    CollapseStatusBar();
-
-            InitialCommentData();
         }
 
         protected override async void OnBackgroundActivated(BackgroundActivatedEventArgs args)
@@ -185,18 +193,6 @@ namespace TrueLove.UWP
             {
 
             };
-        }
-
-        private async void InitialCommentData()
-        {
-            if (NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
-            {
-                var localFolder = ApplicationData.Current.LocalFolder;
-                var file = await localFolder.CreateFileAsync("OfflineData.txt",
-                    CreationCollisionOption.ReplaceExisting);
-                var _src = await new ReviewWeb().GetSourceCodeAsync($"https://avicii.com/page/11", false);
-                await FileIO.AppendTextAsync(file, _src);
-            }
         }
     }
 }
