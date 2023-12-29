@@ -1,7 +1,5 @@
 ﻿using Microsoft.Toolkit.Uwp.Connectivity;
 using TrueLove.Lib.Models.Code;
-using TrueLove.Lib.Spider;
-using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -20,22 +18,10 @@ namespace TrueLove.UWP.Views
         {
             this.InitializeComponent();
             Window.Current.Activated += OnWindowActivated; // 订阅窗口活动事件
-            GetSourceCode();
-
+            CommentCollection.LoadMoreItemsManuallyAsync();
         }
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            Window.Current.Activated -= OnWindowActivated;
-        }
-
-        async void GetSourceCode()
-        {
-            RefreshButton.IsEnabled = false;
-            var reviewWeb = new ReviewWeb();
-            _src = await reviewWeb.GetSourceCodeAsync(ApplicationData.Current.LocalFolder.Path + $"/OfflineData.txt");
-            DataLoad();
-        }
+        protected override void OnNavigatedFrom(NavigationEventArgs e) => Window.Current.Activated -= OnWindowActivated;
 
         /// <summary>
         /// 返回顶部按钮。
@@ -44,12 +30,10 @@ namespace TrueLove.UWP.Views
 
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
-            _pageNumber = 0;
-            NetworkState.Visibility = Visibility.Collapsed;
-            RefreshButton.IsEnabled = false;
-            commentDataCollection.Clear();
+            isInternetAvailable = !NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable;
+            CommentCollection.Clear();
             Scroller.ChangeView(null, 0, null);
-            DataLoad();
+            CommentCollection.LoadMoreItemsManuallyAsync(true);
         }
 
         private void OnWindowActivated(object sender, WindowActivatedEventArgs e) => VisualStateManager.GoToState(this,
@@ -65,76 +49,53 @@ namespace TrueLove.UWP.Views
             // 增加额外距离以防误触
             if (Scroller.VerticalOffset > scrlocation + 1 && canMinimize)
             {
-                BottomPartSlideDownStoryboard.Begin();
+                AfterbodySlideDownStoryboard.Begin();
                 canMinimize = false;
             }
             else if (Scroller.VerticalOffset < scrlocation - 18 && !canMinimize)
             {
-                BottomPartSlideUpStoryboard.Begin();
+                AfterbodySlideUpStoryboard.Begin();
                 canMinimize = true;
             }
             else if (Scroller.VerticalOffset == 0 && !canMinimize)
             {
-                BottomPartSlideUpStoryboard.Begin();
+                AfterbodySlideUpStoryboard.Begin();
                 canMinimize = true;
             }
 
             scrlocation = Scroller.VerticalOffset;
 
-            if (TopPartExtendHeight == 0)
+            if (ForebodyExtendHeight == 0)
             {
-                TopPartExtendHeight = TopPart.ActualHeight;
+                ForebodyExtendHeight = Forebody.ActualHeight;
             }
-            if (TopPartExtendHeight - scrlocation <= 85)
-                TopPart.Height = 85;
+            if (ForebodyExtendHeight - scrlocation <= 85)
+                Forebody.Height = 85;
             else
             {
                 BackSubTitle.Opacity = 0;
-                TopPart.Height = TopPartExtendHeight - scrlocation;
+                Forebody.Height = ForebodyExtendHeight - scrlocation;
             }
             if (Scroller.VerticalOffset == 0)
             {
                 BackSubTitle.Opacity = 1;
             }
 
-            if (Scroller.ExtentHeight - scrlocation <= 1200)
+            if ((Scroller.ScrollableHeight - scrlocation) is >= 750 and <= 760)
             {
-                DataLoad();
+                CommentCollection.LoadMoreItemsManuallyAsync();
             }
         }
 
-        private async void DataLoad()
-        {
-            if (_pageNumber != null)
-            {
-                progressRing.IsActive = true;
-                var refineData = new RefineData();
-                refineData.UpdateComment(_src, commentDataCollection);
-                progressRing.IsActive = false;
-            }
-            if (NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
-            {
-                _pageNumber++;
-                var reviewWeb = new ReviewWeb();
-                _src = await reviewWeb.GetSourceCodeAsync($"https://avicii.com/page/{_pageNumber}", false);
-            }
-            else
-            {
-                _pageNumber = null;
-                NetworkState.Visibility = Visibility.Visible;
-            }
-            RefreshButton.IsEnabled = true;
-        }
-
-        CommentDataCollection commentDataCollection = new CommentDataCollection();
-        double? _pageNumber = 0;
-        string _src;
+        CommentCollection CommentCollection = new CommentCollection();
 
         // 滚动条位置变量
         double scrlocation = 0;
         // 导航栏当前显示状态（这个是为了减少不必要的开销，因为我做的是动画隐藏显示效果如果不用一个变量来记录当前导航栏状态的会重复执行隐藏或显示）
         bool canMinimize = true;
 
-        double TopPartExtendHeight;
+        double ForebodyExtendHeight;
+
+        bool isInternetAvailable = !NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable;
     }
 }

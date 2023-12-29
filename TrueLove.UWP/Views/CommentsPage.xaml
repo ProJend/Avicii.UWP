@@ -11,9 +11,9 @@
     RequestedTheme="Dark"
     mc:Ignorable="d">
     <Page.Resources>
-        <Storyboard x:Name="BottomPartSlideDownStoryboard">
+        <Storyboard x:Name="AfterbodySlideDownStoryboard">
             <DoubleAnimation
-                Storyboard.TargetName="BottomPart_TranslateTransform"
+                Storyboard.TargetName="Afterbody_TranslateTransform"
                 Storyboard.TargetProperty="Y"
                 From="0"
                 To="60">
@@ -22,15 +22,15 @@
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
             <DoubleAnimation
-                Storyboard.TargetName="BottomPart"
+                Storyboard.TargetName="Afterbody"
                 Storyboard.TargetProperty="(Grid.Opacity)"
                 From="1"
                 To="0"
                 Duration="0:0:0.5" />
         </Storyboard>
-        <Storyboard x:Name="BottomPartSlideUpStoryboard">
+        <Storyboard x:Name="AfterbodySlideUpStoryboard">
             <DoubleAnimation
-                Storyboard.TargetName="BottomPart_TranslateTransform"
+                Storyboard.TargetName="Afterbody_TranslateTransform"
                 Storyboard.TargetProperty="Y"
                 From="60"
                 To="0">
@@ -39,13 +39,13 @@
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
             <DoubleAnimation
-                Storyboard.TargetName="BottomPart"
+                Storyboard.TargetName="Afterbody"
                 Storyboard.TargetProperty="(Grid.Opacity)"
                 From="0"
                 To="1"
                 Duration="0:0:0.5" />
         </Storyboard>
-        <DataTemplate x:Key="CommentItem" x:DataType="date:CommentDataType">
+        <DataTemplate x:Key="CommentItemTemplate" x:DataType="date:CommentItem">
             <Grid Padding="30">
                 <TextBlock TextAlignment="Center" TextWrapping="Wrap">
                     <Run
@@ -67,7 +67,7 @@
     </Page.Resources>
     <Grid ManipulationMode="System,TranslateX">
         <Grid
-            x:Name="TopPart"
+            x:Name="Forebody"
             Padding="0,40,0,0"
             VerticalAlignment="Top">
             <Grid.Background>
@@ -119,8 +119,8 @@
                     Margin="0,60,0,0"
                     animations:ReorderGridAnimation.Duration="250"
                     ItemContainerStyle="{StaticResource GridViewItemNoneStyle}"
-                    ItemTemplate="{StaticResource CommentItem}"
-                    ItemsSource="{x:Bind commentDataCollection}">
+                    ItemTemplate="{StaticResource CommentItemTemplate}"
+                    ItemsSource="{x:Bind CommentCollection}">
                     <GridView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <controls:StaggeredPanel DesiredColumnWidth="350" />
@@ -130,7 +130,7 @@
             </StackPanel>
         </ScrollViewer>
         <Grid
-            Name="BottomPart"
+            Name="Afterbody"
             MaxWidth="650"
             Margin="0,20"
             VerticalAlignment="Bottom">
@@ -142,7 +142,7 @@
                 x:Name="NetworkState"
                 Grid.ColumnSpan="2"
                 HorizontalAlignment="Center"
-                Visibility="Collapsed">
+                Visibility="{x:Bind isInternetAvailable}">
                 <FontIcon
                     Margin="0,15"
                     FontFamily="Segoe MDL2 Assets"
@@ -150,12 +150,12 @@
                     Glyph="&#xF384;" />
                 <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}">Offline Data</TextBlock>
             </StackPanel>
-            <ProgressRing
+            <!--<ProgressRing
                 x:Name="progressRing"
                 Grid.ColumnSpan="2"
                 Width="50"
                 Height="50"
-                IsActive="True" />
+                IsActive="True" />-->
             <Button
                 Grid.Column="0"
                 HorizontalAlignment="Center"
@@ -172,7 +172,7 @@
                 <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE72C;" />
             </Button>
             <Grid.RenderTransform>
-                <TranslateTransform x:Name="BottomPart_TranslateTransform" />
+                <TranslateTransform x:Name="Afterbody_TranslateTransform" />
             </Grid.RenderTransform>
             <Grid.Transitions>
                 <TransitionCollection>
