@@ -16,8 +16,12 @@
     <value>真爱</value>
     <comment>DisplayName</comment>
   </data>
+  <data name="pPackageDescription" xml:space="preserve">
+    <value>一个基于 Avicii 网站的 UWP </value>
+    <comment>PackageDescription</comment>
+  </data>
   <data name="pPackageDisplayName" xml:space="preserve">
-    <value>真爱 - Tim Bergling 基金会</value>
+    <value>真爱 - AviciiUWP</value>
     <comment>PackageDisplayName</comment>
   </data>
 </root>

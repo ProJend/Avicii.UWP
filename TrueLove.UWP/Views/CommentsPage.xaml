@@ -69,7 +69,8 @@
         <Grid
             x:Name="Forebody"
             Padding="0,40,0,0"
-            VerticalAlignment="Top">
+            VerticalAlignment="Top"
+            DoubleTapped="Forebody_DoubleTapped">
             <Grid.Background>
                 <ImageBrush
                     ImageSource="/Assets/Instagram/4.jpg"
@@ -129,57 +130,6 @@
                 </GridView>
             </StackPanel>
         </ScrollViewer>
-        <Grid
-            Name="Afterbody"
-            MaxWidth="650"
-            Margin="0,20"
-            VerticalAlignment="Bottom">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <StackPanel
-                x:Name="NetworkState"
-                Grid.ColumnSpan="2"
-                HorizontalAlignment="Center"
-                Visibility="{x:Bind isInternetAvailable}">
-                <FontIcon
-                    Margin="0,15"
-                    FontFamily="Segoe MDL2 Assets"
-                    FontSize="40"
-                    Glyph="&#xF384;" />
-                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}">Offline Data</TextBlock>
-            </StackPanel>
-            <!--<ProgressRing
-                x:Name="progressRing"
-                Grid.ColumnSpan="2"
-                Width="50"
-                Height="50"
-                IsActive="True" />-->
-            <Button
-                Grid.Column="0"
-                HorizontalAlignment="Center"
-                Click="BackToTop_Click"
-                Style="{ThemeResource TranslucentCircleButton}">
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE898;" />
-            </Button>
-            <Button
-                x:Name="RefreshButton"
-                Grid.Column="1"
-                HorizontalAlignment="Center"
-                Click="Refresh_Click"
-                Style="{ThemeResource TranslucentCircleButton}">
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE72C;" />
-            </Button>
-            <Grid.RenderTransform>
-                <TranslateTransform x:Name="Afterbody_TranslateTransform" />
-            </Grid.RenderTransform>
-            <Grid.Transitions>
-                <TransitionCollection>
-                    <PopupThemeTransition />
-                </TransitionCollection>
-            </Grid.Transitions>
-        </Grid>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WindowFocusStates">
                 <VisualState x:Name="WindowFocused" />

@@ -118,17 +118,30 @@ namespace TrueLove.UWP.Views
                 if (isInternetAvailable)
                 {
                     splashProgressRing.IsActive = true;
-                    await Task.Delay(5000);
-                    //var localFolder = ApplicationData.Current.LocalFolder;
-                    //var file = await localFolder.CreateFileAsync("OfflineData.txt",
-                    //    CreationCollisionOption.ReplaceExisting);
-                    //var _src = await new ReviewStream().GetStreamAsync($"https://avicii.com/page/11", false);
-                    //await FileIO.AppendTextAsync(file, _src);
+
+                    var localFolder = ApplicationData.Current.LocalFolder;
+                    var file = await localFolder.CreateFileAsync("OfflineData.txt",
+                        CreationCollisionOption.ReplaceExisting);
+                    var _src = await new ReviewStream().GetStreamAsync($"https://avicii.com/page/11");
+                    await FileIO.AppendTextAsync(file, _src);
                 }
             }
             while (!File.Exists(path));
 
             DismissExtendedSplash();
+        }
+
+        void DismissExtendedSplash()
+        {
+            if (Generic.DeviceFamilyMatch(DeviceFamilyType.Desktop))
+                CollapseTitleBar();
+            //else if(Generic.DeviceFamilyMatch(DeviceFamilyType.Mobile))
+            //    CollapseStatusBar();
+
+            // Navigate to mainpage
+            rootFrame.Navigate(typeof(MainPage));
+            // Place the frame in the current Window
+            Window.Current.Content = rootFrame;
         }
 
         /// <summary>
@@ -164,19 +177,6 @@ namespace TrueLove.UWP.Views
             {
 
             };
-        }
-
-        void DismissExtendedSplash()
-        {
-            if (Generic.DeviceFamilyMatch(DeviceFamilyType.Desktop))
-                CollapseTitleBar();
-            //else if(Generic.DeviceFamilyMatch(DeviceFamilyType.Mobile))
-            //    CollapseStatusBar();
-
-            // Navigate to mainpage
-            rootFrame.Navigate(typeof(MainPage));
-            // Place the frame in the current Window
-            Window.Current.Content = rootFrame;
         }
     }
 }

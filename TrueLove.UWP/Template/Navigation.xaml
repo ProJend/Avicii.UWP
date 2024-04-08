@@ -303,9 +303,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="GridViewItem">
-                    <Grid Background="{TemplateBinding Background}">
-                        <ContentPresenter Margin="{TemplateBinding Padding}" Content="{TemplateBinding Content}" />
-                    </Grid>
+                    <ListViewItemPresenter x:Name="Root" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

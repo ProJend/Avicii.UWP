@@ -1,7 +1,16 @@
 ﻿using Microsoft.Toolkit.Uwp.Connectivity;
+using System;
 using System.Collections.ObjectModel;
+using TrueLove.Lib.Models.Code;
+using TrueLove.Lib.Models.UI;
+using TrueLove.Lib.Notification;
 using TrueLove.Lib.Spider;
+using Windows.ApplicationModel;
+using Windows.ApplicationModel.Background;
+using Windows.Storage;
+using Windows.System;
 using Windows.UI.Core;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
@@ -20,13 +29,10 @@ namespace TrueLove.UWP.Views
         {
             this.InitializeComponent();
             Window.Current.Activated += OnWindowActivated; // 订阅窗口活动事件
-            DataLoad();
+            ImageCollection.LoadMoreItemsManuallyAsync();
         }
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            Window.Current.Activated -= OnWindowActivated;
-        }
+        protected override void OnNavigatedFrom(NavigationEventArgs e) => Window.Current.Activated -= OnWindowActivated;
 
         /// <summary>
         /// 返回顶部按钮。
@@ -35,15 +41,30 @@ namespace TrueLove.UWP.Views
 
         private void Refresh_Click(object sender, RoutedEventArgs e)
         {
-            NetworkState.Visibility = Visibility.Collapsed;
-            RefreshButton.IsEnabled = false;
-            imageCollection.Clear();
+            isInternetAvailable = !NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable;
+            ImageCollection.Clear();
             Scroller.ChangeView(null, 0, null);
-            DataLoad();
+            ImageCollection.LoadMoreItemsManuallyAsync(true);
         }
 
         private void OnWindowActivated(object sender, WindowActivatedEventArgs e) => VisualStateManager.GoToState(this,
                 e.WindowActivationState == CoreWindowActivationState.Deactivated ? WindowNotFocused.Name : WindowFocused.Name, false);
+
+        private async void MenuFlyout_Click(object sender, RoutedEventArgs e)
+        {
+            var menuFlyoutItem = sender as FrameworkElement;
+            switch (menuFlyoutItem.Tag as string)
+            {
+                case "show":
+                    var options = new FolderLauncherOptions();
+                    var folder = ApplicationData.Current.LocalFolder;
+                    await Launcher.LaunchFolderAsync(folder, options);
+                    break;
+
+                case "save":
+                    break;
+            }
+        }
 
         /// <summary>
         /// 检查工具栏相关的按钮可用状态。
@@ -55,47 +76,30 @@ namespace TrueLove.UWP.Views
             // 增加额外距离以防误触
             if (Scroller.VerticalOffset > scrlocation + 1 && canMinimize)
             {
-                BottomPartSlideDownStoryboard.Begin();
+                AfterbodySlideDownStoryboard.Begin();
                 canMinimize = false;
             }
             else if (Scroller.VerticalOffset < scrlocation - 18 && !canMinimize)
             {
-                BottomPartSlideUpStoryboard.Begin();
+                AfterbodySlideUpStoryboard.Begin();
                 canMinimize = true;
             }
             else if (Scroller.VerticalOffset == 0 && !canMinimize)
             {
-                BottomPartSlideUpStoryboard.Begin();
+                AfterbodySlideUpStoryboard.Begin();
                 canMinimize = true;
 
             }
 
             scrlocation = Scroller.VerticalOffset;
 
-            if (Scroller.ExtentHeight - scrlocation <= 1100)
+            if ((Scroller.ScrollableHeight - scrlocation) is >= 750 and <= 760)
             {
-                DataLoad();
+                ImageCollection.LoadMoreItemsManuallyAsync();
             }
         }
 
-        private async void DataLoad()
-        {
-            progressRing.IsActive = true;
-            RefreshButton.IsEnabled = false;
-
-            if (NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
-            {
-                _pageNumber++;
-                var reviewWeb = new ReviewWeb();
-                var src = await reviewWeb.GetSourceCodeAsync($"https://avicii.com/images/page/{_pageNumber}", false);
-                var refineData = new RefineData();
-                refineData.UpdateImage(src, imageCollection);
-            }
-            else { NetworkState.Visibility = Visibility.Visible; }
-
-            progressRing.IsActive = false;
-            RefreshButton.IsEnabled = true;
-        }
+        ImageCollection ImageCollection = new ImageCollection();
 
         // 滚动条位置变量
         double scrlocation = 0;
@@ -104,6 +108,7 @@ namespace TrueLove.UWP.Views
         bool canMinimize = true;
 
         private double _pageNumber;
-        ObservableCollection<BitmapImage> imageCollection = new ObservableCollection<BitmapImage>();
+
+        bool isInternetAvailable = !NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable;
     }
 }

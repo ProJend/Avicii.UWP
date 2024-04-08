@@ -160,7 +160,6 @@
                         <Setter Target="FloatingLayout_a.Style" Value="{StaticResource CrossBottom}" />
                         <Setter Target="FloatingLayout_b.Style" Value="{StaticResource CrossBottom}" />
                         <Setter Target="FloatingLayout_c.Style" Value="{StaticResource CrossBottom}" />
-                        <Setter Target="Root.Margin" Value="0 40 0 0" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>

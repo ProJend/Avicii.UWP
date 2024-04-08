@@ -16,8 +16,12 @@
     <value>真愛</value>
     <comment>DisplayName</comment>
   </data>
+  <data name="pPackageDescription" xml:space="preserve">
+    <value>一個基於 Avicii 網站的 UWP </value>
+    <comment>PackageDescription</comment>
+  </data>
   <data name="pPackageDisplayName" xml:space="preserve">
-    <value>True Love - Tim Bergling Foundtion</value>
+    <value>真愛 - AviciiUWP</value>
     <comment>PackageDisplayName</comment>
   </data>
 </root>

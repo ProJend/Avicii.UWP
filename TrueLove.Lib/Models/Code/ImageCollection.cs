@@ -1,34 +1,45 @@
 ﻿using Microsoft.Toolkit.Uwp.Connectivity;
 using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using System.Threading.Tasks;
 using TrueLove.Lib.Spider;
 using Windows.Storage;
 using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace TrueLove.Lib.Models.Code
 {
-    public class CommentItem
+    public class ImageCollection : ObservableCollection<BitmapImage>, ISupportIncrementalLoading
     {
-        public string Name { get; set; }
-        public string Comment { get; set; }
-        public string Date { get; set; }
-    }
+        public ObservableCollection<BitmapImage> ImageColl;
 
-    public class CommentCollection : ObservableCollection<CommentItem>, ISupportIncrementalLoading
-    {
-        public ObservableCollection<CommentItem> CommentColl;
-
-        public async void LoadMoreItemsManuallyAsync()
+        public async void LoadMoreItemsManuallyAsync(bool isRefreshing = false)
         {
+            if (isRefreshing)
+            {
+                _pageNumber = 0;
+            }
+            string _src = "null";
+            if (_pageNumber++ == 0)
+            {
+                var path = ApplicationData.Current.LocalFolder.Path;
+                var dir = new DirectoryInfo(path);
+                _times = dir.GetFiles().Length - 1; // 该目录下的文件数
+            }
+            else if (NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
+            {
+                var reviewStream = new ReviewStream();
+                _src = await reviewStream.GetStreamAsync($"https://avicii.com/page/{_pageNumber}");
+            }
+            var refineStream = new RefineStream();
             try
             {
-                var refineStream = new RefineStream();
-                for (int i = 1; i <= 99; i++)
+                for (int i = 1; i <= _times; i++)
                 {
-                    var singleItme = await refineStream.RefineComment(i);
+                    var singleItme = await refineStream.RefineImage(_src, i);
                     Add(singleItme);
                 }
             }
@@ -67,7 +78,7 @@ namespace TrueLove.Lib.Models.Code
                     var refineStream = new RefineStream();
                     try
                     {
-                        var singleItme = await refineStream.RefineComment(_times++);
+                        var singleItme = await refineStream.RefineImage(_src, _times++);
                         Add(singleItme);
                     }
                     catch (Exception)

@@ -1,24 +1,33 @@
 ﻿using HtmlAgilityPack;
+using Microsoft.Toolkit.Uwp.Connectivity;
 using System;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using TrueLove.Lib.Models.Code;
+using Windows.Storage;
 using Windows.UI.Xaml.Media.Imaging;
 
 namespace TrueLove.Lib.Spider
 {
-
-
     public class RefineStream
     {
-        public Task<CommentItem> RefineComment(string src, int times)
+        string _src;
+        int _pageNumber = 1;
+        HtmlDocument htmlDocument = new HtmlDocument();
+
+        public RefineStream()
+        {
+            var reviewStream = new ReviewStream();
+            _src = reviewStream.GetStream(ApplicationData.Current.LocalFolder.Path + @"/OfflineData.txt", _pageNumber == 1);
+            htmlDocument.LoadHtml(_src);
+        }
+
+        public Task<CommentItem> RefineComment(int ID)
         {
             var singleComment = new CommentItem();
-            var htmlDocument = new HtmlDocument();
-            htmlDocument.LoadHtml(src);
-            string namePath = $"//*[@id=\"comments\"]/ul[2]/li[{times}]/div/strong";
-            string comPath = $"//*[@id=\"comments\"]/ul[2]/li[{times}]/div/p";
-            string datePath = $"//*[@id=\"comments\"]/ul[2]/li[{times}]/div/time";
+
+            string namePath = $"//*[@id=\"comments\"]/ul[2]/li[{ID}]/div/strong";
+            string comPath = $"//*[@id=\"comments\"]/ul[2]/li[{ID}]/div/p";
+            string datePath = $"//*[@id=\"comments\"]/ul[2]/li[{ID}]/div/time";
 
             var nameText = htmlDocument.DocumentNode.SelectSingleNode(namePath).InnerText;
             nameText = nameText.Substring(5);
@@ -35,26 +44,26 @@ namespace TrueLove.Lib.Spider
             return Task.Run(() => singleComment);
         }
 
-        public void RefineImage(string src, ObservableCollection<BitmapImage> currentList)
+        public Task<BitmapImage> RefineImage(string src, int ID)
         {
-            try
-            {
-                var htmlDocument = new HtmlDocument();
-                htmlDocument.LoadHtml(src);
-                for (int i = 1; i <= 99; i++)
-                {
-                    string imagePath = $"//*[@id=\"images\"]/ul[2]/li[{i}]/img";
+            var singleImage = new BitmapImage();
+            var htmlDocument = new HtmlDocument();
+            htmlDocument.LoadHtml(src);
+            string imagePath = $"//*[@id=\"images\"]/ul[2]/li[{ID}]/img";
 
-                    var imageNode = htmlDocument.DocumentNode.SelectSingleNode(imagePath);
-                    if (imageNode != null)
-                    {
-                        var path = imageNode.Attributes["src"].Value;
-                        var uri = new Uri(path);
-                        currentList.Add(new BitmapImage(uri));
-                    }
-                }
+            var imageNode = htmlDocument.DocumentNode.SelectSingleNode(imagePath);
+            if (imageNode != null)
+            {
+                var path = imageNode.Attributes["src"].Value;
+                var uri = new Uri(path);
+
             }
-            catch { }
+            else
+            {
+
+            }
+
+            return Task.Run(() => singleImage);
         }
     }
 }

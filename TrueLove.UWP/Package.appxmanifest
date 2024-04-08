@@ -1,47 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="AviciiUWP" Publisher="CN=Admin" Version="0.4.1.0" />
-  <mp:PhoneIdentity PhoneProductId="cf0148d5-01bb-4b60-b53b-da3346bf8e5e" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
-  <Properties>
-    <DisplayName>True Love</DisplayName>
-    <PublisherDisplayName>ProJend</PublisherDisplayName>
-    <Logo>Assets\StoreLogo.png</Logo>
-  </Properties>
-  <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
-  </Dependencies>
-  <Resources>
-    <Resource Language="x-generate" />
-  </Resources>
-  <Applications>
-    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="TrueLove.UWP.App">
-      <uap:VisualElements DisplayName="ms-resource:pDisplayName" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="A UWP cover for Avicii website." BackgroundColor="black">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" ShortName="ms-resource:pDisplayName" Square310x310Logo="Assets\Square310x310Logo.png" Square71x71Logo="Assets\Square71x71Logo.png">
-          <uap:ShowNameOnTiles>
-            <uap:ShowOn Tile="square150x150Logo" />
-            <uap:ShowOn Tile="wide310x150Logo" />
-            <uap:ShowOn Tile="square310x310Logo" />
-          </uap:ShowNameOnTiles>
-        </uap:DefaultTile>
-        <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="black" />
-        <uap:InitialRotationPreference>
-          <uap:Rotation Preference="portrait" />
-          <uap:Rotation Preference="landscape" />
-          <uap:Rotation Preference="portraitFlipped" />
-          <uap:Rotation Preference="landscapeFlipped" />
-        </uap:InitialRotationPreference>
-        <uap:LockScreen BadgeLogo="Assets\BadgeLogo.png" Notification="badgeAndTileText" />
-      </uap:VisualElements>
-      <Extensions>
-        <Extension Category="windows.backgroundTasks" EntryPoint="BackgroundTask.BackgroundTask">
-          <BackgroundTasks>
-            <Task Type="timer"/>
-            <Task Type="pushNotification"/>
-          </BackgroundTasks>
-        </Extension>
-      </Extensions>
-    </Application>
-  </Applications>
-  <Capabilities>
-    <Capability Name="internetClient"/></Capabilities>
+	<Identity Name="AviciiUWP" Publisher="CN=Admin" Version="0.5.0.0" />
+	<mp:PhoneIdentity PhoneProductId="cf0148d5-01bb-4b60-b53b-da3346bf8e5e" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+	<Properties>
+		<DisplayName>ms-resource:pPackageDisplayName</DisplayName>
+		<PublisherDisplayName>ProJend</PublisherDisplayName>
+		<Logo>Assets\StoreLogo.png</Logo>
+	</Properties>
+	<Dependencies>
+		<TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
+		<TargetDeviceFamily Name="Windows.Mobile" MinVersion="10.0.15063.0" MaxVersionTested="10.0.15063.0" />
+	</Dependencies>
+	<Resources>
+		<Resource Language="x-generate" />
+	</Resources>
+	<Applications>
+		<Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="TrueLove.UWP.App">
+			<uap:VisualElements DisplayName="ms-resource:pDisplayName" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="ms-resource:pPackageDescription" BackgroundColor="black">
+				<uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" ShortName="ms-resource:pDisplayName" Square310x310Logo="Assets\Square310x310Logo.png" Square71x71Logo="Assets\Square71x71Logo.png">
+					<uap:ShowNameOnTiles>
+						<uap:ShowOn Tile="square150x150Logo" />
+						<uap:ShowOn Tile="wide310x150Logo" />
+						<uap:ShowOn Tile="square310x310Logo" />
+					</uap:ShowNameOnTiles>
+				</uap:DefaultTile>
+				<uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="black" />
+				<uap:InitialRotationPreference>
+					<uap:Rotation Preference="portrait" />
+					<uap:Rotation Preference="landscape" />
+					<uap:Rotation Preference="portraitFlipped" />
+					<uap:Rotation Preference="landscapeFlipped" />
+				</uap:InitialRotationPreference>
+				<uap:LockScreen BadgeLogo="Assets\BadgeLogo.png" Notification="badgeAndTileText" />
+			</uap:VisualElements>
+			<Extensions>
+				<Extension Category="windows.backgroundTasks" EntryPoint="BackgroundTask.BackgroundTask">
+					<BackgroundTasks>
+						<Task Type="timer"/>
+						<Task Type="pushNotification"/>
+					</BackgroundTasks>
+				</Extension>
+			</Extensions>
+		</Application>
+	</Applications>
+	<Capabilities>
+		<Capability Name="internetClient"/>
+	</Capabilities>
 </Package>

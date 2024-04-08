@@ -121,8 +121,12 @@
     <value>True Love</value>
     <comment>DisplayName</comment>
   </data>
+  <data name="pPackageDescription" xml:space="preserve">
+    <value>A UWP cover for Avicii website.</value>
+    <comment>PackageDescription</comment>
+  </data>
   <data name="pPackageDisplayName" xml:space="preserve">
-    <value>True Love - Tim Bergling Foundtion</value>
+    <value>True Love - AviciiUWP</value>
     <comment>PackageDisplayName</comment>
   </data>
 </root>
