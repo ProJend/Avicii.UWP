@@ -1,6 +1,7 @@
 ﻿using HtmlAgilityPack;
 using Microsoft.Toolkit.Uwp.Connectivity;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using TrueLove.Lib.Models.Code;
 using Windows.Storage;
@@ -11,19 +12,24 @@ namespace TrueLove.Lib.Spider
     public class RefineStream
     {
         string _src;
-        int _pageNumber = 1;
-        HtmlDocument htmlDocument = new HtmlDocument();
 
-        public RefineStream()
+
+        public RefineStream(int pageNumber) => RefineStreamAsync(pageNumber);
+
+        private async void RefineStreamAsync(int _pageNumber)
         {
             var reviewStream = new ReviewStream();
-            _src = reviewStream.GetStream(ApplicationData.Current.LocalFolder.Path + @"/OfflineData.txt", _pageNumber == 1);
-            htmlDocument.LoadHtml(_src);
+            _src = reviewStream.GetStream(ApplicationData.Current.LocalFolder.Path + @"/OfflineData.txt");
+            Debug.WriteLine(ApplicationData.Current.LocalFolder.Path + @"/OfflineData.txt");
+            if (NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
+                await reviewStream.GetStreamAsync($"https://avicii.com/page/{_pageNumber++}");
         }
 
         public Task<CommentItem> RefineComment(int ID)
         {
             var singleComment = new CommentItem();
+            var htmlDocument = new HtmlDocument();
+            htmlDocument.LoadHtml(_src);
 
             string namePath = $"//*[@id=\"comments\"]/ul[2]/li[{ID}]/div/strong";
             string comPath = $"//*[@id=\"comments\"]/ul[2]/li[{ID}]/div/p";

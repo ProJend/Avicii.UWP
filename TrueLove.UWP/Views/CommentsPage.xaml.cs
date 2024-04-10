@@ -26,7 +26,7 @@ namespace TrueLove.UWP.Views
         protected override void OnNavigatedFrom(NavigationEventArgs e) => Window.Current.Activated -= OnWindowActivated;
         private void CompositionTarget_Rendered(object sender, RenderedEventArgs e)
         {
-            CommentCollection.LoadMoreItemsManuallyAsync();
+            CommentCollection.LoadMoreItemsManually();
             CompositionTarget.Rendered -= CompositionTarget_Rendered;
         }
 
@@ -38,7 +38,7 @@ namespace TrueLove.UWP.Views
         /// 检查工具栏相关的按钮可用状态。
         /// 下滑隐藏工具栏 https://www.cnblogs.com/lonelyxmas/p/9919869.html
         /// </summary>
-        private void Scroller_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        private async void Scroller_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
         {
             scrlocation = Scroller.VerticalOffset;
 
@@ -58,11 +58,14 @@ namespace TrueLove.UWP.Views
                 BackSubTitle.Opacity = 1;
             }
 
-            if ((Scroller.ScrollableHeight - scrlocation) is >= 800 and <= 810)
+            if (Scroller.ScrollableHeight - Scroller.VerticalOffset <= 500)
             {
-                CommentCollection.LoadMoreItemsManuallyAsync();
+                if (_isLoading) return;
+                _isLoading = true;
+                _isLoading = await CommentCollection.LoadMoreItemsManuallyAsync();
             }
         }
+        bool _isLoading;
 
         CommentCollection CommentCollection = new CommentCollection();
 

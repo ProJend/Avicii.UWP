@@ -5,7 +5,6 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using System.Threading.Tasks;
 using TrueLove.Lib.Spider;
-using Windows.Storage;
 using Windows.UI.Xaml.Data;
 
 namespace TrueLove.Lib.Models.Code
@@ -20,12 +19,28 @@ namespace TrueLove.Lib.Models.Code
     public class CommentCollection : ObservableCollection<CommentItem>, ISupportIncrementalLoading
     {
         public ObservableCollection<CommentItem> CommentColl;
+        int _pageNum = 1;
 
-        public async void LoadMoreItemsManuallyAsync()
+        public async Task<bool> LoadMoreItemsManuallyAsync()
         {
             try
             {
-                var refineStream = new RefineStream();
+                var refineStream = new RefineStream(_pageNum++);
+                for (int i = 1; i <= 99; i++)
+                {
+                    var singleItme = await refineStream.RefineComment(i);
+                    Add(singleItme);
+                }
+            }
+            catch { };
+            return false;
+        }
+
+        public async void LoadMoreItemsManually()
+        {
+            try
+            {
+                var refineStream = new RefineStream(_pageNum++);
                 for (int i = 1; i <= 99; i++)
                 {
                     var singleItme = await refineStream.RefineComment(i);
@@ -37,7 +52,7 @@ namespace TrueLove.Lib.Models.Code
 
         public Windows.Foundation.IAsyncOperation<LoadMoreItemsResult> LoadMoreItemsAsync(uint count) => AsyncInfo.Run(c => LoadMoreItemsAsyncCore(c, count));
 
-        public bool HasMoreItems => false;
+        public bool HasMoreItems => Count < 100;
 
         async Task<LoadMoreItemsResult> LoadMoreItemsAsyncCore(CancellationToken cancel, uint count)
         {
@@ -52,30 +67,9 @@ namespace TrueLove.Lib.Models.Code
             else
             {
                 // 向集合中添加指定项
-                for (uint n = 0; n < count; n++)
-                {
-                    var reviewStream = new ReviewStream();
-                    string _src = "null";
-                    if (_pageNumber == 0)
-                    {
-                        _src = await reviewStream.GetStreamAsync(ApplicationData.Current.LocalFolder.Path + $"/OfflineData.txt");
-                    }
-                    else if (NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
-                    {
-                        _src = await reviewStream.GetStreamAsync($"https://avicii.com/page/{_pageNumber}");
-                    }
-                    var refineStream = new RefineStream();
-                    try
-                    {
-                        var singleItme = await refineStream.RefineComment(_times++);
-                        Add(singleItme);
-                    }
-                    catch (Exception)
-                    {
-                        _pageNumber++;
-                        _times = 0;
-                    }
-                }
+                var refineStream = new RefineStream(_pageNumber++);
+                var singleItme = await refineStream.RefineComment(1);
+                Add(singleItme);
             }
             // 完成加载
             LoadMoreEnd?.Invoke(this, EventArgs.Empty);
@@ -92,6 +86,5 @@ namespace TrueLove.Lib.Models.Code
         public event EventHandler LoadMoreEnd;
 
         int _pageNumber = 0;
-        int _times = 0;
     }
 }

@@ -70,7 +70,8 @@
             x:Name="Forebody"
             Padding="0,40,0,0"
             VerticalAlignment="Top"
-            DoubleTapped="Forebody_DoubleTapped">
+            DoubleTapped="Forebody_DoubleTapped"
+            ToolTipService.ToolTip="Double-click to back to top of page">
             <Grid.Background>
                 <ImageBrush
                     ImageSource="/Assets/Instagram/4.jpg"
@@ -88,6 +89,7 @@
                 Margin="0,0,19,13"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
+                Opacity="0"
                 Style="{StaticResource GhostButton}">
                 Leave a Memory
             </Button>
@@ -119,7 +121,7 @@
                     x:Name="CommentView"
                     Margin="0,60,0,0"
                     animations:ReorderGridAnimation.Duration="250"
-                    ItemContainerStyle="{StaticResource GridViewItemNoneStyle}"
+                    ItemContainerStyle="{StaticResource GridViewItemStretchStyle}"
                     ItemTemplate="{StaticResource CommentItemTemplate}"
                     ItemsSource="{x:Bind CommentCollection}">
                     <GridView.ItemsPanel>

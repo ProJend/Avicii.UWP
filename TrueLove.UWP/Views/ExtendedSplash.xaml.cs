@@ -5,7 +5,6 @@ using Windows.UI.Xaml.Controls;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Core;
 using Microsoft.Toolkit.Uwp.Connectivity;
-using TrueLove.Lib.Spider;
 using Windows.Storage;
 using System.Threading.Tasks;
 using System.IO;
@@ -14,6 +13,7 @@ using TrueLove.Lib.Models.Enum;
 using Windows.ApplicationModel.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI;
+using System.Net.Http;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/p/?LinkID=234238
 
@@ -113,17 +113,19 @@ namespace TrueLove.UWP.Views
             var path = ApplicationData.Current.LocalFolder.Path + @"/OfflineData.txt";
             do
             {
-                await Task.Delay(0); // 使初始画面活动起来
+                await Task.Delay(1); // 使初始画面活动起来
                 var isInternetAvailable = NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable;
                 if (isInternetAvailable)
                 {
                     splashProgressRing.IsActive = true;
 
+                    using var httpClient = new HttpClient();
+                    var stream = await httpClient.GetStringAsync("https://avicii.com/page/11");
+
                     var localFolder = ApplicationData.Current.LocalFolder;
                     var file = await localFolder.CreateFileAsync("OfflineData.txt",
                         CreationCollisionOption.ReplaceExisting);
-                    var _src = await new ReviewStream().GetStreamAsync($"https://avicii.com/page/11");
-                    await FileIO.AppendTextAsync(file, _src);
+                    await FileIO.AppendTextAsync(file, stream);
                 }
             }
             while (!File.Exists(path));

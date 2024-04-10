@@ -10,11 +10,11 @@ namespace TrueLove.Lib.Spider
 {
     public class ReviewStream
     {
-        public string GetStream(string path, bool isFirstLanuch = false)
+        public string GetStream(string path)
         {
-            stream = File.ReadAllText(path);
-            if (isFirstLanuch)
+            if (File.Exists(path))
             {
+                stream = File.ReadAllText(path);
                 TimeToNow();
             }
             return stream;
@@ -25,19 +25,17 @@ namespace TrueLove.Lib.Spider
         /// </summary>
         /// <param name="path">Use URL address</param>
         /// <param name="isLocalFile">switch to use website address or local document address</param>
-        public async Task<string> GetStreamAsync(string path, bool isLocalFile = false)
+        public async Task<string> GetStreamAsync(string path)
         {
             try
             {
-                using (var httpClient = new HttpClient())
-                {
-                    stream = await httpClient.GetStringAsync(new Uri(path));
+                using var httpClient = new HttpClient();
+                stream = await httpClient.GetStringAsync(new Uri(path));
 
-                    var localFolder = ApplicationData.Current.LocalFolder;
-                    var file = await localFolder.CreateFileAsync("OfflineData.txt",
-                        CreationCollisionOption.ReplaceExisting);
-                    await FileIO.AppendTextAsync(file, stream);
-                }
+                var localFolder = ApplicationData.Current.LocalFolder;
+                var file = await localFolder.CreateFileAsync("OfflineData.txt",
+                    CreationCollisionOption.ReplaceExisting);
+                await FileIO.AppendTextAsync(file, stream);
             }
             catch (HttpRequestException)
             {

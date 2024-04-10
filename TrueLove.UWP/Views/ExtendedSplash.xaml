@@ -18,8 +18,8 @@
                 HorizontalAlignment="Center" />
         </Canvas>
         <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin=" 0 60">
-            <TextBlock Style="{ThemeResource SubheaderTextBlockStyle}" TextAlignment="Center">Initiation...</TextBlock>
-            <TextBlock Style="{ThemeResource BodyTextBlockStyle}" TextAlignment="Center">Make Sure Network Connecting</TextBlock>
+            <TextBlock Style="{ThemeResource SubheaderTextBlockStyle}" TextAlignment="Center">Preparing...</TextBlock>
+            <TextBlock Style="{ThemeResource BodyTextBlockStyle}" TextAlignment="Center">Make sure the network is connected.</TextBlock>
         </StackPanel>
     </Grid>
 </Page>

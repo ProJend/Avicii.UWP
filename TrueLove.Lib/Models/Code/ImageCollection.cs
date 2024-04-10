@@ -34,7 +34,7 @@ namespace TrueLove.Lib.Models.Code
                 var reviewStream = new ReviewStream();
                 _src = await reviewStream.GetStreamAsync($"https://avicii.com/page/{_pageNumber}");
             }
-            var refineStream = new RefineStream();
+            var refineStream = new RefineStream(_pageNumber++);
             try
             {
                 for (int i = 1; i <= _times; i++)
@@ -75,7 +75,7 @@ namespace TrueLove.Lib.Models.Code
                     {
                         _src = await reviewStream.GetStreamAsync($"https://avicii.com/page/{_pageNumber}");
                     }
-                    var refineStream = new RefineStream();
+                    var refineStream = new RefineStream(_pageNumber++);
                     try
                     {
                         var singleItme = await refineStream.RefineImage(_src, _times++);
