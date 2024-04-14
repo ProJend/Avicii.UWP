@@ -18,18 +18,28 @@ namespace TrueLove.Lib.Models.Code
 
     public class CommentCollection : ObservableCollection<CommentItem>, ISupportIncrementalLoading
     {
-        public ObservableCollection<CommentItem> CommentColl;
-        int _pageNum = 1;
+        int _pageNumber = 1;
 
         public async Task<bool> LoadMoreItemsManuallyAsync()
         {
             try
             {
-                var refineStream = new RefineStream(_pageNum++);
+                var refineStream = new RefineStream(_pageNumber++);
                 for (int i = 1; i <= 99; i++)
                 {
+                    bool isSolo = true;
                     var singleItme = await refineStream.RefineComment(i);
-                    Add(singleItme);
+                    foreach (var item in this)
+                    {
+                        if (item.Comment == singleItme.Comment &&
+                            item.Name == singleItme.Name)
+                        {
+                            isSolo = false;
+                            break;
+                        }
+                    }
+                    if (isSolo)
+                        Add(singleItme);
                 }
             }
             catch { };
@@ -40,8 +50,8 @@ namespace TrueLove.Lib.Models.Code
         {
             try
             {
-                var refineStream = new RefineStream(_pageNum++);
-                for (int i = 1; i <= 99; i++)
+                var refineStream = new RefineStream(_pageNumber++);
+                for (int i = 1; i <= 50; i++)
                 {
                     var singleItme = await refineStream.RefineComment(i);
                     Add(singleItme);
@@ -84,7 +94,5 @@ namespace TrueLove.Lib.Models.Code
         /// 该事件在加载完成后发生。
         /// </summary>
         public event EventHandler LoadMoreEnd;
-
-        int _pageNumber = 0;
     }
 }
