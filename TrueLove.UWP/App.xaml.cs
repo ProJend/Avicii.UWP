@@ -65,7 +65,7 @@ namespace TrueLove.UWP
                     // 当导航堆栈尚未还原时，导航到第一页，
                     // 并通过将所需信息作为导航参数传入来配置
                     // 参数
-                    var path = ApplicationData.Current.LocalFolder.Path + @"/OfflineData.txt";
+                    var path = ApplicationData.Current.LocalFolder.Path + @"\Comment.html";
                     if (File.Exists(path))
                     {
                         rootFrame.Navigate(typeof(MainPage), e.Arguments);
