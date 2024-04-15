@@ -12,14 +12,24 @@
         <Canvas>
             <Image x:Name="extendedSplashImage" Source="/Assets/SplashScreen.png" />
             <ProgressRing
-                Name="splashProgressRing"
+                Name="loadingRing"
                 Width="50"
                 Height="50"
                 HorizontalAlignment="Center" />
         </Canvas>
-        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin=" 0 60">
+        <StackPanel
+            Margin="0,60"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Bottom">
             <TextBlock Style="{ThemeResource SubheaderTextBlockStyle}" TextAlignment="Center">Preparing...</TextBlock>
-            <TextBlock Style="{ThemeResource BodyTextBlockStyle}" TextAlignment="Center">Make sure the network is connected.</TextBlock>
+            <TextBlock
+                Name="prompt"
+                Margin="5"
+                Foreground="Orange"
+                Style="{ThemeResource BodyTextBlockStyle}"
+                TextAlignment="Center">
+                No Internet Connection
+            </TextBlock>
         </StackPanel>
     </Grid>
 </Page>

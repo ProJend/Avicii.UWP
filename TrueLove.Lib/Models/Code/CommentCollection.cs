@@ -24,11 +24,11 @@ namespace TrueLove.Lib.Models.Code
         {
             try
             {
-                var refineStream = new RefineStream(_pageNumber++);
-                for (int i = 1; i <= 99; i++)
+                var commentParser = new CommentParser(_pageNumber++);
+                for (int element = 1; element <= 99; element++)
                 {
                     bool isSolo = true;
-                    var singleItme = await refineStream.RefineComment(i);
+                    var singleItme = await commentParser.Append(element);
                     foreach (var item in this)
                     {
                         if (item.Comment == singleItme.Comment &&
@@ -50,10 +50,10 @@ namespace TrueLove.Lib.Models.Code
         {
             try
             {
-                var refineStream = new RefineStream(_pageNumber++);
-                for (int i = 1; i <= 50; i++)
+                var commentParser = new CommentParser(_pageNumber++);
+                for (int element = 1; element <= 50; element++)
                 {
-                    var singleItme = await refineStream.RefineComment(i);
+                    var singleItme = await commentParser.Append(element);
                     Add(singleItme);
                 }
             }
@@ -77,8 +77,8 @@ namespace TrueLove.Lib.Models.Code
             else
             {
                 // 向集合中添加指定项
-                var refineStream = new RefineStream(_pageNumber++);
-                var singleItme = await refineStream.RefineComment(1);
+                var commentParser = new CommentParser(_pageNumber++);
+                var singleItme = await commentParser.Append(1);
                 Add(singleItme);
             }
             // 完成加载

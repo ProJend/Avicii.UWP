@@ -11,40 +11,6 @@
     RequestedTheme="Dark"
     mc:Ignorable="d">
     <Page.Resources>
-        <Storyboard x:Name="AfterbodySlideDownStoryboard">
-            <DoubleAnimation
-                Storyboard.TargetName="Afterbody_TranslateTransform"
-                Storyboard.TargetProperty="Y"
-                From="0"
-                To="60">
-                <DoubleAnimation.EasingFunction>
-                    <ExponentialEase EasingMode="EaseOut" Exponent="7" />
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-            <DoubleAnimation
-                Storyboard.TargetName="Afterbody"
-                Storyboard.TargetProperty="(Grid.Opacity)"
-                From="1"
-                To="0"
-                Duration="0:0:0.5" />
-        </Storyboard>
-        <Storyboard x:Name="AfterbodySlideUpStoryboard">
-            <DoubleAnimation
-                Storyboard.TargetName="Afterbody_TranslateTransform"
-                Storyboard.TargetProperty="Y"
-                From="60"
-                To="0">
-                <DoubleAnimation.EasingFunction>
-                    <ExponentialEase EasingMode="EaseOut" Exponent="7" />
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-            <DoubleAnimation
-                Storyboard.TargetName="Afterbody"
-                Storyboard.TargetProperty="(Grid.Opacity)"
-                From="0"
-                To="1"
-                Duration="0:0:0.5" />
-        </Storyboard>
         <DataTemplate x:Key="CommentItemTemplate" x:DataType="date:CommentItem">
             <Grid Padding="30">
                 <TextBlock TextAlignment="Center" TextWrapping="Wrap">
@@ -106,7 +72,7 @@
         <ScrollViewer
             x:Name="Scroller"
             Margin="0,85,0,0"
-            ViewChanged="Scroller_ViewChanged">
+            ViewChanged="Scroller_ViewChanged" VerticalScrollBarVisibility="Hidden">
             <StackPanel>
                 <TextBlock
                     x:Name="SubTitle"
@@ -121,6 +87,7 @@
                     x:Name="CommentView"
                     Margin="0,60,0,0"
                     animations:ReorderGridAnimation.Duration="250"
+                    IsItemClickEnabled="False"
                     ItemContainerStyle="{StaticResource GridViewItemStretchStyle}"
                     ItemTemplate="{StaticResource CommentItemTemplate}"
                     ItemsSource="{x:Bind CommentCollection}">

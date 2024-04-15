@@ -1,12 +1,10 @@
 ﻿using Microsoft.Toolkit.Uwp.Connectivity;
 using System;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using System.Threading.Tasks;
 using TrueLove.Lib.Spider;
-using Windows.Storage;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media.Imaging;
 
@@ -14,32 +12,31 @@ namespace TrueLove.Lib.Models.Code
 {
     public class ImageCollection : ObservableCollection<BitmapImage>, ISupportIncrementalLoading
     {
-        public ObservableCollection<BitmapImage> ImageColl;
+        int _pageNumber = 1;
 
-        public async void LoadMoreItemsManuallyAsync(bool isRefreshing = false)
+        public async Task<bool> LoadMoreItemsManuallyAsync()
         {
-            if (isRefreshing)
-            {
-                _pageNumber = 0;
-            }
-            string _src = "null";
-            if (_pageNumber++ == 0)
-            {
-                var path = ApplicationData.Current.LocalFolder.Path;
-                var dir = new DirectoryInfo(path);
-                _times = dir.GetFiles().Length - 1; // 该目录下的文件数
-            }
-            else if (NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
-            {
-                var reviewStream = new ReviewStream();
-                _src = await reviewStream.GetStreamAsync($"https://avicii.com/page/{_pageNumber}");
-            }
-            var refineStream = new RefineStream(_pageNumber++);
             try
             {
-                for (int i = 1; i <= _times; i++)
+                var imageParser = new ImageParser(_pageNumber++);
+                for (int element = 1; element <= 100; element++)
                 {
-                    var singleItme = await refineStream.RefineImage(_src, i);
+                    var singleItme = await imageParser.Append(element);
+                    Add(singleItme);
+                }
+            }
+            catch { };
+            return false;
+        }
+
+        public async void LoadMoreItemsManually()
+        {
+            try
+            {
+                var imageParser = new ImageParser(_pageNumber++);
+                for (int element = 1; element <= 100; element++)
+                {
+                    var singleItme = await imageParser.Append(element);
                     Add(singleItme);
                 }
             }
@@ -62,31 +59,9 @@ namespace TrueLove.Lib.Models.Code
             }
             else
             {
-                // 向集合中添加指定项
-                for (uint n = 0; n < count; n++)
-                {
-                    var reviewStream = new ReviewStream();
-                    string _src = "null";
-                    if (_pageNumber == 0)
-                    {
-                        _src = await reviewStream.GetStreamAsync(ApplicationData.Current.LocalFolder.Path + $"/OfflineData.txt");
-                    }
-                    else if (NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
-                    {
-                        _src = await reviewStream.GetStreamAsync($"https://avicii.com/page/{_pageNumber}");
-                    }
-                    var refineStream = new RefineStream(_pageNumber++);
-                    try
-                    {
-                        var singleItme = await refineStream.RefineImage(_src, _times++);
-                        Add(singleItme);
-                    }
-                    catch (Exception)
-                    {
-                        _pageNumber++;
-                        _times = 0;
-                    }
-                }
+                var imageParser = new ImageParser(_pageNumber++);
+                var singleItme = await imageParser.Append(1);
+                Add(singleItme);
             }
             // 完成加载
             LoadMoreEnd?.Invoke(this, EventArgs.Empty);
@@ -101,8 +76,5 @@ namespace TrueLove.Lib.Models.Code
         /// 该事件在加载完成后发生。
         /// </summary>
         public event EventHandler LoadMoreEnd;
-
-        int _pageNumber = 0;
-        int _times = 0;
     }
 }

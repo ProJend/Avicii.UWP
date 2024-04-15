@@ -31,8 +31,7 @@
                     Tag="comment" />
                 <muxc:NavigationViewItem
                     Content="Images"
-                    Tag="image"
-                    Visibility="Collapsed">
+                    Tag="image">
                     <muxc:NavigationViewItem.Icon>
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEB9F;" />
                     </muxc:NavigationViewItem.Icon>

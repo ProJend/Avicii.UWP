@@ -33,11 +33,6 @@ namespace TrueLove.UWP.Views
         private void OnWindowActivated(object sender, WindowActivatedEventArgs e) => VisualStateManager.GoToState(this,
                 e.WindowActivationState == CoreWindowActivationState.Deactivated ? WindowNotFocused.Name : WindowFocused.Name, false);
 
-
-        /// <summary>
-        /// 检查工具栏相关的按钮可用状态。
-        /// 下滑隐藏工具栏 https://www.cnblogs.com/lonelyxmas/p/9919869.html
-        /// </summary>
         private async void Scroller_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
         {
             scrlocation = Scroller.VerticalOffset;
@@ -58,7 +53,7 @@ namespace TrueLove.UWP.Views
                 BackSubTitle.Opacity = 1;
             }
 
-            if (Scroller.ScrollableHeight - Scroller.VerticalOffset <= 500)
+            if (Scroller.ScrollableHeight - Scroller.VerticalOffset <= 200)
             {
                 if (_isLoading) return;
                 _isLoading = true;
@@ -71,7 +66,6 @@ namespace TrueLove.UWP.Views
 
         // 滚动条位置变量
         double scrlocation = 0;
-
         double ForebodyExtendHeight;
 
         private void Forebody_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e) => Scroller.ChangeView(null, 0, null);

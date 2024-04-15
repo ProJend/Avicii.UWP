@@ -79,8 +79,8 @@ namespace TrueLove.UWP.Views
 
         void PositionRing()
         {
-            splashProgressRing.SetValue(Canvas.LeftProperty, splashImageRect.X + (splashImageRect.Width * 0.5) - (splashProgressRing.Width * 0.5));
-            splashProgressRing.SetValue(Canvas.TopProperty, (splashImageRect.Y + splashImageRect.Height + splashImageRect.Height * 0.1));
+            loadingRing.SetValue(Canvas.LeftProperty, splashImageRect.X + (splashImageRect.Width * 0.5) - (loadingRing.Width * 0.5));
+            loadingRing.SetValue(Canvas.TopProperty, (splashImageRect.Y + splashImageRect.Height + splashImageRect.Height * 0.1));
         }
 
         void ExtendedSplash_OnResize(Object sender, WindowSizeChangedEventArgs e)
@@ -103,29 +103,41 @@ namespace TrueLove.UWP.Views
             // Complete app setup operations here...
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e) => CatchStream();
+        private void Page_Loaded(object sender, RoutedEventArgs e) => Catchcontents();
 
         /// <summary>
-        /// Initialize stream data and save as local file
+        /// Initialize contents data and save as local file
         /// </summary>
-        async void CatchStream()
+        async void Catchcontents()
         {
-            var path = ApplicationData.Current.LocalFolder.Path + @"/OfflineData.txt";
+            var path = ApplicationData.Current.LocalFolder.Path + @"\Comment.html";
             do
             {
                 await Task.Delay(1); // 使初始画面活动起来
                 var isInternetAvailable = NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable;
                 if (isInternetAvailable)
                 {
-                    splashProgressRing.IsActive = true;
+                    loadingRing.IsActive = true;
+                    prompt.Opacity = 0;
 
                     using var httpClient = new HttpClient();
-                    var stream = await httpClient.GetStringAsync("https://avicii.com/page/11");
 
+                    var contents = await httpClient.GetStringAsync("https://avicii.com/page/1");
                     var localFolder = ApplicationData.Current.LocalFolder;
-                    var file = await localFolder.CreateFileAsync("OfflineData.txt",
+                    var file = await localFolder.CreateFileAsync("Comment.html",
                         CreationCollisionOption.ReplaceExisting);
-                    await FileIO.AppendTextAsync(file, stream);
+                    await FileIO.AppendTextAsync(file, contents);
+
+                    contents = await httpClient.GetStringAsync("https://avicii.com/images/page/1");
+                    localFolder = ApplicationData.Current.LocalFolder;
+                    file = await localFolder.CreateFileAsync("Image.html",
+                        CreationCollisionOption.ReplaceExisting);
+                    await FileIO.AppendTextAsync(file, contents);
+                }
+                else
+                {
+                    loadingRing.IsActive = false;
+                    prompt.Opacity = 1;
                 }
             }
             while (!File.Exists(path));

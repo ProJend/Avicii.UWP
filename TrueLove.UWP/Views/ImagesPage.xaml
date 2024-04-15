@@ -12,40 +12,6 @@
         <Style TargetType="ScrollBar">
             <Setter Property="Margin" Value="0,85,0,0" />
         </Style>
-        <Storyboard x:Name="AfterbodySlideDownStoryboard">
-            <DoubleAnimation
-                Storyboard.TargetName="Afterbody_TranslateTransform"
-                Storyboard.TargetProperty="Y"
-                From="0"
-                To="60">
-                <DoubleAnimation.EasingFunction>
-                    <ExponentialEase EasingMode="EaseOut" Exponent="7" />
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-            <DoubleAnimation
-                Storyboard.TargetName="Afterbody"
-                Storyboard.TargetProperty="(Grid.Opacity)"
-                From="1"
-                To="0"
-                Duration="0:0:0.5" />
-        </Storyboard>
-        <Storyboard x:Name="AfterbodySlideUpStoryboard">
-            <DoubleAnimation
-                Storyboard.TargetName="Afterbody_TranslateTransform"
-                Storyboard.TargetProperty="Y"
-                From="60"
-                To="0">
-                <DoubleAnimation.EasingFunction>
-                    <ExponentialEase EasingMode="EaseOut" Exponent="7" />
-                </DoubleAnimation.EasingFunction>
-            </DoubleAnimation>
-            <DoubleAnimation
-                Storyboard.TargetName="Afterbody"
-                Storyboard.TargetProperty="(Grid.Opacity)"
-                From="0"
-                To="1"
-                Duration="0:0:0.5" />
-        </Storyboard>
     </Page.Resources>
     <Grid ManipulationMode="System,TranslateX">
         <ScrollViewer x:Name="Scroller" ViewChanged="Scroller_ViewChanged">
@@ -61,7 +27,7 @@
                 <GridView
                     x:Name="ImageView"
                     animations:ReorderGridAnimation.Duration="250"
-                    ItemContainerStyle="{StaticResource GridViewItemNoneStyle}"
+                    ItemContainerStyle="{StaticResource GridViewItemStretchStyle}"
                     ItemsSource="{x:Bind ImageCollection}">
                     <GridView.ItemTemplate>
                         <DataTemplate>
@@ -73,7 +39,7 @@
                             <controls:StaggeredPanel HorizontalAlignment="Stretch" DesiredColumnWidth="250" />
                         </ItemsPanelTemplate>
                     </GridView.ItemsPanel>
-                    <GridView.ContextFlyout>
+                    <!--<GridView.ContextFlyout>
                         <MenuFlyout>
                             <MenuFlyoutItem
                                 Click="MenuFlyout_Click"
@@ -91,9 +57,8 @@
                                     <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE792;" />
                                 </MenuFlyoutItem.Icon>
                             </MenuFlyoutItem>
-
                         </MenuFlyout>
-                    </GridView.ContextFlyout>
+                    </GridView.ContextFlyout>-->
                 </GridView>
             </StackPanel>
         </ScrollViewer>
@@ -112,59 +77,10 @@
                 x:Name="TitleButton"
                 Margin="0,0,19,13"
                 HorizontalAlignment="Right"
-                Style="{StaticResource GhostButton}">
+                Style="{StaticResource GhostButton}"
+                Visibility="Collapsed">
                 Leave a Memory
             </Button>
-        </Grid>
-        <Grid
-            Name="Afterbody"
-            MaxWidth="650"
-            Margin="0,20"
-            VerticalAlignment="Bottom">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <StackPanel
-                x:Name="NetworkState"
-                Grid.ColumnSpan="2"
-                HorizontalAlignment="Center"
-                Visibility="Collapsed">
-                <FontIcon
-                    Margin="0,15"
-                    FontFamily="Segoe MDL2 Assets"
-                    FontSize="40"
-                    Glyph="&#xF384;" />
-                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}">Offline Data</TextBlock>
-            </StackPanel>
-            <ProgressRing
-                x:Name="progressRing"
-                Grid.ColumnSpan="2"
-                Width="50"
-                Height="50" />
-            <Button
-                Grid.Column="0"
-                HorizontalAlignment="Center"
-                Click="BackToTop_Click"
-                Style="{ThemeResource TranslucentCircleButton}">
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE898;" />
-            </Button>
-            <Button
-                x:Name="RefreshButton"
-                Grid.Column="1"
-                HorizontalAlignment="Center"
-                Click="Refresh_Click"
-                Style="{ThemeResource TranslucentCircleButton}">
-                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE72C;" />
-            </Button>
-            <Grid.RenderTransform>
-                <TranslateTransform x:Name="Afterbody_TranslateTransform" />
-            </Grid.RenderTransform>
-            <Grid.Transitions>
-                <TransitionCollection>
-                    <PopupThemeTransition />
-                </TransitionCollection>
-            </Grid.Transitions>
         </Grid>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="WindowFocusStates">

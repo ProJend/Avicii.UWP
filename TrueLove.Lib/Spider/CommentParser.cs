@@ -6,27 +6,25 @@ using System.Threading.Tasks;
 using System.Web;
 using TrueLove.Lib.Models.Code;
 using Windows.Storage;
-using Windows.UI.Xaml.Media.Imaging;
 
 namespace TrueLove.Lib.Spider
 {
-    public class RefineStream
+    public class CommentParser
     {
         string _src;
 
+        public CommentParser(int pageNumber) => ParseCommentAsync(pageNumber);
 
-        public RefineStream(int pageNumber) => RefineStreamAsync(pageNumber);
-
-        private async void RefineStreamAsync(int _pageNumber)
+        private async void ParseCommentAsync(int _pageNumber)
         {
-            var reviewStream = new ReviewStream();
-            _src = reviewStream.GetStream(ApplicationData.Current.LocalFolder.Path + @"/OfflineData.txt");
-            Debug.WriteLine(ApplicationData.Current.LocalFolder.Path + @"/OfflineData.txt");
+            var doctypeGenerator = new DoctypeGenerator();
+            _src = doctypeGenerator.GetSourceCode(ApplicationData.Current.LocalFolder.Path + @"\Comment.html");
+            Debug.WriteLine(ApplicationData.Current.LocalFolder.Path + @"\Comment.html");
             if (NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
-                await reviewStream.GetStreamAsync($"https://avicii.com/page/{_pageNumber++}");
+                await doctypeGenerator.GetSourceCodeAsync($"https://avicii.com/page/{_pageNumber}", "comment");
         }
 
-        public Task<CommentItem> RefineComment(int ID)
+        public Task<CommentItem> Append(int ID)
         {
             var singleComment = new CommentItem();
             var htmlDocument = new HtmlDocument();
@@ -51,28 +49,6 @@ namespace TrueLove.Lib.Spider
                 singleComment.Date = parsedDate.ToString("d");
             }
             return Task.Run(() => singleComment);
-        }
-
-        public Task<BitmapImage> RefineImage(string src, int ID)
-        {
-            var singleImage = new BitmapImage();
-            var htmlDocument = new HtmlDocument();
-            htmlDocument.LoadHtml(src);
-            string imagePath = $"//*[@id=\"images\"]/ul[2]/li[{ID}]/img";
-
-            var imageNode = htmlDocument.DocumentNode.SelectSingleNode(imagePath);
-            if (imageNode != null)
-            {
-                var path = imageNode.Attributes["src"].Value;
-                var uri = new Uri(path);
-
-            }
-            else
-            {
-
-            }
-
-            return Task.Run(() => singleImage);
         }
     }
 }
