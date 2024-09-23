@@ -31,12 +31,15 @@
                     ItemsSource="{x:Bind ImageCollection}">
                     <GridView.ItemTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding}" Stretch="Uniform" />
+                            <Grid>
+                                <ProgressRing IsActive="True" />
+                                <Image Source="{Binding}" Stretch="Uniform" />
+                            </Grid>
                         </DataTemplate>
                     </GridView.ItemTemplate>
                     <GridView.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <controls:StaggeredPanel HorizontalAlignment="Stretch" DesiredColumnWidth="250" />
+                            <controls:StaggeredPanel HorizontalAlignment="Stretch" DesiredColumnWidth="250"/>
                         </ItemsPanelTemplate>
                     </GridView.ItemsPanel>
                     <!--<GridView.ContextFlyout>

@@ -18,11 +18,22 @@ namespace TrueLove.Lib.Models.Code
         {
             try
             {
+
                 var imageParser = new ImageParser(_pageNumber++);
-                for (int element = 1; element <= 100; element++)
+                for (int element = 1; element <= 99; element++)
                 {
-                    var singleItme = await imageParser.Append(element);
-                    Add(singleItme);
+                    bool isSolo = true;
+                    var singleItem = await imageParser.Append(element);
+                    foreach (var item in this)
+                    {
+                        if (item.UriSource.AbsoluteUri == singleItem.UriSource.AbsoluteUri)
+                        {
+                            isSolo = false;
+                            break;
+                        }
+                    }
+                    if (isSolo)
+                        Add(singleItem);
                 }
             }
             catch { };
@@ -34,10 +45,10 @@ namespace TrueLove.Lib.Models.Code
             try
             {
                 var imageParser = new ImageParser(_pageNumber++);
-                for (int element = 1; element <= 100; element++)
+                for (int element = 1; element <= 50; element++)
                 {
-                    var singleItme = await imageParser.Append(element);
-                    Add(singleItme);
+                    var singleItem = await imageParser.Append(element);
+                    Add(singleItem);
                 }
             }
             catch { };
@@ -60,8 +71,8 @@ namespace TrueLove.Lib.Models.Code
             else
             {
                 var imageParser = new ImageParser(_pageNumber++);
-                var singleItme = await imageParser.Append(1);
-                Add(singleItme);
+                var singleItem = await imageParser.Append(1);
+                Add(singleItem);
             }
             // 完成加载
             LoadMoreEnd?.Invoke(this, EventArgs.Empty);

@@ -43,13 +43,10 @@ namespace TrueLove.Lib.Spider
                     using var httpClient = new HttpClient();
                     sourceCode = await httpClient.GetStringAsync(new Uri(path));
 
-                    if (path.Contains("1"))
-                    {
-                        var localFolder = ApplicationData.Current.LocalFolder;
-                        var file = await localFolder.CreateFileAsync("Image.html",
-                            CreationCollisionOption.ReplaceExisting);
-                        await FileIO.AppendTextAsync(file, sourceCode);
-                    }
+                    var localFolder = ApplicationData.Current.LocalFolder;
+                    var file = await localFolder.CreateFileAsync("Image.html",
+                        CreationCollisionOption.ReplaceExisting);
+                    await FileIO.AppendTextAsync(file, sourceCode);
                 }
             }
             catch (HttpRequestException)
