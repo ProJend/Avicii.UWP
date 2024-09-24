@@ -1,5 +1,4 @@
-﻿using Microsoft.Toolkit.Uwp.Connectivity;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
@@ -12,46 +11,53 @@ namespace TrueLove.Lib.Models.Code
 {
     public class ImageCollection : ObservableCollection<BitmapImage>, ISupportIncrementalLoading
     {
-        int _pageNumber = 1;
+        private int _pageNumber = 1;
+        private int _countRepeated;
+        private bool _isRepeated;
+
+        public async void LoadMoreItemsManually()
+        {
+            var imageParser = new ImageParser(_pageNumber++);
+            for (int element = 1; element <= 50; element++)
+            {
+                var latestItem = await imageParser.Append(element);
+                Add(latestItem);
+            }
+        }
 
         public async Task<bool> LoadMoreItemsManuallyAsync()
         {
             try
             {
-
                 var imageParser = new ImageParser(_pageNumber++);
                 for (int element = 1; element <= 99; element++)
                 {
-                    bool isSolo = true;
-                    var singleItem = await imageParser.Append(element);
-                    foreach (var item in this)
-                    {
-                        if (item.UriSource.AbsoluteUri == singleItem.UriSource.AbsoluteUri)
-                        {
-                            isSolo = false;
-                            break;
-                        }
-                    }
-                    if (isSolo)
-                        Add(singleItem);
-                }
-            }
-            catch { };
-            return false;
-        }
+                    var latestItem = await imageParser.Append(element);
 
-        public async void LoadMoreItemsManually()
-        {
-            try
-            {
-                var imageParser = new ImageParser(_pageNumber++);
-                for (int element = 1; element <= 50; element++)
-                {
-                    var singleItem = await imageParser.Append(element);
-                    Add(singleItem);
+                    if (!_isRepeated)
+                    {
+                        var _isRepeating = false;
+                        foreach (var item in this)
+                        {
+                            if (item.UriSource.AbsoluteUri == latestItem.UriSource.AbsoluteUri)
+                            {
+                                _isRepeating = true;
+                                _countRepeated++;
+                                if (element == 99 && _countRepeated > 0)
+                                    _isRepeated = true;
+                                break;
+                            }
+                        }
+                        if (!_isRepeating)
+                            Add(latestItem);
+                        continue;
+                    }
+
+                    Add(latestItem);
                 }
             }
-            catch { };
+            catch (NullReferenceException) { } //爬取溢出           
+            return false;
         }
 
         public Windows.Foundation.IAsyncOperation<LoadMoreItemsResult> LoadMoreItemsAsync(uint count) => AsyncInfo.Run(c => LoadMoreItemsAsyncCore(c, count));
@@ -71,8 +77,8 @@ namespace TrueLove.Lib.Models.Code
             else
             {
                 var imageParser = new ImageParser(_pageNumber++);
-                var singleItem = await imageParser.Append(1);
-                Add(singleItem);
+                var latestItem = await imageParser.Append(1);
+                Add(latestItem);
             }
             // 完成加载
             LoadMoreEnd?.Invoke(this, EventArgs.Empty);

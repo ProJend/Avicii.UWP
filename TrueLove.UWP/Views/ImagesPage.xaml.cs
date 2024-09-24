@@ -1,8 +1,6 @@
 ﻿using Microsoft.Toolkit.Uwp.Connectivity;
-using System;
 using TrueLove.Lib.Models.Code;
-using Windows.Storage;
-using Windows.System;
+using TrueLove.Lib.Notification;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -55,13 +53,20 @@ namespace TrueLove.UWP.Views
         {
             if (Scroller.ScrollableHeight - Scroller.VerticalOffset <= 200)
             {
-                if (_isLoading) return;
-                _isLoading = true;
-                _isLoading = await ImageCollection.LoadMoreItemsManuallyAsync();
+                var isInternetAvailable = NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable;
+                if (isInternetAvailable)
+                {
+                    if (_isLoading) return;
+                    _isLoading = true;
+                    _isLoading = await ImageCollection.LoadMoreItemsManuallyAsync();
+                }
+                else
+                {
+                    Assembly.Toast();
+                }
             }
         }
         bool _isLoading;
-
-        ImageCollection ImageCollection = new ImageCollection();
+        private ImageCollection ImageCollection = [];
     }
 }

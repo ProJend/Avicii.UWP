@@ -3,7 +3,6 @@ using System.IO;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using TrueLove.Lib.Notification;
 using Windows.Storage;
 
 namespace TrueLove.Lib.Spider
@@ -12,11 +11,8 @@ namespace TrueLove.Lib.Spider
     {
         public string GetSourceCode(string path)
         {
-            if (File.Exists(path))
-            {
-                sourceCode = File.ReadAllText(path);
-                //TimeToNow();
-            }
+            sourceCode = File.ReadAllText(path);
+            //TimeToNow();
             return sourceCode;
         }
 
@@ -24,34 +20,29 @@ namespace TrueLove.Lib.Spider
         /// 
         /// </summary>
         /// <param name="path">Use URL address</param>
-        public async Task<string> GetSourceCodeAsync(string path, string page)
+        public async Task<string> SaveSourceCodeAsync(string path, string page)
         {
+            using var httpClient = new HttpClient();
             try
             {
-                if (page == "comment")
-                {
-                    using var httpClient = new HttpClient();
-                    sourceCode = await httpClient.GetStringAsync(new Uri(path));
-
-                    var localFolder = ApplicationData.Current.LocalFolder;
-                    var file = await localFolder.CreateFileAsync("Comment.html",
-                        CreationCollisionOption.ReplaceExisting);
-                    await FileIO.AppendTextAsync(file, sourceCode);
-                }
-                if (page == "image")
-                {
-                    using var httpClient = new HttpClient();
-                    sourceCode = await httpClient.GetStringAsync(new Uri(path));
-
-                    var localFolder = ApplicationData.Current.LocalFolder;
-                    var file = await localFolder.CreateFileAsync("Image.html",
-                        CreationCollisionOption.ReplaceExisting);
-                    await FileIO.AppendTextAsync(file, sourceCode);
-                }
+                sourceCode = await httpClient.GetStringAsync(new Uri(path));
             }
             catch (HttpRequestException)
             {
-                Assembly.Toast();
+                sourceCode = await httpClient.GetStringAsync(new Uri(path));
+            }
+            var localFolder = ApplicationData.Current.LocalFolder;
+            if (page == "comment")
+            {
+                var file = await localFolder.CreateFileAsync("Comment.html",
+                    CreationCollisionOption.ReplaceExisting);
+                await FileIO.AppendTextAsync(file, sourceCode);
+            }
+            if (page == "image")
+            {
+                var file = await localFolder.CreateFileAsync("Image.html",
+                    CreationCollisionOption.ReplaceExisting);
+                await FileIO.AppendTextAsync(file, sourceCode);
             }
             return sourceCode;
         }

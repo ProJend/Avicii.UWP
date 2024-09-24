@@ -21,12 +21,12 @@ namespace TrueLove.Lib.Spider
             _src = doctypeGenerator.GetSourceCode(ApplicationData.Current.LocalFolder.Path + @"\Comment.html");
             Debug.WriteLine(ApplicationData.Current.LocalFolder.Path + @"\Comment.html");
             if (NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
-                await doctypeGenerator.GetSourceCodeAsync($"https://avicii.com/page/{_pageNumber}", "comment");
+                await doctypeGenerator.SaveSourceCodeAsync($"https://avicii.com/page/{_pageNumber}", "comment");
         }
 
         public Task<CommentItem> Append(int ID)
         {
-            var singleComment = new CommentItem();
+            var latestComment = new CommentItem();
             var htmlDocument = new HtmlDocument();
             htmlDocument.LoadHtml(_src);
 
@@ -44,11 +44,11 @@ namespace TrueLove.Lib.Spider
             comText = HttpUtility.HtmlDecode(comText);
             if (new[] { nameText, comText, dateText } != null)
             {
-                singleComment.Name = nameText;
-                singleComment.Comment = comText;
-                singleComment.Date = parsedDate.ToString("d");
+                latestComment.Name = nameText;
+                latestComment.Comment = comText;
+                latestComment.Date = parsedDate.ToString("d");
             }
-            return Task.Run(() => singleComment);
+            return Task.Run(() => latestComment);
         }
     }
 }

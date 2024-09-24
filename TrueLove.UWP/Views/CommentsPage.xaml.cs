@@ -1,5 +1,6 @@
 ﻿using Microsoft.Toolkit.Uwp.Connectivity;
 using TrueLove.Lib.Models.Code;
+using TrueLove.Lib.Notification;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -55,14 +56,22 @@ namespace TrueLove.UWP.Views
 
             if (Scroller.ScrollableHeight - Scroller.VerticalOffset <= 200)
             {
-                if (_isLoading) return;
-                _isLoading = true;
-                _isLoading = await CommentCollection.LoadMoreItemsManuallyAsync();
+                var isInternetAvailable = NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable;
+                if (isInternetAvailable)
+                {
+                    if (_isLoading) return;
+                    _isLoading = true;
+                    _isLoading = await CommentCollection.LoadMoreItemsManuallyAsync();
+                }
+                else
+                {
+                    Assembly.Toast();
+                }
             }
         }
         bool _isLoading;
 
-        CommentCollection CommentCollection = new CommentCollection();
+        CommentCollection CommentCollection = [];
 
         // 滚动条位置变量
         double scrlocation = 0;

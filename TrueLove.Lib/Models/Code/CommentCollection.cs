@@ -19,6 +19,8 @@ namespace TrueLove.Lib.Models.Code
     public class CommentCollection : ObservableCollection<CommentItem>, ISupportIncrementalLoading
     {
         int _pageNumber = 1;
+        private int _countRepeated;
+        private bool _isRepeated = false;
 
         public async Task<bool> LoadMoreItemsManuallyAsync()
         {
@@ -27,37 +29,43 @@ namespace TrueLove.Lib.Models.Code
                 var commentParser = new CommentParser(_pageNumber++);
                 for (int element = 1; element <= 99; element++)
                 {
-                    bool isSolo = true;
-                    var singleItme = await commentParser.Append(element);
-                    foreach (var item in this)
+                    var latestItem = await commentParser.Append(element);
+
+                    if (!_isRepeated)
                     {
-                        if (item.Comment == singleItme.Comment &&
-                            item.Name == singleItme.Name)
+                        var _isRepeating = false;
+                        foreach (var item in this)
                         {
-                            isSolo = false;
-                            break;
+                            if (item.Comment == latestItem.Comment &&
+                                item.Name == latestItem.Name)
+                            {
+                                _isRepeating = true;
+                                _countRepeated++;
+                                if (element == 99 && _countRepeated > 0)
+                                    _isRepeated = true;
+                                break;
+                            }
                         }
+                        if (!_isRepeating)
+                            Add(latestItem);
+                        continue;
                     }
-                    if (isSolo)
-                        Add(singleItme);
+
+                    Add(latestItem);
                 }
             }
-            catch { };
+            catch (NullReferenceException) { } //爬取溢出
             return false;
         }
 
         public async void LoadMoreItemsManually()
         {
-            try
+            var commentParser = new CommentParser(_pageNumber++);
+            for (int element = 1; element <= 50; element++)
             {
-                var commentParser = new CommentParser(_pageNumber++);
-                for (int element = 1; element <= 50; element++)
-                {
-                    var singleItme = await commentParser.Append(element);
-                    Add(singleItme);
-                }
+                var latestItem = await commentParser.Append(element);
+                Add(latestItem);
             }
-            catch { };
         }
 
         public Windows.Foundation.IAsyncOperation<LoadMoreItemsResult> LoadMoreItemsAsync(uint count) => AsyncInfo.Run(c => LoadMoreItemsAsyncCore(c, count));
@@ -78,8 +86,8 @@ namespace TrueLove.Lib.Models.Code
             {
                 // 向集合中添加指定项
                 var commentParser = new CommentParser(_pageNumber++);
-                var singleItme = await commentParser.Append(1);
-                Add(singleItme);
+                var latestItem = await commentParser.Append(1);
+                Add(latestItem);
             }
             // 完成加载
             LoadMoreEnd?.Invoke(this, EventArgs.Empty);

@@ -20,12 +20,12 @@ namespace TrueLove.Lib.Spider
             _src = doctypeGenerator.GetSourceCode(ApplicationData.Current.LocalFolder.Path + @"\Image.html");
             Debug.WriteLine(ApplicationData.Current.LocalFolder.Path + @"\Image.html");
             if (NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
-                _src = await doctypeGenerator.GetSourceCodeAsync($"https://avicii.com/images/page/{_pageNumber}", "image");
+                await doctypeGenerator.SaveSourceCodeAsync($"https://avicii.com/images/page/{_pageNumber}", "image");
         }
 
         public Task<BitmapImage> Append(int ID)
         {
-            var singleImage = new BitmapImage();
+            var latestImage = new BitmapImage();
             var htmlDocument = new HtmlDocument();
             htmlDocument.LoadHtml(_src);
 
@@ -36,10 +36,10 @@ namespace TrueLove.Lib.Spider
             {
                 var path = imageNode.Attributes["src"].Value;
                 var uri = new Uri(path);
-                singleImage.UriSource = uri;
+                latestImage.UriSource = uri;
             }
 
-            return Task.Run(() => singleImage);
+            return Task.Run(() => latestImage);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using Windows.Foundation;
+﻿using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.ApplicationModel.Activation;
@@ -14,6 +13,7 @@ using Windows.ApplicationModel.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI;
 using System.Net.Http;
+using TrueLove.Lib.Spider;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/p/?LinkID=234238
 
@@ -29,7 +29,7 @@ namespace TrueLove.UWP.Views
         internal bool dismissed = false; // Variable to track splash screen dismissal status.
         internal Frame rootFrame;
 
-        public ExtendedSplash(SplashScreen splashscreen, bool loadState)
+        public ExtendedSplash(SplashScreen splashScreen, bool loadState)
         {
             this.InitializeComponent();
 
@@ -37,7 +37,7 @@ namespace TrueLove.UWP.Views
             // This is important to ensure that the extended splash screen is formatted properly in response to snapping, unsnapping, rotation, etc...
             Window.Current.SizeChanged += new WindowSizeChangedEventHandler(ExtendedSplash_OnResize);
 
-            splash = splashscreen;
+            splash = splashScreen;
 
             if (splash != null)
             {
@@ -53,7 +53,7 @@ namespace TrueLove.UWP.Views
             }
 
             // Create a Frame to act as the navigation context
-            rootFrame = new Frame();
+            rootFrame = new();
 
             // Restore the saved session state if necessary
             //RestoreState(loadState);
@@ -79,11 +79,11 @@ namespace TrueLove.UWP.Views
 
         void PositionRing()
         {
-            loadingRing.SetValue(Canvas.LeftProperty, splashImageRect.X + (splashImageRect.Width * 0.5) - (loadingRing.Width * 0.5));
-            loadingRing.SetValue(Canvas.TopProperty, (splashImageRect.Y + splashImageRect.Height + splashImageRect.Height * 0.1));
+            loadingRing.SetValue(Canvas.LeftProperty, splashImageRect.X + splashImageRect.Width * 0.5 - loadingRing.Width * 0.5);
+            loadingRing.SetValue(Canvas.TopProperty, splashImageRect.Y + splashImageRect.Height + splashImageRect.Height * 0.1);
         }
 
-        void ExtendedSplash_OnResize(Object sender, WindowSizeChangedEventArgs e)
+        void ExtendedSplash_OnResize(object sender, WindowSizeChangedEventArgs e)
         {
             // Safely update the extended splash screen image coordinates. This function will be fired in response to snapping, unsnapping, rotation, etc...
             if (splash != null)
@@ -103,12 +103,12 @@ namespace TrueLove.UWP.Views
             // Complete app setup operations here...
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e) => Catchcontents();
+        private void Page_Loaded(object sender, RoutedEventArgs e) => PreLoading();
 
         /// <summary>
         /// Initialize contents data and save as local file
         /// </summary>
-        async void Catchcontents()
+        async void PreLoading()
         {
             var path = ApplicationData.Current.LocalFolder.Path + @"\Comment.html";
             do
@@ -122,17 +122,9 @@ namespace TrueLove.UWP.Views
 
                     using var httpClient = new HttpClient();
 
-                    var contents = await httpClient.GetStringAsync("https://avicii.com/page/1");
-                    var localFolder = ApplicationData.Current.LocalFolder;
-                    var file = await localFolder.CreateFileAsync("Comment.html",
-                        CreationCollisionOption.ReplaceExisting);
-                    await FileIO.AppendTextAsync(file, contents);
-
-                    contents = await httpClient.GetStringAsync("https://avicii.com/images/page/1");
-                    localFolder = ApplicationData.Current.LocalFolder;
-                    file = await localFolder.CreateFileAsync("Image.html",
-                        CreationCollisionOption.ReplaceExisting);
-                    await FileIO.AppendTextAsync(file, contents);
+                    DoctypeGenerator doctypeGenerator = new();
+                    await doctypeGenerator.SaveSourceCodeAsync("https://avicii.com/page/1", "comment");
+                    await doctypeGenerator.SaveSourceCodeAsync("https://avicii.com/images/page/1", "image");
                 }
                 else
                 {
@@ -152,7 +144,7 @@ namespace TrueLove.UWP.Views
             //else if(Generic.DeviceFamilyMatch(DeviceFamilyType.Mobile))
             //    CollapseStatusBar();
 
-            // Navigate to mainpage
+            // Navigate to MainPage
             rootFrame.Navigate(typeof(MainPage));
             // Place the frame in the current Window
             Window.Current.Content = rootFrame;
