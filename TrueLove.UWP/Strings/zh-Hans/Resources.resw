@@ -13,15 +13,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="pDisplayName" xml:space="preserve">
-    <value>真爱</value>
+    <value>Avicii 回忆</value>
     <comment>DisplayName</comment>
   </data>
   <data name="pPackageDescription" xml:space="preserve">
     <value>一个基于 Avicii 网站的 UWP </value>
     <comment>PackageDescription</comment>
-  </data>
-  <data name="pPackageDisplayName" xml:space="preserve">
-    <value>真爱 - AviciiUWP</value>
-    <comment>PackageDisplayName</comment>
   </data>
 </root>

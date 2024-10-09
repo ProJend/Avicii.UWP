@@ -22,7 +22,7 @@
                     <LineBreak /><LineBreak />
                     <Run Text="{x:Bind Comment}" />
                     <LineBreak /><LineBreak />
-                    <Run Text="{x:Bind Date}" />
+                    <Run Foreground="DarkGray" Text="{x:Bind Date}" />
                 </TextBlock>
             </Grid>
         </DataTemplate>

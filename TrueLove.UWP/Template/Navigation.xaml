@@ -299,11 +299,14 @@
     </Style>
     <!--#endregion-->
 
-    <Style x:Name="GridViewItemNoneStyle" TargetType="GridViewItem">
+    <Style x:Name="GridViewItemStretchStyle" TargetType="GridViewItem">
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="GridViewItem">
-                    <ListViewItemPresenter x:Name="Root" />
+                    <Grid Background="{TemplateBinding Background}">
+                        <ContentPresenter Margin="{TemplateBinding Padding}" Content="{TemplateBinding Content}" />
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

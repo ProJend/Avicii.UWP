@@ -61,7 +61,7 @@ namespace TrueLove.Lib.Notification
 
         public static void Toast()
         {
-            Register.RegisterBackgroundTask("ToastBackgroudTask");
+            Register.RegisterBackgroundTask("ToastBackgroundTask");
             var content = Template.Toast.CheckNetwork();
 
             // Create the notification

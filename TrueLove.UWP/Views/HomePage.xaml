@@ -82,7 +82,7 @@
                                 <FontIcon
                                     FontFamily="{ThemeResource ExtraIconfont}"
                                     Foreground="{ThemeResource SystemAccentColor}"
-                                    Glyph="&#xeaae;" />
+                                    Glyph="&#xe71e;" />
                             </Button>
                             <Button
                                 Click="Links_Click"
@@ -91,7 +91,7 @@
                                 <FontIcon
                                     FontFamily="{ThemeResource ExtraIconfont}"
                                     Foreground="{ThemeResource SystemAccentColor}"
-                                    Glyph="&#xe660;" />
+                                    Glyph="&#xe612;" />
                             </Button>
                             <Button
                                 Click="Links_Click"
@@ -100,7 +100,7 @@
                                 <FontIcon
                                     FontFamily="{ThemeResource ExtraIconfont}"
                                     Foreground="{ThemeResource SystemAccentColor}"
-                                    Glyph="&#xe61a;" />
+                                    Glyph="&#xe6bc;" />
                             </Button>
                         </StackPanel>
                     </StackPanel>
@@ -129,7 +129,7 @@
                             TextAlignment="Center">
                             <LineBreak />
                             <Run>Tim created music that brought people together with timeless memories from all over the world.</Run><LineBreak /><LineBreak />
-                            <Run>We created this space so you could share your memories with all of us and let the world know what Avicii meant to you.</Run><LineBreak /><LineBreak />
+                            <Run>This space was created for you to share your memories and let the world know what Avicii meant to you.</Run><LineBreak /><LineBreak />
                             <Run>His music and your memories are forever.</Run>
                         </TextBlock>
                     </StackPanel>

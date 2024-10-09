@@ -120,8 +120,6 @@ namespace TrueLove.UWP.Views
                     loadingRing.IsActive = true;
                     prompt.Opacity = 0;
 
-                    using var httpClient = new HttpClient();
-
                     DoctypeGenerator doctypeGenerator = new();
                     await doctypeGenerator.SaveSourceCodeAsync("https://avicii.com/page/1", "comment");
                     await doctypeGenerator.SaveSourceCodeAsync("https://avicii.com/images/page/1", "image");

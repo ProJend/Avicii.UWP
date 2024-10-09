@@ -31,9 +31,9 @@
                     ItemsSource="{x:Bind ImageCollection}">
                     <GridView.ItemTemplate>
                         <DataTemplate>
-                            <Grid>
+                            <Grid MinHeight="100">
                                 <ProgressRing IsActive="True" />
-                                <Image Source="{Binding}" Stretch="Uniform" />
+                                <Image Source="{Binding}" Stretch="Uniform"/>
                             </Grid>
                         </DataTemplate>
                     </GridView.ItemTemplate>

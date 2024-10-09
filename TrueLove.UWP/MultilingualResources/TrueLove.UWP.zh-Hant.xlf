@@ -7,19 +7,14 @@
     <body>
       <group id="TRUELOVE.UWP/STRINGS/EN/RESOURCES.RESW" datatype="resx">
         <trans-unit id="pDisplayName" translate="yes" xml:space="preserve">
-          <source>True Love</source>
-          <target state="translated">真愛</target>
+          <source>Avicii Memories</source>
+          <target state="translated">Avicii 回憶</target>
           <note from="MultilingualBuild" annotates="source" priority="2">DisplayName</note>
         </trans-unit>
         <trans-unit id="pPackageDescription" translate="yes" xml:space="preserve">
           <source>A UWP cover for Avicii website.</source>
           <target state="translated">一個基於 Avicii 網站的 UWP </target>
           <note from="MultilingualBuild" annotates="source" priority="2">PackageDescription</note>
-        </trans-unit>
-        <trans-unit id="pPackageDisplayName" translate="yes" xml:space="preserve">
-          <source>True Love - AviciiUWP</source>
-          <target state="translated">真愛 - AviciiUWP</target>
-          <note from="MultilingualBuild" annotates="source" priority="2">PackageDisplayName</note>
         </trans-unit>
       </group>
     </body>

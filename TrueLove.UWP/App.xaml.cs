@@ -42,7 +42,7 @@ namespace TrueLove.UWP
         {
             // 不要在窗口已包含内容时重复应用程序初始化，
             // 只需确保窗口处于活动状态
-            if (!(Window.Current.Content is Frame rootFrame))
+            if (Window.Current.Content is not Frame rootFrame)
             {
                 // 创建要充当导航上下文的框架，并导航到第一页
                 rootFrame = new Frame();
@@ -65,7 +65,7 @@ namespace TrueLove.UWP
                     // 当导航堆栈尚未还原时，导航到第一页，
                     // 并通过将所需信息作为导航参数传入来配置
                     // 参数
-                    var path = ApplicationData.Current.LocalFolder.Path + @"\Comment.html";
+                    var path = ApplicationData.Current.LocalFolder.Path + @"\Image.html";
                     if (File.Exists(path))
                     {
                         rootFrame.Navigate(typeof(MainPage), e.Arguments);
@@ -77,7 +77,7 @@ namespace TrueLove.UWP
                     else
                     {
                         bool loadState = e.PreviousExecutionState == ApplicationExecutionState.Terminated;
-                        ExtendedSplash extendedSplash = new ExtendedSplash(e.SplashScreen, loadState);
+                        ExtendedSplash extendedSplash = new(e.SplashScreen, loadState);
                         rootFrame.Content = extendedSplash;
                         Window.Current.Content = rootFrame;
                         await Task.Delay(50); // 防止初始屏幕闪烁
@@ -121,9 +121,8 @@ namespace TrueLove.UWP
 
             switch (args.TaskInstance.Task.Name)
             {
-                case "ToastBackgroudTask":
-                    var details = args.TaskInstance.TriggerDetails as ToastNotificationActionTriggerDetail;
-                    if (details != null)
+                case "ToastBackgroundTask":
+                    if (args.TaskInstance.TriggerDetails is ToastNotificationActionTriggerDetail details)
                     {
                         QueryString arg = QueryString.Parse(details.Argument);
                         switch (arg["action"])
