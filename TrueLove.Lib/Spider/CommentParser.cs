@@ -2,8 +2,8 @@
 using Microsoft.Toolkit.Uwp.Connectivity;
 using System;
 using System.Diagnostics;
+using System.Net;
 using System.Threading.Tasks;
-using System.Web;
 using TrueLove.Lib.Models.Code;
 using Windows.Storage;
 
@@ -40,8 +40,8 @@ namespace TrueLove.Lib.Spider
             var dateText = htmlDocument.DocumentNode.SelectSingleNode(datePath).InnerText;
             var parsedDate = DateTime.Parse(dateText);
 
-            nameText = HttpUtility.HtmlDecode(nameText);
-            comText = HttpUtility.HtmlDecode(comText);
+            nameText = WebUtility.HtmlDecode(nameText);
+            comText = WebUtility.HtmlDecode(comText);
             if (new[] { nameText, comText, dateText } != null)
             {
                 latestComment.Name = nameText;
