@@ -14,6 +14,7 @@ using Windows.UI.ViewManagement;
 using Windows.UI;
 using System.Net.Http;
 using TrueLove.Lib.Spider;
+using TrueLove.Lib.Notification;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/p/?LinkID=234238
 
@@ -111,26 +112,31 @@ namespace TrueLove.UWP.Views
         async void PreLoading()
         {
             var path = ApplicationData.Current.LocalFolder.Path + @"\Comment.html";
-            do
+            if (!File.Exists(path))
             {
-                await Task.Delay(1); // 使初始画面活动起来
-                var isInternetAvailable = NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable;
-                if (isInternetAvailable)
+                do
                 {
-                    loadingRing.IsActive = true;
-                    prompt.Opacity = 0;
+                    await Task.Delay(1); // 使初始画面活动起来
+                    var isInternetAvailable = NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable;
+                    if (isInternetAvailable)
+                    {
+                        loadingRing.IsActive = true;
+                        prompt.Opacity = 0;
 
-                    DoctypeGenerator doctypeGenerator = new();
-                    await doctypeGenerator.SaveSourceCodeAsync("https://avicii.com/page/1", "comment");
-                    await doctypeGenerator.SaveSourceCodeAsync("https://avicii.com/images/page/1", "image");
+                        DoctypeGenerator doctypeGenerator = new();
+                        await doctypeGenerator.SaveSourceCodeAsync("https://avicii.com/page/1", "comment");
+                        await doctypeGenerator.SaveSourceCodeAsync("https://avicii.com/images/page/1", "image");
+                    }
+                    else
+                    {
+                        loadingRing.IsActive = false;
+                        prompt.Opacity = 1;
+                    }
                 }
-                else
-                {
-                    loadingRing.IsActive = false;
-                    prompt.Opacity = 1;
-                }
+                while (!File.Exists(path));
             }
-            while (!File.Exists(path));
+
+            Register.RegisterBackgroundTask("TileFeedBackgroundTask", "BackgroundTasks.TileFeedBackgroundTask");
 
             DismissExtendedSplash();
         }

@@ -31,8 +31,7 @@ namespace TrueLove.UWP.Views
             switch (toggleSwitch.Tag as string)
             {
                 case "enableLiveTileSwitch":
-                    if (EnableLiveTileSwitch.IsOn)
-                        Register.RegisterBackgroundTask("BackgroundTask.BackgroundTask");
+                    if (EnableLiveTileSwitch.IsOn) { }
                     else
                     {
                         TileUpdateManager.CreateTileUpdaterForApplication().Clear(); // 清空队列

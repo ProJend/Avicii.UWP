@@ -1,96 +1,71 @@
 ﻿using Microsoft.Toolkit.Uwp.Notifications;
-using Windows.ApplicationModel;
+using TrueLove.Lib.Models.Code;
 
 namespace TrueLove.Lib.Notification.Template
 {
     internal class LiveTile
     {
-        public static TileContent TitleTemplate(TileBindingContentPhotos photosContent) => new TileContent()
-        {   // 创建静态磁贴对象并返回
+        public static TileContent CommentTemplate(CommentItem commentItem) => new()
+        {
+            // 创建静态磁贴对象并返回
             Visual = new TileVisual()
             {
+                Branding = TileBranding.NameAndLogo,
                 TileMedium = new TileBinding()
                 {
+                    DisplayName = commentItem.Name,
                     Content = new TileBindingContentAdaptive()
                     {
-                        TextStacking = TileTextStacking.Center,
                         Children =
                         {
                             new AdaptiveText()
                             {
-                                Text = "Share your memories of Avicii.",
-                                HintAlign = AdaptiveTextAlign.Center,
+                                Text = commentItem.Comment,
                                 HintWrap = true,
-                            },
-                        },
-                        PeekImage = new TilePeekImage()
-                        {
-                            Source = "Assets/Square150x150Logo.png",
+                            }
                         }
                     }
                 },
                 TileWide = new TileBinding()
                 {
+                    DisplayName = "from " + commentItem.Name,
                     Content = new TileBindingContentAdaptive()
                     {
                         Children =
                         {
                             new AdaptiveText()
                             {
-                                Text = "Tim Bergling\nMemories",
-                                HintStyle = AdaptiveTextStyle.Body,
-                                HintAlign = AdaptiveTextAlign.Right,
+                                Text = commentItem.Comment,
+                                HintWrap = true,
                             }
-                        },
-                        BackgroundImage = new TileBackgroundImage()
-                        {
-                            Source = "Assets/Background.jpg"
-                        },
-                        PeekImage = new TilePeekImage()
-                        {
-                            Source = "Assets/Wide310x150Logo.png",
                         }
                     }
                 },
+            }
+        };
+        public static TileContent ImageTemplate(ImageCollection source) => new()
+        {
+            // 创建静态磁贴对象并返回
+            Visual = new TileVisual()
+            {
+                Branding = TileBranding.NameAndLogo,
                 TileLarge = new TileBinding()
                 {
-                    //Content = photosContent
                     Content = new TileBindingContentPhotos()
                     {
                         Images =
                         {
-                            new TileBasicImage
-                            {
-                                Source = Package.Current.InstalledLocation.Path + @"\Assets\Instagram\1.jpg"
-                            },
-                            new TileBasicImage
-                            {
-                                Source = Package.Current.InstalledLocation.Path + @"\Assets\Instagram\2.jpg"
-                            },
-                            new TileBasicImage
-                            {
-                                Source = Package.Current.InstalledLocation.Path + @"\Assets\Instagram\3.jpg"
-                            },
-                            new TileBasicImage
-                            {
-                                Source = Package.Current.InstalledLocation.Path + @"\Assets\Instagram\4.jpg"
-                            },
-                            new TileBasicImage
-                            {
-                                Source = Package.Current.InstalledLocation.Path + @"\Assets\Instagram\5.jpg"
-                            },
-                            new TileBasicImage
-                            {
-                                Source = Package.Current.InstalledLocation.Path + @"\Assets\Instagram\6.jpg"
-                            },
-                            new TileBasicImage
-                            {
-                                Source = Package.Current.InstalledLocation.Path + @"\Assets\Instagram\7.jpg"
-                            },
-                            new TileBasicImage
-                            {
-                                Source = Package.Current.InstalledLocation.Path + @"\Assets\Instagram\8.jpg"
-                            },
+                            new TileBasicImage() { Source = source[0] },
+                            new TileBasicImage() { Source = source[1] },
+                            new TileBasicImage() { Source = source[2] },
+                            new TileBasicImage() { Source = source[3] },
+                            new TileBasicImage() { Source = source[4] },
+                            new TileBasicImage() { Source = source[5] },
+                            new TileBasicImage() { Source = source[6] },
+                            new TileBasicImage() { Source = source[7] },
+                            new TileBasicImage() { Source = source[8] },
+ 
+                            // TODO: Can have 9 images total
                         }
                     }
                 }

@@ -13,9 +13,14 @@ namespace TrueLove.Lib.Spider
     {
         string _src;
 
-        public CommentParser(int pageNumber) => ParseCommentAsync(pageNumber);
+        public void ParseComment()
+        {
+            var doctypeGenerator = new DoctypeGenerator();
+            _src = doctypeGenerator.GetSourceCode(ApplicationData.Current.LocalFolder.Path + @"\Comment.html");
+            Debug.WriteLine(ApplicationData.Current.LocalFolder.Path + @"\Comment.html");
+        }
 
-        private async void ParseCommentAsync(int _pageNumber)
+        public async void ParseCommentWithNetwork(int _pageNumber)
         {
             var doctypeGenerator = new DoctypeGenerator();
             _src = doctypeGenerator.GetSourceCode(ApplicationData.Current.LocalFolder.Path + @"\Comment.html");

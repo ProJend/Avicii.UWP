@@ -7,12 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueLove.UWP", "TrueLove.UW
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrueLove.Lib", "TrueLove.Lib\TrueLove.Lib.csproj", "{BE71C6BF-09B2-48D7-9290-E97BE9B8D622}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackgroundTask", "BackgroundTask\BackgroundTask.csproj", "{32288EDB-3F7F-479A-8303-7BB6705E0636}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{93E7F14A-5AB3-43FD-A405-F4F62F61BEE5}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackgroundTasks", "BackgroundTasks\BackgroundTasks.csproj", "{32288EDB-3F7F-479A-8303-7BB6705E0636}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

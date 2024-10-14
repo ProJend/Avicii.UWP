@@ -1,5 +1,5 @@
-﻿using Microsoft.Toolkit.Uwp.Connectivity;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
@@ -18,15 +18,27 @@ namespace TrueLove.Lib.Models.Code
 
     public class CommentCollection : ObservableCollection<CommentItem>, ISupportIncrementalLoading
     {
-        int _pageNumber = 1;
+        int _pageNumber;
         private int _countRepeated;
-        private bool _isRepeated = false;
+        private bool _isRepeated;
+
+        public async void LoadMoreItemsManually()
+        {
+            CommentParser commentParser = new();
+            commentParser.ParseCommentWithNetwork(++_pageNumber);
+            for (int element = 1; element <= 50; element++)
+            {
+                var latestItem = await commentParser.Append(element);
+                Add(latestItem);
+            }
+        }
 
         public async Task<bool> LoadMoreItemsManuallyAsync()
         {
             try
             {
-                var commentParser = new CommentParser(_pageNumber++);
+                CommentParser commentParser = new();
+                commentParser.ParseCommentWithNetwork(++_pageNumber);
                 for (int element = 1; element <= 99; element++)
                 {
                     var latestItem = await commentParser.Append(element);
@@ -58,12 +70,23 @@ namespace TrueLove.Lib.Models.Code
             return false;
         }
 
-        public async void LoadMoreItemsManually()
+        public void Load5ItemsRandomly()
         {
-            var commentParser = new CommentParser(_pageNumber++);
-            for (int element = 1; element <= 50; element++)
+            List<int> list = [];
+            CommentParser commentParser = new();
+            commentParser.ParseComment();
+            for (int j = 1; j <= 5; j++)
             {
-                var latestItem = await commentParser.Append(element);
+                Random random = new();
+                int element;
+                do
+                {
+                    element = random.Next(1, 99);
+                }
+                while (list.Contains(element));
+                list.Add(element);
+
+                var latestItem = commentParser.Append(element).Result;
                 Add(latestItem);
             }
         }
@@ -85,7 +108,8 @@ namespace TrueLove.Lib.Models.Code
             else
             {
                 // 向集合中添加指定项
-                var commentParser = new CommentParser(_pageNumber++);
+                CommentParser commentParser = new();
+                commentParser.ParseComment();
                 var latestItem = await commentParser.Append(1);
                 Add(latestItem);
             }

@@ -65,23 +65,11 @@ namespace TrueLove.UWP
                     // 当导航堆栈尚未还原时，导航到第一页，
                     // 并通过将所需信息作为导航参数传入来配置
                     // 参数
-                    var path = ApplicationData.Current.LocalFolder.Path + @"\Image.html";
-                    if (File.Exists(path))
-                    {
-                        rootFrame.Navigate(typeof(MainPage), e.Arguments);
-                        if (Generic.DeviceFamilyMatch(DeviceFamilyType.Desktop))
-                            CollapseTitleBar();
-                        //else if(Generic.DeviceFamilyMatch(DeviceFamilyType.Mobile))
-                        //    CollapseStatusBar();
-                    }
-                    else
-                    {
-                        bool loadState = e.PreviousExecutionState == ApplicationExecutionState.Terminated;
-                        ExtendedSplash extendedSplash = new(e.SplashScreen, loadState);
-                        rootFrame.Content = extendedSplash;
-                        Window.Current.Content = rootFrame;
-                        await Task.Delay(50); // 防止初始屏幕闪烁
-                    }
+                    bool loadState = e.PreviousExecutionState == ApplicationExecutionState.Terminated;
+                    ExtendedSplash extendedSplash = new(e.SplashScreen, loadState);
+                    rootFrame.Content = extendedSplash;
+                    Window.Current.Content = rootFrame;
+                    await Task.Delay(50); // 防止初始屏幕闪烁
 
                 }
                 // 确保当前窗口处于活动状态
@@ -89,7 +77,7 @@ namespace TrueLove.UWP
             }
         }
 
-        protected override void OnActivated(IActivatedEventArgs e)
+        protected override async void OnActivated(IActivatedEventArgs e)
         {
             // 判断激活类型
             // 确认是由Toast通知激活应用
@@ -103,16 +91,16 @@ namespace TrueLove.UWP
                     Window.Current.Content = root;
                 }
                 if (root.Content == null)
-                {
-                    root.Navigate(typeof(MainPage));
+                {                    
+                    bool loadState = e.PreviousExecutionState == ApplicationExecutionState.Terminated;
+                    ExtendedSplash extendedSplash = new(e.SplashScreen, loadState);
+                    root = new Frame();
+                    root.Content = extendedSplash;
+                    Window.Current.Content = root;
+                    await Task.Delay(50); // 防止初始屏幕闪烁
                 }
             }
             Window.Current.Activate();
-
-            if (Generic.DeviceFamilyMatch(DeviceFamilyType.Desktop))
-                CollapseTitleBar();
-            //else
-            //    CollapseStatusBar();
         }
 
         protected override async void OnBackgroundActivated(BackgroundActivatedEventArgs args)
@@ -157,41 +145,6 @@ namespace TrueLove.UWP
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: 保存应用程序状态并停止任何后台活动
             deferral.Complete();
-        }
-
-        /// <summary>
-        /// 沉淀状态栏 for PC
-        /// </summary>
-        private void CollapseTitleBar()
-        {
-            CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
-            var titleBar = ApplicationView.GetForCurrentView().TitleBar;
-            titleBar.ButtonBackgroundColor = Colors.Transparent;
-            titleBar.ButtonForegroundColor = Colors.White;
-
-            titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
-            titleBar.ButtonInactiveForegroundColor = Colors.Gray;
-
-            titleBar.ButtonHoverBackgroundColor = Colors.PaleTurquoise;
-            titleBar.ButtonHoverForegroundColor = Colors.Black;
-
-            titleBar.ButtonPressedBackgroundColor = Colors.PaleTurquoise;
-            titleBar.ButtonPressedForegroundColor = Colors.White;
-        }
-
-        /// <summary>
-        /// 沉淀状态栏 for Phone
-        /// </summary>
-        private void CollapseStatusBar()
-        {
-            var applicationView = ApplicationView.GetForCurrentView();
-            applicationView.SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
-            var s = StatusBar.GetForCurrentView();
-
-            applicationView.VisibleBoundsChanged += (e, o) =>
-            {
-
-            };
         }
     }
 }

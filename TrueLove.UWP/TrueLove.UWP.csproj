@@ -12,8 +12,8 @@
     <AssemblyName>TrueLove</AssemblyName>
     <DefaultLanguage>en</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.22621.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.26100.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -315,9 +315,9 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BackgroundTask\BackgroundTask.csproj">
+    <ProjectReference Include="..\BackgroundTasks\BackgroundTasks.csproj">
       <Project>{32288edb-3f7f-479a-8303-7bb6705e0636}</Project>
-      <Name>BackgroundTask</Name>
+      <Name>BackgroundTasks</Name>
     </ProjectReference>
     <ProjectReference Include="..\TrueLove.Lib\TrueLove.Lib.csproj">
       <Project>{be71c6bf-09b2-48d7-9290-e97be9b8d622}</Project>
@@ -325,16 +325,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <SDKReference Include="WindowsMobile, Version=10.0.22621.0">
-      <Name>Windows Mobile Extensions for the UWP</Name>
-    </SDKReference>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Views\DeviceFamily-Mobile\" />
   </ItemGroup>
   <ItemGroup>
     <XliffResource Include="MultilingualResources\TrueLove.UWP.zh-Hans.xlf" />
     <XliffResource Include="MultilingualResources\TrueLove.UWP.zh-Hant.xlf" />
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="WindowsMobile, Version=10.0.26100.0">
+      <Name>Windows Mobile Extensions for the UWP</Name>
+    </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

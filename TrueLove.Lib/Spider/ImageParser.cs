@@ -1,10 +1,8 @@
 ﻿using HtmlAgilityPack;
 using Microsoft.Toolkit.Uwp.Connectivity;
-using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.Storage;
-using Windows.UI.Xaml.Media.Imaging;
 
 namespace TrueLove.Lib.Spider
 {
@@ -12,9 +10,14 @@ namespace TrueLove.Lib.Spider
     {
         string _src;
 
-        public ImageParser(int pageNumber) => ParseImageAsync(pageNumber);
+        public void ParseImage()
+        {
+            var doctypeGenerator = new DoctypeGenerator();
+            _src = doctypeGenerator.GetSourceCode(ApplicationData.Current.LocalFolder.Path + @"\Image.html");
+            Debug.WriteLine(ApplicationData.Current.LocalFolder.Path + @"\Image.html");
+        }
 
-        private async void ParseImageAsync(int _pageNumber)
+        public async void ParseImageWithNetwork(int _pageNumber)
         {
             var doctypeGenerator = new DoctypeGenerator();
             _src = doctypeGenerator.GetSourceCode(ApplicationData.Current.LocalFolder.Path + @"\Image.html");
@@ -23,23 +26,21 @@ namespace TrueLove.Lib.Spider
                 await doctypeGenerator.SaveSourceCodeAsync($"https://avicii.com/images/page/{_pageNumber}", "image");
         }
 
-        public Task<BitmapImage> Append(int ID)
+        public Task<string> Append(int ID)
         {
-            var latestImage = new BitmapImage();
             var htmlDocument = new HtmlDocument();
             htmlDocument.LoadHtml(_src);
 
             string imagePath = $"//*[@id=\"images\"]/ul[2]/li[{ID}]/img";
 
             var imageNode = htmlDocument.DocumentNode.SelectSingleNode(imagePath);
+            string uri = null;
             if (imageNode != null)
             {
-                var path = imageNode.Attributes["src"].Value;
-                var uri = new Uri(path);
-                latestImage.UriSource = uri;
+                uri = imageNode.Attributes["src"].Value;
             }
 
-            return Task.Run(() => latestImage);
+            return Task.Run(() => uri);
         }
     }
 }

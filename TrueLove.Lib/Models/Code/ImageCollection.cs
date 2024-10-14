@@ -1,23 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using System.Threading.Tasks;
 using TrueLove.Lib.Spider;
 using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Media.Imaging;
 
 namespace TrueLove.Lib.Models.Code
 {
-    public class ImageCollection : ObservableCollection<BitmapImage>, ISupportIncrementalLoading
+    public class ImageCollection : ObservableCollection<string>, ISupportIncrementalLoading
     {
-        private int _pageNumber = 1;
+        private int _pageNumber;
         private int _countRepeated;
         private bool _isRepeated;
 
         public async void LoadMoreItemsManually()
         {
-            var imageParser = new ImageParser(_pageNumber++);
+            ImageParser imageParser = new();
+            imageParser.ParseImageWithNetwork(++_pageNumber);
             for (int element = 1; element <= 50; element++)
             {
                 var latestItem = await imageParser.Append(element);
@@ -29,7 +30,8 @@ namespace TrueLove.Lib.Models.Code
         {
             try
             {
-                var imageParser = new ImageParser(_pageNumber++);
+                ImageParser imageParser = new();
+                imageParser.ParseImageWithNetwork(++_pageNumber);
                 for (int element = 1; element <= 99; element++)
                 {
                     var latestItem = await imageParser.Append(element);
@@ -39,7 +41,7 @@ namespace TrueLove.Lib.Models.Code
                         var _isRepeating = false;
                         foreach (var item in this)
                         {
-                            if (item.UriSource.AbsoluteUri == latestItem.UriSource.AbsoluteUri)
+                            if (item == latestItem)
                             {
                                 _isRepeating = true;
                                 _countRepeated++;
@@ -60,6 +62,27 @@ namespace TrueLove.Lib.Models.Code
             return false;
         }
 
+        public void Load9ItemsRandomly()
+        {
+            List<int> list = [];
+            ImageParser imageParser = new();
+            imageParser.ParseImage();
+            for (int j = 0; j < 9; j++)
+            {
+                Random random = new();
+                int element;
+                do
+                {
+                    element = random.Next(1, 99);
+                }
+                while (list.Contains(element));
+                list.Add(element);
+
+                var latestItem = imageParser.Append(element).Result;
+                Add(latestItem);
+            }
+        }
+
         public Windows.Foundation.IAsyncOperation<LoadMoreItemsResult> LoadMoreItemsAsync(uint count) => AsyncInfo.Run(c => LoadMoreItemsAsyncCore(c, count));
 
         public bool HasMoreItems => false;
@@ -76,7 +99,8 @@ namespace TrueLove.Lib.Models.Code
             }
             else
             {
-                var imageParser = new ImageParser(_pageNumber++);
+                ImageParser imageParser = new();
+                imageParser.ParseImage();
                 var latestItem = await imageParser.Append(1);
                 Add(latestItem);
             }

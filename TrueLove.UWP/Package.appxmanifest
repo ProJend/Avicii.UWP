@@ -34,10 +34,9 @@
 				<uap:LockScreen BadgeLogo="Assets\BadgeLogo.png" Notification="badgeAndTileText" />
 			</uap:VisualElements>
 			<Extensions>
-				<Extension Category="windows.backgroundTasks" EntryPoint="BackgroundTask.BackgroundTask">
+				<Extension Category="windows.backgroundTasks" EntryPoint="BackgroundTasks.TileFeedBackgroundTask">
 					<BackgroundTasks>
 						<Task Type="timer"/>
-						<Task Type="pushNotification"/>
 					</BackgroundTasks>
 				</Extension>
 			</Extensions>
