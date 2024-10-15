@@ -25,7 +25,7 @@ namespace TrueLove.UWP.Views
         {
             this.InitializeComponent();
             Loaded += Page_Loaded; // 订阅页面加载后事件
-            Window.Current.Activated += OnWindowActivated; // 订阅窗口活动事件            
+            Window.Current.Activated += OnWindowActivated; // 订阅窗口活动事件
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e) => Window.Current.Activated -= OnWindowActivated;
@@ -36,6 +36,11 @@ namespace TrueLove.UWP.Views
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             ImageCollection.LoadMoreItemsManually();
+            var isInternetAvailable = NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable;
+            if (!isInternetAvailable)
+            {
+                Assembly.Toast();
+            }
             Loaded -= Page_Loaded;
         }
 
@@ -49,10 +54,6 @@ namespace TrueLove.UWP.Views
                     if (_isLoading) return;
                     _isLoading = true;
                     _isLoading = await ImageCollection.LoadMoreItemsManuallyAsync();
-                }
-                else
-                {
-                    Assembly.Toast();
                 }
             }
         }
@@ -109,7 +110,7 @@ namespace TrueLove.UWP.Views
                 ContentDialog errorDialog = new()
                 {
                     Title = "Error",
-                    Content = $"Failed to save image: No Network Available",
+                    Content = $"Failed to save image: No Internet Connection",
                     CloseButtonText = "OK"
                 };
                 await errorDialog.ShowAsync();

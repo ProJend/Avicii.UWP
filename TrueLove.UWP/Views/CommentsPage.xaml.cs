@@ -30,6 +30,11 @@ namespace TrueLove.UWP.Views
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             CommentCollection.LoadMoreItemsManually();
+            var isInternetAvailable = NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable;
+            if (!isInternetAvailable)
+            {
+                Assembly.Toast();
+            }
             Loaded -= Page_Loaded;
         }
 
@@ -61,10 +66,6 @@ namespace TrueLove.UWP.Views
                     if (_isLoading) return;
                     _isLoading = true;
                     _isLoading = await CommentCollection.LoadMoreItemsManuallyAsync();
-                }
-                else
-                {
-                    Assembly.Toast();
                 }
             }
         }

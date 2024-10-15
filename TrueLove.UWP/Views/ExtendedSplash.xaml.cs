@@ -1,20 +1,19 @@
-﻿using Windows.Foundation;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.ApplicationModel.Activation;
-using Windows.UI.Core;
-using Microsoft.Toolkit.Uwp.Connectivity;
-using Windows.Storage;
-using System.Threading.Tasks;
+﻿using Microsoft.Toolkit.Uwp.Connectivity;
 using System.IO;
+using System.Threading.Tasks;
 using TrueLove.Lib.Helpers;
 using TrueLove.Lib.Models.Enum;
-using Windows.ApplicationModel.Core;
-using Windows.UI.ViewManagement;
-using Windows.UI;
-using System.Net.Http;
-using TrueLove.Lib.Spider;
 using TrueLove.Lib.Notification;
+using TrueLove.Lib.Spider;
+using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Core;
+using Windows.Foundation;
+using Windows.Storage;
+using Windows.UI;
+using Windows.UI.Core;
+using Windows.UI.ViewManagement;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/p/?LinkID=234238
 
@@ -136,6 +135,7 @@ namespace TrueLove.UWP.Views
                 while (!File.Exists(path));
             }
 
+            Register.RegisterBackgroundTask("ToastBackgroundTask");
             Register.RegisterBackgroundTask("TileFeedBackgroundTask", "BackgroundTasks.TileFeedBackgroundTask");
 
             DismissExtendedSplash();
