@@ -5,7 +5,9 @@
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:date="using:TrueLove.Lib.Models.Code"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DataContext="{d:DesignInstance Type=date:ImageCollection}"
     Background="Transparent"
     mc:Ignorable="d">
     <Page.Resources>
@@ -27,41 +29,33 @@
                 <GridView
                     x:Name="ImageView"
                     animations:ReorderGridAnimation.Duration="250"
-                    ItemContainerStyle="{StaticResource GridViewItemStretchStyle}"
+                    ItemContainerStyle="{StaticResource GridViewItemNoAnimationStyle}"
                     ItemsSource="{x:Bind ImageCollection}">
                     <GridView.ItemTemplate>
                         <DataTemplate>
                             <Grid MinHeight="100">
                                 <ProgressRing IsActive="True" />
-                                <Image Source="{Binding}" Stretch="Uniform"/>
+                                <Image Source="{Binding}" Stretch="Uniform" />
+                                <Grid.ContextFlyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem
+                                            Click="MenuFlyoutItem_Click"
+                                            Tag="save"
+                                            Text="Save As">
+                                            <MenuFlyoutItem.Icon>
+                                                <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE792;" />
+                                            </MenuFlyoutItem.Icon>
+                                        </MenuFlyoutItem>
+                                    </MenuFlyout>
+                                </Grid.ContextFlyout>
                             </Grid>
                         </DataTemplate>
                     </GridView.ItemTemplate>
                     <GridView.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <controls:StaggeredPanel HorizontalAlignment="Stretch" DesiredColumnWidth="250"/>
+                            <controls:StaggeredPanel HorizontalAlignment="Stretch" DesiredColumnWidth="250" />
                         </ItemsPanelTemplate>
                     </GridView.ItemsPanel>
-                    <!--<GridView.ContextFlyout>
-                        <MenuFlyout>
-                            <MenuFlyoutItem
-                                Click="MenuFlyout_Click"
-                                Tag="show"
-                                Text="Show in Explorer">
-                                <MenuFlyoutItem.Icon>
-                                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE838;" />
-                                </MenuFlyoutItem.Icon>
-                            </MenuFlyoutItem>
-                            <MenuFlyoutItem
-                                Click="MenuFlyout_Click"
-                                Tag="save"
-                                Text="Save As">
-                                <MenuFlyoutItem.Icon>
-                                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE792;" />
-                                </MenuFlyoutItem.Icon>
-                            </MenuFlyoutItem>
-                        </MenuFlyout>
-                    </GridView.ContextFlyout>-->
                 </GridView>
             </StackPanel>
         </ScrollViewer>
