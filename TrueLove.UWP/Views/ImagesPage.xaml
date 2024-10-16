@@ -5,10 +5,11 @@
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:date="using:TrueLove.Lib.Models.Code"
+    xmlns:data="using:TrueLove.Lib.Models.Code"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DataContext="{d:DesignInstance Type=date:ImageCollection}"
+    d:DataContext="{d:DesignInstance Type=data:ImageCollection}"
     Background="Transparent"
+    RequestedTheme="Dark"
     mc:Ignorable="d">
     <Page.Resources>
         <Style TargetType="ScrollBar">
@@ -33,7 +34,7 @@
                     ItemsSource="{x:Bind ImageCollection}">
                     <GridView.ItemTemplate>
                         <DataTemplate>
-                            <Grid MinHeight="100">
+                            <Grid MinHeight="50">
                                 <ProgressRing IsActive="True" />
                                 <Image Source="{Binding}" Stretch="Uniform" />
                                 <Grid.ContextFlyout>
@@ -63,7 +64,8 @@
             Height="85"
             Padding="0,40,0,0"
             VerticalAlignment="Top"
-            Background="{ThemeResource SolidBlackBlurBrush}">
+            Background="{ThemeResource SolidBlackBlurBrush}"
+            DoubleTapped="Forebody_DoubleTapped">
             <TextBlock
                 x:Name="Title"
                 Margin="12,-2,0,0"

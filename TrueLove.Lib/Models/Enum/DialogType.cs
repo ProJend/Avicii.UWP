@@ -3,6 +3,5 @@
     public enum DialogType
     {
         CommentCreate,
-        ReleaseNotes,
     }
 }

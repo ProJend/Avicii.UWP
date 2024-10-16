@@ -18,7 +18,7 @@ namespace TrueLove.Lib.Models.Code
         public async void LoadMoreItemsManually()
         {
             ImageParser imageParser = new();
-            imageParser.ParseImageWithNetwork(++_pageNumber);
+            imageParser.ForegroundParseImage(++_pageNumber);
             for (int element = 1; element <= 50; element++)
             {
                 var latestItem = await imageParser.Append(element);
@@ -31,7 +31,7 @@ namespace TrueLove.Lib.Models.Code
             try
             {
                 ImageParser imageParser = new();
-                imageParser.ParseImageWithNetwork(++_pageNumber);
+                imageParser.ForegroundParseImage(++_pageNumber);
                 for (int element = 1; element <= 99; element++)
                 {
                     var latestItem = await imageParser.Append(element);
@@ -66,7 +66,7 @@ namespace TrueLove.Lib.Models.Code
         {
             List<int> list = [];
             ImageParser imageParser = new();
-            imageParser.ParseImage();
+            imageParser.BackgroundParseImage(++_pageNumber);
             for (int j = 0; j < 9; j++)
             {
                 Random random = new();
@@ -100,7 +100,7 @@ namespace TrueLove.Lib.Models.Code
             else
             {
                 ImageParser imageParser = new();
-                imageParser.ParseImage();
+                imageParser.BackgroundParseImage(++_pageNumber);
                 var latestItem = await imageParser.Append(1);
                 Add(latestItem);
             }

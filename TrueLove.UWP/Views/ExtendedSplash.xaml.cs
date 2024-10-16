@@ -133,10 +133,11 @@ namespace TrueLove.UWP.Views
                     }
                 }
                 while (!File.Exists(path));
-            }
 
-            Register.RegisterBackgroundTask("ToastBackgroundTask");
-            Register.RegisterBackgroundTask("TileFeedBackgroundTask", "BackgroundTasks.TileFeedBackgroundTask");
+                //Assembly.Tile();
+                Register.RegisterBackgroundTask("ToastBackgroundTask");
+                Register.RegisterBackgroundTask("TileFeedBackgroundTask", "BackgroundTasks.TileFeedBackgroundTask");
+            }
 
             DismissExtendedSplash();
         }

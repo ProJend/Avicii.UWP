@@ -1,17 +1,10 @@
 ﻿using Microsoft.QueryStringDotNET;
 using System;
-using System.IO;
 using System.Threading.Tasks;
-using TrueLove.Lib.Helpers;
-using TrueLove.Lib.Models.Enum;
 using TrueLove.UWP.Views;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.ApplicationModel.Core;
-using Windows.Storage;
-using Windows.UI;
 using Windows.UI.Notifications;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -91,11 +84,13 @@ namespace TrueLove.UWP
                     Window.Current.Content = root;
                 }
                 if (root.Content == null)
-                {                    
+                {
                     bool loadState = e.PreviousExecutionState == ApplicationExecutionState.Terminated;
                     ExtendedSplash extendedSplash = new(e.SplashScreen, loadState);
-                    root = new Frame();
-                    root.Content = extendedSplash;
+                    root = new Frame
+                    {
+                        Content = extendedSplash
+                    };
                     Window.Current.Content = root;
                     await Task.Delay(50); // 防止初始屏幕闪烁
                 }

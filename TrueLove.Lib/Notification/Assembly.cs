@@ -36,13 +36,6 @@ namespace TrueLove.Lib.Notification
                         dialogCreate.BorderBrush = (Brush)Application.Current.Resources["SystemControlBackgroundListMediumRevealBorderBrush"];
                     }
                     break;
-
-                case DialogType.ReleaseNotes:
-                    dialogCreate.Title = "Release Notes";
-                    dialogCreate.CloseButtonText = "Okay";
-                    dialogCreate.Content = new Template.ContentDialog.ReleaseNotes();
-                    dialogCreate.Background = new SolidColorBrush(Colors.Black);
-                    break;
             }
             try
             {
@@ -57,6 +50,7 @@ namespace TrueLove.Lib.Notification
             // Create a tile update manager for the specified syndication feed.
             var updater = TileUpdateManager.CreateTileUpdaterForApplication();
             updater.Clear();
+            updater.EnableNotificationQueue(true);
 
             CommentCollection commentCollection = [];
             commentCollection.Load5ItemsRandomly();

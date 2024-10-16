@@ -15,7 +15,7 @@ The building of the project was in progress...
 - [Windows10 OS](https://www.microsoft.com/en-us/software-download/windows10) (ARM) : Windows 10 Creators Update (10.0; version 15063) or higher
   - &gt;= Windows 1703
 - [Visual Studio](https://visualstudio.microsoft.com/downloads/) with UWP : Version 2017 or higher
-- [SDK](https://developer.microsoft.com/en-us/windows/downloads/sdk-archive/) : Windows 11 SDK (10.0.26100.0)
+- [SDK](https://developer.microsoft.com/en-us/windows/downloads/sdk-archive/) : Windows 11 SDK (10.0.22621.0)
   - Can be installed in the Visual Studio Installer as well.
 
 ### Installation

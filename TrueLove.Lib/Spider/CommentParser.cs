@@ -13,14 +13,16 @@ namespace TrueLove.Lib.Spider
     {
         string _src;
 
-        public void ParseComment()
+        public void BackgroundParseComment(int _pageNumber)
         {
             var doctypeGenerator = new DoctypeGenerator();
             _src = doctypeGenerator.GetSourceCode(ApplicationData.Current.LocalFolder.Path + @"\Comment.html");
             Debug.WriteLine(ApplicationData.Current.LocalFolder.Path + @"\Comment.html");
+            if (NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
+                _ = doctypeGenerator.SaveSourceCodeAsync($"https://avicii.com/page/{_pageNumber}", "comment");
         }
 
-        public async void ParseCommentWithNetwork(int _pageNumber)
+        public async void ForegroundParseComment(int _pageNumber)
         {
             var doctypeGenerator = new DoctypeGenerator();
             _src = doctypeGenerator.GetSourceCode(ApplicationData.Current.LocalFolder.Path + @"\Comment.html");

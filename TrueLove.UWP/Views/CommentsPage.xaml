@@ -5,14 +5,14 @@
     xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:date="using:TrueLove.Lib.Models.Code"
+    xmlns:data="using:TrueLove.Lib.Models.Code"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    d:DataContext="{d:DesignInstance Type=date:CommentCollection}"
+    d:DataContext="{d:DesignInstance Type=data:CommentCollection}"
     Background="Transparent"
     RequestedTheme="Dark"
     mc:Ignorable="d">
     <Page.Resources>
-        <DataTemplate x:Key="CommentItemTemplate" x:DataType="date:CommentItem">
+        <DataTemplate x:Key="CommentItemTemplate" x:DataType="data:CommentItem">
             <Grid Padding="30">
                 <TextBlock TextAlignment="Center" TextWrapping="Wrap">
                     <Run

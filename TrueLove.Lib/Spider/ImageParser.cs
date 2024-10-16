@@ -10,14 +10,16 @@ namespace TrueLove.Lib.Spider
     {
         string _src;
 
-        public void ParseImage()
+        public void BackgroundParseImage(int _pageNumber)
         {
             var doctypeGenerator = new DoctypeGenerator();
             _src = doctypeGenerator.GetSourceCode(ApplicationData.Current.LocalFolder.Path + @"\Image.html");
             Debug.WriteLine(ApplicationData.Current.LocalFolder.Path + @"\Image.html");
+            if (NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
+                _ = doctypeGenerator.SaveSourceCodeAsync($"https://avicii.com/images/page/{_pageNumber}", "image");
         }
 
-        public async void ParseImageWithNetwork(int _pageNumber)
+        public async void ForegroundParseImage(int _pageNumber)
         {
             var doctypeGenerator = new DoctypeGenerator();
             _src = doctypeGenerator.GetSourceCode(ApplicationData.Current.LocalFolder.Path + @"\Image.html");

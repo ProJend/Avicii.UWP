@@ -4,8 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" 
     Loaded="Page_Loaded"
+    RequestedTheme="Dark"
     mc:Ignorable="d">
 
     <Grid>
@@ -17,17 +18,55 @@
                 Height="50"
                 HorizontalAlignment="Center" />
         </Canvas>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <StackPanel
+                Grid.Row="0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+                <StackPanel Margin="20" VerticalAlignment="Top">
+                    <FontIcon
+                        FontFamily="{ThemeResource ExtraIconfont}"
+                        FontSize="60"
+                        Glyph="&#xe644;" />
+                    <TextBlock
+                        MaxWidth="120"
+                        Margin="0,20,0,0"
+                        TextAlignment="Center"
+                        TextWrapping="Wrap">
+                        Double-click the title to return to the top.
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel Margin="20" VerticalAlignment="Top">
+                    <FontIcon
+                        FontFamily="{ThemeResource ExtraIconfont}"
+                        FontSize="60"
+                        Glyph="&#xe646;" />
+                    <TextBlock
+                        MaxWidth="120"
+                        Margin="0,20,0,0"
+                        TextAlignment="Center"
+                        TextWrapping="Wrap">
+                        Slide left or right to switch hamburger menu.
+                    </TextBlock>
+                </StackPanel>
+
+            </StackPanel>
+        </Grid>
         <StackPanel
             Margin="0,60"
-            HorizontalAlignment="Stretch"
+            HorizontalAlignment="Center"
             VerticalAlignment="Bottom">
-            <TextBlock Style="{ThemeResource SubheaderTextBlockStyle}" TextAlignment="Center">Preparing...</TextBlock>
+            <TextBlock Style="{ThemeResource SubheaderTextBlockStyle}">Preparing...</TextBlock>
             <TextBlock
                 Name="prompt"
                 Margin="5"
                 Foreground="Orange"
-                Style="{ThemeResource BodyTextBlockStyle}"
-                TextAlignment="Center">
+                Style="{ThemeResource BodyTextBlockStyle}">
                 No Internet Connection
             </TextBlock>
         </StackPanel>

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Net.Http;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.Storage;
 
@@ -9,12 +8,7 @@ namespace TrueLove.Lib.Spider
 {
     public class DoctypeGenerator
     {
-        public string GetSourceCode(string path)
-        {
-            sourceCode = File.ReadAllText(path);
-            //TimeToNow();
-            return sourceCode;
-        }
+        public string GetSourceCode(string path) => File.ReadAllText(path);
 
         /// <summary>
         /// 
@@ -22,15 +16,17 @@ namespace TrueLove.Lib.Spider
         /// <param name="path">Use URL address</param>
         public async Task<string> SaveSourceCodeAsync(string path, string page)
         {
+            string sourceCode = null;
             using var httpClient = new HttpClient();
-            try
+            do
             {
-                sourceCode = await httpClient.GetStringAsync(new Uri(path));
+                try
+                {
+                    sourceCode = await httpClient.GetStringAsync(new Uri(path));
+                }
+                catch (HttpRequestException) { }
             }
-            catch (HttpRequestException)
-            {
-                sourceCode = await httpClient.GetStringAsync(new Uri(path));
-            }
+            while (sourceCode == null);
             var localFolder = ApplicationData.Current.LocalFolder;
             if (page == "comment")
             {
@@ -46,16 +42,5 @@ namespace TrueLove.Lib.Spider
             }
             return sourceCode;
         }
-
-        public void TimeToNow()
-        {
-            var pattern = @"\d+-\d+-\d+";
-            var now = DateTime.Now;
-            var input = now.ToString("yyyy-MM-dd");
-            Regex regex = new Regex(pattern);
-            sourceCode = regex.Replace(sourceCode, input);
-        }
-
-        internal string sourceCode;
     }
 }

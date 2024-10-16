@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
 using TrueLove.Lib.Notification;
 using Windows.ApplicationModel.Background;
-using Windows.UI.Notifications;
 
 namespace BackgroundTasks
 {
@@ -16,7 +15,6 @@ namespace BackgroundTasks
             BackgroundTaskDeferral deferral = taskInstance.GetDeferral();
 
             Assembly.Tile(); // 组装动态磁贴
-            TileUpdateManager.CreateTileUpdaterForApplication().EnableNotificationQueue(true);
 
             // Inform the system that the task is finished.
             deferral.Complete();

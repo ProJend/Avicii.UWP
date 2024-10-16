@@ -25,7 +25,7 @@ namespace TrueLove.Lib.Models.Code
         public async void LoadMoreItemsManually()
         {
             CommentParser commentParser = new();
-            commentParser.ParseCommentWithNetwork(++_pageNumber);
+            commentParser.ForegroundParseComment(++_pageNumber);
             for (int element = 1; element <= 50; element++)
             {
                 var latestItem = await commentParser.Append(element);
@@ -38,7 +38,7 @@ namespace TrueLove.Lib.Models.Code
             try
             {
                 CommentParser commentParser = new();
-                commentParser.ParseCommentWithNetwork(++_pageNumber);
+                commentParser.ForegroundParseComment(++_pageNumber);
                 for (int element = 1; element <= 99; element++)
                 {
                     var latestItem = await commentParser.Append(element);
@@ -74,7 +74,7 @@ namespace TrueLove.Lib.Models.Code
         {
             List<int> list = [];
             CommentParser commentParser = new();
-            commentParser.ParseComment();
+            commentParser.BackgroundParseComment(++_pageNumber);
             for (int j = 1; j <= 5; j++)
             {
                 Random random = new();
@@ -109,7 +109,7 @@ namespace TrueLove.Lib.Models.Code
             {
                 // 向集合中添加指定项
                 CommentParser commentParser = new();
-                commentParser.ParseComment();
+                commentParser.BackgroundParseComment(++_pageNumber);
                 var latestItem = await commentParser.Append(1);
                 Add(latestItem);
             }
