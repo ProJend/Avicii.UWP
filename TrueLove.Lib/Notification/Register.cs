@@ -31,6 +31,7 @@ namespace TrueLove.Lib.Notification
 
         public static async void RegisterBackgroundTask(string taskName, string taskEntryPoint)
         {
+            BackgroundExecutionManager.RemoveAccess();
             var backgroundAccessStatus = await BackgroundExecutionManager.RequestAccessAsync();
             if (backgroundAccessStatus == BackgroundAccessStatus.AllowedSubjectToSystemPolicy ||
                 backgroundAccessStatus == BackgroundAccessStatus.AlwaysAllowed)
