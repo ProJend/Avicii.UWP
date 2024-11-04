@@ -4,8 +4,9 @@ using System.Threading.Tasks;
 using TrueLove.Lib.Helpers;
 using TrueLove.Lib.Models.Enum;
 using TrueLove.Lib.Notification;
-using TrueLove.Lib.Spider;
+using TrueLove.Lib.Server;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Background;
 using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Storage;
@@ -17,7 +18,7 @@ using Windows.UI.Xaml.Controls;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/p/?LinkID=234238
 
-namespace TrueLove.UWP.Views
+namespace TrueLove.UWP.Pages
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -27,7 +28,6 @@ namespace TrueLove.UWP.Views
         internal Rect splashImageRect; // Rect to store splash screen image coordinates.
         private SplashScreen splash; // Variable to hold the splash screen object.
         internal bool dismissed = false; // Variable to track splash screen dismissal status.
-        internal Frame rootFrame;
 
         public ExtendedSplash(SplashScreen splashScreen, bool loadState)
         {
@@ -51,9 +51,6 @@ namespace TrueLove.UWP.Views
                 // Optional: Add a progress ring to your splash screen to show users that content is loading
                 PositionRing();
             }
-
-            // Create a Frame to act as the navigation context
-            rootFrame = new();
 
             // Restore the saved session state if necessary
             //RestoreState(loadState);
@@ -110,7 +107,7 @@ namespace TrueLove.UWP.Views
         /// </summary>
         async void PreLoading()
         {
-            var path = ApplicationData.Current.LocalFolder.Path + @"\Comment.html";
+            var path = ApplicationData.Current.LocalFolder.Path + @"\Image.html";
             if (!File.Exists(path))
             {
                 do
@@ -134,9 +131,9 @@ namespace TrueLove.UWP.Views
                 }
                 while (!File.Exists(path));
 
-                //Assembly.Tile();
-                Register.RegisterBackgroundTask("ToastBackgroundTask");
-                Register.RegisterBackgroundTask("TileFeedBackgroundTask", "BackgroundTasks.TileFeedBackgroundTask");
+                Register.BackgroundTask("DisposableTileFeedBackgroundTask");
+                Register.BackgroundTask("TileFeedBackgroundTask", "BackgroundTasks.TileFeedBackgroundTask", new TimeTrigger(60, false));
+                Register.BackgroundTask("ToastBackgroundTask", new ToastNotificationActionTrigger());
             }
 
             DismissExtendedSplash();
@@ -150,6 +147,7 @@ namespace TrueLove.UWP.Views
             //    CollapseStatusBar();
 
             // Navigate to MainPage
+            var rootFrame = Window.Current.Content as Frame;
             rootFrame.Navigate(typeof(MainPage));
             // Place the frame in the current Window
             Window.Current.Content = rootFrame;

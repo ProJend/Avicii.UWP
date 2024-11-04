@@ -3,7 +3,7 @@ using System;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using TrueLove.Lib.Models.Code;
+using TrueLove.Lib.Models.Code.Page;
 using TrueLove.Lib.Notification;
 using Windows.Storage;
 using Windows.Storage.Pickers;
@@ -15,7 +15,7 @@ using Windows.UI.Xaml.Navigation;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
-namespace TrueLove.UWP.Views
+namespace TrueLove.UWP.Pages
 {
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
@@ -36,11 +36,11 @@ namespace TrueLove.UWP.Views
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            ImageCollection.LoadMoreItemsManually();
+            ImageViewModel.LoadMoreItemsManually();
             var isInternetAvailable = NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable;
             if (!isInternetAvailable)
             {
-                Assembly.Toast();
+                Show.Toast();
             }
             Loaded -= Page_Loaded;
         }
@@ -54,13 +54,13 @@ namespace TrueLove.UWP.Views
                 {
                     if (_isLoading) return;
                     _isLoading = true;
-                    _isLoading = await ImageCollection.LoadMoreItemsManuallyAsync();
+                    _isLoading = await ImageViewModel.LoadMoreItemsManuallyAsync();
                 }
             }
         }
         bool _isLoading;
 
-        private readonly ImageCollection ImageCollection = [];
+        private readonly ImageViewModel ImageViewModel = [];
 
         private async void MenuFlyoutItem_Click(object sender, RoutedEventArgs e)
         {

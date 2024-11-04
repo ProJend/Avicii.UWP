@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.Storage;
 
-namespace TrueLove.Lib.Spider
+namespace TrueLove.Lib.Server
 {
-    internal class ImageParser
+    public class ImageParser
     {
         string _src;
 

@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Windows.Storage;
 
-namespace TrueLove.Lib.Spider
+namespace TrueLove.Lib.Server
 {
     public class DoctypeGenerator
     {

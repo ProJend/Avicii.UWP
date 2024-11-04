@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:media="using:MicaForUWP.Media"
+    xmlns:mica="using:MicaForUWP.Media"
     xmlns:muxm="using:Microsoft.UI.Xaml.Media">
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Dark">
@@ -25,14 +25,14 @@
                 BackgroundSource="HostBackdrop"
                 TintColor="Black"
                 TintOpacity=".5" />
-            <media:BackdropBlurBrush
+            <mica:BackdropBlurBrush
                 x:Key="SolidBlackBlurBrush"
                 Amount="20"
                 BackgroundSource="Backdrop"
                 FallbackColor="Black"
                 TintColor="Black"
                 TintOpacity=".6" />
-            <media:BackdropBlurBrush
+            <mica:BackdropBlurBrush
                 x:Key="TranslucentBlurBrush"
                 Amount="20"
                 BackgroundSource="Backdrop"

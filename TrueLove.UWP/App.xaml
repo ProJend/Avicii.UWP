@@ -7,12 +7,12 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
-                <ResourceDictionary Source="Template/Breakpoint.xaml" />
-                <ResourceDictionary Source="Template/Button.xaml" />
-                <ResourceDictionary Source="Template/Colors.xaml" />
-                <ResourceDictionary Source="Template/Converter.xaml" />
-                <ResourceDictionary Source="Template/Fonts.xaml" />
-                <ResourceDictionary Source="Template/Navigation.xaml" />
+                <ResourceDictionary Source="Resources/Breakpoint.xaml" />
+                <ResourceDictionary Source="Resources/Button.xaml" />
+                <ResourceDictionary Source="Resources/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Converter.xaml" />
+                <ResourceDictionary Source="Resources/Fonts.xaml" />
+                <ResourceDictionary Source="Resources/Navigation.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

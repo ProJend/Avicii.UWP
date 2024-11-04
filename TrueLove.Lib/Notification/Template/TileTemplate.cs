@@ -1,11 +1,12 @@
 ﻿using Microsoft.Toolkit.Uwp.Notifications;
 using TrueLove.Lib.Models.Code;
+using TrueLove.Lib.Models.Code.Page;
 
 namespace TrueLove.Lib.Notification.Template
 {
-    internal class LiveTile
+    public class TileTemplate
     {
-        public static TileContent CommentTemplate(CommentItem commentItem) => new()
+        public static TileContent CommentTemplate(CommentModel commentItem) => new()
         {
             // 创建静态磁贴对象并返回
             Visual = new TileVisual()
@@ -43,7 +44,7 @@ namespace TrueLove.Lib.Notification.Template
                 },
             }
         };
-        public static TileContent ImageTemplate(ImageCollection source) => new()
+        public static TileContent ImageTemplate(ImageViewModel source) => new()
         {
             // 创建静态磁贴对象并返回
             Visual = new TileVisual()

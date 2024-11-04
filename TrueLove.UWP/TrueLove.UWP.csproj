@@ -139,22 +139,22 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CommentsPage.xaml.cs">
+    <Compile Include="Pages\CommentsPage.xaml.cs">
       <DependentUpon>CommentsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ExtendedSplash.xaml.cs">
+    <Compile Include="Pages\ExtendedSplash.xaml.cs">
       <DependentUpon>ExtendedSplash.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\HomePage.xaml.cs">
+    <Compile Include="Pages\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ImagesPage.xaml.cs">
+    <Compile Include="Pages\ImagesPage.xaml.cs">
       <DependentUpon>ImagesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MainPage.xaml.cs">
+    <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SettingsPage.xaml.cs">
+    <Compile Include="Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -229,53 +229,53 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Template\Button.xaml">
+    <Page Include="Pages\CommentsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Template\Converter.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Pages\ExtendedSplash.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\CommentsPage.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Pages\HomePage.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\ExtendedSplash.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Pages\ImagesPage.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\HomePage.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Pages\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\ImagesPage.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Pages\SettingsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\MainPage.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Resources\Breakpoint.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\SettingsPage.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Resources\Button.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="Template\Breakpoint.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Resources\Colors.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="Template\Colors.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Resources\Converter.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="Template\Fonts.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Resources\Fonts.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
-    <Page Include="Template\Navigation.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Resources\Navigation.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -325,7 +325,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\DeviceFamily-Mobile\" />
+    <Folder Include="Pages\DeviceFamily-Mobile\" />
   </ItemGroup>
   <ItemGroup>
     <XliffResource Include="MultilingualResources\TrueLove.UWP.zh-Hans.xlf" />

@@ -121,25 +121,26 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Models\Code\CommentCollection.cs" />
-    <Compile Include="Models\Code\ImageCollection.cs" />
-    <Compile Include="Models\UI\Converter\InverseOpacityConverter.cs" />
-    <Compile Include="Notification\Register.cs" />
-    <Compile Include="Helpers\Generic.cs" />
+    <Compile Include="Models\Code\CommentModel.cs" />
     <Compile Include="Models\Enum\DeviceFamilyType.cs" />
     <Compile Include="Models\Enum\DialogType.cs" />
+    <Compile Include="Models\UI\Page\CommentViewModel.cs" />
     <Compile Include="Models\UI\Converter\InverseBooleanConverter.cs" />
+    <Compile Include="Models\UI\Converter\InverseOpacityConverter.cs" />
+    <Compile Include="Models\UI\Page\ImageViewModel.cs" />
     <Compile Include="Models\UI\LocalSettings.cs" />
+    <Compile Include="Notification\Register.cs" />
+    <Compile Include="Helpers\Generic.cs" />
+    <Compile Include="Notification\Show.cs" />
     <Compile Include="Notification\Template\ContentDialog\CommentCreate.xaml.cs">
       <DependentUpon>CommentCreate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Notification\Assembly.cs" />
-    <Compile Include="Notification\Template\LiveTile.cs" />
+    <Compile Include="Notification\Template\TileTemplate.cs" />
     <Compile Include="Notification\Template\Toast.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Spider\CommentParser.cs" />
-    <Compile Include="Spider\DoctypeGenerator.cs" />
-    <Compile Include="Spider\ImageParser.cs" />
+    <Compile Include="Server\CommentParser.cs" />
+    <Compile Include="Server\DoctypeGenerator.cs" />
+    <Compile Include="Server\ImageParser.cs" />
     <EmbeddedResource Include="Properties\TrueLove.Lib.rd.xml" />
   </ItemGroup>
   <ItemGroup>

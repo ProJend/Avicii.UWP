@@ -4,31 +4,24 @@ using System.Collections.ObjectModel;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using System.Threading.Tasks;
-using TrueLove.Lib.Spider;
+using TrueLove.Lib.Server;
 using Windows.UI.Xaml.Data;
 
-namespace TrueLove.Lib.Models.Code
+namespace TrueLove.Lib.Models.Code.Page
 {
-    public class CommentItem
+    public class ImageViewModel : ObservableCollection<string>, ISupportIncrementalLoading
     {
-        public string Name { get; set; }
-        public string Comment { get; set; }
-        public string Date { get; set; }
-    }
-
-    public class CommentCollection : ObservableCollection<CommentItem>, ISupportIncrementalLoading
-    {
-        int _pageNumber;
+        private int _pageNumber;
         private int _countRepeated;
         private bool _isRepeated;
 
         public async void LoadMoreItemsManually()
         {
-            CommentParser commentParser = new();
-            commentParser.ForegroundParseComment(++_pageNumber);
+            ImageParser imageParser = new();
+            imageParser.ForegroundParseImage(++_pageNumber);
             for (int element = 1; element <= 50; element++)
             {
-                var latestItem = await commentParser.Append(element);
+                var latestItem = await imageParser.Append(element);
                 Add(latestItem);
             }
         }
@@ -37,19 +30,18 @@ namespace TrueLove.Lib.Models.Code
         {
             try
             {
-                CommentParser commentParser = new();
-                commentParser.ForegroundParseComment(++_pageNumber);
+                ImageParser imageParser = new();
+                imageParser.ForegroundParseImage(++_pageNumber);
                 for (int element = 1; element <= 99; element++)
                 {
-                    var latestItem = await commentParser.Append(element);
+                    var latestItem = await imageParser.Append(element);
 
                     if (!_isRepeated)
                     {
                         var _isRepeating = false;
                         foreach (var item in this)
                         {
-                            if (item.Comment == latestItem.Comment &&
-                                item.Name == latestItem.Name)
+                            if (item == latestItem)
                             {
                                 _isRepeating = true;
                                 _countRepeated++;
@@ -66,16 +58,16 @@ namespace TrueLove.Lib.Models.Code
                     Add(latestItem);
                 }
             }
-            catch (NullReferenceException) { } //爬取溢出
+            catch (NullReferenceException) { } //爬取溢出           
             return false;
         }
 
-        public void Load5ItemsRandomly()
+        public void Load9ItemsRandomly()
         {
             List<int> list = [];
-            CommentParser commentParser = new();
-            commentParser.BackgroundParseComment(++_pageNumber);
-            for (int j = 1; j <= 5; j++)
+            ImageParser imageParser = new();
+            imageParser.BackgroundParseImage(++_pageNumber);
+            for (int j = 0; j < 9; j++)
             {
                 Random random = new();
                 int element;
@@ -86,14 +78,14 @@ namespace TrueLove.Lib.Models.Code
                 while (list.Contains(element));
                 list.Add(element);
 
-                var latestItem = commentParser.Append(element).Result;
+                var latestItem = imageParser.Append(element).Result;
                 Add(latestItem);
             }
         }
 
         public Windows.Foundation.IAsyncOperation<LoadMoreItemsResult> LoadMoreItemsAsync(uint count) => AsyncInfo.Run(c => LoadMoreItemsAsyncCore(c, count));
 
-        public bool HasMoreItems => Count < 100;
+        public bool HasMoreItems => false;
 
         async Task<LoadMoreItemsResult> LoadMoreItemsAsyncCore(CancellationToken cancel, uint count)
         {
@@ -107,10 +99,9 @@ namespace TrueLove.Lib.Models.Code
             }
             else
             {
-                // 向集合中添加指定项
-                CommentParser commentParser = new();
-                commentParser.BackgroundParseComment(++_pageNumber);
-                var latestItem = await commentParser.Append(1);
+                ImageParser imageParser = new();
+                imageParser.BackgroundParseImage(++_pageNumber);
+                var latestItem = await imageParser.Append(1);
                 Add(latestItem);
             }
             // 完成加载

@@ -1,35 +1,15 @@
 ﻿using System;
-using System.Linq;
 using Windows.ApplicationModel.Background;
 
 namespace TrueLove.Lib.Notification
 {
     public class Register
     {
-        //注册后台任务方法封装
-        public static async void RegisterBackgroundTask(string taskName)
-        {
-            // If background task is already registered, do nothing
-            if (BackgroundTaskRegistration.AllTasks.Any(i => i.Value.Name.Equals(taskName)))
-                return;
-
-            // Otherwise request access
-            BackgroundAccessStatus status = await BackgroundExecutionManager.RequestAccessAsync();
-
-            // Create the background task
-            BackgroundTaskBuilder builder = new()
-            {
-                Name = taskName
-            };
-
-            // Assign the toast action trigger
-            builder.SetTrigger(new ToastNotificationActionTrigger());
-
-            // And register the task
-            BackgroundTaskRegistration registration = builder.Register();
-        }
-
-        public static async void RegisterBackgroundTask(string taskName, string taskEntryPoint)
+        /// <summary>
+        /// 单次执行后台任务
+        /// </summary>
+        /// <param name="taskName"></param>
+        public static async void BackgroundTask(string taskName)
         {
             BackgroundExecutionManager.RemoveAccess();
             var backgroundAccessStatus = await BackgroundExecutionManager.RequestAccessAsync();
@@ -44,12 +24,73 @@ namespace TrueLove.Lib.Notification
                     }
                 }
 
-                BackgroundTaskBuilder taskBuilder = new()
+                var taskBuilder = new BackgroundTaskBuilder()
+                {
+                    Name = taskName,
+                };
+                var trigger = new ApplicationTrigger();
+                taskBuilder.SetTrigger(trigger);
+                taskBuilder.Register();
+                await trigger.RequestAsync();
+            }
+        }
+
+        /// <summary>
+        /// 注册进程内后台任务
+        /// </summary>
+        /// <param name="taskName"></param>
+        /// <param name="trigger"></param>
+        public static async void BackgroundTask(string taskName, IBackgroundTrigger trigger)
+        {
+            BackgroundExecutionManager.RemoveAccess();
+            var backgroundAccessStatus = await BackgroundExecutionManager.RequestAccessAsync();
+            if (backgroundAccessStatus == BackgroundAccessStatus.AllowedSubjectToSystemPolicy ||
+                backgroundAccessStatus == BackgroundAccessStatus.AlwaysAllowed)
+            {
+                foreach (var task in BackgroundTaskRegistration.AllTasks)
+                {
+                    if (task.Value.Name == taskName)
+                    {
+                        task.Value.Unregister(true);
+                    }
+                }
+
+                var taskBuilder = new BackgroundTaskBuilder()
+                {
+                    Name = taskName,
+                };
+                taskBuilder.SetTrigger(trigger);
+                taskBuilder.Register();
+            }
+        }
+
+        /// <summary>
+        /// 注册进程外后台任务
+        /// </summary>
+        /// <param name="taskName"></param>
+        /// <param name="taskEntryPoint"></param>
+        /// <param name="trigger"></param>
+        public static async void BackgroundTask(string taskName, string taskEntryPoint, IBackgroundTrigger trigger)
+        {
+            BackgroundExecutionManager.RemoveAccess();
+            var backgroundAccessStatus = await BackgroundExecutionManager.RequestAccessAsync();
+            if (backgroundAccessStatus == BackgroundAccessStatus.AllowedSubjectToSystemPolicy ||
+                backgroundAccessStatus == BackgroundAccessStatus.AlwaysAllowed)
+            {
+                foreach (var task in BackgroundTaskRegistration.AllTasks)
+                {
+                    if (task.Value.Name == taskName)
+                    {
+                        task.Value.Unregister(true);
+                    }
+                }
+
+                var taskBuilder = new BackgroundTaskBuilder()
                 {
                     Name = taskName,
                     TaskEntryPoint = taskEntryPoint
                 };
-                taskBuilder.SetTrigger(new TimeTrigger(30, false));
+                taskBuilder.SetTrigger(trigger);
                 taskBuilder.Register();
             }
         }

@@ -1,5 +1,5 @@
 ﻿using Microsoft.Toolkit.Uwp.Connectivity;
-using TrueLove.Lib.Models.Code;
+using TrueLove.Lib.Models.Code.Page;
 using TrueLove.Lib.Notification;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -9,7 +9,7 @@ using Windows.UI.Xaml.Navigation;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
-namespace TrueLove.UWP.Views
+namespace TrueLove.UWP.Pages
 {
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
@@ -29,11 +29,11 @@ namespace TrueLove.UWP.Views
                 e.WindowActivationState == CoreWindowActivationState.Deactivated ? WindowNotFocused.Name : WindowFocused.Name, false);
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            CommentCollection.LoadMoreItemsManually();
+            CommentViewModel.LoadMoreItemsManually();
             var isInternetAvailable = NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable;
             if (!isInternetAvailable)
             {
-                Assembly.Toast();
+                Show.Toast();
             }
             Loaded -= Page_Loaded;
         }
@@ -65,13 +65,13 @@ namespace TrueLove.UWP.Views
                 {
                     if (_isLoading) return;
                     _isLoading = true;
-                    _isLoading = await CommentCollection.LoadMoreItemsManuallyAsync();
+                    _isLoading = await CommentViewModel.LoadMoreItemsManuallyAsync();
                 }
             }
         }
         bool _isLoading;
 
-        CommentCollection CommentCollection = [];
+        CommentViewModel CommentViewModel = [];
 
         // 滚动条位置变量
         double scrlocation = 0;

@@ -1,9 +1,11 @@
 ﻿using Microsoft.QueryStringDotNET;
 using System;
 using System.Threading.Tasks;
-using TrueLove.UWP.Views;
+using TrueLove.Lib.Notification;
+using TrueLove.UWP.Pages;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Background;
 using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -31,7 +33,19 @@ namespace TrueLove.UWP
         /// 将在启动应用程序以打开特定文件等情况下使用。
         /// </summary>
         /// <param name="e">有关启动请求和过程的详细信息。</param>
-        protected override async void OnLaunched(LaunchActivatedEventArgs e)
+        protected override void OnLaunched(LaunchActivatedEventArgs e) => Navigation(e, e.PrelaunchActivated);
+
+        protected override void OnActivated(IActivatedEventArgs e)
+        {
+            // 判断激活类型
+            // 确认是由Toast通知激活应用
+            if (e.Kind == ActivationKind.ToastNotification)
+            {
+                Navigation(e);
+            }
+        }
+
+        private async void Navigation(object e, bool prelaunch = false)
         {
             // 不要在窗口已包含内容时重复应用程序初始化，
             // 只需确保窗口处于活动状态
@@ -41,60 +55,23 @@ namespace TrueLove.UWP
                 rootFrame = new Frame();
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
-
-                //if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                //{
-                //    // TODO: 从之前挂起的应用程序加载状态
-                //}
-
-                // 将框架放在当前窗口中
-                Window.Current.Content = rootFrame;
             }
 
-            if (e.PrelaunchActivated == false)
+            if (prelaunch == false)
             {
-                if (rootFrame.Content == null)
+                if (e is IActivatedEventArgs args)
                 {
                     // 当导航堆栈尚未还原时，导航到第一页，
-                    // 并通过将所需信息作为导航参数传入来配置
-                    // 参数
-                    bool loadState = e.PreviousExecutionState == ApplicationExecutionState.Terminated;
-                    ExtendedSplash extendedSplash = new(e.SplashScreen, loadState);
+                    // 并通过将所需信息作为导航参数传入来配置参数
+                    bool loadState = args.PreviousExecutionState == ApplicationExecutionState.Terminated;
+                    ExtendedSplash extendedSplash = new(args.SplashScreen, loadState);
                     rootFrame.Content = extendedSplash;
                     Window.Current.Content = rootFrame;
                     await Task.Delay(50); // 防止初始屏幕闪烁
-
-                }
-                // 确保当前窗口处于活动状态
-                Window.Current.Activate();
-            }
-        }
-
-        protected override async void OnActivated(IActivatedEventArgs e)
-        {
-            // 判断激活类型
-            // 确认是由Toast通知激活应用
-            if (e.Kind == ActivationKind.ToastNotification)
-            {
-                // 获取页面引用
-                var root = Window.Current.Content as Frame;
-                if (root == null)
-                {
-                    root = new Frame();
-                    Window.Current.Content = root;
-                }
-                if (root.Content == null)
-                {
-                    bool loadState = e.PreviousExecutionState == ApplicationExecutionState.Terminated;
-                    ExtendedSplash extendedSplash = new(e.SplashScreen, loadState);
-                    root = new Frame
-                    {
-                        Content = extendedSplash
-                    };
-                    Window.Current.Content = root;
-                    await Task.Delay(50); // 防止初始屏幕闪烁
                 }
             }
+
+            // 确保当前窗口处于活动状态
             Window.Current.Activate();
         }
 
@@ -115,6 +92,12 @@ namespace TrueLove.UWP
                                 await Windows.System.Launcher.LaunchUriAsync(settings);
                                 break;
                         }
+                    }
+                    break;
+                case "DisposableTileFeedBackgroundTask":
+                    if (args.TaskInstance.TriggerDetails is ApplicationTriggerDetails details1)
+                    {
+                        Show.Tile();
                     }
                     break;
             }

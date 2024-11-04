@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using TrueLove.Lib.Models.Code;
 using Windows.Storage;
 
-namespace TrueLove.Lib.Spider
+namespace TrueLove.Lib.Server
 {
     public class CommentParser
     {
@@ -31,9 +31,9 @@ namespace TrueLove.Lib.Spider
                 await doctypeGenerator.SaveSourceCodeAsync($"https://avicii.com/page/{_pageNumber}", "comment");
         }
 
-        public Task<CommentItem> Append(int ID)
+        public Task<CommentModel> Append(int ID)
         {
-            var latestComment = new CommentItem();
+            var latestComment = new CommentModel();
             var htmlDocument = new HtmlDocument();
             htmlDocument.LoadHtml(_src);
 

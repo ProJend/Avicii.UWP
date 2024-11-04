@@ -14,7 +14,7 @@ namespace BackgroundTasks
             // while asynchronous code is still running.
             BackgroundTaskDeferral deferral = taskInstance.GetDeferral();
 
-            Assembly.Tile(); // 组装动态磁贴
+            Show.Tile(); // 组装动态磁贴
 
             // Inform the system that the task is finished.
             deferral.Complete();

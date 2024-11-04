@@ -1,7 +1,7 @@
 ﻿using Microsoft.Toolkit.Uwp.Notifications;
 using System;
 using TrueLove.Lib.Helpers;
-using TrueLove.Lib.Models.Code;
+using TrueLove.Lib.Models.Code.Page;
 using TrueLove.Lib.Models.Enum;
 using TrueLove.Lib.Notification.Template;
 using Windows.UI;
@@ -12,8 +12,30 @@ using Windows.UI.Xaml.Media;
 
 namespace TrueLove.Lib.Notification
 {
-    public class Assembly
+    public class Show
     {
+        public static void Tile()
+        {
+            // Create a tile update manager for the specified syndication feed.
+            var updater = TileUpdateManager.CreateTileUpdaterForApplication();
+            updater.Clear();
+            updater.EnableNotificationQueue(true);
+
+            CommentViewModel commentCollection = [];
+            commentCollection.Load5ItemsRandomly();
+            ImageViewModel imageCollection = [];
+            imageCollection.Load9ItemsRandomly();
+            TileContent content = TileTemplate.ImageTemplate(imageCollection); // 得到磁贴的对象
+            TileNotification notification = new(content.GetXml());
+            updater.Update(notification); // 添加到磁贴的队列
+            for (var i = 0; i < 4; i++)
+            {
+                content = TileTemplate.CommentTemplate(commentCollection[i]);
+                notification = new(content.GetXml());
+                updater.Update(notification);
+            }
+        }
+
         public static async void Dialog(DialogType name)
         {
             var dialogCreate = new ContentDialog();
@@ -43,28 +65,6 @@ namespace TrueLove.Lib.Notification
                 if (loaded == ContentDialogResult.Secondary) commentCreate.SavingDate();
             }
             catch (Exception) { } // Nothing todo.
-        }
-
-        public static void Tile()
-        {
-            // Create a tile update manager for the specified syndication feed.
-            var updater = TileUpdateManager.CreateTileUpdaterForApplication();
-            updater.Clear();
-            updater.EnableNotificationQueue(true);
-
-            CommentCollection commentCollection = [];
-            commentCollection.Load5ItemsRandomly();
-            ImageCollection imageCollection = [];
-            imageCollection.Load9ItemsRandomly();
-            TileContent content = LiveTile.ImageTemplate(imageCollection); // 得到磁贴的对象
-            TileNotification notification = new(content.GetXml());
-            updater.Update(notification); // 添加到磁贴的队列
-            for (var i = 0; i < 4; i++)
-            {
-                content = LiveTile.CommentTemplate(commentCollection[i]);
-                notification = new(content.GetXml());
-                updater.Update(notification);
-            }
         }
 
         public static void Toast()
