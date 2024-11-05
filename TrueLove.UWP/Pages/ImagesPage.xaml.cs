@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TrueLove.Lib.Models.Code.Page;
 using TrueLove.Lib.Notification;
+using TrueLove.Lib.Server;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI.Core;
@@ -25,7 +26,6 @@ namespace TrueLove.UWP.Pages
         public ImagesPage()
         {
             this.InitializeComponent();
-            Loaded += Page_Loaded; // 订阅页面加载后事件
             Window.Current.Activated += OnWindowActivated; // 订阅窗口活动事件
         }
 
@@ -34,15 +34,26 @@ namespace TrueLove.UWP.Pages
         private void OnWindowActivated(object sender, WindowActivatedEventArgs e) => VisualStateManager.GoToState(this,
                 e.WindowActivationState == CoreWindowActivationState.Deactivated ? WindowNotFocused.Name : WindowFocused.Name, false);
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e) => await Task.Run(PreLoadMoreItems);
+
+        async void PreLoadMoreItems()
         {
-            ImageViewModel.LoadMoreItemsManually();
             var isInternetAvailable = NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable;
             if (!isInternetAvailable)
             {
                 Show.Toast();
             }
-            Loaded -= Page_Loaded;
+
+            ImageParser imageParser = new();
+            imageParser.ForegroundParseImage(1);
+            for (int element = 1; element <= 50; element++)
+            {
+                var latestItem = await imageParser.Append(element);
+                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    ImageViewModel.Add(latestItem);  // UI 更新操作，确保它在主线程上执行
+                });
+            }
         }
 
         private async void Scroller_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
@@ -54,7 +65,7 @@ namespace TrueLove.UWP.Pages
                 {
                     if (_isLoading) return;
                     _isLoading = true;
-                    _isLoading = await ImageViewModel.LoadMoreItemsManuallyAsync();
+                    _isLoading = await ImageViewModel.LoadMoreItemsAsync();
                 }
             }
         }

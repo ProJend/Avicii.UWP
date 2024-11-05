@@ -1,6 +1,9 @@
 ﻿using Microsoft.Toolkit.Uwp.Connectivity;
+using System;
+using System.Threading.Tasks;
 using TrueLove.Lib.Models.Code.Page;
 using TrueLove.Lib.Notification;
+using TrueLove.Lib.Server;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -19,23 +22,34 @@ namespace TrueLove.UWP.Pages
         public CommentsPage()
         {
             this.InitializeComponent();
-            Loaded += Page_Loaded; // 订阅页面加载后事件
-            Window.Current.Activated += OnWindowActivated; // 订阅窗口活动事件            
+            Window.Current.Activated += OnWindowActivated; // 订阅窗口活动事件
         }
-
-        protected override void OnNavigatedFrom(NavigationEventArgs e) => Window.Current.Activated -= OnWindowActivated;
 
         private void OnWindowActivated(object sender, WindowActivatedEventArgs e) => VisualStateManager.GoToState(this,
                 e.WindowActivationState == CoreWindowActivationState.Deactivated ? WindowNotFocused.Name : WindowFocused.Name, false);
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e) => Window.Current.Activated -= OnWindowActivated;
+
+        protected override async void OnNavigatedTo(NavigationEventArgs e) => await Task.Run(PreLoadMoreItems);
+
+        async void PreLoadMoreItems()
         {
-            CommentViewModel.LoadMoreItemsManually();
             var isInternetAvailable = NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable;
             if (!isInternetAvailable)
             {
                 Show.Toast();
             }
-            Loaded -= Page_Loaded;
+
+            CommentParser commentParser = new();
+            commentParser.ForegroundParseComment(1);
+            for (int element = 1; element <= 50; element++)
+            {
+                var latestItem = await commentParser.Append(element);
+                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                {
+                    CommentViewModel.Add(latestItem);  // UI 更新操作，确保它在主线程上执行
+                });
+            }
         }
 
         private async void Scroller_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
@@ -65,7 +79,7 @@ namespace TrueLove.UWP.Pages
                 {
                     if (_isLoading) return;
                     _isLoading = true;
-                    _isLoading = await CommentViewModel.LoadMoreItemsManuallyAsync();
+                    _isLoading = await CommentViewModel.LoadMoreItemsAsync();
                 }
             }
         }

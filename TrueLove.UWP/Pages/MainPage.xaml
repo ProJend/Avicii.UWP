@@ -10,7 +10,13 @@
     mc:Ignorable="d">
 
     <Grid ManipulationMode="System,TranslateX">
-        <Frame x:Name="ContentFrame" />
+        <Frame x:Name="ContentFrame">
+            <Frame.ContentTransitions>
+                <TransitionCollection>
+                    <NavigationThemeTransition />
+                </TransitionCollection>
+            </Frame.ContentTransitions>
+        </Frame>
         <muxc:NavigationView
             x:Name="NavView"
             AlwaysShowHeader="False"
@@ -29,9 +35,7 @@
                     Content="Comments"
                     Icon="Comment"
                     Tag="comment" />
-                <muxc:NavigationViewItem
-                    Content="Images"
-                    Tag="image">
+                <muxc:NavigationViewItem Content="Images" Tag="image">
                     <muxc:NavigationViewItem.Icon>
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEB9F;" />
                     </muxc:NavigationViewItem.Icon>

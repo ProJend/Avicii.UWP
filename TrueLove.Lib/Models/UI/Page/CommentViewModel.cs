@@ -11,22 +11,11 @@ namespace TrueLove.Lib.Models.Code.Page
 {
     public class CommentViewModel : ObservableCollection<CommentModel>, ISupportIncrementalLoading
     {
-        int _pageNumber;
+        int _pageNumber = 1;
         private int _countRepeated;
         private bool _isRepeated;
 
-        public async void LoadMoreItemsManually()
-        {
-            CommentParser commentParser = new();
-            commentParser.ForegroundParseComment(++_pageNumber);
-            for (int element = 1; element <= 50; element++)
-            {
-                var latestItem = await commentParser.Append(element);
-                Add(latestItem);
-            }
-        }
-
-        public async Task<bool> LoadMoreItemsManuallyAsync()
+        public async Task<bool> LoadMoreItemsAsync()
         {
             try
             {

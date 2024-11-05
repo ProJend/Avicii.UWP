@@ -53,7 +53,7 @@ namespace TrueLove.UWP.Pages
             // If navigation occurs on SelectionChanged, this isn't needed.
             // Because we use ItemInvoked to navigate, we need to call Navigate
             // here to load the home page.
-            NavView_Navigate("home", new EntranceNavigationTransitionInfo());
+            NavView_Navigate("home", new SuppressNavigationTransitionInfo());
         }
 
         // List of ValueTuple holding the Navigation Tag and the relative Navigation Page

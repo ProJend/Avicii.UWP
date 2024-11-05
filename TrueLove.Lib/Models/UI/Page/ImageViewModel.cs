@@ -11,22 +11,11 @@ namespace TrueLove.Lib.Models.Code.Page
 {
     public class ImageViewModel : ObservableCollection<string>, ISupportIncrementalLoading
     {
-        private int _pageNumber;
+        private int _pageNumber = 1;
         private int _countRepeated;
         private bool _isRepeated;
 
-        public async void LoadMoreItemsManually()
-        {
-            ImageParser imageParser = new();
-            imageParser.ForegroundParseImage(++_pageNumber);
-            for (int element = 1; element <= 50; element++)
-            {
-                var latestItem = await imageParser.Append(element);
-                Add(latestItem);
-            }
-        }
-
-        public async Task<bool> LoadMoreItemsManuallyAsync()
+        public async Task<bool> LoadMoreItemsAsync()
         {
             try
             {

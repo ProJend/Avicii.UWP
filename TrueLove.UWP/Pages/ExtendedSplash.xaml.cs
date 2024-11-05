@@ -15,6 +15,7 @@ using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Animation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/p/?LinkID=234238
 
@@ -148,7 +149,7 @@ namespace TrueLove.UWP.Pages
 
             // Navigate to MainPage
             var rootFrame = Window.Current.Content as Frame;
-            rootFrame.Navigate(typeof(MainPage));
+            rootFrame.Navigate(typeof(MainPage), null, new DrillInNavigationTransitionInfo());
             // Place the frame in the current Window
             Window.Current.Content = rootFrame;
         }
