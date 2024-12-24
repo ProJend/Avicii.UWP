@@ -309,7 +309,6 @@
     <PRIResource Include="Strings\zh-Hant\Resources.resw" />
     <PRIResource Include="Strings\zh-Hans\Resources.resw" />
     <None Include="TrueLove.UWP_TemporaryKey.pfx" />
-    <None Include="TrueLove.UWP_StoreKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
