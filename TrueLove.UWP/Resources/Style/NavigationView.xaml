@@ -6,6 +6,7 @@
     xmlns:controls="using:Microsoft.UI.Xaml.Controls">
 
     <IsWin11:Style BasedOn="{StaticResource DefaultNavigationViewStyle}" TargetType="controls:NavigationView" />
+
     <Style x:Key="NavigationBackButtonNormalStyle" TargetType="Button">
         <Setter Property="Background" Value="{ThemeResource NavigationViewBackButtonBackground}" />
         <Setter Property="Foreground" Value="{ThemeResource NavigationViewItemForeground}" />
@@ -160,6 +161,7 @@
             </Setter.Value>
         </Setter>
     </Style>
+
     <Style x:Key="DefaultNavigationViewStyle" TargetType="controls:NavigationView">
         <Setter Property="PaneToggleButtonStyle" Value="{StaticResource PaneToggleButtonStyle}" />
         <Setter Property="IsTabStop" Value="False" />
@@ -397,6 +399,7 @@
                             <SplitView
                                 x:Name="RootSplitView"
                                 Grid.Row="1"
+                                Margin="-1"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{ThemeResource NavigationViewItemSeparatorForeground}"
                                 BorderThickness="{ThemeResource NavigationViewBorderThickness}"
@@ -405,7 +408,7 @@
                                 IsPaneOpen="{Binding IsPaneOpen, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                 IsTabStop="False"
                                 OpenPaneLength="{Binding TemplateSettings.OpenPaneWidth, RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                PaneBackground="{ThemeResource NavigationViewDefaultPaneBackground}">
+                                PaneBackground="{ThemeResource SystemControlAcrylicElementBrush}">
                                 <SplitView.Pane>
                                     <Grid
                                         x:Name="PaneContentGrid"
