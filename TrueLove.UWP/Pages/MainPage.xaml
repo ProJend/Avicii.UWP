@@ -55,7 +55,7 @@
                         <AdaptiveTrigger MinWindowWidth="{StaticResource MinWindowBreakpoint}" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="AppTitleBar.Margin" Value="80 0 0 0" />
+                        <Setter Target="AppTitleBar.Margin" Value="85 0 0 0" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>
@@ -64,7 +64,7 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="NavView.PaneDisplayMode" Value="Top" />
-                        <Setter Target="AppTitleBar.Margin" Value="440 0 0 0" />
+                        <Setter Target="AppTitleBar.Margin" Value="400 0 0 0" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

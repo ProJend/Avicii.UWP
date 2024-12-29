@@ -20,7 +20,7 @@
         </Style>
     </Page.Resources>
     <Grid Name="Root">
-        <FlipView FocusVisualPrimaryThickness="0">
+        <FlipView FocusVisualPrimaryThickness="0" Style="{StaticResource DefaultFlipViewStyle1}">
             <FlipView.Background>
                 <ImageBrush
                     AlignmentX="Left"
@@ -76,8 +76,11 @@
                             HorizontalAlignment="Center"
                             Orientation="Horizontal">
                             <Button
+                                Width="45"
+                                Height="45"
+                                Background="Transparent"
+                                BorderBrush="Transparent"
                                 Click="Links_Click"
-                                Style="{StaticResource TransparentButton}"
                                 Tag="spotify">
                                 <FontIcon
                                     FontFamily="{ThemeResource ExtraIconfont}"
@@ -85,8 +88,11 @@
                                     Glyph="&#xe71e;" />
                             </Button>
                             <Button
+                                Width="45"
+                                Height="45"
+                                Background="Transparent"
+                                BorderBrush="Transparent"
                                 Click="Links_Click"
-                                Style="{StaticResource TransparentButton}"
                                 Tag="youTube">
                                 <FontIcon
                                     FontFamily="{ThemeResource ExtraIconfont}"
@@ -94,8 +100,11 @@
                                     Glyph="&#xe612;" />
                             </Button>
                             <Button
+                                Width="45"
+                                Height="45"
+                                Background="Transparent"
+                                BorderBrush="Transparent"
                                 Click="Links_Click"
-                                Style="{StaticResource TransparentButton}"
                                 Tag="apple">
                                 <FontIcon
                                     FontFamily="{ThemeResource ExtraIconfont}"
