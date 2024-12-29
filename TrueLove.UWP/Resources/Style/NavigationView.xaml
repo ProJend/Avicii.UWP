@@ -11,20 +11,17 @@
         <Setter Property="Foreground" Value="{ThemeResource NavigationViewItemForeground}" />
         <Setter Property="FontFamily" Value="{ThemeResource SymbolThemeFontFamily}" />
         <Setter Property="FontSize" Value="16" />
-        <Setter Property="Height" Value="{ThemeResource NavigationBackButtonHeight}" />
-        <Setter Property="Width" Value="{ThemeResource NavigationBackButtonWidth}" />
+        <Setter Property="Height" Value="48" />
+        <Setter Property="Width" Value="44" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="UseSystemFocusVisuals" Value="{StaticResource UseSystemFocusVisuals}" />
         <Setter Property="Content" Value="&#xE72B;" />
-        <Setter Property="Margin" Value="4,2" />
+        <Setter Property="Margin" Value="0,-4,0,0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
-                    <Grid
-                        x:Name="RootGrid"
-                        Background="{TemplateBinding Background}"
-                        CornerRadius="{ThemeResource ControlCornerRadius}">
+                    <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
                         <controls:AnimatedIcon
                             x:Name="Content"
                             Width="16"
@@ -51,11 +48,8 @@
                                         <Setter Target="Content.(controls:AnimatedIcon.State)" Value="PointerOver" />
                                     </VisualState.Setters>
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource NavigationViewButtonBackgroundPointerOver}" />
-                                        </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource NavigationViewButtonForegroundPointerOver}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ApplicationPointerOverForegroundThemeBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -64,11 +58,8 @@
                                         <Setter Target="Content.(controls:AnimatedIcon.State)" Value="Pressed" />
                                     </VisualState.Setters>
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RootGrid" Storyboard.TargetProperty="Background">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource NavigationViewButtonBackgroundPressed}" />
-                                        </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="Content" Storyboard.TargetProperty="Foreground">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource NavigationViewButtonForegroundPressed}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ApplicationPressedForegroundThemeBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
@@ -116,7 +107,6 @@
                                 Padding="{ThemeResource NavigationViewButtonHolderGridMargin}">
                                 <Button
                                     x:Name="NavigationViewBackButton"
-                                    Width="{Binding TemplateSettings.SmallerPaneToggleButtonWidth, RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                     VerticalAlignment="Top"
                                     IsEnabled="{TemplateBinding IsBackEnabled}"
                                     Style="{StaticResource NavigationBackButtonNormalStyle}"
@@ -533,7 +523,7 @@
                                 <VisualState x:Name="Minimal">
                                     <VisualState.Setters>
                                         <Setter Target="HeaderContent.Margin" Value="{ThemeResource NavigationViewMinimalHeaderMargin}" />
-                                        <Setter Target="NavigationViewBackButton.Style" Value="{ThemeResource NavigationBackButtonSmallStyle}" />
+                                        <Setter Target="NavigationViewBackButton.Style" Value="{ThemeResource NavigationBackButtonNormalStyle}" />
                                         <Setter Target="ContentGrid.BorderThickness" Value="{ThemeResource NavigationViewMinimalContentGridBorderThickness}" />
                                         <Setter Target="ContentGrid.CornerRadius" Value="{ThemeResource NavigationViewMinimalContentGridCornerRadius}" />
                                         <Setter Target="ContentGrid.Margin" Value="{ThemeResource NavigationViewMinimalContentMargin}" />
@@ -549,7 +539,7 @@
                                 <VisualState x:Name="MinimalWithBackButton">
                                     <VisualState.Setters>
                                         <Setter Target="HeaderContent.Margin" Value="{ThemeResource NavigationViewMinimalHeaderMargin}" />
-                                        <Setter Target="NavigationViewBackButton.Style" Value="{ThemeResource NavigationBackButtonSmallStyle}" />
+                                        <Setter Target="NavigationViewBackButton.Style" Value="{ThemeResource NavigationBackButtonNormalStyle}" />
                                         <Setter Target="ContentGrid.BorderThickness" Value="{ThemeResource NavigationViewMinimalContentGridBorderThickness}" />
                                         <Setter Target="ContentGrid.CornerRadius" Value="{ThemeResource NavigationViewMinimalContentGridCornerRadius}" />
                                         <Setter Target="ContentGrid.Margin" Value="{ThemeResource NavigationViewMinimalContentMargin}" />
