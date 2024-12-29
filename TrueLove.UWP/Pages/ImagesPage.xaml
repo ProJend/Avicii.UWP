@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModel="using:TrueLove.Lib.Models.Code.Page"
     d:DataContext="{d:DesignInstance Type=viewModel:ImageViewModel}"
-    Background="Transparent"
+    Background="{ThemeResource PageBackgroundMicaBrush}"
     RequestedTheme="Dark"
     mc:Ignorable="d">
     <Page.Resources>
