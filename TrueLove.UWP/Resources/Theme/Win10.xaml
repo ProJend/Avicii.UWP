@@ -1,0 +1,22 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls">
+
+    <ResourceDictionary.MergedDictionaries>
+        <controls:XamlControlsResources ControlsResourcesVersion="Version1">
+            <controls:XamlControlsResources.MergedDictionaries>
+                <ResourceDictionary>
+                    <CornerRadius x:Key="OverlayCornerRadius">0</CornerRadius>
+                    <CornerRadius x:Key="ControlCornerRadius">0</CornerRadius>
+
+                    <Color x:Key="NavigationViewTopPaneBackground">Transparent</Color>
+
+                    <StaticResource x:Key="AccentButtonForeground" ResourceKey="PageBackgroundColor" />
+                    <StaticResource x:Key="AccentButtonForegroundPointerOver" ResourceKey="PageBackgroundColor" />
+                    <StaticResource x:Key="AccentButtonForegroundPressed" ResourceKey="PageBackgroundColor" />
+                </ResourceDictionary>
+            </controls:XamlControlsResources.MergedDictionaries>
+        </controls:XamlControlsResources>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

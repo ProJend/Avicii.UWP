@@ -9,7 +9,7 @@
     xmlns:model="using:TrueLove.Lib.Models.Code"
     xmlns:viewModel="using:TrueLove.Lib.Models.Code.Page"
     d:DataContext="{d:DesignInstance Type=viewModel:CommentViewModel}"
-    Background="Transparent"
+    Background="{ThemeResource PageBackgroundMicaBrush}"
     RequestedTheme="Dark"
     mc:Ignorable="d">
     <Page.Resources>
@@ -41,10 +41,7 @@
             DoubleTapped="Forebody_DoubleTapped"
             ToolTipService.ToolTip="Double-click to back to top of page">
             <Grid.Background>
-                <ImageBrush
-                    ImageSource="/Assets/Instagram/4.jpg"
-                    Opacity="0.4"
-                    Stretch="UniformToFill" />
+                <ImageBrush ImageSource="/Assets/Instagram/4.jpg" Stretch="UniformToFill" />
             </Grid.Background>
             <TextBlock
                 x:Name="Title"
@@ -57,8 +54,8 @@
                 Margin="0,0,19,13"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
-                Opacity="0"
-                Style="{StaticResource GhostButton}">
+                Background="{ThemeResource SystemAccentColor}"
+                Style="{StaticResource AccentButtonStyle}">
                 Leave a Memory
             </Button>
             <!--  占位符  -->

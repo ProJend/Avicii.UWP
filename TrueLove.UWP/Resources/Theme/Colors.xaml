@@ -6,6 +6,14 @@
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Dark">
             <Color x:Key="PageBackgroundColor">Black</Color>
+            <mica:BackdropMicaBrush
+                x:Key="PageBackgroundMicaBrush"
+                BackgroundSource="WallpaperBackdrop"
+                FallbackColor="Black"
+                TintOpacity="0"
+                LuminosityOpacity="0.7"
+                TintColor="Black" />
+
             <Color x:Key="SystemAccentColor">PaleTurquoise</Color>
             <Color x:Key="SystemAccentColorLight1">#91D7D7</Color>
             <Color x:Key="SystemAccentColorLight2">#73BFC0</Color>
@@ -13,18 +21,7 @@
             <Color x:Key="SystemAccentColorDark1">#369092</Color>
             <Color x:Key="SystemAccentColorDark2">#18797B</Color>
             <Color x:Key="SystemAccentColorDark3">#136263</Color>
-            <muxm:AcrylicBrush
-                x:Key="NavigationViewDefaultPaneBackground"
-                BackgroundSource="Backdrop"
-                FallbackColor="#FF1F1F1F"
-                TintColor="Black"
-                TintOpacity=".5" />
-            <Color x:Key="NavigationViewTopPaneBackground">Transparent</Color>
-            <muxm:AcrylicBrush
-                x:Key="NavigationViewExpandedPaneBackground"
-                BackgroundSource="HostBackdrop"
-                TintColor="Black"
-                TintOpacity=".5" />
+
             <mica:BackdropBlurBrush
                 x:Key="SolidBlackBlurBrush"
                 Amount="20"
