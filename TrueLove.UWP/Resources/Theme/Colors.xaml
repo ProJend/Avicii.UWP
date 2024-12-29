@@ -13,18 +13,7 @@
             <Color x:Key="SystemAccentColorDark1">#369092</Color>
             <Color x:Key="SystemAccentColorDark2">#18797B</Color>
             <Color x:Key="SystemAccentColorDark3">#136263</Color>
-            <muxm:AcrylicBrush
-                x:Key="NavigationViewDefaultPaneBackground"
-                BackgroundSource="Backdrop"
-                FallbackColor="#FF1F1F1F"
-                TintColor="Black"
-                TintOpacity=".5" />
-            <Color x:Key="NavigationViewTopPaneBackground">Transparent</Color>
-            <muxm:AcrylicBrush
-                x:Key="NavigationViewExpandedPaneBackground"
-                BackgroundSource="HostBackdrop"
-                TintColor="Black"
-                TintOpacity=".5" />
+            
             <mica:BackdropBlurBrush
                 x:Key="SolidBlackBlurBrush"
                 Amount="20"
