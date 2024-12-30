@@ -144,8 +144,8 @@
                     </StackPanel>
                 </Grid>
             </FlipViewItem>
-            <FlipViewItem ManipulationMode="System,TranslateX">
-                <Grid Background="Black">
+            <FlipViewItem Padding="0,0,0,-500" ManipulationMode="System,TranslateX">
+                <Grid Padding="0,0,0,500" Background="Black">
                     <Image
                         Height="150"
                         HorizontalAlignment="Center"
