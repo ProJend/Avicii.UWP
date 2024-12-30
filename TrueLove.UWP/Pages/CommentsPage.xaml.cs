@@ -45,10 +45,13 @@ namespace TrueLove.UWP.Pages
             for (int element = 1; element <= 50; element++)
             {
                 var latestItem = await commentParser.Append(element);
-                await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                if (latestItem != null)
                 {
-                    CommentViewModel.Add(latestItem);  // UI 更新操作，确保它在主线程上执行
-                });
+                    await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                    {
+                        CommentViewModel.Add(latestItem);  // UI 更新操作，确保它在主线程上执行
+                    });
+                }
             }
         }
 

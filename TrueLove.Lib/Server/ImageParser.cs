@@ -38,10 +38,13 @@ namespace TrueLove.Lib.Server
 
             var imageNode = htmlDocument.DocumentNode.SelectSingleNode(imagePath);
             string uri = null;
-            if (imageNode != null)
-            {
-                uri = imageNode.Attributes["src"].Value;
-            }
+
+            if (imageNode == null)
+                return Task.Run(() => uri = null);
+
+            uri = imageNode.Attributes["src"].Value;
+            if (uri == null)
+                return Task.Run(() => uri = null);
 
             return Task.Run(() => uri);
         }

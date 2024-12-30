@@ -40,12 +40,13 @@ namespace TrueLove.Lib.Models.Code.Page
                                 break;
                             }
                         }
-                        if (!_isRepeating)
+                        if (!_isRepeating && latestItem != null)
                             Add(latestItem);
                         continue;
                     }
 
-                    Add(latestItem);
+                    if (latestItem != null)
+                        Add(latestItem);
                 }
             }
             catch (NullReferenceException) { } //爬取溢出
@@ -69,7 +70,8 @@ namespace TrueLove.Lib.Models.Code.Page
                 list.Add(element);
 
                 var latestItem = commentParser.Append(element).Result;
-                Add(latestItem);
+                if (latestItem != null)
+                    Add(latestItem);
             }
         }
 
@@ -93,7 +95,8 @@ namespace TrueLove.Lib.Models.Code.Page
                 CommentParser commentParser = new();
                 commentParser.BackgroundParseComment(++_pageNumber);
                 var latestItem = await commentParser.Append(1);
-                Add(latestItem);
+                if (latestItem != null)
+                    Add(latestItem);
             }
             // 完成加载
             LoadMoreEnd?.Invoke(this, EventArgs.Empty);

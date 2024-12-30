@@ -49,13 +49,16 @@ namespace TrueLove.Lib.Server
             var parsedDate = DateTime.Parse(dateText);
 
             nameText = WebUtility.HtmlDecode(nameText);
+            if (string.IsNullOrEmpty(nameText))
+                nameText = "Anonymity";
+
             comText = WebUtility.HtmlDecode(comText);
-            if (new[] { nameText, comText, dateText } != null)
-            {
-                latestComment.Name = nameText;
-                latestComment.Comment = comText;
-                latestComment.Date = parsedDate.ToString("d");
-            }
+            if (string.IsNullOrEmpty(comText) || string.IsNullOrEmpty(dateText))
+                return Task.Run(() => latestComment = null);
+
+            latestComment.Name = nameText;
+            latestComment.Comment = comText;
+            latestComment.Date = parsedDate.ToString("d");
             return Task.Run(() => latestComment);
         }
     }
