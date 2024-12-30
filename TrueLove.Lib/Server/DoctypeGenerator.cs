@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
+using TrueLove.Lib.Models.Enum;
 using Windows.Storage;
 
 namespace TrueLove.Lib.Server
@@ -14,7 +15,7 @@ namespace TrueLove.Lib.Server
         /// 
         /// </summary>
         /// <param name="path">Use URL address</param>
-        public async Task<string> SaveSourceCodeAsync(string path, string page)
+        public async Task<string> SaveSourceCodeAsync(string path, PageType page)
         {
             string sourceCode = null;
             using var httpClient = new HttpClient();
@@ -28,18 +29,9 @@ namespace TrueLove.Lib.Server
             }
             while (sourceCode == null);
             var localFolder = ApplicationData.Current.LocalFolder;
-            if (page == "comment")
-            {
-                var file = await localFolder.CreateFileAsync("Comment.html",
-                    CreationCollisionOption.ReplaceExisting);
-                await FileIO.AppendTextAsync(file, sourceCode);
-            }
-            if (page == "image")
-            {
-                var file = await localFolder.CreateFileAsync("Image.html",
-                    CreationCollisionOption.ReplaceExisting);
-                await FileIO.AppendTextAsync(file, sourceCode);
-            }
+            var file = await localFolder.CreateFileAsync(page + ".html",
+                CreationCollisionOption.ReplaceExisting);
+            await FileIO.AppendTextAsync(file, sourceCode);
             return sourceCode;
         }
     }

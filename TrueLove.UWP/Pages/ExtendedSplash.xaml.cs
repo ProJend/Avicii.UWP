@@ -121,8 +121,8 @@ namespace TrueLove.UWP.Pages
                         prompt.Opacity = 0;
 
                         DoctypeGenerator doctypeGenerator = new();
-                        await doctypeGenerator.SaveSourceCodeAsync("https://avicii.com/page/1", "comment");
-                        await doctypeGenerator.SaveSourceCodeAsync("https://avicii.com/images/page/1", "image");
+                        await doctypeGenerator.SaveSourceCodeAsync("https://avicii.com/page/1", PageType.Comment);
+                        await doctypeGenerator.SaveSourceCodeAsync("https://avicii.com/images/page/1", PageType.Image);
                     }
                     else
                     {

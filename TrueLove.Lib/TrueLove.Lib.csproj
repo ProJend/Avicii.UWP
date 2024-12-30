@@ -124,6 +124,7 @@
     <Compile Include="Models\Code\CommentModel.cs" />
     <Compile Include="Models\Enum\DeviceFamilyType.cs" />
     <Compile Include="Models\Enum\DialogType.cs" />
+    <Compile Include="Models\Enum\PageType.cs" />
     <Compile Include="Models\UI\Page\CommentViewModel.cs" />
     <Compile Include="Models\UI\Converter\InverseBooleanConverter.cs" />
     <Compile Include="Models\UI\Converter\InverseOpacityConverter.cs" />

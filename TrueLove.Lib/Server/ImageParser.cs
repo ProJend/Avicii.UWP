@@ -2,6 +2,7 @@
 using Microsoft.Toolkit.Uwp.Connectivity;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using TrueLove.Lib.Models.Enum;
 using Windows.Storage;
 
 namespace TrueLove.Lib.Server
@@ -16,7 +17,7 @@ namespace TrueLove.Lib.Server
             _src = doctypeGenerator.GetSourceCode(ApplicationData.Current.LocalFolder.Path + @"\Image.html");
             Debug.WriteLine(ApplicationData.Current.LocalFolder.Path + @"\Image.html");
             if (NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
-                _ = doctypeGenerator.SaveSourceCodeAsync($"https://avicii.com/images/page/{_pageNumber}", "image");
+                _ = doctypeGenerator.SaveSourceCodeAsync($"https://avicii.com/images/page/{_pageNumber}", PageType.Image);
         }
 
         public async void ForegroundParseImage(int _pageNumber)
@@ -25,7 +26,7 @@ namespace TrueLove.Lib.Server
             _src = doctypeGenerator.GetSourceCode(ApplicationData.Current.LocalFolder.Path + @"\Image.html");
             Debug.WriteLine(ApplicationData.Current.LocalFolder.Path + @"\Image.html");
             if (NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
-                await doctypeGenerator.SaveSourceCodeAsync($"https://avicii.com/images/page/{_pageNumber}", "image");
+                await doctypeGenerator.SaveSourceCodeAsync($"https://avicii.com/images/page/{_pageNumber}", PageType.Image);
         }
 
         public Task<string> Append(int ID)

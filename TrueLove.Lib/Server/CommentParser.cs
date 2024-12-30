@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Threading.Tasks;
 using TrueLove.Lib.Models.Code;
+using TrueLove.Lib.Models.Enum;
 using Windows.Storage;
 
 namespace TrueLove.Lib.Server
@@ -19,7 +20,7 @@ namespace TrueLove.Lib.Server
             _src = doctypeGenerator.GetSourceCode(ApplicationData.Current.LocalFolder.Path + @"\Comment.html");
             Debug.WriteLine(ApplicationData.Current.LocalFolder.Path + @"\Comment.html");
             if (NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
-                _ = doctypeGenerator.SaveSourceCodeAsync($"https://avicii.com/page/{_pageNumber}", "comment");
+                _ = doctypeGenerator.SaveSourceCodeAsync($"https://avicii.com/page/{_pageNumber}", PageType.Comment);
         }
 
         public async void ForegroundParseComment(int _pageNumber)
@@ -28,7 +29,7 @@ namespace TrueLove.Lib.Server
             _src = doctypeGenerator.GetSourceCode(ApplicationData.Current.LocalFolder.Path + @"\Comment.html");
             Debug.WriteLine(ApplicationData.Current.LocalFolder.Path + @"\Comment.html");
             if (NetworkHelper.Instance.ConnectionInformation.IsInternetAvailable)
-                await doctypeGenerator.SaveSourceCodeAsync($"https://avicii.com/page/{_pageNumber}", "comment");
+                await doctypeGenerator.SaveSourceCodeAsync($"https://avicii.com/page/{_pageNumber}", PageType.Comment);
         }
 
         public Task<CommentModel> Append(int ID)
