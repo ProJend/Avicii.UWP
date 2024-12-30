@@ -151,6 +151,13 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Center"
                         Source="/Assets/SplashScreen.png" />
+                    <HyperlinkButton
+                        Margin="5"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        NavigateUri="https://github.com/ProJend/Avicii.UWP">
+                        ©2025 ProJend. MIT
+                    </HyperlinkButton>
                 </Grid>
             </FlipViewItem>
             <FlipView.ItemsPanel>
