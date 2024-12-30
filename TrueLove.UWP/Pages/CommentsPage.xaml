@@ -38,15 +38,15 @@
             x:Name="Forebody"
             Padding="0,40,0,0"
             VerticalAlignment="Top"
-            DoubleTapped="Forebody_DoubleTapped"
-            ToolTipService.ToolTip="Double-click to back to top of page">
+            DoubleTapped="Forebody_DoubleTapped">
             <Grid.Background>
                 <ImageBrush ImageSource="/Assets/Instagram/4.jpg" Stretch="UniformToFill" />
             </Grid.Background>
-            <TextBlock
+            <TextBlock HorizontalAlignment="Left"
                 x:Name="Title"
                 Margin="12,-2,0,0"
-                Style="{ThemeResource TitleTextBlockStyle}">
+                Style="{ThemeResource TitleTextBlockStyle}"
+                ToolTipService.ToolTip="Double-click to back to top of page">
                 Comments
             </TextBlock>
             <Button

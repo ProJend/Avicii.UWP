@@ -69,7 +69,9 @@
             <TextBlock
                 x:Name="Title"
                 Margin="12,-2,0,0"
-                Style="{ThemeResource TitleTextBlockStyle}">
+                HorizontalAlignment="Left"
+                Style="{ThemeResource TitleTextBlockStyle}"
+                ToolTipService.ToolTip="Double-click to back to top of page">
                 Images
             </TextBlock>
             <Button
