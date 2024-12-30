@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" 
     Loaded="Page_Loaded"
     RequestedTheme="Dark"
     mc:Ignorable="d">
@@ -12,11 +11,6 @@
     <Grid>
         <Canvas>
             <Image x:Name="extendedSplashImage" Source="/Assets/SplashScreen.png" />
-            <ProgressRing
-                Name="loadingRing"
-                Width="50"
-                Height="50"
-                HorizontalAlignment="Center" />
         </Canvas>
         <Grid>
             <Grid.RowDefinitions>
@@ -54,18 +48,23 @@
                         Slide left or right to switch hamburger menu.
                     </TextBlock>
                 </StackPanel>
-
             </StackPanel>
         </Grid>
         <StackPanel
             Margin="0,60"
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom">
+            <ProgressRing
+                Name="loadingRing"
+                Width="50"
+                Height="50"
+                Margin="20" />
             <TextBlock Style="{ThemeResource SubheaderTextBlockStyle}">Preparing...</TextBlock>
             <TextBlock
                 Name="prompt"
                 Margin="5"
                 Foreground="Orange"
+                Opacity="0"
                 Style="{ThemeResource BodyTextBlockStyle}">
                 No Internet Connection
             </TextBlock>

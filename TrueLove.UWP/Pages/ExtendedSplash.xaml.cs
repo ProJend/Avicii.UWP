@@ -50,7 +50,7 @@ namespace TrueLove.UWP.Pages
                 PositionImage();
 
                 // Optional: Add a progress ring to your splash screen to show users that content is loading
-                PositionRing();
+                //PositionRing();
             }
 
             // Restore the saved session state if necessary
@@ -89,7 +89,7 @@ namespace TrueLove.UWP.Pages
                 // Update the coordinates of the splash screen image.
                 splashImageRect = splash.ImageLocation;
                 PositionImage();
-                PositionRing();
+                //PositionRing();
             }
         }
 
