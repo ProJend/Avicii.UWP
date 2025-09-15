@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="cTitleDescription.Text" xml:space="preserve">
+    <value>TAKE A FEW MINUTES AND READ THE AVICII STORIES AND MEMORIES PEOPLE HAVE SHARED FROM ALL OVER THE WORLD.</value>
+  </data>
+  <data name="iTitleDescription.Text" xml:space="preserve">
+    <value>SOMETIME A PICTURE IS WORTH MORE THAN A THOUSAND WORDS.</value>
+  </data>
+  <data name="hRemeberingDescription2.Text" xml:space="preserve">
+    <value>This space was created for you to share your memories and let the world know what Avicii meant to you.</value>
+  </data>
   <data name="pDisplayName" xml:space="preserve">
     <value>Avicii Memories</value>
     <comment>DisplayName</comment>
@@ -124,5 +133,56 @@
   <data name="pPackageDescription" xml:space="preserve">
     <value>A UWP cover for Avicii website.</value>
     <comment>PackageDescription</comment>
+  </data>
+  <data name="hRemeberingDescription1.Text" xml:space="preserve">
+    <value>Tim created music that brought people together with timeless memories from all over the world.</value>
+  </data>
+  <data name="hRemeberingDescription3.Text" xml:space="preserve">
+    <value>His music and your memories are forever.</value>
+  </data>
+  <data name="mItemName1.Content" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="mItemName2.Content" xml:space="preserve">
+    <value>Comments</value>
+  </data>
+  <data name="mItemName3.Content" xml:space="preserve">
+    <value>Images</value>
+  </data>
+  <data name="hMemoryDescription.Text" xml:space="preserve">
+    <value>IN LOVING MEMORY</value>
+  </data>
+  <data name="TitleMemoryAdding.Content" xml:space="preserve">
+    <value>Leave a Memory</value>
+  </data>
+  <data name="cTitle.Text" xml:space="preserve">
+    <value>Comments</value>
+  </data>
+  <data name="iTitle.Text" xml:space="preserve">
+    <value>IMAGES</value>
+  </data>
+  <data name="eSlideTip.Text" xml:space="preserve">
+    <value>Slide left or right to switch hamburger menu.</value>
+  </data>
+  <data name="eDoubleClickTip.Text" xml:space="preserve">
+    <value>Double-click the title to back to top.</value>
+  </data>
+  <data name="ePreparing.Text" xml:space="preserve">
+    <value>Preparing...</value>
+  </data>
+  <data name="eInternetWarning.Text" xml:space="preserve">
+    <value>No Internet Connection</value>
+  </data>
+  <data name="TitleTip.ToolTipService.ToolTip" xml:space="preserve">
+    <value>Double-click to back to top</value>
+  </data>
+  <data name="cTitleDescription.CharacterSpacing" xml:space="preserve">
+    <value>350</value>
+  </data>
+  <data name="iTitleDescription.CharacterSpacing" xml:space="preserve">
+    <value>350</value>
+  </data>
+  <data name="iItemName.Text" xml:space="preserve">
+    <value>Save As</value>
   </data>
 </root>
