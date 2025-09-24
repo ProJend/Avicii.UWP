@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-	<Identity Name="Avicii.UWP" Publisher="CN=Admin" Version="0.9.5.0" />
-	<mp:PhoneIdentity PhoneProductId="cf0148d5-01bb-4b60-b53b-da3346bf8e5e" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+	<Identity Name="ProJend.Avicii.UWP" Publisher="CN=ProJend" Version="1.0.0.0" />
+	<mp:PhoneIdentity PhoneProductId="8b4ea604-e9de-44fc-aeb0-dc01177e500e" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
 	<Properties>
 		<DisplayName>Avicii.UWP</DisplayName>
 		<PublisherDisplayName>ProJend</PublisherDisplayName>
