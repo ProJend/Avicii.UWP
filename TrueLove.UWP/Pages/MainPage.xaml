@@ -30,15 +30,15 @@
 
             <muxc:NavigationView.MenuItems>
                 <muxc:NavigationViewItem
-                    Content="Home"
+                    x:Uid="mItemName1"
                     Icon="Home"
                     Tag="home" />
                 <muxc:NavigationViewItem
-                    Content="Comments"
+                    x:Uid="mItemName2"
                     Icon="Comment"
                     Tag="comment" />
                 <muxc:NavigationViewItem
-                    Content="Images"
+                    x:Uid="mItemName3"
                     Icon="Pictures"
                     Tag="image" />
             </muxc:NavigationView.MenuItems>

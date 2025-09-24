@@ -13,63 +13,63 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="pDisplayName" xml:space="preserve">
-    <value>Avicii 回忆</value>
+    <value>Avicii 回憶</value>
     <comment>DisplayName</comment>
   </data>
   <data name="pPackageDescription" xml:space="preserve">
-    <value>一个基于 Avicii 网站的 UWP</value>
+    <value>一個基於 Avicii 網站的 UWP</value>
     <comment>PackageDescription</comment>
   </data>
   <data name="cTitleDescription.Text" xml:space="preserve">
-    <value>花几分钟时间，读一读世界各地网友分享的和 Avicii 相关故事与回忆。</value>
+    <value>花幾分鐘時間，讀下世界各地網友分享的同 Avicii 有關的故事及回憶。</value>
   </data>
   <data name="hMemoryDescription.Text" xml:space="preserve">
-    <value>在爱的回忆中</value>
+    <value>在愛的集體回憶中</value>
   </data>
   <data name="hRemeberingDescription1.Text" xml:space="preserve">
-    <value>Tim 创作的音乐将世界各地的人们联系在一起，留下了永恒的回忆。</value>
+    <value>Tim 的音樂帶來永恆的集體回憶，將世界各地的人聯絡在一齊</value>
   </data>
   <data name="hRemeberingDescription3.Text" xml:space="preserve">
-    <value>他的音乐与你们的回忆都将成为永恒。</value>
+    <value>他的音樂及大家的回憶都會永存心底。</value>
   </data>
   <data name="mItemName1.Content" xml:space="preserve">
-    <value>主页</value>
+    <value>主頁</value>
   </data>
   <data name="mItemName2.Content" xml:space="preserve">
-    <value>评论</value>
+    <value>評論</value>
   </data>
   <data name="mItemName3.Content" xml:space="preserve">
-    <value>图片</value>
+    <value>相片</value>
   </data>
   <data name="hRemeberingDescription2.Text" xml:space="preserve">
-    <value>这个空间为你们而设，在此分享你们的回忆，让全世界人知道 Avicii 对你们的意义。</value>
+    <value>這個空間為你們而設，在此分享你們的回憶，等全世界人知道 Avicii 對你們來講意味著甚麼</value>
   </data>
   <data name="cTitle.Text" xml:space="preserve">
-    <value>评论</value>
+    <value>評論</value>
   </data>
   <data name="iTitleDescription.Text" xml:space="preserve">
-    <value>有时，一幅画面胜过千言万语。</value>
+    <value>間中，一幅畫贏過千言萬語。</value>
   </data>
   <data name="TitleMemoryAdding.Content" xml:space="preserve">
-    <value>留下回忆</value>
+    <value>留低回憶</value>
   </data>
   <data name="iTitle.Text" xml:space="preserve">
-    <value>图片</value>
+    <value>相片</value>
   </data>
   <data name="eSlideTip.Text" xml:space="preserve">
-    <value>左右滑动切换汉堡菜单</value>
+    <value>滑左滑右切換更多菜單</value>
   </data>
   <data name="eDoubleClickTip.Text" xml:space="preserve">
-    <value>双击标题回到顶部</value>
+    <value>雙擊標題返回頭頂</value>
   </data>
   <data name="ePreparing.Text" xml:space="preserve">
-    <value>准备中...</value>
+    <value>準備中...</value>
   </data>
   <data name="eInternetWarning.Text" xml:space="preserve">
-    <value>无网络连接</value>
+    <value>無網絡連線</value>
   </data>
   <data name="TitleTip.ToolTipService.ToolTip" xml:space="preserve">
-    <value>双击回到顶部</value>
+    <value>雙擊返回頭頂</value>
   </data>
   <data name="cTitleDescription.CharacterSpacing" xml:space="preserve">
     <value>0</value>
@@ -78,6 +78,6 @@
     <value>0</value>
   </data>
   <data name="iItemName.Text" xml:space="preserve">
-    <value>另存为</value>
+    <value>另存新檔</value>
   </data>
 </root>

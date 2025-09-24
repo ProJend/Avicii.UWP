@@ -318,7 +318,7 @@
   </ItemGroup>
   <ItemGroup>
     <PRIResource Include="Strings\en\Resources.resw" />
-    <PRIResource Include="Strings\zh-Hant\Resources.resw" />
+    <PRIResource Include="Strings\zh-HK\Resources.resw" />
     <PRIResource Include="Strings\zh-Hans\Resources.resw" />
     <None Include="TrueLove.UWP_TemporaryKey.pfx" />
   </ItemGroup>
@@ -339,13 +339,13 @@
     <Folder Include="Pages\DeviceFamily-Mobile\" />
   </ItemGroup>
   <ItemGroup>
-    <XliffResource Include="MultilingualResources\TrueLove.UWP.zh-Hans.xlf" />
-    <XliffResource Include="MultilingualResources\TrueLove.UWP.zh-Hant.xlf" />
-  </ItemGroup>
-  <ItemGroup>
     <SDKReference Include="WindowsMobile, Version=10.0.22621.0">
       <Name>Windows Mobile Extensions for the UWP</Name>
     </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <XliffResource Include="MultilingualResources\TrueLove.UWP.zh-Hans.xlf" />
+    <XliffResource Include="MultilingualResources\TrueLove.UWP.zh-HK.xlf" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

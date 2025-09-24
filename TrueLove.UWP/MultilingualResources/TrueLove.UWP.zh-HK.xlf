@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
-	<file datatype="xml" source-language="en" target-language="zh-Hans" original="TRUELOVE.UWP/STRINGS/EN/RESOURCES.RESW" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+	<file datatype="xml" source-language="en" target-language="zh-HK" original="TRUELOVE.UWP/STRINGS/EN/RESOURCES.RESW" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
 		<header>
 			<tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="1.0.0.0" tool-company="Microsoft" />
 		</header>
@@ -8,81 +8,81 @@
 			<group id="TRUELOVE.UWP/STRINGS/EN/RESOURCES.RESW" datatype="resx">
 				<trans-unit id="pDisplayName" translate="yes" xml:space="preserve">
           <source>Avicii Memories</source>
-          <target state="translated">Avicii 回忆</target>
+          <target state="translated">Avicii 回憶</target>
           <note from="MultilingualBuild" annotates="source" priority="2">DisplayName</note>
         </trans-unit>
 				<trans-unit id="pPackageDescription" translate="yes" xml:space="preserve">
           <source>A UWP cover for Avicii website.</source>
-          <target state="translated">一个基于 Avicii 网站的 UWP</target>
+          <target state="translated">一個基於 Avicii 網站的 UWP</target>
           <note from="MultilingualBuild" annotates="source" priority="2">PackageDescription</note>
         </trans-unit>
 				<trans-unit id="cTitleDescription.Text" translate="yes" xml:space="preserve">
           <source>TAKE A FEW MINUTES AND READ THE AVICII STORIES AND MEMORIES PEOPLE HAVE SHARED FROM ALL OVER THE WORLD.</source>
-          <target state="translated">花几分钟时间，读一读世界各地网友分享的和 Avicii 相关故事与回忆。</target>
+          <target state="translated">花幾分鐘時間，讀下世界各地網友分享的同 Avicii 有關的故事及回憶。</target>
         </trans-unit>
 				<trans-unit id="hMemoryDescription.Text" translate="yes" xml:space="preserve">
           <source>IN LOVING MEMORY</source>
-          <target state="translated">在爱的回忆中</target>
+          <target state="translated">在愛的集體回憶中</target>
         </trans-unit>
 				<trans-unit id="hRemeberingDescription1.Text" translate="yes" xml:space="preserve">
           <source>Tim created music that brought people together with timeless memories from all over the world.</source>
-          <target state="translated">Tim 创作的音乐将世界各地的人们联系在一起，留下了永恒的回忆。</target>
+          <target state="translated">Tim 的音樂帶來永恆的集體回憶，將世界各地的人聯絡在一齊</target>
         </trans-unit>
 				<trans-unit id="hRemeberingDescription3.Text" translate="yes" xml:space="preserve">
           <source>His music and your memories are forever.</source>
-          <target state="translated">他的音乐与你们的回忆都将成为永恒。</target>
+          <target state="translated">他的音樂及大家的回憶都會永存心底。</target>
         </trans-unit>
 				<trans-unit id="mItemName1.Content" translate="yes" xml:space="preserve">
           <source>Home</source>
-          <target state="translated">主页</target>
+          <target state="translated">主頁</target>
         </trans-unit>
 				<trans-unit id="mItemName2.Content" translate="yes" xml:space="preserve">
           <source>Comments</source>
-          <target state="translated">评论</target>
+          <target state="translated">評論</target>
         </trans-unit>
 				<trans-unit id="mItemName3.Content" translate="yes" xml:space="preserve">
           <source>Images</source>
-          <target state="translated">图片</target>
+          <target state="translated">相片</target>
         </trans-unit>
 				<trans-unit id="hRemeberingDescription2.Text" translate="yes" xml:space="preserve">
           <source>This space was created for you to share your memories and let the world know what Avicii meant to you.</source>
-          <target state="translated">这个空间为你们而设，在此分享你们的回忆，让全世界人知道 Avicii 对你们的意义。</target>
+          <target state="translated">這個空間為你們而設，在此分享你們的回憶，等全世界人知道 Avicii 對你們來講意味著甚麼</target>
         </trans-unit>
 				<trans-unit id="cTitle.Text" translate="yes" xml:space="preserve">
           <source>Comments</source>
-          <target state="translated">评论</target>
+          <target state="translated">評論</target>
         </trans-unit>
 				<trans-unit id="iTitleDescription.Text" translate="yes" xml:space="preserve">
           <source>SOMETIME A PICTURE IS WORTH MORE THAN A THOUSAND WORDS.</source>
-          <target state="translated">有时，一幅画面胜过千言万语。</target>
+          <target state="translated">間中，一幅畫贏過千言萬語。</target>
         </trans-unit>
 				<trans-unit id="TitleMemoryAdding.Content" translate="yes" xml:space="preserve">
           <source>Leave a Memory</source>
-          <target state="translated">留下回忆</target>
+          <target state="translated">留低回憶</target>
         </trans-unit>
 				<trans-unit id="iTitle.Text" translate="yes" xml:space="preserve">
-          <source>IMAGES</source> 
-          <target state="translated">图片</target>
+          <source>IMAGES</source>
+          <target state="translated">相片</target>
         </trans-unit>
 				<trans-unit id="eSlideTip.Text" translate="yes" xml:space="preserve">
           <source>Slide left or right to switch hamburger menu.</source>
-          <target state="translated">左右滑动切换汉堡菜单</target>
+          <target state="translated">滑左滑右切換更多菜單</target>
         </trans-unit>
 				<trans-unit id="eDoubleClickTip.Text" translate="yes" xml:space="preserve">
           <source>Double-click the title to back to top.</source>
-          <target state="translated">双击标题回到顶部</target>
+          <target state="translated">雙擊標題返回頭頂</target>
         </trans-unit>
 				<trans-unit id="ePreparing.Text" translate="yes" xml:space="preserve">
           <source>Preparing...</source>
-          <target state="translated">准备中...</target>
+          <target state="translated">準備中...</target>
         </trans-unit>
 				<trans-unit id="eInternetWarning.Text" translate="yes" xml:space="preserve">
           <source>No Internet Connection</source>
-          <target state="translated">无网络连接</target>
+          <target state="translated">無網絡連線</target>
         </trans-unit>
 				<trans-unit id="TitleTip.ToolTipService.ToolTip" translate="yes" xml:space="preserve">
           <source>Double-click to back to top</source>
-          <target state="translated">双击回到顶部</target>
+          <target state="translated">雙擊返回頭頂</target>
         </trans-unit>
 				<trans-unit id="cTitleDescription.CharacterSpacing" translate="yes" xml:space="preserve">
           <source>350</source>
@@ -94,7 +94,7 @@
         </trans-unit>
 				<trans-unit id="iItemName.Text" translate="yes" xml:space="preserve">
           <source>Save As</source>
-          <target state="translated">另存为</target>
+          <target state="translated">另存新檔</target>
         </trans-unit>
 			</group>
 		</body>

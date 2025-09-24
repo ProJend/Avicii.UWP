@@ -36,37 +36,35 @@
     <Grid ManipulationMode="System,TranslateX">
         <Grid
             x:Name="Forebody"
+            x:Uid="TitleTip"
             Padding="0,40,0,0"
             VerticalAlignment="Top"
             DoubleTapped="Forebody_DoubleTapped">
             <Grid.Background>
                 <ImageBrush ImageSource="/Assets/Instagram/4.jpg" Stretch="UniformToFill" />
             </Grid.Background>
-            <TextBlock HorizontalAlignment="Left"
+            <TextBlock
                 x:Name="Title"
+                x:Uid="cTitle"
                 Margin="12,-2,0,0"
-                Style="{ThemeResource TitleTextBlockStyle}"
-                ToolTipService.ToolTip="Double-click to back to top of page">
-                Comments
-            </TextBlock>
+                HorizontalAlignment="Left"
+                Style="{ThemeResource TitleTextBlockStyle}" />
             <Button
                 x:Name="TitleButton"
+                x:Uid="TitleMemoryAdding"
                 Margin="0,0,19,13"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Top"
                 Background="{ThemeResource SystemAccentColor}"
-                Style="{StaticResource AccentButtonStyle}">
-                Leave a Memory
-            </Button>
+                Style="{StaticResource AccentButtonStyle}"
+                Visibility="Collapsed" />
             <!--  占位符  -->
             <TextBlock
                 x:Name="BackSubTitle"
+                x:Uid="cTitleDescription"
                 MaxWidth="700"
-                CharacterSpacing="350"
                 Style="{ThemeResource SubtitleTextBlockStyle}"
-                TextAlignment="Center">
-                TAKE A FEW MINUTES AND READ THE AVICII STORIES AND MEMORIES PEOPLE HAVE SHARED FROM ALL OVER THE WORLD.
-            </TextBlock>
+                TextAlignment="Center" />
         </Grid>
         <ScrollViewer
             x:Name="Scroller"
@@ -76,13 +74,11 @@
             <StackPanel>
                 <TextBlock
                     x:Name="SubTitle"
+                    x:Uid="cTitleDescription"
                     MaxWidth="700"
-                    CharacterSpacing="350"
                     Opacity="{Binding ElementName=BackSubTitle, Path=Opacity, Converter={StaticResource InverseOpacityConverter}}"
                     Style="{ThemeResource SubtitleTextBlockStyle}"
-                    TextAlignment="Center">
-                    TAKE A FEW MINUTES AND READ THE AVICII STORIES AND MEMORIES PEOPLE HAVE SHARED FROM ALL OVER THE WORLD.
-                </TextBlock>
+                    TextAlignment="Center" />
                 <GridView
                     x:Name="CommentView"
                     Margin="0,60,0,0"
