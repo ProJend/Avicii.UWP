@@ -1,6 +1,20 @@
-# Avicii UWP
-### About This APP
-A UWP cover for Avicii website.
+<p align="center">
+  <span><img src="./TrueLove.UWP/Assets/Square44x44Logo.altform-unplated_targetsize-256.png" alt="Logo" width="96" height="96">
+  <h1 align="center">Avicii.UWP</h1></span>
+</p>
+
+
+
+<p align="center">
+  A client for Avicii.com
+</p>
+
+<p align="center">
+  <a href="https://apps.microsoft.com/detail/9P6KTDMFVD2W">
+   <img src="https://get.microsoft.com/images/en-us%20dark.svg" alt="Download Avicii.UWP" height="200"/>
+  </a>
+</p>
+
 >![](./ScreenShot/Home.png)
 >
 >![](./ScreenShot/Comments.png)
